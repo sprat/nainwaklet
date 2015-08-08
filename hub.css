@@ -1,0 +1,32 @@
+html, body {
+	margin: 0;
+	padding: 0;
+}
+
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+
+body {
+    font-size: 8.0pt;
+    font-family: Verdana, Arial;
+}
+
+a {
+	color: #BB6600;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.title {
+	font-size: 1.2em;
+	font-weight: bold;
+	color: #FFF;
+}
