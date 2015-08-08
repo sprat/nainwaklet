@@ -81,7 +81,7 @@
 
     function createHubMenu(hubPath) {
         var iframe = document.createElement("iframe");
-        iframe.setAttribute("src", getCurrentScriptHost() + hubPath);
+        iframe.setAttribute("src", getBaseUrl() + hubPath);
         iframe.style.width = "100%";
         return iframe;
     }
@@ -114,11 +114,9 @@
         }
     }
 
-    function getCurrentScriptHost() {
-        var url = document.scripts[document.scripts.length - 1].src,
-            a = document.createElement("a");
-        a.href = url;
-        return a.origin;
+    function getBaseUrl() {
+        var scriptUrl = document.scripts[document.scripts.length - 1].src;
+        return scriptUrl.substring(0, scriptUrl.lastIndexOf('/') + 1);
     }
 
     function getQueryParams() {
@@ -148,5 +146,5 @@
         }
     }
 
-    runOnNainwak("/hub.html");
+    runOnNainwak("hub.html");
 }());
