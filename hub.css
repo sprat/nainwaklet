@@ -1,14 +1,14 @@
 html, body {
-	margin: 0;
-	padding: 0;
+    margin: 0;
+    padding: 0;
 }
 
 html {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 *, *:before, *:after {
-  box-sizing: inherit;
+    box-sizing: inherit;
 }
 
 body {
@@ -17,7 +17,7 @@ body {
 }
 
 a {
-	color: #BB6600;
+    color: #BB6600;
     text-decoration: none;
 }
 
@@ -26,7 +26,7 @@ a:hover {
 }
 
 .title {
-	font-size: 1.2em;
-	font-weight: bold;
-	color: #FFF;
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #FFF;
 }

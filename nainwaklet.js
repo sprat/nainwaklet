@@ -1,6 +1,6 @@
 /*global
     window, document, alert, XMLHttpRequest
-*/
+ */
 (function () {
     "use strict";
 
@@ -45,16 +45,16 @@
         var pagesUrls = {
             //menu: gameUrl('menu', IDS),  // Menu principal
             pager: gameUrl('pager', IDS),  // Pager : PV/PA, compteur des messages
-            //pub: gameUrl('pub', IDS),  // Publicités
-            //map: gameUrl('map', IDS),  // Carte de la détection
-            detect: gameUrl('detect', IDS),  // Détection
+            //pub: gameUrl('pub', IDS),  // PublicitÃ©s
+            //map: gameUrl('map', IDS),  // Carte de la dÃ©tection
+            detect: gameUrl('detect', IDS),  // DÃ©tection
             //deplac: gameUrl('deplac', IDS),  // Action
             invent: gameUrl('invent', IDS),  // Inventaire
             perso: gameUrl('perso', IDS),  // Fiche de perso
-            even: gameUrl('even', IDS, "&duree=240&type=ALL"),  // Évènements : tous types d'evts sur 10 jours
+            even: gameUrl('even', IDS, "&duree=240&type=ALL"),  // Ã©vÃ©nements : tous types d'evts sur 10 jours
             //chat: gameUrl('chat', IDS),  // Messagerie
             //guilde: gameUrl('guilde', IDS),  // Guilde
-            encyclo: gameUrl('encyclo', IDS)  // Encyclopédie
+            encyclo: gameUrl('encyclo', IDS)  // EncyclopÃ©die
         };
         Object.keys(pagesUrls).forEach(function (name) {
             var url = pagesUrls[name];
@@ -73,7 +73,7 @@
             if (IDS) {
                 sendUpdate(IDS);
             } else {
-                alert("Erreur : ID de session non trouvé, vous devez vous connecter d'abord");
+                alert("Erreur : ID de session non trouvÃ©, vous devez vous connecter d'abord");
             }
         };
         return button;
@@ -126,9 +126,7 @@
         pairs.forEach(function (e) {
             var pair = e.split("="),
                 name = decodeURIComponent(pair[0]),
-                value = pair[1]
-                    ? decodeURIComponent(pair[1])
-                    : "";
+                value = decodeURIComponent(pair[1] || "");
             params[name] = value;
         });
         return params;
