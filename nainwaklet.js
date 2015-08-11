@@ -1,7 +1,7 @@
 /*global
     window, document, alert, XMLHttpRequest
  */
-(function () {
+(function (exports) {
     "use strict";
 
     function log(msg) {
@@ -12,13 +12,6 @@
 
     function startsWith(str, substr) {
         return str.slice(0, substr.length) === substr;
-    }
-
-    function getFrameDoc(name) {
-        var frame = window.frames[name];
-        if (frame) {
-            return frame.document;
-        }
     }
 
     function asyncGet(url, onSuccess, onFailure) {
@@ -97,20 +90,33 @@
         return ui;
     }
 
-    function toggleHubUI(hubPath) {
-        var doc = getFrameDoc("pub"),
-            body = doc.body,
-            hubUI = doc.getElementById("hubUI");
+    function infoFrameLoaded() {
+        var infoDoc = window.info.document,
+            url = infoDoc.location,
+            html = infoDoc.documentElement.innerHTML;
+        log("info frame loaded: " + url);
+    }
+
+    function toggleHubUI(hubPath, storage) {
+        var infoFrame = window.info.frameElement,
+            pubDoc = window.pub.document,
+            pubBody = pubDoc.body,
+            hubUI = pubDoc.getElementById("hubUI");
 
         if (!hubUI) {
+            // backup the existing content
+            storage.pubBodyInnerHTML = pubBody.innerHTML;
+            storage.infoFrameLoaded = infoFrameLoaded;
+
             // replace the existing content by the hub UI
             hubUI = createHubUI(hubPath);
-            hubUI.bodyContentBackup = body.innerHTML;
-            body.innerHTML = "";
-            body.appendChild(hubUI);
+            pubBody.innerHTML = "";
+            pubBody.appendChild(hubUI);
+            infoFrame.addEventListener('load', infoFrameLoaded, false);
         } else {
-            // replace the hub UI by the initial content
-            body.innerHTML = hubUI.bodyContentBackup;
+            // restore the initial content
+            pubBody.innerHTML = storage.pubBodyInnerHTML;
+            infoFrame.removeEventListener('load', storage.infoFrameLoaded, false);
         }
     }
 
@@ -138,11 +144,14 @@
 
     function runOnNainwak(hubPath) {
         if (startsWith(window.location.href, "http://www.nainwak.com/jeu/index.php")) {
-            toggleHubUI(hubPath);
+            // initialize the plugin storage
+            exports.nainwaklet = exports.nainwaklet || {};
+            // toggle the UI
+            toggleHubUI(hubPath, exports.nainwaklet);
         } else {
             alert("Erreur : ce bouton fonctionne uniquement sur la page jeu de Nainwak");
         }
     }
 
     runOnNainwak("hub.html");
-}());
+}(window));
