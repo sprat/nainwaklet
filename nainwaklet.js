@@ -8,6 +8,12 @@
 (function () {
     "use strict";
 
+    /* Note: data attributes are not officially supported in HTML4 but it
+     * should not cause problems.
+     */
+    var currentScript = document.scripts[document.scripts.length - 1],
+        hubUrl = currentScript.getAttribute('data-hub');
+
     function log(msg) {
         if (window.console) {
             window.console.log(msg);
@@ -209,10 +215,6 @@
             return container;
         }
     });
-
-    // put here the path to the hub page, relatively to the nainwaklet path
-    // TODO: put it in the nainwaklet button script tag instead
-    var hubUrl = getScriptBaseUrl() + "hub.html";
 
     if (startsWith(window.location.href, "http://www.nainwak.com/jeu/index.php")) {
         if (!window.nainwaklet) {  // not initialized => enable
