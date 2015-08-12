@@ -46,11 +46,6 @@
         return str.slice(0, substr.length) === substr;
     }
 
-    function getScriptBaseUrl() {
-        var scriptUrl = document.scripts[document.scripts.length - 1].src;
-        return scriptUrl.substring(0, scriptUrl.lastIndexOf('/') + 1);
-    }
-
     function getQueryParams() {
         var query = window.location.search.substr(1),
             pairs = query.split("&"),
