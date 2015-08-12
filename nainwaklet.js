@@ -12,6 +12,7 @@
      * should not cause problems.
      */
     var currentScript = document.scripts[document.scripts.length - 1],
+        cssUrl = currentScript.src.replace('.js', '.css'),
         hubUrl = currentScript.getAttribute('data-hub');
 
     function log(msg) {
@@ -93,8 +94,6 @@
             button.setAttribute("class", "spy");
             button.setAttribute("type", "button");
             button.innerHTML = "Lancer MAJ";
-            // TODO: move in CSS
-            button.style.marginBottom = "10px";
             button.onclick = function () {
                 var IDS = getIDS();
                 if (IDS) {
@@ -149,8 +148,6 @@
             var iframe = document.createElement("iframe");
             iframe.setAttribute("class", "hub");
             iframe.setAttribute("src", this.url);
-            // TODO: move in CSS
-            iframe.style.width = "100%";
             return iframe;
         }
     });
@@ -162,11 +159,18 @@
             this.hub = new Hub(hubUrl);
             this.enabled = false;
             this.container = window.pub.document.body;  // container for the UI
+            this.cssLink = this.createCssLink(cssUrl);
         },
         enable: function () {
             if (this.enabled) {
                 return;
             }
+
+            var doc = this.container.ownerDocument,
+                head = doc.getElementsByTagName('head')[0];
+
+            // add the CSS link element to the head
+            head.appendChild(this.cssLink);
 
             var ui = this.createUI();
 
@@ -187,6 +191,9 @@
             // restore the initial content
             this.container.innerHTML = this.containerInitialContent;
 
+            // remove the CSS link element
+            this.cssLink.parentNode.removeChild(this.cssLink);
+
             this.enabled = false;
         },
         createUI: function () {
@@ -195,9 +202,6 @@
                 hubUI = this.hub.createUI();
 
             container.setAttribute("class", "nainwaklet");
-
-            // TODO: move in CSS
-            container.style.textAlign = "center";
 
             if (spyUI) {
                 container.appendChild(spyUI);
@@ -208,6 +212,13 @@
             }
 
             return container;
+        },
+        createCssLink: function (url) {
+            var link = document.createElement('link');
+            link.setAttribute('rel', 'stylesheet');
+            link.setAttribute('type', 'text/css');
+            link.setAttribute('href', url);
+            return link;
         }
     });
 
