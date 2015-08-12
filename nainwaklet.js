@@ -13,7 +13,7 @@
      */
     var currentScript = document.scripts[document.scripts.length - 1],
         cssUrl = currentScript.src.replace('.js', '.css'),
-        hubUrl = currentScript.getAttribute('data-hub');
+        hubUrl = currentScript.getAttribute('data-nainwaklet-hub');
 
     function log(msg) {
         if (window.console) {

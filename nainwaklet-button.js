@@ -6,19 +6,34 @@
 
     var scriptUrl = document.scripts[document.scripts.length - 1].src,
         baseUrl = scriptUrl.substring(0, scriptUrl.lastIndexOf('/') + 1),
-        nainwakletJs = baseUrl + "nainwaklet.js",
+        jsUrl = baseUrl + "nainwaklet.js",
         defaultHubUrl = baseUrl + "hub.html";
+
+    function getNainwakletInjectionCode(hubUrl) {
+        var template = function () {
+                var d = document,
+                    b = d.body,
+                    s = d.querySelector("script[data-nainwaklet-hub]");
+                if (s) {
+                    b.removeChild(s);
+                }
+                s = d.createElement('script');
+                s.setAttribute('type', 'text/javascript');
+                s.setAttribute('src', '@js@');
+                s.setAttribute('data-nainwaklet-hub', '@hub@');
+                b.appendChild(s);
+            },
+            code = template.toString()
+                .replace(/\s+/g, ' ')
+                .replace('@js@', jsUrl)
+                .replace('@hub@', hubUrl || defaultHubUrl);
+
+        return 'javascript:(' + code + '())';
+    }
 
     function initNainwakletButton(id, hubUrl) {
         var button = document.getElementById(id),
-            hub = hubUrl || defaultHubUrl,
-            href = "javascript:(function(){var%20d=document,b=d.body,s=d.getElementById('nainwaklet_js');"
-                    + "if%20(s)%20b.removeChild(s);"
-                    + "s=d.createElement('script');"
-                    + "s.setAttribute('id','nainwaklet_js');"
-                    + "s.setAttribute('src','" + nainwakletJs + "');"
-                    + "s.setAttribute('data-hub','" + hub + "');"
-                    + "b.appendChild(s);}());";
+            href = getNainwakletInjectionCode(hubUrl);
         button.setAttribute("href", href);
     }
 
