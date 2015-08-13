@@ -6,27 +6,29 @@
 
     var scriptUrl = document.scripts[document.scripts.length - 1].src,
         baseUrl = scriptUrl.substring(0, scriptUrl.lastIndexOf('/') + 1),
-        jsUrl = baseUrl + "nainwaklet.js",
+        nainwakletUrl = baseUrl + "nainwaklet.js",
         defaultHubUrl = baseUrl + "hub.html";
 
     function getNainwakletInjectionCode(hubUrl) {
         var template = function () {
                 var d = document,
                     b = d.body,
-                    s = d.querySelector("script[data-nainwaklet-hub]");
+                    id = "nainwakletScript",
+                    s = d.getElementById(id);
                 if (s) {
                     b.removeChild(s);
                 }
                 s = d.createElement('script');
                 s.setAttribute('type', 'text/javascript');
-                s.setAttribute('src', '@js@');
-                s.setAttribute('data-nainwaklet-hub', '@hub@');
+                s.setAttribute('src', '@src@');
+                s.setAttribute('id', id);
                 b.appendChild(s);
             },
+            hubParam = encodeURIComponent(hubUrl || defaultHubUrl),
+            url = nainwakletUrl + '?hub=' + hubParam,
             code = template.toString()
                 .replace(/\s+/g, ' ')
-                .replace('@js@', jsUrl)
-                .replace('@hub@', hubUrl || defaultHubUrl);
+                .replace('@src@', url);
 
         return 'javascript:(' + code + '())';
     }

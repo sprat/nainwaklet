@@ -8,13 +8,6 @@
 (function () {
     "use strict";
 
-    /* Note: data attributes are not officially supported in HTML4 but it
-     * should not cause problems.
-     */
-    var currentScript = document.scripts[document.scripts.length - 1],
-        cssUrl = currentScript.src.replace('.js', '.css'),
-        hubUrl = currentScript.getAttribute('data-nainwaklet-hub');
-
     function log(msg) {
         if (window.console) {
             window.console.log(msg);
@@ -47,8 +40,14 @@
         return str.slice(0, substr.length) === substr;
     }
 
-    function getQueryParams() {
-        var query = window.location.search.substr(1),
+    function parseUrl(url) {
+        var a = document.createElement('a');
+        a.href = url;
+        return a;
+    }
+
+    function parseQueryParams(location) {
+        var query = location.search.substr(1),
             pairs = query.split("&"),
             params = {};
         pairs.forEach(function (e) {
@@ -61,7 +60,7 @@
     }
 
     function getIDS() {
-        return getQueryParams().IDS;
+        return parseQueryParams(window.location).IDS;
     }
 
     /*
@@ -152,9 +151,9 @@
         }
     });
 
-    /* Manager class */
-    var Manager = defineClass({
-        initialize: function (hubUrl) {
+    /* Application class */
+    var Application = defineClass({
+        initialize: function (hubUrl, cssUrl) {
             this.spy = new Spy();
             this.hub = new Hub(hubUrl);
             this.enabled = false;
@@ -222,16 +221,28 @@
         }
     });
 
-    if (startsWith(window.location.href, "http://www.nainwak.com/jeu/index.php")) {
-        if (!window.nainwaklet) {  // not initialized => enable
-            window.nainwaklet = new Manager(hubUrl);
-            window.nainwaklet.enable();
-        } else {  // already initialized => disable
-            window.nainwaklet.disable();
-            delete window.nainwaklet;
+    function toggleApp() {
+        var currentScript = document.scripts[document.scripts.length - 1],
+            scriptLocation = parseUrl(currentScript.src),
+            scriptUrl = scriptLocation.origin + scriptLocation.pathname,
+            scriptParams = parseQueryParams(scriptLocation),
+            cssUrl = scriptUrl.replace('.js', '.css'),
+            hubUrl = scriptParams.hub,
+            app = window.nainwakletApp;
+
+        if (!app) {  // app not initialized => create & enable
+            app = new Application(hubUrl, cssUrl);
+            app.enable();
+            window.nainwakletApp = app;
+        } else {  // app already initialized => disable & delete
+            app.disable();
+            delete window.nainwakletApp;
         }
+    }
+
+    if (startsWith(window.location.href, "http://www.nainwak.com/jeu/index.php")) {
+        toggleApp();
     } else {
         alert("Erreur : ce bouton fonctionne uniquement sur la page jeu de Nainwak");
     }
-
 }());
