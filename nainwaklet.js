@@ -59,10 +59,6 @@
         return params;
     }
 
-    function getIDS() {
-        return parseQueryParams(window.location).IDS;
-    }
-
     /*
     function asyncGet(url, onSuccess, onFailure) {
         var xhr = new XMLHttpRequest();
@@ -82,11 +78,36 @@
 
     /* Spy class */
     var Spy = defineClass({
-        //infoFrame = window.info.frameElement,
-        //this.infoFrameLoaded = infoFrameLoaded;
-        // replace the existing content by the hub UI
-        //infoFrame.addEventListener('load', infoFrameLoaded, false);
-        //infoFrame.removeEventListener('load', storage.infoFrameLoaded, false);
+        initialize: function () {
+            this.IDS = parseQueryParams(window.location).IDS;
+            this.infoFrame = window.info.frameElement;
+            this.infoLoadedListener = null;
+        },
+
+        enable: function () {
+            if (this.isEnabled()) {
+                return false;
+            }
+
+            this.infoLoadedListener = this.infoLoaded.bind(this);
+            this.infoFrame.addEventListener('load', this.infoLoadedListener, false);
+            return true;
+        },
+
+        disable: function () {
+            if (!this.isEnabled()) {
+                return false;
+            }
+
+            this.infoFrame.removeEventListener('load', this.infoLoadedListener, false);
+            this.infoLoadedListener = null;
+            return true;
+        },
+
+        isEnabled: function () {
+            return this.infoLoadedListener !== null;
+        },
+
         createUI: function () {
             var button = document.createElement("button"),
                 that = this;
@@ -94,41 +115,37 @@
             button.setAttribute("type", "button");
             button.innerHTML = "Lancer MAJ";
             button.onclick = function () {
-                var IDS = getIDS();
-                if (IDS) {
-                    that.sendUpdate(IDS);
-                } else {
-                    alert("Erreur : ID de session non trouvé, vous devez vous connecter d'abord");
-                }
+                that.sendUpdate();
             };
             return button;
         },
-        /*
-        infoFrameLoaded_: function () {
+
+        infoLoaded: function () {
             var infoDoc = window.info.document,
-                url = infoDoc.location,
-                html = infoDoc.documentElement.innerHTML;
+                url = infoDoc.location;
+            //html = infoDoc.documentElement.innerHTML;
             log("info frame loaded: " + url);
         },
-        */
-        gameUrl: function (name, IDS, suffix) {
+
+        gameUrl: function (name, suffix) {
             //http://www.nainwak.com/accueil/resume.php?IDS=b363601260a8be5d86d1034efba99568&errmsg=
-            return 'http://www.nainwak.com/jeu/' + name + '.php?IDS=' + IDS + (suffix || "");
+            return 'http://www.nainwak.com/jeu/' + name + '.php?IDS=' + this.IDS + (suffix || "");
         },
-        sendUpdate: function (IDS) {
+
+        sendUpdate: function () {
             var pagesUrls = {
-                //menu: this.gameUrl('menu', IDS),  // Menu principal
-                pager: this.gameUrl('pager', IDS),  // Pager : PV/PA, compteur des messages
-                //pub: this.gameUrl('pub', IDS),  // Publicités
-                //map: this.gameUrl('map', IDS),  // Carte de la détection
-                detect: this.gameUrl('detect', IDS),  // Détection
-                //deplac: this.gameUrl('deplac', IDS),  // Action
-                invent: this.gameUrl('invent', IDS),  // Inventaire
-                perso: this.gameUrl('perso', IDS),  // Fiche de perso
-                even: this.gameUrl('even', IDS, "&duree=240&type=ALL"),  // événements : tous types d'evts sur 10 jours
-                //chat: this.gameUrl('chat', IDS),  // Messagerie
-                //guilde: this.gameUrl('guilde', IDS),  // Guilde
-                encyclo: this.gameUrl('encyclo', IDS)  // Encyclopédie
+                //menu: this.gameUrl('menu'),  // Menu principal
+                pager: this.gameUrl('pager'),  // Pager : PV/PA, compteur des messages
+                //pub: this.gameUrl('pub'),  // Publicités
+                //map: this.gameUrl('map'),  // Carte de la détection
+                detect: this.gameUrl('detect'),  // Détection
+                //deplac: this.gameUrl('deplac'),  // Action
+                invent: this.gameUrl('invent'),  // Inventaire
+                perso: this.gameUrl('perso'),  // Fiche de perso
+                even: this.gameUrl('even', "&duree=240&type=ALL"),  // événements : tous types d'evts sur 10 jours
+                //chat: this.gameUrl('chat'),  // Messagerie
+                //guilde: this.gameUrl('guilde'),  // Guilde
+                encyclo: this.gameUrl('encyclo')  // Encyclopédie
             };
             Object.keys(pagesUrls).forEach(function (name) {
                 var url = pagesUrls[name];
@@ -143,6 +160,7 @@
         initialize: function (url) {
             this.url = url;
         },
+
         createUI: function () {
             var iframe = document.createElement("iframe");
             iframe.setAttribute("class", "hub");
@@ -159,13 +177,15 @@
             this.hub = new Hub(hubUrl);  // Hub component
             this.ui = this.createUI();  // app UI
             this.css = this.createCSS(cssUrl);  // app CSS
+            this.containerInitialContent = null;
         },
+
         enable: function () {
             /* This method installs the application UI in the container
              * element if the application is not already enabled.
              */
             if (this.isEnabled()) {
-                return;
+                return false;
             }
 
             var doc = this.container.ownerDocument,
@@ -180,25 +200,38 @@
             // replace by our UI
             this.container.innerHTML = "";
             this.container.appendChild(this.ui);
+
+            // enable the spy agent
+            this.spy.enable();
+
+            return true;
         },
+
         disable: function () {
             /* This method removes the application UI from the container
              * element and restores its content if the application is enabled.
              */
             if (!this.isEnabled()) {
-                return;
+                return false;
             }
+
+            // disable the spy agent
+            this.spy.disable();
 
             // restore the initial content
             this.container.innerHTML = this.containerInitialContent;
-            delete this.containerInitialContent;
+            this.containerInitialContent = null;;
 
             // remove the CSS element
             this.css.parentNode.removeChild(this.css);
+
+            return true;
         },
+
         isEnabled: function () {
-            return this.containerInitialContent !== undefined;
+            return this.containerInitialContent !== null;
         },
+
         createUI: function () {
             var container = document.createElement("div"),
                 spyUI = this.spy.createUI(),
@@ -216,6 +249,7 @@
 
             return container;
         },
+
         createCSS: function (url) {
             var link = document.createElement('link');
             link.setAttribute('rel', 'stylesheet');
