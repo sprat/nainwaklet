@@ -153,47 +153,51 @@
 
     /* Application class */
     var Application = defineClass({
-        initialize: function (hubUrl, cssUrl) {
-            this.spy = new Spy();
-            this.hub = new Hub(hubUrl);
-            this.enabled = false;
-            this.container = window.pub.document.body;  // container for the UI
-            this.cssLink = this.createCssLink(cssUrl);
+        initialize: function (container, hubUrl, cssUrl) {
+            this.container = container;  // container for the UI
+            this.spy = new Spy();  // Spy component
+            this.hub = new Hub(hubUrl);  // Hub component
+            this.ui = this.createUI();  // app UI
+            this.css = this.createCSS(cssUrl);  // app CSS
         },
         enable: function () {
-            if (this.enabled) {
+            /* This method installs the application UI in the container
+             * element if the application is not already enabled.
+             */
+            if (this.isEnabled()) {
                 return;
             }
 
             var doc = this.container.ownerDocument,
                 head = doc.getElementsByTagName('head')[0];
 
-            // add the CSS link element to the head
-            head.appendChild(this.cssLink);
-
-            var ui = this.createUI();
+            // add the CSS element to the head
+            head.appendChild(this.css);
 
             // backup the initial content
             this.containerInitialContent = this.container.innerHTML;
 
             // replace by our UI
             this.container.innerHTML = "";
-            this.container.appendChild(ui);
-
-            this.enabled = true;
+            this.container.appendChild(this.ui);
         },
         disable: function () {
-            if (!this.enabled) {
+            /* This method removes the application UI from the container
+             * element and restores its content if the application is enabled.
+             */
+            if (!this.isEnabled()) {
                 return;
             }
 
             // restore the initial content
             this.container.innerHTML = this.containerInitialContent;
+            delete this.containerInitialContent;
 
-            // remove the CSS link element
-            this.cssLink.parentNode.removeChild(this.cssLink);
-
-            this.enabled = false;
+            // remove the CSS element
+            this.css.parentNode.removeChild(this.css);
+        },
+        isEnabled: function () {
+            return this.containerInitialContent !== undefined;
         },
         createUI: function () {
             var container = document.createElement("div"),
@@ -212,7 +216,7 @@
 
             return container;
         },
-        createCssLink: function (url) {
+        createCSS: function (url) {
             var link = document.createElement('link');
             link.setAttribute('rel', 'stylesheet');
             link.setAttribute('type', 'text/css');
@@ -228,10 +232,11 @@
             scriptParams = parseQueryParams(scriptLocation),
             cssUrl = scriptUrl.replace('.js', '.css'),
             hubUrl = scriptParams.hub,
+            container = window.pub.document.body,
             app = window.nainwakletApp;
 
         if (!app) {  // app not initialized => create & enable
-            app = new Application(hubUrl, cssUrl);
+            app = new Application(container, hubUrl, cssUrl);
             app.enable();
             window.nainwakletApp = app;
         } else {  // app already initialized => disable & delete
