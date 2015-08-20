@@ -8,11 +8,12 @@
 (function () {
     "use strict";
 
-    var log = (window.console)
-        ? window.console.log
-        : function () {
-            return;
-        };
+    var console = window.console,
+        log = (console)
+            ? console.log.bind(console)
+            : function () {
+                return;
+            };
 
     function extend(target, source) {
         var names = Object.keys(source);
@@ -151,26 +152,12 @@
         }
     });
 
-    /* Hub class */
-    var Hub = defineClass({
-        initialize: function (url) {
-            this.url = url;
-        },
-
-        createUI: function () {
-            var iframe = document.createElement("iframe");
-            iframe.setAttribute("class", "hub");
-            iframe.setAttribute("src", this.url);
-            return iframe;
-        }
-    });
-
     /* Application class */
     var Application = defineClass({
         initialize: function (container, hubUrl, cssUrl) {
             this.container = container;  // container for the UI
             this.spy = new Spy();  // Spy component
-            this.hub = new Hub(hubUrl);  // Hub component
+            this.hubUrl = hubUrl;  // hub URL
             this.ui = this.createUI();  // app UI
             this.css = this.createCSS(cssUrl);  // app CSS
             this.containerInitialContent = null;
@@ -231,7 +218,7 @@
         createUI: function () {
             var container = document.createElement("div"),
                 spyUI = this.spy.createUI(),
-                hubUI = this.hub.createUI();
+                hubUI = this.createHubUI();
 
             container.setAttribute("class", "nainwaklet");
 
@@ -244,6 +231,16 @@
             }
 
             return container;
+        },
+
+        createHubUI: function () {
+            if (!this.hubUrl) {
+                return;
+            }
+            var iframe = document.createElement("iframe");
+            iframe.setAttribute("class", "hub");
+            iframe.setAttribute("src", this.hubUrl);
+            return iframe;
         },
 
         createCSS: function (url) {
