@@ -36,10 +36,6 @@
         return constructor;
     }
 
-    function startsWith(str, substr) {
-        return str.slice(0, substr.length) === substr;
-    }
-
     function parseUrl(url) {
         var a = document.createElement('a');
         a.href = url;
@@ -220,7 +216,7 @@
 
             // restore the initial content
             this.container.innerHTML = this.containerInitialContent;
-            this.containerInitialContent = null;;
+            this.containerInitialContent = null;
 
             // remove the CSS element
             this.css.parentNode.removeChild(this.css);
@@ -259,6 +255,11 @@
         }
     });
 
+    function isNainwakGamePage() {
+        var path = window.location.origin + window.location.pathname;
+        return path === "http://www.nainwak.com/jeu/index.php";
+    }
+
     function toggleApp() {
         var currentScript = document.scripts[document.scripts.length - 1],
             scriptLocation = parseUrl(currentScript.src),
@@ -279,7 +280,7 @@
         }
     }
 
-    if (startsWith(window.location.href, "http://www.nainwak.com/jeu/index.php")) {
+    if (isNainwakGamePage()) {
         toggleApp();
     } else {
         alert("Erreur : ce bouton fonctionne uniquement sur la page jeu de Nainwak");
