@@ -8,11 +8,11 @@
 (function () {
     "use strict";
 
-    function log(msg) {
-        if (window.console) {
-            window.console.log(msg);
-        }
-    }
+    var log = (window.console)
+        ? window.console.log
+        : function () {
+            return;
+        };
 
     function extend(target, source) {
         var names = Object.keys(source);
