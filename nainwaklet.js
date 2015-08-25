@@ -73,7 +73,8 @@
     }
     */
 
-    /* Spy class */
+    /* Spy "class" */
+    // TODO: convert to class-free style...
     var Spy = defineClass({
         initialize: function () {
             this.IDS = parseQueryParams(window.location).IDS;
@@ -152,105 +153,99 @@
         }
     });
 
-    /* Application class */
-    var Application = defineClass({
-        initialize: function (container, hubUrl, cssUrl) {
-            this.container = container;  // container for the UI
-            this.spy = new Spy();  // Spy component
-            this.hubUrl = hubUrl;  // hub URL
-            this.ui = this.createUI();  // app UI
-            this.css = this.createCSS(cssUrl);  // app CSS
-            this.containerInitialContent = null;
-        },
+    /* Application "class" */
+    function createApplication(container, hubUrl, cssUrl) {
+        var spy = new Spy(),  // Spy instance
+            containerContent = null,  // initial content of the container
+            createHubFrame = function () {
+                var iframe = document.createElement("iframe");
+                iframe.setAttribute("class", "hub");
+                iframe.setAttribute("src", hubUrl);
+                return iframe;
+            },
+            createCssLink = function () {
+                var link = document.createElement('link');
+                link.setAttribute('rel', 'stylesheet');
+                link.setAttribute('type', 'text/css');
+                link.setAttribute('href', cssUrl);
+                return link;
+            },
+            createUI = function () {
+                var root = document.createElement("div"),
+                    spyUI = spy.createUI(),
+                    hubFrame;
 
-        enable: function () {
-            /* This method installs the application UI in the container
-             * element if the application is not already enabled.
-             */
-            if (this.isEnabled()) {
-                return false;
-            }
+                root.setAttribute("class", "nainwaklet");
 
-            var doc = this.container.ownerDocument,
-                head = doc.getElementsByTagName('head')[0];
+                if (spyUI) {
+                    root.appendChild(spyUI);
+                }
 
-            // add the CSS element to the head
-            head.appendChild(this.css);
+                hubFrame = createHubFrame();
+                root.appendChild(hubFrame);
 
-            // backup the initial content
-            this.containerInitialContent = this.container.innerHTML;
+                return root;
+            },
+            ui = createUI(),  // application UI
+            cssLink = createCssLink(), // application CSS link
+            isEnabled = function () {
+                return containerContent !== null;
+            },
+            enable = function () {
+                /* This method installs the application UI in the container
+                 * element if the application is not already enabled.
+                 */
+                if (isEnabled()) {
+                    return false;
+                }
 
-            // replace by our UI
-            this.container.innerHTML = "";
-            this.container.appendChild(this.ui);
+                var doc = container.ownerDocument,
+                    head = doc.getElementsByTagName('head')[0];
 
-            // enable the spy agent
-            this.spy.enable();
+                // add the CSS element to the head
+                head.appendChild(cssLink);
 
-            return true;
-        },
+                // backup the initial content
+                containerContent = container.innerHTML;
 
-        disable: function () {
-            /* This method removes the application UI from the container
-             * element and restores its content if the application is enabled.
-             */
-            if (!this.isEnabled()) {
-                return false;
-            }
+                // replace by our UI
+                container.innerHTML = "";
+                container.appendChild(ui);
 
-            // disable the spy agent
-            this.spy.disable();
+                // enable the spy agent
+                spy.enable();
 
-            // restore the initial content
-            this.container.innerHTML = this.containerInitialContent;
-            this.containerInitialContent = null;
+                return true;
+            },
+            disable = function () {
+                /* This method removes the application UI from the container
+                 * element and restores its content if the application is enabled.
+                 */
+                if (!isEnabled()) {
+                    return false;
+                }
 
-            // remove the CSS element
-            this.css.parentNode.removeChild(this.css);
+                // disable the spy agent
+                spy.disable();
 
-            return true;
-        },
+                // restore the initial content
+                container.innerHTML = containerContent;
+                containerContent = null;
 
-        isEnabled: function () {
-            return this.containerInitialContent !== null;
-        },
+                // remove the CSS element
+                cssLink.parentNode.removeChild(cssLink);
 
-        createUI: function () {
-            var container = document.createElement("div"),
-                spyUI = this.spy.createUI(),
-                hubUI = this.createHubUI();
+                return true;
+            };
 
-            container.setAttribute("class", "nainwaklet");
-
-            if (spyUI) {
-                container.appendChild(spyUI);
-            }
-
-            if (hubUI) {
-                container.appendChild(hubUI);
-            }
-
-            return container;
-        },
-
-        createHubUI: function () {
-            if (!this.hubUrl) {
-                return;
-            }
-            var iframe = document.createElement("iframe");
-            iframe.setAttribute("class", "hub");
-            iframe.setAttribute("src", this.hubUrl);
-            return iframe;
-        },
-
-        createCSS: function (url) {
-            var link = document.createElement('link');
-            link.setAttribute('rel', 'stylesheet');
-            link.setAttribute('type', 'text/css');
-            link.setAttribute('href', url);
-            return link;
-        }
-    });
+        // TODO: we should implement a getter/setter for the enabled flag
+        return Object.freeze({
+            isEnabled: isEnabled,
+            enable: enable,
+            disable: disable,
+            spy: spy
+        });
+    }
 
     function isNainwakGamePage() {
         var path = window.location.origin + window.location.pathname;
@@ -268,7 +263,7 @@
             app = window.nainwakletApp;
 
         if (!app) {  // app not initialized => create & enable
-            app = new Application(container, hubUrl, cssUrl);
+            app = createApplication(container, hubUrl, cssUrl);
             app.enable();
             window.nainwakletApp = app;
         } else {  // app already initialized => disable & delete
