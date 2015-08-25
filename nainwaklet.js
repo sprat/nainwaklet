@@ -60,15 +60,18 @@
     function createSpy() {
         // There's also:
         // - http://www.nainwak.com/accueil/resume.php?IDS=...&errmsg=
-        var IDS = parseQueryParams(window.location).IDS,
-            infoFrame = window.info.frameElement,
+        var infoFrame = window.info.frameElement,
             enabled = false,
+            //IDS = parseQueryParams(window.location).IDS,
             infoLoaded = function () {
-                var infoDoc = infoFrame.contentDocument,
-                    url = infoDoc.location;
-                //html = infoDoc.documentElement.innerHTML;
-                log("info frame loaded: " + url);
+                var win = infoFrame.contentWindow,
+                    location = win.location;
+                //doc = win.document,
+                //html = doc.documentElement.innerHTML
+                log("info frame loaded");
+                log(location.href);
             },
+            /*
             gameUrl = function (name) {
                 return 'http://www.nainwak.com/jeu/' + name + '.php?IDS=' + IDS;
             },
@@ -86,21 +89,7 @@
                 guilde: gameUrl('guilde'),  // Guilde
                 encyclo: gameUrl('encyclo')  // Encyclopédie
             },
-            sendUpdate = function () {
-                Object.keys(gameUrls).forEach(function (name) {
-                    var url = gameUrls[name];
-                    log(name + ": " + url);
-                });
-                //asyncGet(gameUrls.detect, log, log);
-            },
-            createUI = function () {
-                var button = document.createElement("button");
-                button.setAttribute("class", "spy");
-                button.setAttribute("type", "button");
-                button.innerHTML = "Lancer MAJ";
-                button.onclick = sendUpdate;
-                return button;
-            },
+            */
             isEnabled = function () {
                 return enabled;
             },
@@ -127,8 +116,7 @@
         return Object.freeze({
             isEnabled: isEnabled,
             enable: enable,
-            disable: disable,
-            createUI: createUI  // TODO: we should not expose that directly
+            disable: disable
         });
     }
 
@@ -151,18 +139,10 @@
             },
             createUI = function () {
                 var root = document.createElement("div"),
-                    spyUI = spy.createUI(),
-                    hubFrame;
+                    hubFrame = createHubFrame();
 
                 root.setAttribute("class", "nainwaklet");
-
-                if (spyUI) {
-                    root.appendChild(spyUI);
-                }
-
-                hubFrame = createHubFrame();
                 root.appendChild(hubFrame);
-
                 return root;
             },
             ui = createUI(),  // application UI
