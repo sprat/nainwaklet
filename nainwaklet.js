@@ -58,6 +58,8 @@
 
     /* Spy "class" */
     function createSpy() {
+        // There's also:
+        // - http://www.nainwak.com/accueil/resume.php?IDS=...&errmsg=
         var IDS = parseQueryParams(window.location).IDS,
             infoFrame = window.info.frameElement,
             enabled = false,
@@ -67,30 +69,29 @@
                 //html = infoDoc.documentElement.innerHTML;
                 log("info frame loaded: " + url);
             },
-            gameUrl = function (name, suffix) {
-                //http://www.nainwak.com/accueil/resume.php?IDS=b363601260a8be5d86d1034efba99568&errmsg=
-                return 'http://www.nainwak.com/jeu/' + name + '.php?IDS=' + IDS + (suffix || "");
+            gameUrl = function (name) {
+                return 'http://www.nainwak.com/jeu/' + name + '.php?IDS=' + IDS;
+            },
+            gameUrls = {
+                menu: gameUrl('menu'),  // Menu principal
+                pager: gameUrl('pager'),  // Pager : PV/PA, compteur des messages
+                pub: gameUrl('pub'),  // Publicités
+                map: gameUrl('map'),  // Carte de la détection
+                detect: gameUrl('detect'),  // Détection
+                deplac: gameUrl('deplac'),  // Action
+                invent: gameUrl('invent'),  // Inventaire
+                perso: gameUrl('perso'),  // Fiche de perso
+                even: gameUrl('even') + "&duree=240&type=ALL",  // événements : tous types d'evts sur 10 jours
+                chat: gameUrl('chat'),  // Messagerie
+                guilde: gameUrl('guilde'),  // Guilde
+                encyclo: gameUrl('encyclo')  // Encyclopédie
             },
             sendUpdate = function () {
-                var pagesUrls = {
-                    //menu: gameUrl('menu'),  // Menu principal
-                    pager: gameUrl('pager'),  // Pager : PV/PA, compteur des messages
-                    //pub: gameUrl('pub'),  // Publicités
-                    //map: gameUrl('map'),  // Carte de la détection
-                    detect: gameUrl('detect'),  // Détection
-                    //deplac: gameUrl('deplac'),  // Action
-                    invent: gameUrl('invent'),  // Inventaire
-                    perso: gameUrl('perso'),  // Fiche de perso
-                    even: gameUrl('even', "&duree=240&type=ALL"),  // événements : tous types d'evts sur 10 jours
-                    //chat: gameUrl('chat'),  // Messagerie
-                    //guilde: gameUrl('guilde'),  // Guilde
-                    encyclo: gameUrl('encyclo')  // Encyclopédie
-                };
-                Object.keys(pagesUrls).forEach(function (name) {
-                    var url = pagesUrls[name];
+                Object.keys(gameUrls).forEach(function (name) {
+                    var url = gameUrls[name];
                     log(name + ": " + url);
                 });
-                //asyncGet(pagesUrls.detect, log, log);
+                //asyncGet(gameUrls.detect, log, log);
             },
             createUI = function () {
                 var button = document.createElement("button");
