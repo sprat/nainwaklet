@@ -1,9 +1,6 @@
 /*global
     window, document, alert, XMLHttpRequest
  */
-/*jslint
-    this: true
- */
 
 (function () {
     "use strict";
@@ -15,6 +12,7 @@
                 return;
             };
 
+    /*
     function extend(target, source) {
         Object.keys(source).forEach(function (key) {
             if (target[key] === undefined) {
@@ -23,20 +21,21 @@
         });
     }
 
-    function defineClass(members) {
-        // create a constructor function
-        function constructor() {
-            if (this.initialize) {
-                this.initialize.apply(this, arguments);
+    function asyncGet(url, onSuccess, onFailure) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', encodeURI(url), true);  // asynchronous
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {  // response received and loaded
+                if (xhr.status === 200) {
+                    onSuccess(xhr.responseText, xhr.statusText);
+                } else {
+                    onFailure(xhr.statusText);
+                }
             }
-        }
-
-        // add the members to the prototype
-        extend(constructor.prototype, members);
-
-        // return the constructor
-        return constructor;
+        };
+        xhr.send(null);
     }
+    */
 
     function parseUrl(url) {
         var a = document.createElement('a');
@@ -57,106 +56,84 @@
         return params;
     }
 
-    /*
-    function asyncGet(url, onSuccess, onFailure) {
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', encodeURI(url), true);  // asynchronous
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {  // response received and loaded
-                if (xhr.status === 200) {
-                    onSuccess(xhr.responseText, xhr.statusText);
-                } else {
-                    onFailure(xhr.statusText);
-                }
-            }
-        };
-        xhr.send(null);
-    }
-    */
-
     /* Spy "class" */
-    // TODO: convert to class-free style...
-    var Spy = defineClass({
-        initialize: function () {
-            this.IDS = parseQueryParams(window.location).IDS;
-            this.infoFrame = window.info.frameElement;
-            this.infoLoadedListener = null;
-        },
+    function createSpy() {
+        var IDS = parseQueryParams(window.location).IDS,
+            infoFrame = window.info.frameElement,
+            enabled = false,
+            infoLoaded = function () {
+                var infoDoc = window.info.document,
+                    url = infoDoc.location;
+                //html = infoDoc.documentElement.innerHTML;
+                log("info frame loaded: " + url);
+            },
+            gameUrl = function (name, suffix) {
+                //http://www.nainwak.com/accueil/resume.php?IDS=b363601260a8be5d86d1034efba99568&errmsg=
+                return 'http://www.nainwak.com/jeu/' + name + '.php?IDS=' + IDS + (suffix || "");
+            },
+            sendUpdate = function () {
+                var pagesUrls = {
+                    //menu: gameUrl('menu'),  // Menu principal
+                    pager: gameUrl('pager'),  // Pager : PV/PA, compteur des messages
+                    //pub: gameUrl('pub'),  // Publicités
+                    //map: gameUrl('map'),  // Carte de la détection
+                    detect: gameUrl('detect'),  // Détection
+                    //deplac: gameUrl('deplac'),  // Action
+                    invent: gameUrl('invent'),  // Inventaire
+                    perso: gameUrl('perso'),  // Fiche de perso
+                    even: gameUrl('even', "&duree=240&type=ALL"),  // événements : tous types d'evts sur 10 jours
+                    //chat: gameUrl('chat'),  // Messagerie
+                    //guilde: gameUrl('guilde'),  // Guilde
+                    encyclo: gameUrl('encyclo')  // Encyclopédie
+                };
+                Object.keys(pagesUrls).forEach(function (name) {
+                    var url = pagesUrls[name];
+                    log(name + ": " + url);
+                });
+                //asyncGet(pagesUrls.detect, log, log);
+            },
+            createUI = function () {
+                var button = document.createElement("button");
+                button.setAttribute("class", "spy");
+                button.setAttribute("type", "button");
+                button.innerHTML = "Lancer MAJ";
+                button.onclick = sendUpdate;
+                return button;
+            },
+            isEnabled = function () {
+                return enabled;
+            },
+            enable = function () {
+                if (isEnabled()) {
+                    return false;
+                }
 
-        enable: function () {
-            if (this.isEnabled()) {
-                return false;
-            }
+                infoFrame.addEventListener('load', infoLoaded, false);
+                enabled = true;
+                return true;
+            },
+            disable = function () {
+                if (!isEnabled()) {
+                    return false;
+                }
 
-            this.infoLoadedListener = this.infoLoaded.bind(this);
-            this.infoFrame.addEventListener('load', this.infoLoadedListener, false);
-            return true;
-        },
-
-        disable: function () {
-            if (!this.isEnabled()) {
-                return false;
-            }
-
-            this.infoFrame.removeEventListener('load', this.infoLoadedListener, false);
-            this.infoLoadedListener = null;
-            return true;
-        },
-
-        isEnabled: function () {
-            return this.infoLoadedListener !== null;
-        },
-
-        createUI: function () {
-            var button = document.createElement("button"),
-                that = this;
-            button.setAttribute("class", "spy");
-            button.setAttribute("type", "button");
-            button.innerHTML = "Lancer MAJ";
-            button.onclick = function () {
-                that.sendUpdate();
+                infoFrame.removeEventListener('load', infoLoaded, false);
+                enabled = false;
+                return true;
             };
-            return button;
-        },
 
-        infoLoaded: function () {
-            var infoDoc = window.info.document,
-                url = infoDoc.location;
-            //html = infoDoc.documentElement.innerHTML;
-            log("info frame loaded: " + url);
-        },
-
-        gameUrl: function (name, suffix) {
-            //http://www.nainwak.com/accueil/resume.php?IDS=b363601260a8be5d86d1034efba99568&errmsg=
-            return 'http://www.nainwak.com/jeu/' + name + '.php?IDS=' + this.IDS + (suffix || "");
-        },
-
-        sendUpdate: function () {
-            var pagesUrls = {
-                //menu: this.gameUrl('menu'),  // Menu principal
-                pager: this.gameUrl('pager'),  // Pager : PV/PA, compteur des messages
-                //pub: this.gameUrl('pub'),  // Publicités
-                //map: this.gameUrl('map'),  // Carte de la détection
-                detect: this.gameUrl('detect'),  // Détection
-                //deplac: this.gameUrl('deplac'),  // Action
-                invent: this.gameUrl('invent'),  // Inventaire
-                perso: this.gameUrl('perso'),  // Fiche de perso
-                even: this.gameUrl('even', "&duree=240&type=ALL"),  // événements : tous types d'evts sur 10 jours
-                //chat: this.gameUrl('chat'),  // Messagerie
-                //guilde: this.gameUrl('guilde'),  // Guilde
-                encyclo: this.gameUrl('encyclo')  // Encyclopédie
-            };
-            Object.keys(pagesUrls).forEach(function (name) {
-                var url = pagesUrls[name];
-                log(name + ": " + url);
-            });
-            //asyncGet(pagesUrls.detect, log, log);
-        }
-    });
+        // TODO: we should implement a getter/setter for the enabled flag
+        return Object.freeze({
+            isEnabled: isEnabled,
+            enable: enable,
+            disable: disable,
+            createUI: createUI  // TODO: we should not expose that directly
+        });
+    }
 
     /* Application "class" */
     function createApplication(container, hubUrl, cssUrl) {
-        var spy = new Spy(),  // Spy instance
+        var spy = createSpy(),  // Spy instance
             containerContent = null,  // initial content of the container
             createHubFrame = function () {
                 var iframe = document.createElement("iframe");
