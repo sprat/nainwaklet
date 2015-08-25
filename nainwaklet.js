@@ -16,9 +16,10 @@
             };
 
     function extend(target, source) {
-        var names = Object.keys(source);
-        names.forEach(function (name) {
-            target[name] = source[name];
+        Object.keys(source).forEach(function (key) {
+            if (target[key] === undefined) {
+                target[key] = source[key];
+            }
         });
     }
 
