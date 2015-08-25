@@ -64,7 +64,7 @@
             infoFrame = window.info.frameElement,
             enabled = false,
             infoLoaded = function () {
-                var infoDoc = window.info.document,
+                var infoDoc = infoFrame.contentDocument,
                     url = infoDoc.location;
                 //html = infoDoc.documentElement.innerHTML;
                 log("info frame loaded: " + url);
