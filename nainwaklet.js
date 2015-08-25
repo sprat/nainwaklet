@@ -56,6 +56,53 @@
         return params;
     }
 
+    function createPage(name, load) {  /*, fetchParams*/
+        var baseUrl = 'http://www.nainwak.com/jeu/' + name + '.php';
+        // TODO: add a fetch method
+        return Object.freeze({
+            name: name,
+            baseUrl: baseUrl,
+            load: load
+        });
+    }
+
+    var pages = [
+        // Détection
+        createPage('detect', function (window) {
+            var document = window.document,
+                c1 = document.getElementsByClassName('c1')[0];
+            log('Processing detect...');
+            //log(document);
+            log(c1);
+            //log(window.tabavat);
+            //gavat(id, photo, nom, tag, barbe, classe, cote, distance, x, y, description, attaquer, gifler, estCible)
+            //log(window.tabobjet);
+            //gobjet(id, photo, nom, distance, x, y, poussiere, prendre)
+        })
+        /*
+        // Evénements (tous types d'evts sur 10 jours)
+        createPage('even', function (win) {
+            log('Processing even...');
+            log(doc);
+        }, {duree: 240, type: 'ALL'}),
+        // Fiche de perso
+        createPage('perso', function (doc) {
+            log('Processing perso...');
+            log(doc);
+        }),
+        // Inventaire
+        createPage('invent', function (doc) {
+            log('Processing invent...');
+            log(doc);
+        }),
+        // Encyclopédie
+        createPage('encyclo', function (doc) {
+            log('Processing encyclo...');
+            log(doc);
+        })
+        */
+    ];
+
     /* Spy "class" */
     function createSpy() {
         // There's also:
@@ -65,31 +112,14 @@
             //IDS = parseQueryParams(window.location).IDS,
             infoLoaded = function () {
                 var win = infoFrame.contentWindow,
-                    location = win.location;
-                //doc = win.document,
-                //html = doc.documentElement.innerHTML
-                log("info frame loaded");
-                log(location.href);
+                    location = win.location,
+                    baseUrl = location.origin + location.pathname;
+                pages.forEach(function (page) {
+                    if (page.baseUrl === baseUrl) {
+                        page.load(win);
+                    }
+                });
             },
-            /*
-            gameUrl = function (name) {
-                return 'http://www.nainwak.com/jeu/' + name + '.php?IDS=' + IDS;
-            },
-            gameUrls = {
-                menu: gameUrl('menu'),  // Menu principal
-                pager: gameUrl('pager'),  // Pager : PV/PA, compteur des messages
-                pub: gameUrl('pub'),  // Publicités
-                map: gameUrl('map'),  // Carte de la détection
-                detect: gameUrl('detect'),  // Détection
-                deplac: gameUrl('deplac'),  // Action
-                invent: gameUrl('invent'),  // Inventaire
-                perso: gameUrl('perso'),  // Fiche de perso
-                even: gameUrl('even') + "&duree=240&type=ALL",  // événements : tous types d'evts sur 10 jours
-                chat: gameUrl('chat'),  // Messagerie
-                guilde: gameUrl('guilde'),  // Guilde
-                encyclo: gameUrl('encyclo')  // Encyclopédie
-            },
-            */
             isEnabled = function () {
                 return enabled;
             },
