@@ -7,10 +7,10 @@ var nainwaklet = (function () {
     "use strict";
 
     var nainwakOrigin = 'http://www.nainwak.com',
-        currentScript = document.scripts[document.scripts.length - 1],
-        scriptUrl = currentScript.src,
+        script = document.scripts[document.scripts.length - 1],
+        scriptUrl = script.src,
         scriptBaseUrl = scriptUrl.substring(0, scriptUrl.lastIndexOf("/") + 1),
-        channel = currentScript.getAttribute('data-channel'),
+        channel = script.getAttribute('data-channel'),
         log = (window.console)
             ? window.console.log.bind(window.console)
             : function () {
@@ -257,6 +257,7 @@ var nainwaklet = (function () {
     }
 
     function toggleApp() {
+        // TODO: remove this global
         var app = window.nainwakletApp;
 
         if (!app) {  // app not initialized => create & enable
