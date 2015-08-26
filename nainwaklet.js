@@ -256,15 +256,15 @@
             cssUrl = scriptUrl.replace('.js', '.css'),
             hubUrl = scriptParams.hub,
             container = window.pub.document.body,
-            app = window.nainwakletApp;
+            app = window.nainwaklet;
 
         if (!app) {  // app not initialized => create & enable
             app = createApplication(container, hubUrl, cssUrl);
             app.enable();
-            window.nainwakletApp = app;
+            window.nainwaklet = app;
         } else {  // app already initialized => disable & delete
             app.disable();
-            delete window.nainwakletApp;
+            delete window.nainwaklet;
         }
     }
 
