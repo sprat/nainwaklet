@@ -56,6 +56,20 @@
         return params;
     }
 
+    function currentNain() {
+        // get the current "Nain" info from the menu frame
+        var menuDoc = window.menu.document,
+            title = menuDoc.querySelector('.news-titre'),
+            name = title.querySelector('td:last-child').innerHTML,
+            avatar = title.querySelector('td:first-child img').src;
+        // TODO: we should introduce a "Nain" class here, which would be used
+        // when we analyze the detect page
+        return Object.freeze({
+            name: name,
+            avatar: avatar
+        });
+    }
+
     function createPage(name, load) {  /*, fetchParams*/
         var baseUrl = 'http://www.nainwak.com/jeu/' + name + '.php';
         // TODO: add a fetch method
@@ -104,7 +118,7 @@
     ];
 
     /* Spy "class" */
-    function createSpy() {
+    function createSpy(nain) {
         // There's also:
         // - http://www.nainwak.com/accueil/resume.php?IDS=...&errmsg=
         var infoFrame = window.info.frameElement,
@@ -142,6 +156,8 @@
                 return true;
             };
 
+        log(nain);
+
         // TODO: we should implement a getter/setter for the enabled flag
         return Object.freeze({
             isEnabled: isEnabled,
@@ -152,7 +168,8 @@
 
     /* Application "class" */
     function createApplication(container, hubUrl, cssUrl) {
-        var spy = createSpy(),  // Spy instance
+        var nain = currentNain(),  // current Nain
+            spy = createSpy(nain),  // Spy instance
             containerContent = null,  // initial content of the container
             createHubFrame = function () {
                 var iframe = document.createElement("iframe");
