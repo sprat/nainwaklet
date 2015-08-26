@@ -5,7 +5,8 @@
 (function () {
     "use strict";
 
-    var console = window.console,
+    var nainwakOrigin = 'http://www.nainwak.com',
+        console = window.console,
         log = (console)
             ? console.log.bind(console)
             : function () {
@@ -71,7 +72,7 @@
     }
 
     function createPage(name, analyze) {  /*, fetchParams*/
-        var baseUrl = 'http://www.nainwak.com/jeu/' + name + '.php';
+        var baseUrl = nainwakOrigin + '/jeu/' + name + '.php';
         // TODO: add a fetch method
         return Object.freeze({
             name: name,
@@ -110,7 +111,7 @@
     /* Spy "class" */
     function createSpy(nain) {
         // There's also:
-        // - http://www.nainwak.com/accueil/resume.php?IDS=...&errmsg=
+        // - /accueil/resume.php?IDS=...&errmsg=
         var infoFrame = window.info.frameElement,
             enabled = false,
             //IDS = parseQueryParams(window.location).IDS,
@@ -244,8 +245,8 @@
     }
 
     function isNainwakGamePage() {
-        var path = window.location.origin + window.location.pathname;
-        return path === "http://www.nainwak.com/jeu/index.php";
+        var loc = window.location;
+        return (loc.origin == nainwakOrigin) && (loc.pathname == "/jeu/index.php");
     }
 
     function toggleApp() {
