@@ -70,50 +70,40 @@
         });
     }
 
-    function createPage(name, load) {  /*, fetchParams*/
+    function createPage(name, analyze) {  /*, fetchParams*/
         var baseUrl = 'http://www.nainwak.com/jeu/' + name + '.php';
         // TODO: add a fetch method
         return Object.freeze({
             name: name,
             baseUrl: baseUrl,
-            load: load
+            analyze: analyze
         });
+    }
+
+    function analyzeDetect(window) {
+        var document = window.document,
+            c1 = document.getElementsByClassName('c1')[0];
+        log('Processing detect...');
+        //log(document);
+        log(c1);
+        //log(window.tabavat);
+        //gavat(id, photo, nom, tag, barbe, classe, cote, distance, x, y, description, attaquer, gifler, estCible)
+        //log(window.tabobjet);
+        //gobjet(id, photo, nom, distance, x, y, poussiere, prendre)
     }
 
     var pages = [
         // Détection
-        createPage('detect', function (window) {
-            var document = window.document,
-                c1 = document.getElementsByClassName('c1')[0];
-            log('Processing detect...');
-            //log(document);
-            log(c1);
-            //log(window.tabavat);
-            //gavat(id, photo, nom, tag, barbe, classe, cote, distance, x, y, description, attaquer, gifler, estCible)
-            //log(window.tabobjet);
-            //gobjet(id, photo, nom, distance, x, y, poussiere, prendre)
-        })
+        createPage('detect', analyzeDetect)
         /*
         // Evénements (tous types d'evts sur 10 jours)
-        createPage('even', function (win) {
-            log('Processing even...');
-            log(doc);
-        }, {duree: 240, type: 'ALL'}),
+        createPage('even', log, {duree: 240, type: 'ALL'}),
         // Fiche de perso
-        createPage('perso', function (doc) {
-            log('Processing perso...');
-            log(doc);
-        }),
+        createPage('perso', log),
         // Inventaire
-        createPage('invent', function (doc) {
-            log('Processing invent...');
-            log(doc);
-        }),
+        createPage('invent', log),
         // Encyclopédie
-        createPage('encyclo', function (doc) {
-            log('Processing encyclo...');
-            log(doc);
-        })
+        createPage('encyclo', log)
         */
     ];
 
@@ -125,12 +115,12 @@
             enabled = false,
             //IDS = parseQueryParams(window.location).IDS,
             infoLoaded = function () {
-                var win = infoFrame.contentWindow,
-                    location = win.location,
+                var window = infoFrame.contentWindow,
+                    location = window.location,
                     baseUrl = location.origin + location.pathname;
                 pages.forEach(function (page) {
                     if (page.baseUrl === baseUrl) {
-                        page.load(win);
+                        page.analyze(window);
                     }
                 });
             },
