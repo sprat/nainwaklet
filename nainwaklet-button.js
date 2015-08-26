@@ -6,7 +6,7 @@
 
     var scriptUrl = document.scripts[document.scripts.length - 1].src,
         baseUrl = scriptUrl.substring(0, scriptUrl.lastIndexOf('/') + 1),
-        nainwakletUrl = baseUrl + "nainwaklet.js";
+        nainwakletUrl = baseUrl.replace(/^https?:/, '') + "nainwaklet.js";
 
     function getNainwakletInjectionUrl(channel) {
         var template = function () {
