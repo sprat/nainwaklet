@@ -44,6 +44,7 @@
         return a;
     }
 
+    /*
     function parseQueryParams(location) {
         var query = location.search.substr(1),
             pairs = query.split("&"),
@@ -56,6 +57,7 @@
         });
         return params;
     }
+    */
 
     function currentNain() {
         // get the current "Nain" info from the menu frame
@@ -246,20 +248,24 @@
 
     function isNainwakGamePage() {
         var loc = window.location;
-        return (loc.origin == nainwakOrigin) && (loc.pathname == "/jeu/index.php");
+        return (loc.origin === nainwakOrigin) && (loc.pathname === "/jeu/index.php");
     }
 
     function toggleApp() {
         var currentScript = document.scripts[document.scripts.length - 1],
+            channel = currentScript.getAttribute('data-channel'),
             scriptLocation = parseUrl(currentScript.src),
             scriptUrl = scriptLocation.origin + scriptLocation.pathname,
-            scriptParams = parseQueryParams(scriptLocation),
+            baseUrl = scriptUrl.substring(0, scriptUrl.lastIndexOf("/") + 1),
+            hubUrl = baseUrl + 'hub.html',
             cssUrl = scriptUrl.replace('.js', '.css'),
-            hubUrl = scriptParams.hub,
             container = window.pub.document.body,
             app = window.nainwaklet;
 
+        console.log(channel);
+
         if (!app) {  // app not initialized => create & enable
+            // TODO: we should pass the channel here instead...
             app = createApplication(container, hubUrl, cssUrl);
             app.enable();
             window.nainwaklet = app;
