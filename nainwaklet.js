@@ -2,13 +2,17 @@
     window, document, alert, XMLHttpRequest
  */
 
-(function () {
+/* nainwaklet module */
+var nainwaklet = (function () {
     "use strict";
 
     var nainwakOrigin = 'http://www.nainwak.com',
-        console = window.console,
-        log = (console)
-            ? console.log.bind(console)
+        currentScript = document.scripts[document.scripts.length - 1],
+        scriptUrl = currentScript.src,
+        scriptBaseUrl = scriptUrl.substring(0, scriptUrl.lastIndexOf("/") + 1),
+        channel = currentScript.getAttribute('data-channel'),
+        log = (window.console)
+            ? window.console.log.bind(window.console)
             : function () {
                 return;
             };
@@ -36,7 +40,6 @@
         };
         xhr.send(null);
     }
-    */
 
     function parseUrl(url) {
         var a = document.createElement('a');
@@ -44,7 +47,6 @@
         return a;
     }
 
-    /*
     function parseQueryParams(location) {
         var query = location.search.substr(1),
             pairs = query.split("&"),
@@ -74,11 +76,11 @@
     }
 
     function createPage(name, analyze) {  /*, fetchParams*/
-        var baseUrl = nainwakOrigin + '/jeu/' + name + '.php';
+        var url = nainwakOrigin + '/jeu/' + name + '.php';
         // TODO: add a fetch method
         return Object.freeze({
             name: name,
-            baseUrl: baseUrl,
+            url: url,  // base URL without query parameters
             analyze: analyze
         });
     }
@@ -120,9 +122,9 @@
             infoLoaded = function () {
                 var window = infoFrame.contentWindow,
                     location = window.location,
-                    baseUrl = location.origin + location.pathname;
+                    url = location.origin + location.pathname;
                 pages.forEach(function (page) {
-                    if (page.baseUrl === baseUrl) {
+                    if (page.url === url) {
                         page.analyze(window);
                     }
                 });
@@ -160,18 +162,21 @@
     }
 
     /* Application "class" */
-    function createApplication(container, hubUrl, cssUrl) {
-        var nain = currentNain(),  // current Nain
+    function createApplication() {  /* channel: not used yet */
+        var container = window.pub.document.body,
+            nain = currentNain(),  // current Nain
             spy = createSpy(nain),  // Spy instance
             containerContent = null,  // initial content of the container
             createHubFrame = function () {
-                var iframe = document.createElement("iframe");
+                var iframe = document.createElement("iframe"),
+                    hubUrl = scriptBaseUrl + 'hub.html';
                 iframe.setAttribute("class", "hub");
                 iframe.setAttribute("src", hubUrl);
                 return iframe;
             },
             createCssLink = function () {
-                var link = document.createElement('link');
+                var link = document.createElement('link'),
+                    cssUrl = scriptUrl.replace('.js', '.css');
                 link.setAttribute('rel', 'stylesheet');
                 link.setAttribute('type', 'text/css');
                 link.setAttribute('href', cssUrl);
@@ -246,38 +251,35 @@
         });
     }
 
-    function isNainwakGamePage() {
+    function onNainwakGamePage() {
         var loc = window.location;
         return (loc.origin === nainwakOrigin) && (loc.pathname === "/jeu/index.php");
     }
 
     function toggleApp() {
-        var currentScript = document.scripts[document.scripts.length - 1],
-            channel = currentScript.getAttribute('data-channel'),
-            scriptLocation = parseUrl(currentScript.src),
-            scriptUrl = scriptLocation.origin + scriptLocation.pathname,
-            baseUrl = scriptUrl.substring(0, scriptUrl.lastIndexOf("/") + 1),
-            hubUrl = baseUrl + 'hub.html',
-            cssUrl = scriptUrl.replace('.js', '.css'),
-            container = window.pub.document.body,
-            app = window.nainwaklet;
-
-        console.log(channel);
+        var app = window.nainwakletApp;
 
         if (!app) {  // app not initialized => create & enable
-            // TODO: we should pass the channel here instead...
-            app = createApplication(container, hubUrl, cssUrl);
+            app = createApplication(channel);
             app.enable();
-            window.nainwaklet = app;
+            window.nainwakletApp = app;
         } else {  // app already initialized => disable & delete
             app.disable();
-            delete window.nainwaklet;
+            delete window.nainwakletApp;
         }
     }
 
-    if (isNainwakGamePage()) {
-        toggleApp();
-    } else {
-        alert("Erreur : ce bouton fonctionne uniquement sur la page jeu de Nainwak");
-    }
+    // public API
+    return {
+        run: function () {
+            if (onNainwakGamePage()) {
+                toggleApp();
+            } else {
+                log("Erreur : ce bookmarklet ne fonctionne que sur la page jeu de Nainwak");
+            }
+        }
+    };
 }());
+
+// run the module
+nainwaklet.run();
