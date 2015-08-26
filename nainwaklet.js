@@ -2,8 +2,11 @@
     window, document, alert, XMLHttpRequest
  */
 
-/* nainwaklet module */
-var nainwaklet = (function () {
+/* Nainwaklet module
+ * Note: when we click on the bookmarklet, the script is reloaded and the
+ * module may already be defined... so we don't redefine it in that case!
+ */
+var nainwaklet = window.nainwaklet || (function () {
     "use strict";
 
     var nainwakOrigin = 'http://www.nainwak.com',
@@ -11,6 +14,7 @@ var nainwaklet = (function () {
         scriptUrl = script.src,
         scriptBaseUrl = scriptUrl.substring(0, scriptUrl.lastIndexOf("/") + 1),
         channel = script.getAttribute('data-channel'),
+        app = null,
         log = (window.console)
             ? window.console.log.bind(window.console)
             : function () {
@@ -162,10 +166,10 @@ var nainwaklet = (function () {
     }
 
     /* Application "class" */
-    function createApplication() {  /* channel: not used yet */
-        var container = window.pub.document.body,
-            nain = currentNain(),  // current Nain
+    function createApplication() {  /* channel not used yet */
+        var nain = currentNain(),  // current Nain
             spy = createSpy(nain),  // Spy instance
+            container = window.pub.document.body,  // element where the application installs its UI
             containerContent = null,  // initial content of the container
             createHubFrame = function () {
                 var iframe = document.createElement("iframe"),
@@ -240,6 +244,15 @@ var nainwaklet = (function () {
                 cssLink.parentNode.removeChild(cssLink);
 
                 return true;
+            },
+            toggle = function () {
+                if (isEnabled()) {
+                    disable();
+                    return false;
+                } else {
+                    enable();
+                    return true;
+                }
             };
 
         // TODO: we should implement a getter/setter for the enabled flag
@@ -247,40 +260,33 @@ var nainwaklet = (function () {
             isEnabled: isEnabled,
             enable: enable,
             disable: disable,
+            toggle: toggle,
             spy: spy
         });
     }
 
-    function onNainwakGamePage() {
+    function isOnNainwakGame() {
         var loc = window.location;
         return (loc.origin === nainwakOrigin) && (loc.pathname === "/jeu/index.php");
     }
 
-    function toggleApp() {
-        // TODO: remove this global
-        var app = window.nainwakletApp;
-
-        if (!app) {  // app not initialized => create & enable
-            app = createApplication(channel);
-            app.enable();
-            window.nainwakletApp = app;
-        } else {  // app already initialized => disable & delete
-            app.disable();
-            delete window.nainwakletApp;
+    function runOnNainwakGame() {
+        if (isOnNainwakGame()) {
+            if (!app) {
+                app = createApplication();
+            }
+            app.toggle();
+        } else {
+            log('Ce bookmarklet ne fonctionne que sur la page jeu de Nainwak!')
         }
     }
 
     // public API
-    return {
-        run: function () {
-            if (onNainwakGamePage()) {
-                toggleApp();
-            } else {
-                log("Erreur : ce bookmarklet ne fonctionne que sur la page jeu de Nainwak");
-            }
-        }
-    };
+    return Object.freeze({
+        channel: channel,
+        runOnNainwakGame: runOnNainwakGame
+    });
 }());
 
-// run the module
-nainwaklet.run();
+// run the module if we are on the Nainwak game page
+nainwaklet.runOnNainwakGame();
