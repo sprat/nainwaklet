@@ -6,22 +6,20 @@
  * Note: when we click on the bookmarklet, the script is reloaded and the
  * module may already be defined... so we don't redefine it in that case!
  */
-var nainwaklet = window.nainwaklet || (function () {
+var Nainwaklet = window.Nainwaklet || (function () {
     "use strict";
 
     var nainwakOrigin = 'http://www.nainwak.com',
         script = document.scripts[document.scripts.length - 1],
         scriptUrl = script.src,
         scriptBaseUrl = scriptUrl.substring(0, scriptUrl.lastIndexOf("/") + 1),
-        channel = script.getAttribute('data-channel'),
-        app = null,
+        defaultChannel = script.getAttribute('data-channel') || 'default',
         log = (window.console)
             ? window.console.log.bind(window.console)
             : function () {
                 return;
             };
 
-    /*
     function extend(target, source) {
         Object.keys(source).forEach(function (key) {
             if (target[key] === undefined) {
@@ -30,6 +28,7 @@ var nainwaklet = window.nainwaklet || (function () {
         });
     }
 
+    /*
     function asyncGet(url, onSuccess, onFailure) {
         var xhr = new XMLHttpRequest();
         xhr.open('GET', encodeURI(url), true);  // asynchronous
@@ -65,14 +64,13 @@ var nainwaklet = window.nainwaklet || (function () {
     }
     */
 
-    function currentNain() {
-        // get the current "Nain" info from the menu frame
+    function getCurrentUser() {
+        /* Get the current user info from the menu frame */
         var menuDoc = window.menu.document,
             title = menuDoc.querySelector('.news-titre'),
             name = title.querySelector('td:last-child').innerHTML,
             avatar = title.querySelector('td:first-child img').src;
-        // TODO: we should introduce a "Nain" class here, which would be used
-        // when we analyze the detect page
+
         return Object.freeze({
             name: name,
             avatar: avatar
@@ -117,7 +115,7 @@ var nainwaklet = window.nainwaklet || (function () {
     ];
 
     /* Spy "class" */
-    function createSpy(nain) {
+    function createSpy() {  /*user, channel*/
         // There's also:
         // - /accueil/resume.php?IDS=...&errmsg=
         var infoFrame = window.info.frameElement,
@@ -153,31 +151,38 @@ var nainwaklet = window.nainwaklet || (function () {
                 infoFrame.removeEventListener('load', infoLoaded, false);
                 enabled = false;
                 return true;
+            },
+            toggle = function () {
+                if (isEnabled()) {
+                    disable();
+                    return false;
+                } else {
+                    enable();
+                    return true;
+                }
             };
-
-        log(nain);
 
         // TODO: we should implement a getter/setter for the enabled flag
         return Object.freeze({
             isEnabled: isEnabled,
             enable: enable,
-            disable: disable
+            disable: disable,
+            toggle: toggle
         });
     }
 
-    /* Application "class" */
-    function createApplication() {  /* channel not used yet */
-        var nain = currentNain(),  // current Nain
-            spy = createSpy(nain),  // Spy instance
-            container = window.pub.document.body,  // element where the application installs its UI
-            containerContent = null,  // initial content of the container
-            createHubFrame = function () {
+    /* Hub "class" */
+    function createHub(container) {  /*, user, channel*/
+        var containerContent = null,  // original content of the container
+            createUI = function () {
                 var iframe = document.createElement("iframe"),
                     hubUrl = scriptBaseUrl + 'hub.html';
-                iframe.setAttribute("class", "hub");
+                iframe.setAttribute("class", "nainwaklet-hub");
                 iframe.setAttribute("src", hubUrl);
+                iframe.style.width = '100%';
                 return iframe;
             },
+            /*
             createCssLink = function () {
                 var link = document.createElement('link'),
                     cssUrl = scriptUrl.replace('.js', '.css');
@@ -186,16 +191,8 @@ var nainwaklet = window.nainwaklet || (function () {
                 link.setAttribute('href', cssUrl);
                 return link;
             },
-            createUI = function () {
-                var root = document.createElement("div"),
-                    hubFrame = createHubFrame();
-
-                root.setAttribute("class", "nainwaklet");
-                root.appendChild(hubFrame);
-                return root;
-            },
-            ui = createUI(),  // application UI
-            cssLink = createCssLink(), // application CSS link
+            */
+            ui = createUI(),  // hub UI
             isEnabled = function () {
                 return containerContent !== null;
             },
@@ -207,11 +204,11 @@ var nainwaklet = window.nainwaklet || (function () {
                     return false;
                 }
 
-                var doc = container.ownerDocument,
-                    head = doc.getElementsByTagName('head')[0];
+                //var doc = container.ownerDocument;
+                //    head = doc.getElementsByTagName('head')[0]
 
                 // add the CSS element to the head
-                head.appendChild(cssLink);
+                //head.appendChild(cssLink);
 
                 // backup the initial content
                 containerContent = container.innerHTML;
@@ -219,9 +216,6 @@ var nainwaklet = window.nainwaklet || (function () {
                 // replace by our UI
                 container.innerHTML = "";
                 container.appendChild(ui);
-
-                // enable the spy agent
-                spy.enable();
 
                 return true;
             },
@@ -233,15 +227,12 @@ var nainwaklet = window.nainwaklet || (function () {
                     return false;
                 }
 
-                // disable the spy agent
-                spy.disable();
-
                 // restore the initial content
                 container.innerHTML = containerContent;
                 containerContent = null;
 
                 // remove the CSS element
-                cssLink.parentNode.removeChild(cssLink);
+                //cssLink.parentNode.removeChild(cssLink);
 
                 return true;
             },
@@ -260,33 +251,50 @@ var nainwaklet = window.nainwaklet || (function () {
             isEnabled: isEnabled,
             enable: enable,
             disable: disable,
-            toggle: toggle,
-            spy: spy
+            toggle: toggle
         });
     }
 
-    function isOnNainwakGame() {
-        var loc = window.location;
-        return (loc.origin === nainwakOrigin) && (loc.pathname === "/jeu/index.php");
-    }
+    function initOnNainwak(api) {
+        var loc = window.location,
+            onNainwak = (loc.origin === nainwakOrigin) && (loc.pathname === "/jeu/index.php");
 
-    function runOnNainwakGame() {
-        if (isOnNainwakGame()) {
-            if (!app) {
-                app = createApplication();
-            }
-            app.toggle();
-        } else {
-            log('Ce bookmarklet ne fonctionne que sur la page jeu de Nainwak!')
+        if (onNainwak) {
+            return api.init({
+                user: getCurrentUser(),
+                hubContainer: window.pub.document.body
+            });
         }
     }
 
-    // public API
-    return Object.freeze({
-        channel: channel,
-        runOnNainwakGame: runOnNainwakGame
-    });
+    // module's public API
+    var api = {};
+    api.init = function (spec) {
+        var user = spec.user,  // TODO: default user?
+            channel = spec.channel || defaultChannel,
+            hubContainer = spec.hubContainer || document.body,
+            spy = createSpy(user, channel),
+            hub = createHub(hubContainer, user, channel),
+            toggle = function () {
+                spy.toggle();
+                hub.toggle();
+            };
+
+        // extend the API
+        extend(api, {
+            spy: spy,
+            hub: hub,
+            toggle: toggle
+        });
+        // remove the init function
+        delete api.init;
+    };
+    initOnNainwak(api);
+    return api;
 }());
 
-// run the module if we are on the Nainwak game page
-nainwaklet.runOnNainwakGame();
+
+// toggle the UI if available (i.e. on Nainwak)
+if (Nainwaklet.toggle) {
+    Nainwaklet.toggle();
+}
