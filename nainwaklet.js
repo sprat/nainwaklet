@@ -9,11 +9,11 @@
 var Nainwaklet = window.Nainwaklet || (function () {
     "use strict";
 
-    var nainwakOrigin = 'http://www.nainwak.com',
+    var module = {},  // public API of this module
+        nainwakOrigin = 'http://www.nainwak.com',
         script = document.scripts[document.scripts.length - 1],
         scriptUrl = script.src,
         scriptBaseUrl = scriptUrl.substring(0, scriptUrl.lastIndexOf("/") + 1),
-        defaultChannel = script.getAttribute('data-channel') || 'default',
         log = (window.console)
             ? window.console.log.bind(window.console)
             : function () {
@@ -26,12 +26,13 @@ var Nainwaklet = window.Nainwaklet || (function () {
                 target[key] = source[key];
             }
         });
+        return target;
     }
 
     /*
     function asyncGet(url, onSuccess, onFailure) {
         var xhr = new XMLHttpRequest();
-        xhr.open('GET', encodeURI(url), true);  // asynchronous
+        xhr.open('GET', url, true);  // asynchronous
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {  // response received and loaded
                 if (xhr.status === 200) {
@@ -49,11 +50,14 @@ var Nainwaklet = window.Nainwaklet || (function () {
         a.href = url;
         return a;
     }
+    */
 
     function parseQueryParams(location) {
         var query = location.search.substr(1),
             pairs = query.split("&"),
             params = {};
+        // Note: this implementation does not handle duplicate parameters
+        // properly, but we don't need that here (yet)
         pairs.forEach(function (e) {
             var pair = e.split("="),
                 name = decodeURIComponent(pair[0]),
@@ -62,21 +66,17 @@ var Nainwaklet = window.Nainwaklet || (function () {
         });
         return params;
     }
-    */
 
-    function getCurrentUser() {
-        /* Get the current user info from the menu frame */
-        var menuDoc = window.menu.document,
-            title = menuDoc.querySelector('.news-titre'),
-            name = title.querySelector('td:last-child').innerHTML,
-            avatar = title.querySelector('td:first-child img').src;
-
+    /* User "class" */
+    function createUser(name, avatar, IDS) {
         return Object.freeze({
             name: name,
-            avatar: avatar
+            avatar: avatar,
+            IDS: IDS
         });
     }
 
+    /* Page "class" */
     function createPage(name, analyze) {  /*, fetchParams*/
         var url = nainwakOrigin + '/jeu/' + name + '.php';
         // TODO: add a fetch method
@@ -87,6 +87,7 @@ var Nainwaklet = window.Nainwaklet || (function () {
         });
     }
 
+    /* pages analyzers */
     function analyzeDetect(window) {
         var document = window.document,
             c1 = document.getElementsByClassName('c1')[0];
@@ -99,6 +100,7 @@ var Nainwaklet = window.Nainwaklet || (function () {
         //gobjet(id, photo, nom, distance, x, y, poussiere, prendre)
     }
 
+    /* available pages for the Spy objects */
     var pages = [
         // Détection
         createPage('detect', analyzeDetect)
@@ -112,17 +114,14 @@ var Nainwaklet = window.Nainwaklet || (function () {
         // Encyclopédie
         createPage('encyclo', log)
         */
+        // There's also /accueil/resume.php?IDS=...&errmsg=
     ];
 
     /* Spy "class" */
-    function createSpy() {  /*user, channel*/
-        // There's also:
-        // - /accueil/resume.php?IDS=...&errmsg=
-        var infoFrame = window.info.frameElement,
-            enabled = false,
-            //IDS = parseQueryParams(window.location).IDS,
+    function createSpy(frame) {  /*user, channel*/
+        var enabled = false,
             infoLoaded = function () {
-                var window = infoFrame.contentWindow,
+                var window = frame.contentWindow,
                     location = window.location,
                     url = location.origin + location.pathname;
                 pages.forEach(function (page) {
@@ -139,7 +138,7 @@ var Nainwaklet = window.Nainwaklet || (function () {
                     return false;
                 }
 
-                infoFrame.addEventListener('load', infoLoaded, false);
+                frame.addEventListener('load', infoLoaded, false);
                 enabled = true;
                 return true;
             },
@@ -148,7 +147,7 @@ var Nainwaklet = window.Nainwaklet || (function () {
                     return false;
                 }
 
-                infoFrame.removeEventListener('load', infoLoaded, false);
+                frame.removeEventListener('load', infoLoaded, false);
                 enabled = false;
                 return true;
             },
@@ -161,6 +160,9 @@ var Nainwaklet = window.Nainwaklet || (function () {
                     return true;
                 }
             };
+
+        // start enabled
+        enable();
 
         // TODO: we should implement a getter/setter for the enabled flag
         return Object.freeze({
@@ -246,6 +248,9 @@ var Nainwaklet = window.Nainwaklet || (function () {
                 }
             };
 
+        // start enabled
+        enable();
+
         // TODO: we should implement a getter/setter for the enabled flag
         return Object.freeze({
             isEnabled: isEnabled,
@@ -255,46 +260,77 @@ var Nainwaklet = window.Nainwaklet || (function () {
         });
     }
 
-    function initOnNainwak(api) {
-        var loc = window.location,
-            onNainwak = (loc.origin === nainwakOrigin) && (loc.pathname === "/jeu/index.php");
-
-        if (onNainwak) {
-            return api.init({
-                user: getCurrentUser(),
-                hubContainer: window.pub.document.body
-            });
-        }
+    function getNainwakUser() {
+        /* Get the Nainwak User info from the menu frame */
+        var frame = window.frames.menu,
+            doc = frame.document,
+            location = frame.location,
+            title = doc.querySelector('.news-titre'),
+            name = title.querySelector('td:last-child').innerHTML,
+            avatar = title.querySelector('td:first-child img').src,
+            IDS = parseQueryParams(location).IDS;
+        return createUser(name, avatar, IDS);
     }
 
-    // module's public API
-    var api = {};
-    api.init = function (spec) {
-        var user = spec.user,  // TODO: default user?
-            channel = spec.channel || defaultChannel,
-            hubContainer = spec.hubContainer || document.body,
-            spy = createSpy(user, channel),
-            hub = createHub(hubContainer, user, channel),
-            toggle = function () {
-                spy.toggle();
-                hub.toggle();
-            };
+    function getDefaultInitSpec() {
+        var spec = {},
+            loc = window.location,
+            currentUrl = loc.origin + loc.pathname,
+            nainwakGameUrl = nainwakOrigin + "/jeu/index.php";
 
-        // extend the API
-        extend(api, {
-            spy: spy,
-            hub: hub,
-            toggle: toggle
-        });
-        // remove the init function
-        delete api.init;
-    };
-    initOnNainwak(api);
-    return api;
+        spec.channel = script.getAttribute('data-channel') || 'default';
+        if (currentUrl === nainwakGameUrl) {
+            spec.user = getNainwakUser();
+            spec.hubContainer = window.frames.pub.document.body;
+            spec.spyFrame = window.frames.info.frameElement;
+        } else {
+            spec.user = createUser('anonymous');
+            spec.hubContainer = window.document.body;
+        }
+        return spec;
+    }
+
+    function init(spec) {
+        var _spec = extend(getDefaultInitSpec(), spec || {}),
+            user = _spec.user,
+            channel = _spec.channel,
+            hubContainer = _spec.hubContainer,
+            spyFrame = _spec.spyFrame;
+
+        if (hubContainer) {
+            module.hub = createHub(hubContainer, user, channel);
+        }
+
+        if (spyFrame) {
+            module.spy = createSpy(spyFrame, user, channel);
+        }
+
+        module.destroy = function () {
+            if (module.spy) {
+                module.spy.disable();
+                delete module.spy;
+            }
+
+            if (module.hub) {
+                module.hub.disable();
+                delete module.hub;
+            }
+
+            delete module.destroy;
+            module.init = init;
+        };
+
+        // remove the init function from the module API
+        delete module.init;
+    }
+
+    // define the module public API
+    module.init = init;
+    return module;
 }());
 
-
-// toggle the UI if available (i.e. on Nainwak)
-if (Nainwaklet.toggle) {
-    Nainwaklet.toggle();
+if (Nainwaklet.init) {
+    Nainwaklet.init();
+} else {
+    Nainwaklet.destroy();
 }
