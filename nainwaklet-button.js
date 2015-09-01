@@ -1,7 +1,7 @@
 /*global
-    window, document
+    window, document, alert
  */
-(function (exports) {
+var NainwakletButton = (function () {
     "use strict";
 
     var scriptUrl = document.scripts[document.scripts.length - 1].src,
@@ -45,7 +45,8 @@
         return 'javascript:(' + code + '())';
     }
 
-    function initNainwakletButtons() {
+    function init() {
+        console.log('initializing the buttons')
         var buttons = document.querySelectorAll('.nainwaklet-button');
 
         Array.prototype.forEach.call(buttons, function (button) {
@@ -55,6 +56,8 @@
         });
     }
 
-    // exports
-    exports.initNainwakletButtons = initNainwakletButtons;
-}(window));
+    // module public API
+    return {
+        init: init
+    };
+}());
