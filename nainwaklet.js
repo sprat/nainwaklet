@@ -2,11 +2,8 @@
     window, document, alert, XMLHttpRequest
  */
 
-/* Nainwaklet module
- * Note: when we click on the bookmarklet, the script is reloaded and the
- * module may already be defined... so we don't redefine it in that case!
- */
-var Nainwaklet = window.Nainwaklet || (function () {
+/* Nainwaklet module */
+var Nainwaklet = (function () {
     "use strict";
 
     var module = {},  // public API of this module
@@ -14,12 +11,14 @@ var Nainwaklet = window.Nainwaklet || (function () {
         script = document.scripts[document.scripts.length - 1],
         scriptUrl = script.src,
         scriptBaseUrl = scriptUrl.substring(0, scriptUrl.lastIndexOf("/") + 1),
+        scriptChannel = script.getAttribute('data-channel'),
         log = (window.console)
             ? window.console.log.bind(window.console)
             : function () {
                 return;
             };
 
+    /*
     function extend(target, source) {
         Object.keys(source).forEach(function (key) {
             if (target[key] === undefined) {
@@ -29,7 +28,6 @@ var Nainwaklet = window.Nainwaklet || (function () {
         return target;
     }
 
-    /*
     function asyncGet(url, onSuccess, onFailure) {
         var xhr = new XMLHttpRequest();
         xhr.open('GET', url, true);  // asynchronous
@@ -272,29 +270,24 @@ var Nainwaklet = window.Nainwaklet || (function () {
         return createUser(name, avatar, IDS);
     }
 
-    function getDefaultInitSpec() {
-        var spec = {},
-            loc = window.location,
+    function initOnNainwak(module) {
+        var loc = window.location,
             currentUrl = loc.origin + loc.pathname,
-            nainwakGameUrl = nainwakOrigin + "/jeu/index.php";
-
-        spec.channel = script.getAttribute('data-channel') || 'default';
+            nainwakGameUrl = nainwakOrigin + '/jeu/index.php';
         if (currentUrl === nainwakGameUrl) {
-            spec.user = getNainwakUser();
-            spec.hubContainer = window.frames.pub.document.body;
-            spec.spyFrame = window.frames.info.frameElement;
-        } else {
-            spec.user = createUser('anonymous');
-            spec.hubContainer = window.document.body;
+            module.init({
+                user: getNainwakUser(),
+                hubContainer: window.frames.pub.document.body,
+                spyFrame: window.frames.info.frameElement
+            });
         }
-        return spec;
     }
 
     function init(spec) {
-        var _spec = extend(getDefaultInitSpec(), spec || {}),
-            user = _spec.user,
-            channel = _spec.channel,
-            hubContainer = _spec.hubContainer,
+        var _spec = spec || {},
+            user = _spec.user || createUser('anonymous'),
+            channel = _spec.channel || scriptChannel || 'default',
+            hubContainer = _spec.hubContainer || window.document.body,
             spyFrame = _spec.spyFrame;
 
         if (hubContainer) {
@@ -326,11 +319,8 @@ var Nainwaklet = window.Nainwaklet || (function () {
 
     // define the module public API
     module.init = init;
+    // initialize the module automatically if we are on the Nainwak game page
+    initOnNainwak(module);
+    // return the module API
     return module;
 }());
-
-if (Nainwaklet.init) {
-    Nainwaklet.init();
-} else {
-    Nainwaklet.destroy();
-}

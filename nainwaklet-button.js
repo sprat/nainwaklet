@@ -10,19 +10,32 @@
 
     function getNainwakletInjectionUrl(channel) {
         var template = function () {
-                var d = document,
+                var w = window,
+                    l = w.location,
+                    d = w.document,
+                    u = l.origin + l.pathname,
                     b = d.body,
-                    id = "nainwakletScript",
+                    n = 'Nainwaklet',
+                    id = n + '-script',
                     s = d.getElementById(id);
-                if (s) {
-                    b.removeChild(s);
+
+                if (u === 'http://www.nainwak.com/jeu/index.php') {
+                    if (s) {
+                        b.removeChild(s);
+                        w[n].destroy();
+                        w[n] = undefined;
+                    } else {
+                        s = d.createElement('script');
+                        s.id = id;
+                        s.type = 'text/javascript';
+                        s.src = '@src@';
+                        s.async = false;
+                        s.setAttribute('data-channel', '@channel@');
+                        b.appendChild(s);
+                    }
+                } else {
+                    alert("Ne fonctionne que sur la page jeu de Nainwak");
                 }
-                s = d.createElement('script');
-                s.setAttribute('type', 'text/javascript');
-                s.setAttribute('src', '@src@');
-                s.setAttribute('data-channel', '@channel@');
-                s.setAttribute('id', id);
-                b.appendChild(s);
             },
             code = template.toString()
                 .replace(/\s+/g, ' ')
@@ -35,7 +48,7 @@
     function initNainwakletButtons() {
         var buttons = document.querySelectorAll('.nainwaklet-button');
 
-        Array.prototype.forEach.call(buttons, function(button) {
+        Array.prototype.forEach.call(buttons, function (button) {
             var channel = button.getAttribute('data-channel'),
                 href = getNainwakletInjectionUrl(channel);
             button.setAttribute("href", href);
