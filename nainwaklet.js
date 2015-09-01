@@ -1,5 +1,5 @@
 /*global
-    window, document, alert, XMLHttpRequest
+    window, document, XMLHttpRequest
  */
 
 /* Nainwaklet module */
