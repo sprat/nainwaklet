@@ -1,6 +1,7 @@
 /*global
     window, document, alert
  */
+// TODO: we should probably merge this code into the Nainwaklet script API
 var NainwakletButton = (function () {
     "use strict";
 
@@ -46,7 +47,6 @@ var NainwakletButton = (function () {
     }
 
     function init() {
-        console.log('initializing the buttons')
         var buttons = document.querySelectorAll('.nainwaklet-button');
 
         Array.prototype.forEach.call(buttons, function (button) {
