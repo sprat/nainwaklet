@@ -1,3 +1,21 @@
+body {
+    font-family: Verdana, Arial;
+    font-size: 13px;
+    padding: 0 20px;
+    margin: 0;
+}
+
+.hub-container {
+    width: 232px;
+    float: right;
+    margin: 0 0 20px 20px;
+}
+
+.nainwaklet-button {
+    margin: 10px 0;
+}
+
+/* button design */
 .nainwaklet-button {
     padding: 10px 20px;
     text-decoration: none;
