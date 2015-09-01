@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <title>Hub #!</title>
-    <link rel="stylesheet" type="text/css" href="nainwaklet-button.css">
-    <script type="text/javascript" src="nainwaklet-button.js"></script>
+    <link rel="stylesheet" type="text/css" href="nainwaklet.css">
+    <script type="text/javascript" src="nainwaklet.js"></script>
     <style type="text/css">
     body {
         font-family: Verdana, Arial;
@@ -12,11 +12,10 @@
         padding: 0 20px;
         margin: 0;
     }
-    .hub {
+    .hub-container {
         width: 232px;
         float: right;
         margin: 0 0 20px 20px;
-        border: 0;
     }
     .nainwaklet-button {
         margin: 10px 0;
@@ -26,16 +25,21 @@
 <body>
     <h1>Hub #!</h1>
 
-    <iframe src="hub.html" class="hub"></iframe>
+    <div class="hub-container">Hub</div>
 
     <p>
         Glissez le button ci-dessous dans vos marques-pages Internet.
         Puis, lorsque vous êtes connecté à votre nain, cliquez sur le
         button pour activer ou désactiver l'interface du Hub.<br>
         <a class="nainwaklet-button" href="#" title="Hub #!" data-channel="#!">Hub #!</a>
-        <script type="text/javascript">
-        NainwakletButton.init();
-        </script>
     </p>
+
+    <script type="text/javascript">
+        Nainwaklet.initButtons();
+        Nainwaklet.init({
+            channel: '#!',
+            hubContainer: document.querySelector('.hub-container')
+        });
+    </script>
 </body>
 </html>

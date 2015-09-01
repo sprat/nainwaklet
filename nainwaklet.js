@@ -180,6 +180,7 @@ var Nainwaklet = (function () {
                 iframe.setAttribute("class", "nainwaklet-hub");
                 iframe.setAttribute("src", hubUrl);
                 iframe.style.width = '100%';
+                iframe.style.border = 0;
                 return iframe;
             },
             /*
@@ -317,8 +318,55 @@ var Nainwaklet = (function () {
         delete module.init;
     }
 
+    function getInjectionUrl(channel) {
+        var template = function () {
+                var w = window,
+                    l = w.location,
+                    d = w.document,
+                    u = l.origin + l.pathname,
+                    b = d.body,
+                    n = 'Nainwaklet',
+                    id = n + '-script',
+                    s = d.getElementById(id);
+
+                if (u === 'http://www.nainwak.com/jeu/index.php') {
+                    if (s) {
+                        b.removeChild(s);
+                        w[n].destroy();
+                        w[n] = undefined;
+                    } else {
+                        s = d.createElement('script');
+                        s.id = id;
+                        s.type = 'text/javascript';
+                        s.src = '@src@';
+                        s.async = false;
+                        s.setAttribute('data-channel', '@channel@');
+                        b.appendChild(s);
+                    }
+                } else {
+                    alert("Ne fonctionne que sur la page jeu de Nainwak");
+                }
+            },
+            code = template.toString()
+                .replace(/\s+/g, ' ')
+                .replace('@src@', scriptUrl)
+                .replace('@channel@', channel);
+    
+        return 'javascript:(' + code + '())';
+    }
+
+    function initButtons() {
+        var buttons = document.querySelectorAll('.nainwaklet-button');
+        Array.prototype.forEach.call(buttons, function (button) {
+            var channel = button.getAttribute('data-channel'),
+                href = getInjectionUrl(channel);
+            button.setAttribute("href", href);
+        });
+    }
+
     // define the module public API
     module.init = init;
+    module.initButtons = initButtons;
     // initialize the module automatically if we are on the Nainwak game page
     initOnNainwak(module);
     // return the module API
