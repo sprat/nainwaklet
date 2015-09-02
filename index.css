@@ -5,7 +5,7 @@ body {
     margin: 0;
 }
 
-.hub-container {
+#hub-container {
     width: 232px;
     float: right;
     margin: 0 0 20px 20px;

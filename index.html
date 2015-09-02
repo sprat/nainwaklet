@@ -9,12 +9,12 @@
 <body>
     <h1>Hub #!</h1>
 
-    <div class="hub-container">Hub</div>
+    <div id="hub-container">Hub</div>
 
     <p>
         Glissez le button ci-dessous dans vos marques-pages Internet.
         Puis, lorsque vous êtes connecté à votre nain, cliquez sur le
-        button pour activer ou désactiver l'interface du Hub.<br>
+        button pour activer/désactiver le Hub.<br>
         <a class="nainwaklet-button" href="#" title="Hub #!" data-channel="#!">Hub #!</a>
     </p>
 
@@ -22,7 +22,7 @@
         Nainwaklet.initializeButtons();
         Nainwaklet.createApplication({
             channel: '#!',
-            container: document.querySelector('.hub-container')
+            container: document.getElementById('hub-container')
         });
     </script>
 </body>
