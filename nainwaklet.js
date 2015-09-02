@@ -134,36 +134,32 @@ var Nainwaklet = (function () {
                     }
                 });
             },
-            isEnabled = function () {
-                return enabled;
-            },
-            enable = function () {
-                if (isEnabled()) {
-                    return false;
-                }
+            enable = function (value) {
+                var oldEnabled = enabled;
 
-                frame.addEventListener('load', infoLoaded, false);
-                enabled = true;
-                return true;
-            },
-            disable = function () {
-                if (!isEnabled()) {
-                    return false;
-                }
+                // update the status (and convert to boolean, just in case)
+                enabled = !!value;
 
-                frame.removeEventListener('load', infoLoaded, false);
-                enabled = false;
-                return true;
+                // register or unregister the load event handler
+                if (oldEnabled !== enabled) {
+                    if (enabled) {
+                        frame.addEventListener('load', infoLoaded, false);
+                    } else {
+                        frame.removeEventListener('load', infoLoaded, false);
+                    }
+                }
             };
 
         // start enabled
-        enable();
+        enable(true);
 
-        // TODO: we should implement a getter/setter for the enabled flag
         return Object.freeze({
-            isEnabled: isEnabled,
-            enable: enable,
-            disable: disable
+            get enabled() {
+                return enabled;
+            },
+            set enabled(value) {
+                enable(value);
+            }
         });
     }
 
@@ -265,7 +261,7 @@ var Nainwaklet = (function () {
 
         function destroy() {
             if (spy) {
-                spy.disable();
+                spy.enabled = false;
             }
 
             if (hub) {
