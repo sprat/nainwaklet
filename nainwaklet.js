@@ -48,7 +48,6 @@ var Nainwaklet = (function () {
         a.href = url;
         return a;
     }
-    */
 
     function parseQueryParams(location) {
         var query = location.search.substr(1),
@@ -64,15 +63,7 @@ var Nainwaklet = (function () {
         });
         return params;
     }
-
-    /* User "class" */
-    function createUser(name, avatar, IDS) {
-        return Object.freeze({
-            name: name,
-            avatar: avatar,
-            IDS: IDS
-        });
-    }
+    */
 
     /* Page "class" */
     function createPage(name, analyze) {  /*, fetchParams*/
@@ -118,6 +109,7 @@ var Nainwaklet = (function () {
     /* Spy "class" */
     function createSpy(frame) {  /*user, channel*/
         var enabled = false,
+            //IDS = parseQueryParams(frame.location).IDS,
             infoLoaded = function () {
                 var window = frame.contentWindow,
                     location = window.location,
@@ -263,23 +255,30 @@ var Nainwaklet = (function () {
         /* Get the Nainwak User info from the menu frame */
         var frame = window.frames.menu,
             doc = frame.document,
-            location = frame.location,
             title = doc.querySelector('.news-titre'),
             name = title.querySelector('td:last-child').innerHTML,
-            avatar = title.querySelector('td:first-child img').src,
-            IDS = parseQueryParams(location).IDS;
-        return createUser(name, avatar, IDS);
+            avatar = title.querySelector('td:first-child img').src;
+        return {
+            name: name,
+            avatar: avatar
+        };
     }
 
     /* Application "class" */
     function createApplication(conf) {
         var _conf = conf || {},
-            user = _conf.user || createUser('anonymous'),
+            user = _conf.user || 'anonymous',
             channel = _conf.channel || scriptChannel || 'default',
             container = _conf.container || window.document.body,
             spyFrame = _conf.spyFrame,
             hub,
             spy;
+
+        if (typeof user === "string") {
+            user = {
+                name: user
+            };
+        }
 
         if (container) {
             hub = createHub(container, user, channel);
