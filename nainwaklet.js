@@ -65,7 +65,21 @@ var Nainwaklet = (function () {
     }
     */
 
-    /* Page "class" */
+    function generateRandomGuestName() {
+        var id = Math.floor(Math.random() * 1000);
+        return 'guest' + id;
+    }
+
+    /* User factory */
+    function createUser(name, avatar) {
+        var defaultAvatar = scriptBaseUrl + 'avatar.png';
+        return Object.freeze({
+            name: name || generateRandomGuestName(),
+            avatar: avatar || defaultAvatar
+        });
+    }
+
+    /* Page factory */
     function createPage(name, analyze) {  /*, fetchParams*/
         var url = nainwakOrigin + '/jeu/' + name + '.php';
         // TODO: add a fetch method
@@ -106,7 +120,7 @@ var Nainwaklet = (function () {
         // There's also /accueil/resume.php?IDS=...&errmsg=
     ];
 
-    /* Spy "class" */
+    /* Spy factory */
     function createSpy(frame) {  /*user, channel*/
         var enabled = false,
             //IDS = parseQueryParams(frame.location).IDS,
@@ -140,15 +154,6 @@ var Nainwaklet = (function () {
                 frame.removeEventListener('load', infoLoaded, false);
                 enabled = false;
                 return true;
-            },
-            toggle = function () {
-                if (isEnabled()) {
-                    disable();
-                    return false;
-                } else {
-                    enable();
-                    return true;
-                }
             };
 
         // start enabled
@@ -158,12 +163,11 @@ var Nainwaklet = (function () {
         return Object.freeze({
             isEnabled: isEnabled,
             enable: enable,
-            disable: disable,
-            toggle: toggle
+            disable: disable
         });
     }
 
-    /* Hub "class" */
+    /* Hub factory */
     function createHub(container) {  /*, user, channel*/
         var containerContent = null,  // original content of the container
             createUI = function () {
@@ -228,15 +232,6 @@ var Nainwaklet = (function () {
                 //cssLink.parentNode.removeChild(cssLink);
 
                 return true;
-            },
-            toggle = function () {
-                if (isEnabled()) {
-                    disable();
-                    return false;
-                } else {
-                    enable();
-                    return true;
-                }
             };
 
         // start enabled
@@ -246,26 +241,19 @@ var Nainwaklet = (function () {
         return Object.freeze({
             isEnabled: isEnabled,
             enable: enable,
-            disable: disable,
-            toggle: toggle
+            disable: disable
         });
     }
 
-    /* Application "class" */
+    /* Application factory */
     function createApplication(conf) {
         var _conf = conf || {},
-            user = _conf.user || 'anonymous',
+            user = _conf.user || createUser(),
             channel = _conf.channel || scriptChannel || 'default',
             container = _conf.container || window.document.body,
             spyFrame = _conf.spyFrame,
             hub,
             spy;
-
-        if (typeof user === "string") {
-            user = {
-                name: user
-            };
-        }
 
         if (container) {
             hub = createHub(container, user, channel);
@@ -286,6 +274,7 @@ var Nainwaklet = (function () {
         }
 
         return Object.freeze({
+            user: user,
             hub: hub,
             spy: spy,
             destroy: destroy
@@ -305,10 +294,7 @@ var Nainwaklet = (function () {
             title = doc.querySelector('.news-titre'),
             name = title.querySelector('td:last-child').innerHTML,
             avatar = title.querySelector('td:first-child img').src;
-        return {
-            name: name,
-            avatar: avatar
-        };
+        return createUser(name, avatar);
     }
 
     function augmentApiOnNainwakGame(api) {
@@ -375,6 +361,7 @@ var Nainwaklet = (function () {
 
     // module public API
     var api = {
+        createUser: createUser,
         createApplication: createApplication,
         initializeButtons: initializeButtons
     };
