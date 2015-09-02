@@ -91,8 +91,8 @@ var Nainwaklet = (function () {
     }
 
     /* pages analyzers */
-    function analyzeDetect(window) {
-        var document = window.document,
+    function analyzeDetect(contentWindow) {
+        var document = contentWindow.document,
             c1 = document.getElementsByClassName('c1')[0];
         log('Processing detect...');
         //log(document);
@@ -104,34 +104,50 @@ var Nainwaklet = (function () {
     }
 
     /* available pages for the Spy objects */
-    var pages = [
-        // Détection
-        createPage('detect', analyzeDetect)
-        /*
-        // Evénements (tous types d'evts sur 10 jours)
-        createPage('even', log, {duree: 240, type: 'ALL'}),
-        // Fiche de perso
-        createPage('perso', log),
-        // Inventaire
-        createPage('invent', log),
-        // Encyclopédie
-        createPage('encyclo', log)
-        */
-        // There's also /accueil/resume.php?IDS=...&errmsg=
-    ];
+    var pages = (function () {
+        var list = [
+                // Détection
+                createPage('detect', analyzeDetect)
+                /*
+                // Evénements (tous types d'evts sur 10 jours)
+                createPage('even', log, {duree: 240, type: 'ALL'}),
+                // Fiche de perso
+                createPage('perso', log),
+                // Inventaire
+                createPage('invent', log),
+                // Encyclopédie
+                createPage('encyclo', log)
+                */
+                // There's also /accueil/resume.php?IDS=...&errmsg=
+            ],
+            get = function (nameOrUrl) {
+                var results = list.filter(function (page) {
+                    return (page.name === nameOrUrl) || (page.url === nameOrUrl);
+                });
+
+                if (results) {
+                    return results[0];
+                }
+            };
+
+        return Object.freeze({
+            get: get,
+            list: list
+        });
+    }());
 
     /* Spy factory */
     function createSpy(frame) {  /*user, channel*/
         //IDS = parseQueryParams(frame.location).IDS,
         var infoLoaded = function () {
-                var window = frame.contentWindow,
-                    location = window.location,
-                    url = location.origin + location.pathname;
-                pages.forEach(function (page) {
-                    if (page.url === url) {
-                        page.analyze(window);
-                    }
-                });
+                var contentWindow = frame.contentWindow,
+                    location = contentWindow.location,
+                    url = location.origin + location.pathname,
+                    page = pages.get(url);
+
+                if (page) {
+                    page.analyze(contentWindow);
+                }
             },
             enabled = false,
             enable = function (value) {
@@ -351,6 +367,7 @@ var Nainwaklet = (function () {
 
     // module public API
     var api = {
+        pages: pages,
         createUser: createUser,
         createApplication: createApplication,
         initializeButtons: initializeButtons
