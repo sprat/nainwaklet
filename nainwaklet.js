@@ -251,19 +251,6 @@ var Nainwaklet = (function () {
         });
     }
 
-    function getNainwakUser() {
-        /* Get the Nainwak User info from the menu frame */
-        var frame = window.frames.menu,
-            doc = frame.document,
-            title = doc.querySelector('.news-titre'),
-            name = title.querySelector('td:last-child').innerHTML,
-            avatar = title.querySelector('td:first-child img').src;
-        return {
-            name: name,
-            avatar: avatar
-        };
-    }
-
     /* Application "class" */
     function createApplication(conf) {
         var _conf = conf || {},
@@ -305,7 +292,41 @@ var Nainwaklet = (function () {
         });
     }
 
+    function isOnNainwakGame() {
+        var loc = window.location,
+            pageUrl = loc.origin + loc.pathname;
+        return pageUrl === nainwakGameUrl;
+    }
+
+    function getNainwakUser() {
+        /* Get the Nainwak User info from the menu frame */
+        var frame = window.frames.menu,
+            doc = frame.document,
+            title = doc.querySelector('.news-titre'),
+            name = title.querySelector('td:last-child').innerHTML,
+            avatar = title.querySelector('td:first-child img').src;
+        return {
+            name: name,
+            avatar: avatar
+        };
+    }
+
+    function augmentApiOnNainwakGame(api) {
+        if (isOnNainwakGame()) {
+            // augment the API with an application object tailored for the Nainwak game
+            api.app = createApplication({
+                user: getNainwakUser(),
+                container: window.frames.pub.document.body,
+                spyFrame: window.frames.info.frameElement
+            });
+        }
+    }
+
+    /********************/
+    /* Bookmarklet part */
+    /********************/
     function getInjectionUrl(channel) {
+     // TODO: don't use Function.prototype.toString, may not work on every browser!
         var template = function () {
                 var w = window,
                     l = w.location,
@@ -352,24 +373,14 @@ var Nainwaklet = (function () {
         });
     }
 
-    function createApplicationOnNainwak(api) {
-        var loc = window.location,
-            currentUrl = loc.origin + loc.pathname;
-
-        if (currentUrl === nainwakGameUrl) {
-            api.app = createApplication({
-                user: getNainwakUser(),
-                container: window.frames.pub.document.body,
-                spyFrame: window.frames.info.frameElement
-            });
-        }
-    }
-
     // module public API
     var api = {
         createApplication: createApplication,
         initializeButtons: initializeButtons
     };
-    createApplicationOnNainwak(api);
+
+    // augment the API if we are on the Nainwak game page
+    augmentApiOnNainwakGame(api);
+
     return Object.freeze(api);
 }());
