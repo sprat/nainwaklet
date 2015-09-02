@@ -122,9 +122,8 @@ var Nainwaklet = (function () {
 
     /* Spy factory */
     function createSpy(frame) {  /*user, channel*/
-        var enabled = false,
-            //IDS = parseQueryParams(frame.location).IDS,
-            infoLoaded = function () {
+        //IDS = parseQueryParams(frame.location).IDS,
+        var infoLoaded = function () {
                 var window = frame.contentWindow,
                     location = window.location,
                     url = location.origin + location.pathname;
@@ -134,19 +133,22 @@ var Nainwaklet = (function () {
                     }
                 });
             },
+            enabled = false,
             enable = function (value) {
                 var oldEnabled = enabled;
 
                 // update the status (and convert to boolean, just in case)
                 enabled = !!value;
 
+                if (oldEnabled === enabled) {  // nothing to do
+                    return;
+                }
+
                 // register or unregister the load event handler
-                if (oldEnabled !== enabled) {
-                    if (enabled) {
-                        frame.addEventListener('load', infoLoaded, false);
-                    } else {
-                        frame.removeEventListener('load', infoLoaded, false);
-                    }
+                if (enabled) {
+                    frame.addEventListener('load', infoLoaded, false);
+                } else {
+                    frame.removeEventListener('load', infoLoaded, false);
                 }
             };
 
@@ -166,7 +168,7 @@ var Nainwaklet = (function () {
     /* Hub factory */
     function createHub(container) {  /*, user, channel*/
         var containerContent = null,  // original content of the container
-            createUI = function () {
+            ui = (function () {  // create the hub UI
                 var iframe = document.createElement("iframe"),
                     hubUrl = scriptBaseUrl + 'hub.html';
                 iframe.setAttribute("class", "nainwaklet-hub");
@@ -174,70 +176,61 @@ var Nainwaklet = (function () {
                 iframe.style.width = '100%';
                 iframe.style.border = 0;
                 return iframe;
-            },
+            }()),
             /*
-            createCssLink = function () {
+            cssLink = (function () {
                 var link = document.createElement('link'),
                     cssUrl = scriptUrl.replace('.js', '.css');
                 link.setAttribute('rel', 'stylesheet');
                 link.setAttribute('type', 'text/css');
                 link.setAttribute('href', cssUrl);
                 return link;
-            },
+            }()),
             */
-            ui = createUI(),  // hub UI
-            isEnabled = function () {
-                return containerContent !== null;
-            },
-            enable = function () {
-                /* This method installs the application UI in the container
-                 * element if the application is not already enabled.
-                 */
-                if (isEnabled()) {
-                    return false;
+            enabled = false,
+            enable = function (value) {
+                var oldEnabled = enabled;
+
+                // update the status (and convert to boolean, just in case)
+                enabled = !!value;
+
+                if (enabled === oldEnabled) {  // nothing to do
+                    return;
                 }
 
-                //var doc = container.ownerDocument;
-                //    head = doc.getElementsByTagName('head')[0]
+                if (enabled) {
+                    //var doc = container.ownerDocument;
+                    //    head = doc.getElementsByTagName('head')[0]
 
-                // add the CSS element to the head
-                //head.appendChild(cssLink);
+                    // add the CSS element to the head
+                    //head.appendChild(cssLink);
 
-                // backup the initial content
-                containerContent = container.innerHTML;
+                    // backup the initial content
+                    containerContent = container.innerHTML;
 
-                // replace by our UI
-                container.innerHTML = "";
-                container.appendChild(ui);
+                    // replace by our UI
+                    container.innerHTML = "";
+                    container.appendChild(ui);
+                } else {
+                    // restore the initial content
+                    container.innerHTML = containerContent;
+                    containerContent = null;
 
-                return true;
-            },
-            disable = function () {
-                /* This method removes the application UI from the container
-                 * element and restores its content if the application is enabled.
-                 */
-                if (!isEnabled()) {
-                    return false;
+                    // remove the CSS element
+                    //cssLink.parentNode.removeChild(cssLink);
                 }
-
-                // restore the initial content
-                container.innerHTML = containerContent;
-                containerContent = null;
-
-                // remove the CSS element
-                //cssLink.parentNode.removeChild(cssLink);
-
-                return true;
             };
 
         // start enabled
-        enable();
+        enable(true);
 
-        // TODO: we should implement a getter/setter for the enabled flag
         return Object.freeze({
-            isEnabled: isEnabled,
-            enable: enable,
-            disable: disable
+            get enabled() {
+                return enabled;
+            },
+            set enabled(value) {
+                enable(value);
+            }
         });
     }
 
@@ -265,7 +258,7 @@ var Nainwaklet = (function () {
             }
 
             if (hub) {
-                hub.disable();
+                hub.enabled = false;
             }
         }
 
@@ -277,14 +270,15 @@ var Nainwaklet = (function () {
         });
     }
 
+    /* Check if we are on the Nainwak game page */
     function isOnNainwakGame() {
         var loc = window.location,
             pageUrl = loc.origin + loc.pathname;
         return pageUrl === nainwakGameUrl;
     }
 
+    /* Get the Nainwak User info from the menu frame */
     function getNainwakUser() {
-        /* Get the Nainwak User info from the menu frame */
         var frame = window.frames.menu,
             doc = frame.document,
             title = doc.querySelector('.news-titre'),
