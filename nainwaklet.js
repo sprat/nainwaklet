@@ -4,13 +4,13 @@
 
 /* Nainwaklet module */
 var Nainwaklet = (function () {
-    "use strict";
+    'use strict';
 
     var nainwakOrigin = 'http://www.nainwak.com',
         nainwakGameUrl = nainwakOrigin + '/jeu/index.php',
         script = document.scripts[document.scripts.length - 1],
         scriptUrl = script.src,
-        scriptBaseUrl = scriptUrl.substring(0, scriptUrl.lastIndexOf("/") + 1),
+        scriptBaseUrl = scriptUrl.substring(0, scriptUrl.lastIndexOf('/') + 1),
         scriptChannel = script.getAttribute('data-channel'),
         log = (window.console)
             ? window.console.log.bind(window.console)
@@ -51,14 +51,14 @@ var Nainwaklet = (function () {
 
     function parseQueryParams(location) {
         var query = location.search.substr(1),
-            pairs = query.split("&"),
+            pairs = query.split('&'),
             params = {};
         // Note: this implementation does not handle duplicate parameters
         // properly, but we don't need that here (yet)
         pairs.forEach(function (e) {
-            var pair = e.split("="),
+            var pair = e.split('='),
                 name = decodeURIComponent(pair[0]),
-                value = decodeURIComponent(pair[1] || "");
+                value = decodeURIComponent(pair[1] || '');
             params[name] = value;
         });
         return params;
@@ -185,10 +185,10 @@ var Nainwaklet = (function () {
     function createHub(container) {  /*, user, channel*/
         var containerContent = null,  // original content of the container
             ui = (function () {  // create the hub UI
-                var iframe = document.createElement("iframe"),
+                var iframe = document.createElement('iframe'),
                     hubUrl = scriptBaseUrl + 'hub.html';
-                iframe.setAttribute("class", "nainwaklet-hub");
-                iframe.setAttribute("src", hubUrl);
+                iframe.setAttribute('class', 'nainwaklet-hub');
+                iframe.setAttribute('src', hubUrl);
                 iframe.style.width = '100%';
                 iframe.style.border = 0;
                 return iframe;
@@ -225,7 +225,7 @@ var Nainwaklet = (function () {
                     containerContent = container.innerHTML;
 
                     // replace by our UI
-                    container.innerHTML = "";
+                    container.innerHTML = '';
                     container.appendChild(ui);
                 } else {
                     // restore the initial content
@@ -318,42 +318,36 @@ var Nainwaklet = (function () {
     /* Bookmarklet part */
     /********************/
     function getInjectionUrl(channel) {
-     // TODO: don't use Function.prototype.toString, may not work on every browser!
-        var template = function () {
-                var w = window,
-                    l = w.location,
-                    u = l.origin + l.pathname,
-                    d = document,
-                    b = d.body,
-                    n = 'Nainwaklet',
-                    id = 'nainwakletScript',
-                    s = d.getElementById(id);
-
-                if (u === '@gameUrl@') {
-                    if (s) {
-                        w[n].app.destroy();
-                        w[n] = null;
-                        b.removeChild(s);
-                    } else {
-                        s = d.createElement('script');
-                        s.id = id;
-                        s.type = 'text/javascript';
-                        s.src = '@src@';
-                        s.async = false;
-                        s.setAttribute('data-channel', '@channel@');
-                        b.appendChild(s);
-                    }
-                } else {
-                    alert("Ne fonctionne que sur la page jeu de Nainwak");
-                }
-            },
-            code = template.toString()
-                .replace(/\s+/g, ' ')
-                .replace('@gameUrl@', nainwakGameUrl)
-                .replace('@src@', scriptUrl)
-                .replace('@channel@', channel);
-
-        return 'javascript:(' + code + '())';
+        var lines = [
+            'javascript:(function () {',
+            '    var w = window,',
+            '        l = w.location,',
+            '        u = l.origin + l.pathname,',
+            '        d = document,',
+            '        b = d.body,',
+            '        n = "Nainwaklet",',
+            '        i = n + "Script",',
+            '        s = d.getElementById(i);',
+            '    if (u === "' + nainwakGameUrl + '") {',
+            '        if (s) {',
+            '            w[n].app.destroy();',
+            '            w[n] = null;',
+            '            b.removeChild(s);',
+            '        } else {',
+            '            s = d.createElement("script");',
+            '            s.id = i;',
+            '            s.type = "text/javascript";',
+            '            s.src = "' + scriptUrl + '";',
+            '            s.async = false;',
+            '            s.setAttribute("data-channel", "' + channel + '");',
+            '            b.appendChild(s);',
+            '        }',
+            '    } else {',
+            '        alert("Ne fonctionne que sur la page jeu de Nainwak");',
+            '    }',
+            '}())'
+        ];
+        return lines.join('\n').replace(/\s+/g, ' ');
     }
 
     function initializeButtons(buttons) {
