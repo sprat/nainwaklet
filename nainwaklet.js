@@ -80,9 +80,9 @@ var Nainwaklet = (function () {
     }
 
     /* Page factory */
-    function createPage(name, analyze) {  /*, fetchParams*/
+    function createPage(name, analyze) {  /*, loadParams*/
         var url = nainwakOrigin + '/jeu/' + name + '.php';
-        // TODO: add a fetch method
+        // TODO: add a load method
         return Object.freeze({
             name: name,
             url: url,  // base URL without query parameters
@@ -90,24 +90,55 @@ var Nainwaklet = (function () {
         });
     }
 
-    /* pages analyzers */
-    function analyzeDetect(contentWindow) {
-        var document = contentWindow.document,
-            c1 = document.getElementsByClassName('c1')[0];
-        log('Processing detect...');
-        //log(document);
-        log(c1);
-        //log(window.tabavat);
-        //gavat(id, photo, nom, tag, barbe, classe, cote, distance, x, y, description, attaquer, gifler, estCible)
-        //log(window.tabobjet);
-        //gobjet(id, photo, nom, distance, x, y, poussiere, prendre)
-    }
+    /* detect page */
+    var detect = (function () {
+        function findLocalization(html) {
+            // example:
+            // <span class="c1">Position (13,5) sur "Ronain Graou" |b95eb2f716c500db6|</span>
+            var re = /<span\sclass="c1">Position\s\((\d*),(\d*)\)\ssur\s"([^"]*)"/im,
+                match = re.exec(html);
+            if (match) {
+                return {
+                    position: [match[1], match[2]],
+                    world: match[3]
+                };
+            }
+        }
 
-    /* available pages for the Spy objects */
+        function findDwarfs(html) {
+            // example:
+            // tabavat[1] = ["33966", "avatar_guilde/41ddb8ad2c2be408e27352accf1cc0b6559466bb.png", "Le PheniX", '[Gnouille] [<span style="color:#91005D;">#!</span>]', "13794", "2", "Diablotin(e)", "0", "13", "5", "&quot;Le PheniX est un oiseau qui symbolise l&#039;immortalité et la résurrection.&quot; A quoi bon me tuer ?!?", "o", "", "0"];
+            // (id, photo, nom, tag, barbe, classe, cote, distance, x, y, description, attaquer, gifler, estCible)
+            var dwarfs = [];
+            // TODO: not implemented
+            return dwarfs;
+        }
+
+        function findObjects(html) {
+            // example:
+            // tabobjet[1] = [3609504, "objets/oreiller.gif", "Oreiller", 1, 12, 5, "ARME", 1262774];
+            // (id, photo, nom, distance, x, y, poussiere, prendre)
+            var objects = [];
+            // TODO: not implemented
+            return objects;
+        }
+
+        function analyze(html) {
+            log('Analyzing detect...');
+            return {
+                localization: findLocalization(html),
+                dwarfs: findDwarfs(html),
+                objects: findObjects(html)
+            };
+        }
+
+        return createPage('detect', analyze);
+    }());
+
+    /* pages */
     var pages = (function () {
         var list = [
-                // Détection
-                createPage('detect', analyzeDetect)
+                detect
                 /*
                 // Evénements (tous types d'evts sur 10 jours)
                 createPage('even', log, {duree: 240, type: 'ALL'}),
@@ -118,7 +149,6 @@ var Nainwaklet = (function () {
                 // Encyclopédie
                 createPage('encyclo', log)
                 */
-                // There's also /accueil/resume.php?IDS=...&errmsg=
             ],
             get = function (nameOrUrl) {
                 var results = list.filter(function (page) {
@@ -141,12 +171,17 @@ var Nainwaklet = (function () {
         //IDS = parseQueryParams(frame.location).IDS,
         var infoLoaded = function () {
                 var contentWindow = frame.contentWindow,
+                    doc = contentWindow.document,
+                    docEl = doc.documentElement,
+                    html = docEl.outerHTML,  // no doctype but we don't mind
                     location = contentWindow.location,
                     url = location.origin + location.pathname,
-                    page = pages.get(url);
+                    page = pages.get(url),
+                    result;
 
                 if (page) {
-                    page.analyze(contentWindow);
+                    result = page.analyze(html);
+                    log(result);
                 }
             },
             enabled = false,
@@ -256,7 +291,7 @@ var Nainwaklet = (function () {
             user = _conf.user || createUser(),
             channel = _conf.channel || scriptChannel || 'default',
             container = _conf.container || window.document.body,
-            spyFrame = _conf.spyFrame,
+            spyFrame = _conf.spyFrame,  // should be the frame element
             hub,
             spy;
 
