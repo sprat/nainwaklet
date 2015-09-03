@@ -18,7 +18,6 @@ var Nainwaklet = (function () {
                 return;
             };
 
-    /*
     function extend(target, source) {
         Object.keys(source).forEach(function (key) {
             if (target[key] === undefined) {
@@ -28,45 +27,41 @@ var Nainwaklet = (function () {
         return target;
     }
 
-    function asyncGet(url, onSuccess, onFailure) {
+    function httpGet(url, processResponse) {
         var xhr = new XMLHttpRequest();
         xhr.open('GET', url, true);  // asynchronous
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {  // response received and loaded
-                if (xhr.status === 200) {
-                    onSuccess(xhr.responseText, xhr.statusText);
-                } else {
-                    onFailure(xhr.statusText);
-                }
+                processResponse({
+                    status: xhr.status,
+                    body: xhr.responseText
+                });
             }
         };
         xhr.send(null);
     }
 
+    function buildQueryParams(params) {
+        var pairs = [];
+        Object.keys(params).forEach(function (key) {
+            var value = params[key],
+                encodedKey = encodeURIComponent(key),
+                encodedValue = encodeURIComponent(value);
+            pairs.push(encodedKey + '=' + encodedValue);
+        });
+        return pairs.join('&');
+    }
+
+    /*
     function parseUrl(url) {
         var a = document.createElement('a');
         a.href = url;
         return a;
     }
-
-    function parseQueryParams(location) {
-        var query = location.search.substr(1),
-            pairs = query.split('&'),
-            params = {};
-        // Note: this implementation does not handle duplicate parameters
-        // properly, but we don't need that here (yet)
-        pairs.forEach(function (e) {
-            var pair = e.split('='),
-                name = decodeURIComponent(pair[0]),
-                value = decodeURIComponent(pair[1] || '');
-            params[name] = value;
-        });
-        return params;
-    }
     */
 
     function generateRandomGuestName() {
-        var id = Math.floor(Math.random() * 1000);
+        var id = Math.round(Math.random() * 1000);
         return 'guest' + id;
     }
 
@@ -80,13 +75,35 @@ var Nainwaklet = (function () {
     }
 
     /* Page factory */
-    function createPage(name, analyze) {  /*, loadParams*/
+    function createPage(name, analyze, loadParams) {
         var url = nainwakOrigin + '/jeu/' + name + '.php';
-        // TODO: add a load method
+
+        function getUrl(IDS) {
+            var params = {
+                IDS: IDS
+            };
+            if (loadParams) {
+                extend(params, loadParams);
+            }
+            return url + '?' + buildQueryParams(params);
+        }
+
+        function load(IDS, processResult) {
+            var loadUrl = getUrl(IDS);
+            httpGet(loadUrl, function (response) {
+                var result = null;
+                if (response.status === 200) {
+                    result = analyze(response.body);
+                }
+                processResult(result);
+            });
+        }
+
         return Object.freeze({
             name: name,
             url: url,  // base URL without query parameters
-            analyze: analyze
+            analyze: analyze,
+            load: load
         });
     }
 
@@ -132,7 +149,7 @@ var Nainwaklet = (function () {
             };
         }
 
-        return createPage('detect', analyze);
+        return createPage('detect', analyze, {});
     }());
 
     /* pages */
