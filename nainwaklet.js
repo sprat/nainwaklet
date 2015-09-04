@@ -13,7 +13,7 @@ var Nainwaklet = (function () {
         scriptBaseUrl = scriptUrl.substring(0, scriptUrl.lastIndexOf('/') + 1),
         scriptChannel = script.getAttribute('data-channel'),
         log = (window.console)
-            ? window.console.log.bind(window.console)
+            ? Function.prototype.bind(window.console.log, window.console)
             : function () {
                 return;
             };
