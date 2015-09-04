@@ -13,7 +13,7 @@ var Nainwaklet = (function () {
         scriptBaseUrl = scriptUrl.substring(0, scriptUrl.lastIndexOf('/') + 1),
         scriptChannel = script.getAttribute('data-channel'),
         log = (window.console)
-            ? Function.prototype.bind(window.console.log, window.console)
+            ? Function.prototype.bind.call(window.console.log, window.console)
             : function () {
                 return;
             };
@@ -107,13 +107,31 @@ var Nainwaklet = (function () {
         });
     }
 
+    function forEachMatch(regex, string, processMatch) {
+        var match;
+        log(regex);
+        log(string);
+        log(processMatch);
+        while (true) {
+            match = regex.exec(string);
+            if (match !== null) {
+                processMatch(match);
+                if (!regex.global) {
+                    break;
+                }
+            } else {
+                break;
+            }
+        }
+    }
+
     /* detect page */
     var detect = (function () {
         function findLocalization(html) {
             // example:
             // <span class="c1">Position (13,5) sur "Ronain Graou" |b95eb2f716c500db6|</span>
-            var re = /<span\sclass="c1">Position\s\((\d+),(\d+)\)\ssur\s"([^"]*)"/i,
-                match = re.exec(html);
+            var regex = /<span\sclass="c1">Position\s\((\d+),(\d+)\)\ssur\s"([^"]*)"/i,
+                match = regex.exec(html);
             if (match) {
                 return {
                     position: [parseInt(match[1], 10), parseInt(match[2], 10)],
@@ -126,8 +144,16 @@ var Nainwaklet = (function () {
             // example:
             // tabavat[1] = ["33966", "avatar_guilde/41ddb8ad2c2be408e27352accf1cc0b6559466bb.png", "Le PheniX", '[Gnouille] [<span style="color:#91005D;">#!</span>]', "13794", "2", "Diablotin(e)", "0", "13", "5", "&quot;Le PheniX est un oiseau qui symbolise l&#039;immortalité et la résurrection.&quot; A quoi bon me tuer ?!?", "o", "", "0"];
             // (id, photo, nom, tag, barbe, classe, cote, distance, x, y, description, attaquer, gifler, estCible)
-            var dwarfs = [];
-            // TODO: not implemented
+            var regex = /tabavat\[\d+\]\s=\s\[(.*)\];/ig,
+                dwarfs = [];
+
+            log('findDwarfs');
+            forEachMatch(regex, html, function (match) {
+                // TODO: not implemented
+                log(match);
+                //createDwarfFromMatch(match[1]);
+            });
+
             return dwarfs;
         }
 
