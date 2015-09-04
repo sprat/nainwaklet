@@ -15,26 +15,6 @@ body {
     margin: 10px 0;
 }
 
-.bottom-menu {
-    list-style: none;
-    padding: 0;
-}
-
-.bottom-menu li {
-    display: inline-block;
-    margin: 0 5px;
-}
-
-.bottom-menu a {
-    color: #666;
-    text-decoration: none;
-}
-
-.bottom-menu a:hover {
-    text-decoration: underline 
-}
-
-
 /* button design */
 .nainwaklet-button {
     padding: 10px 20px;
@@ -68,9 +48,4 @@ body {
     background-image: -o-linear-gradient(top, #333333, #111111);
     background-image: linear-gradient(to bottom, #333333, #111111);
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#333333, endColorstr=#111111);
-}
-
-/* unit-tests page */
-#qunit {
-    margin: 20px 0;
 }
