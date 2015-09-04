@@ -1,0 +1,266 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" href="/css/main.css" type="text/css">
+<script language="JavaScript" src="/js/scriptaculous/prototype.js" type="text/javascript">
+</script>
+<script language="JavaScript" src="/js/cookie.js" type="text/javascript">
+</script>
+<script language="JavaScript" src="/js/base.js" type="text/javascript">
+</script>
+<script language="JavaScript" src="/js/detec.js" type="text/javascript">
+</script>
+<script language="JavaScript" type="text/javascript">
+  if ((typeof Detect=='undefined') ||
+      (Detect.Version<'2.2.0'))
+    alert("Vous avez une vieille version de detec.js, merci de vider votre cache");
+</script>
+<title></title>
+<!--[if lt IE 6]>
+<style type="text/css">
+span.clickable label{ cursor: hand;}
+</style>
+<![endif]-->
+<style type="text/css">
+td img {
+  width: 32px;
+  height: 32px;
+}
+span.c1 {display: none;}
+span.clickable label {
+  cursor: pointer;
+}
+span.clickable input { width:0;}
+span.clickable input:not([Nainwak]){ display: none;}
+span.clickable label:hover { text-decoration: underline;}
+span.clickable input:checked+label { text-decoration: underline;}
+label.checked { text-decoration: underline;}
+span.clickable label.hover { text-decoration: underline;}
+.macible {
+  color: red;
+  font-weight: bold;
+}
+</style>
+<script language="javascript" type="text/javascript">
+function gtc(x, y) {
+  document.location="deplac.php?IDS=5a091646bdf3bdeec8ee2f6677d954ff&destx="+x+"&desty="+y;
+}
+
+var ab=0;
+function gifler(id) {
+  if (ab==0) {
+    window.location.href="gifler.php?IDS=5a091646bdf3bdeec8ee2f6677d954ff&id="+id;
+    ab=1;
+    return true;
+  } else {
+    return false;
+  }
+}
+var classeinterface=2;
+var IDS="5a091646bdf3bdeec8ee2f6677d954ff";
+var classejoueur=Math.min(4, classeinterface);
+
+var tabobjet=new Array();
+var tabavat=new Array();
+
+tabavat[1] = ["33966", "avatar_guilde/41ddb8ad2c2be408e27352accf1cc0b6559466bb.png", "Le PheniX", '[Gnouille] [<span style="color:#91005D;">#!</span>]', "13795", "2", "Diablotin(e)", "0", "13", "5", "&quot;Le PheniX est un oiseau qui symbolise l&#039;immortalité et la résurrection.&quot; A quoi bon me tuer ?!?", "o", "", "0"];
+tabavat[2] = ["50535", "avatar/perso/ab8361266cdecfa7409762063c704affb5f77c53.png", "Nami", '[<span style="color:#F2009B;">OnePiece</span>&#9829;&#9829;]', "10044", "2", "Cancre (nain-culte)", "1", "12", "5", "moi j&#039;avale des BIP au kilometre et j&#039;aime ça. Gold et pandaman vous être trop beaux je vous aime", "o", "", "0"];
+tabavat[3] = ["65631", "avatar/perso/9703fb57e7c4b96e814acbc71dc96921f5b5c5ce.png", "Jekyll", '', "12784", "2", "Contractuelle", "1", "12", "5", "So mad", "o", "", "0"];
+tabavat[4] = ["56067", "avatar/perso/6b2bd4d264c302d43de91df971cf5c32d95caaac.gif", "Bad Bax", '[GWARTEAM]', "11811", "2", "Ordure (Nain-récupérable)", "1", "14", "6", "attention, je connais hyper bien les Gneutes", "o", "", "0"];
+tabavat[5] = ["3605", "avatar/perso/7ad2c484c41a9d54ecf06948d22e1f497370e2fd.png", "Kingplayer", '[STRING]', "11798", "2", "Contractuelle", "1", "12", "5", "06h36 (jeu. 07/11) Ton Super - anabolysants ! a rendu l&#039;âme, te faisant perdre -1286 point(s) de Vie, et augmenter de 1 point(s) de Ridicule !", "o", "", "0"];
+tabavat[6] = ["33924", "avatar/perso/dab064da974199a53f0e22527f901d523e8869b3.png", "Bourinain", '[G-NOUILLE<span style="color:#00C200;">#sNOUFFF</span>]', "10274", "2", "Cancre (nain-culte)", "2", "15", "5", "19h18 (mar. 23/06)  Ton Super - anabolysants ! a rendu l&#039;âme, te faisant perdre -854 point(s) de Vie, et augmenter de 1 point(s) de Ridicule ! PV 1182 / 427 == ne pas me taper amis brave ^", "o", "", "0"];
+tabavat[7] = ["8536", "avatar/perso/016d55c58b3505ff0684f92c090cf3f66c26a80a.gif", "OuhAreYou OuhOuh OuhOuh", '[<span style="color:#5592FF;">Snipers</span>]', "10938", "1", "Mr Propre (nain-peccable)", "2", "15", "5", "", "o", "", "0"];
+tabavat[8] = ["47224", "avatar/perso/b1498fc5ff2bac660e58f532af9e1626bee9c1ed.png", "Prelude51", '[<span style="color:#91005D;">#!</span>Honda]', "13063", "2", "Tortionnaire (nain-pitoyable)", "2", "11", "4", "oléééééééééééééééééééééééééé", "o", "", "0"];
+tabavat[9] = ["6305", "avatar/perso/a258275788ef442ae76ebeb91c24c4c17da12d69.png", "Louisette queen of the snipette !", '[#Gnôuille] [<span style="color:#5592FF;">Snipers</span>]', "13914", "1", "Magicien (nain-cantation)", "3", "16", "4", "danser la guinguette !  | injecter des &#9829; ! | donner de l&#039;amour ! |", "", "", "0"];
+tabavat[10] = ["19180", "avatar/perso/5851ed3ca819604cbfe9eca9ce912d5f4fa05277.png", "Neantnain", '[<span style="color:#00C200;">#sNOUFFF</span>]', "13515", "1", "Donnateur à l&#039;assoc", "3", "16", "4", "Gare si mort!", "", "", "0"];
+tabavat[11] = ["70321", "avatar/perso/dab064da974199a53f0e22527f901d523e8869b3.png", "tchetchen", '[GNOUILLE<span style="color:#00C200;">#sNOUFFF</span>]', "14392", "1", "Ami(e) des fleurs", "3", "16", "4", "&gt;AMI BRAVE ME TAPEZ PAS SVP! Tchetchen, souvent copié, jamais égalé &quot;Le jour ou tu me dépasseras, des cochons s&#039;envoleront de mon cul dans une soucoupe volante remplie de saucisses italiennes&quot;", "", "", "0"];
+tabavat[12] = ["55800", "avatar_guilde/6477304ed1f538c5a674f97379da783208435b79.gif", "tchouka", '[<span style="color:#DABB00;">RUN</span>]', "13241", "2", "Tête brûlée (nain-pulsif)", "3", "10", "5", "07h50 (jeu. 10/04) Tu as tué Shihiro, un(e) Magicien (nain-cantation)", "", "", "0"];
+tabavat[13] = ["72020", "avatar/choix/Megaman.gif", "Drystorm", '', "101", "2", "Moucheron (nain-secte)", "3", "10", "4", "Nain-ternaute", "", "", "0"];
+tabavat[14] = ["114", "avatar/perso/933a27a7a4659bada19b7f345b6c3c15454f41e3.gif", "Xtrem", '[Gnouille&<span style="color:#5592FF;">Snipers</span>]', "13491", "1", "Metatron", "4", "17", "4", "Un peu d&#039;amour en bocal, beaucoup d&#039;amour dans mes coups :-D | Embrasser | Caliner | Caresser | Faire l&#039;amour", "", "", "0"];
+tabavat[15] = ["67625", "avatar/perso/446795d721288438bff27d762d9b8cae19d44a28.png", "Tonton", '[<span style="color:#00C200;">#sNOUFFF</span>]', "13626", "1", "Président de l&#039;UNESCO", "4", "17", "5", "La mousse c&#039;est comme la dentelle, c&#039;est ce qui sépare l&#039;homme du bonheur.", "", "", "1"];
+tabavat[16] = ["71383", "avatar_guilde/ca0690b40161b84c4fae6d2cb8f1b622ac44cf2b.png", "Nainkomp'", '[GNOUILLE<span style="color:#249EFF;">Gôlois</span>]', "11871", "1", "Bob (Goldorak Couscoussière)", "4", "17", "4", "A pistorius, que dieu te protese", "", "", "0"];
+tabavat[17] = ["71382", "avatar_guilde/dfca249876a6215cd9f74a4cc6c94c79f3c6acbb.gif", "Azerrr", '[Gnouille] [<span style="color:#923CFF;">#TFC</span>]', "10401", "1", "Ami(e) de tous", "4", "17", "4", "&quot;J&#039;ai toujours rêvé d&#039;avoir une corde à sauter !&quot;", "", "", "0"];
+tabavat[18] = ["410", "avatar/perso/c487fc3579dd818b2f82fb32576fcaed229418ba.gif", "bravenain", '[SoLo&<span style="color:#5592FF;">Snipers</span>]', "13450", "1", "Superman", "4", "17", "4", "nain à l&#039;abandon... Plus aucun intérêt :(", "", "", "0"];
+tabavat[19] = ["1157", "avatar/perso/e9eb8876eb7591c2f4ea88f160d23b7883af030c.png", "King of kekeland", '[[GNOUILLE]] [<span style="color:#00C200;">#sNOUFFF</span>]', "13552", "1", "Pikachu", "4", "17", "4", "Le Jurassien t&#039;a attaqué avec son(sa) sNOUFFICIDE [perso], et ... il en est fier en plus :)", "", "", "0"];
+tabavat[20] = ["71381", "avatar/perso/9470a1b290b419def6159fa38d6419287f6aaa1e.gif", "Tomtom", '[Gnouille] [<span style="color:#F2004D;">Sproutch</span>]', "11033", "1", "Soldat (Nain-gagé)", "4", "17", "4", "parfois la vie fait Sproutch", "", "", "0"];
+tabavat[21] = ["5536", "avatar/perso/41ddb8ad2c2be408e27352accf1cc0b6559466bb.png", "Beti Zuzen", '[<span style="color:#91005D;">#!</span>]', "14251", "1", "Ami(e) des nains-béciles (des bêtes)", "4", "17", "4", "", "", "", "0"];
+tabavat[22] = ["1849", "avatar/perso/36bb7ee61f775475974a11e5ac1b42b413287d90.gif", "Zou", '', "13977", "1", "Paladin (nain-vinsible)", "4", "17", "4", "Soyons Nain, et Schlavbeuk sera Grand !", "", "", "0"];
+tabavat[23] = ["68642", "avatar/perso/7c0cccd11fdd102cf5aed3664b33b030ba7a04b6.gif", "No†e", '[<span style="color:#5592FF;">Snipers</span>] [C†F]', "14023", "1", "Soldat (Nain-gagé)", "4", "17", "4", "&quot; Que trépasse si je frémis &quot; .... ah merde je suis encore remonté trop loin dans le temps ... [ Les SNIPERS recrutent !!! ... non c&#039;est une blague ... ]", "", "", "0"];
+tabavat[24] = ["68566", "avatar_guilde/41ddb8ad2c2be408e27352accf1cc0b6559466bb.png", "Ouh-l'hippo", '[<span style="color:#91005D;">#!</span>]', "9799", "1", "Bob (Goldorak Couscoussière)", "4", "17", "4", "Frais émoulu de sa cryothérapie ...", "", "", "0"];
+tabavat[25] = ["4408", "avatar/perso/de95b76826d577bf47c540d9cc4bedf5c733a259.gif", "Tiotiof", '[Gnouille] [<span style="color:#00C200;">#sNOUFFF</span>]', "13213", "1", "Donnateur à l&#039;assoc", "4", "17", "4", "", "", "", "0"];
+tabavat[26] = ["61685", "avatar/perso/f40bbff0752d8e9763b353c0dbb45bba99e3c36d.png", "Ninbas", '[<span style="color:#00C200;">#sNOUFFF</span>]', "11252", "1", "Iroquois (Nain-dien)", "4", "17", "4", "Communément appelé Nainbas par mes confrères déficients", "", "", "0"];
+tabavat[27] = ["53247", "avatar/perso/a9bd65439b47352f1ab85103db9a2bfdc6922497.png", "S4ii", '[<span style="color:#00C200;">#sNOUFFF</span>] [poil]', "11713", "1", "Lutin (nain nain nain stroumpf nain nain)", "4", "17", "4", "boom!!!! es", "", "", "0"];
+tabavat[28] = ["27245", "avatar/perso/66d818dde7cc0e012cc75b4c87a328cf9fb85e5b.png", "Le Jurassien", '[<span style="color:#00C200;">#sNOUFFF</span>GNOUILLE !]', "13425", "1", "Lutin (nain nain nain stroumpf nain nain)", "4", "17", "4", "tu as attaqué King of kekeland avec ton(ta) sNOUFFICIDE [perso], et ... c&#039;était très marrant :)", "", "", "0"];
+tabavat[29] = ["57738", "avatar/perso/ece1389ed306fc636d28b93e68e343b3a09e7970.gif", "freerastanainder", '[Gnouille<span style="color:#00C26C;">#ridØcul</span>]', "12586", "1", "Iroquois (Nain-dien)", "4", "17", "3", "Après, tu finis à pied!", "", "", "0"];
+tabavat[30] = ["37924", "avatar/perso/2f12b2deff21569ba0103b6fa3ccfad2dce3a89d.png", "blou-blou", '[GNOUILLE<span style="color:#00C200;">#sNOUFFF</span>]', "12627", "1", "Ami(e) des nains-béciles (des bêtes)", "4", "17", "3", "18h32 (jeu. 07/03) Ton Formule 1 verte a rendu l&#039;âme, te faisant perdre 25 point(s) de Vie, et augmenter de 1 point(s) de Ridicule !", "", "", "0"];
+tabavat[31] = ["45300", "avatar/perso/f18edc42556a6c20aa5828ffcf2556f897f7eb25.gif", "Tuwawar mon deubeulfeuque", '[#sGNOUFFF] [<span style="color:#F20009;">GNeute</span>]', "11129", "2", "Petit-gros (nain-gras)", "4", "10", "2", "Attention!! ouf qui bouffe du nouff!", "", "", "0"];
+tabavat[32] = ["64965", "avatar/choix/mechant.gif", "calumero", '', "11701", "2", "Espion (Nain-formateur)", "4", "11", "8", "", "", "", "0"];
+tabavat[33] = ["70101", "avatar/choix/PHPavatar018.gif", "Bob le crabe", '', "241", "2", "Moucheron (nain-secte)", "4", "10", "8", "Poupy foin du Mont Poupey", "", "", "0"];
+tabavat[34] = ["7623", "avatar/choix/mechant.gif", "GueuT", '[TKO]', "13437", "2", "Pyromane (nain-cendiaire de poche)", "4", "11", "8", "SSS", "", "", "0"];
+tabavat[35] = ["43109", "avatar/perso/0dfb3a7bdbf576719334c53e5cfdb33d808a38b7.png", "festoche", '[<span style="color:#79000E;">¤ Sad-X</span>Cellent¤]', "11939", "2", "Exhibitionniste (nain-visible)", "4", "11", "8", "mode KAMIKAZE : ON; La mort nous sourit à tous, tout ce que l&#039;on peut faire c&#039;est sourire à la mort... alors souris baveux, je suis ta mort. Il parait que Tegmen s&#039;anabolise plus que moi ?.... | Corrompre n_tony | Torturer El-Calvos | Enerver Draco", "", "", "0"];
+tabavat[36] = ["43872", "avatar/choix/PHPavatar027.gif", "archangel", '[PYROS]', "13227", "2", "Exhibitionniste (nain-visible)", "4", "11", "8", "", "", "", "0"];
+tabavat[37] = ["71986", "avatar/choix/Coq.gif", "pluevnr", '[<span style="color:#FF0C5E;">NAINJA</span>]', "2881", "1", "Lutin (nain nain nain stroumpf nain nain)", "4", "13", "1", "nain-corruptible joueur", "", "", "0"];
+tabavat[38] = ["71964", "avatar/choix/mechant.gif", "Mikealkeal", '', "431", "3", "Rampant Sadique", "4", "15", "1", "mouhahaha", "", "", "0"];
+tabavat[39] = ["6008", "avatar_guilde/ca0690b40161b84c4fae6d2cb8f1b622ac44cf2b.png", "Paul Eon", '[Gnouille] [<span style="color:#249EFF;">Gôlois</span>]', "12927", "1", "Chevalier (nain-pitoyable)", "4", "16", "2", "Qui a vu Joséphine ?", "", "", "0"];
+tabavat[40] = ["46805", "avatar/perso/41ddb8ad2c2be408e27352accf1cc0b6559466bb.png", "Stoptou", '[<span style="color:#91005D;">#!</span>]', "12554", "1", "Ami(e) des nains-béciles (des bêtes)", "4", "16", "3", "We rode on horses made of sticks, that awful sound", "", "", "0"];
+tabavat[41] = ["2621", "avatar/perso/8b07a9e2171b593aaa286076f79633ead4038ad7.png", "c4n4rd", '[<span style="color:#00C200;">#sNOUFFF</span>137Gnouill]', "13131", "1", "Paladin (nain-vinsible)", "4", "17", "3", "Une belle bande de ptite b!te http://fr.igraal.com/#parrain=Canouxor", "", "", "0"];
+tabavat[42] = ["71903", "avatar/choix/mechant.gif", "johnwick", '', "2803", "3", "Rampant Brave", "5", "18", "6", "roger hanain; tueur né", "", "", "0"];
+tabavat[43] = ["56470", "avatar/perso/946c4c1fa627bcd5a7efcf13fd3b3e2cf5a81e8d.gif", "froggy", '[<span style="color:#00C200;">#sNOUFFF</span>]', "12562", "1", "Nain-firmière", "5", "18", "4", "OUI NIDE IOU TOU AILPPE SAILLANCE !!", "", "", "0"];
+tabavat[44] = ["42749", "avatar/perso/f40bbff0752d8e9763b353c0dbb45bba99e3c36d.png", "Maitre Yoda", '[Gnouille][<span style="color:#00C200;">#sNOUFFF</span>]', "12939", "1", "Maître nain-geur", "5", "18", "3", "Etre Nouffs c&#039;est plus qu&#039;une guilde, c&#039;est un mode de vie, une famille", "", "", "0"];
+tabavat[45] = ["8844", "avatar_guilde/0ffd3839fb979974926ff8053846738e2124069c.gif", "kriekmarc", '[A.d.N] [<span style="color:#C2000B;">A.d.M</span>]', "13358", "2", "Yeti (Nain-Beau-Minable)", "5", "8", "4", "Le travail c&#039;est bien, les vacances c&#039;est mieux!", "", "", "0"];
+tabavat[46] = ["34624", "avatar/perso/1405e9d23ae8ed629125687511d3431b49b02b52.gif", "Courtebranche", '', "13430", "2", "Tortionnaire (nain-pitoyable)", "5", "9", "8", "Si on ne parlait pas de ce dont on n&#039;avait pas à parler on ne parlerait pas. Aime prendre le temps de le perdre.", "", "", "0"];
+tabavat[47] = ["71707", "avatar/choix/mechant.gif", "Tapo", '', "6978", "2", "Voleur (Nain-terre-dit)", "6", "7", "5", "", "", "", "0"];
+tabavat[48] = ["58413", "avatar/choix/mechant.gif", "Rintintin", '[<span style="color:#2C00AA;">RockU</span>]', "11824", "1", "Iroquois (Nain-dien)", "6", "18", "2", "", "", "", "0"];
+tabavat[49] = ["71438", "avatar_guilde/19c47cc8462061ac60e8340ab9eb9a2a60804dd9.gif", "Naimpreza", '[<span style="color:#3C40FF;">GM</span>]', "10661", "1", "Soldat (Nain-gagé)", "6", "18", "2", "Mieux que le nainvion et encore mieux que le trnain !!", "", "", "0"];
+tabavat[50] = ["60163", "avatar_guilde/ca0690b40161b84c4fae6d2cb8f1b622ac44cf2b.png", "Ø", '[GNOUILLE-<span style="color:#249EFF;">Gôlois</span>]', "12857", "1", "Président de l&#039;UNESCO", "6", "19", "7", "ex [NIB] puis ex [Dinø] et maintenant [Gôlois] ... Ils sont où les roros ?", "", "", "0"];
+tabavat[51] = ["71373", "avatar/perso/e74cc489242d94a4ea29676a0e85dd4cfb421f8d.gif", "moustif", '[Gnouille<span style="color:#00C200;">#sNOUFFF</span>]', "13386", "1", "Lutin (nain nain nain stroumpf nain nain)", "6", "19", "4", "On vous paie pour baiser avec l&#039;ours polaire ?", "", "", "0"];
+tabavat[52] = ["45419", "avatar/perso/d0b4fadacdb53589e6ffcb3c0c0dea3eb35924c7.gif", "OuhMechant", '[GNOUILLE<span style="color:#5592FF;">Snipers</span>]', "13417", "1", "Génie (Nain-Stein)", "6", "19", "4", "Ne soyez pas méchants avec les femmes.    La nature s&#039;en charge au  fur et à mesure que le temps passe. Il n&#039;y a pas de femmes frigides ;  ce sont les mauvaises langues  qui disent ça !", "", "", "0"];
+tabavat[53] = ["3008", "avatar/perso/c26d0dab1b8d124b85bc54fee678af91f53673e3.gif", "Nain Spiration Divine", '', "16317", "1", "Président de l&#039;UNESCO", "7", "19", "2", ": Pour faire passer ta douleur, je vais te faire mal ailleurs...", "", "", "0"];
+tabavat[54] = ["56459", "avatar/perso/ec2ee2798eb12b9d13bc232010b5f450891a8bef.png", "Sexy Lady", '[<span style="color:#FFBE55;">#SPQR#</span>] [XIII]', "13560", "2", "Tête brûlée (nain-pulsif)", "7", "7", "2", "*essuie la bave qui coule au bord de tes lèvres* ...j&#039;adore les déclarations d&#039;amour :-) /// SPQR en mode [XIII]", "", "", "0"];
+tabavat[55] = ["67863", "avatar/choix/mechant.gif", "titoun44", '', "12563", "1", "Iroquois (Nain-dien)", "7", "20", "7", "", "", "", "0"];
+
+tabobjet[1] = [3608081, "objets/kinder.gif", "Kine d&#039;Heure", 1, 12, 6, "SPECIAL", 4550932];
+tabobjet[2] = [3609504, "objets/oreiller.gif", "Oreiller", 1, 12, 5, "ARME", 1193785];
+tabobjet[3] = [3610508, "objets/halteres.gif", "Haltères", 2, 15, 5, "RUNE", 1270900];
+tabobjet[4] = [3610509, "objets/journal.gif", "Nainwak News", 2, 15, 5, "DETECTEUR", 1270901];
+tabobjet[5] = [3610514, "objets/clocheenchocolat.png", "Cloche de Pâques", 2, 15, 5, "MANGER", 7580499];
+tabobjet[6] = [3610668, "objets/perceuse.gif", "Perceuse", 2, 15, 4, "ARME", 1283657];
+tabobjet[7] = [3598326, "objets/potion_sonore.png", "Potion sonore", 2, 11, 6, "SPECIAL", -1];
+tabobjet[8] = [3598327, "objets/potion_sonore.png", "Potion sonore", 2, 11, 6, "SPECIAL", -1];
+tabobjet[9] = [3598328, "objets/tarte_creme.gif", "Tarte à la crème", 2, 11, 6, "SPECIAL", 373286];
+tabobjet[10] = [3599754, "objets/bandeau.gif", "Bandeau Noir", 2, 13, 3, "DETECTEUR", 508195];
+tabobjet[11] = [3610177, "objets/sextan.gif", "Sextant", 3, 12, 2, "DETECTEUR", 1234443];
+tabobjet[12] = [3609448, "objets/oreiller.gif", "Oreiller", 3, 14, 2, "ARME", 1189856];
+tabobjet[13] = [3609463, "objets/raisin2.png", "Raisin", 3, 14, 2, "MANGER", 10438334];
+tabobjet[14] = [3607675, "objets/mongol2.gif", "Mongolfière", 3, 13, 8, "VEHICULE", 1048844];
+tabobjet[15] = [3609888, "objets/grenouille.gif", "Prince charmant", 3, 16, 4, "RUNE", 1223118];
+tabobjet[16] = [3606321, "objets/poubelle.gif", "Boîte à IDM", 3, 11, 3, "RUNE", 972240];
+tabobjet[17] = [3605323, "objets/bandeau.gif", "Bandeau Noir", 3, 10, 6, "DETECTEUR", 891630];
+tabobjet[18] = [3609892, "objets/carpette.gif", "Carpette de loup des bouais", 3, 16, 4, "RUNE", 1223118];
+tabobjet[19] = [3609897, "objets/kinder.gif", "Kine d&#039;Heure", 3, 16, 4, "SPECIAL", 4402943];
+tabobjet[20] = [3609893, "objets/avion_papier.gif", "Avion en papier", 3, 16, 4, "DETECTEUR", 1223118];
+tabobjet[21] = [3609901, "objets/raisin3.png", "Raisin", 3, 16, 4, "MANGER", 10440805];
+tabobjet[22] = [3609891, "objets/chaussure_tennis.gif", "Chaussure de tennis", 3, 16, 4, "RUNE", 1223118];
+tabobjet[23] = [3609898, "objets/bocal_arbre.gif", "Le bocal d&#039;arbre", 3, 16, 4, "SPECIAL", 1223118];
+tabobjet[24] = [3609890, "objets/dorothee.gif", "Disque laser de Dorothée", 3, 16, 4, "RUNE", 1223118];
+tabobjet[25] = [3609458, "objets/tarte_creme.gif", "Tarte à la crème", 3, 14, 2, "SPECIAL", 1189857];
+tabobjet[26] = [3609889, "objets/chapeau_de_magicien.gif", "Chapeau de magicien", 3, 16, 4, "RUNE", 1223118];
+tabobjet[27] = [3610723, "objets/boite_a_outils.gif", "Boîte à Outils", 4, 13, 1, "RUNE", 1290662];
+tabobjet[28] = [3595528, "objets/tractopelle3.gif", "Tractopelle", 4, 17, 6, "VEHICULE", 110549];
+tabobjet[29] = [3608399, "objets/m_et_ms.gif", "Menemen&#039;s", 4, 16, 3, "MANGER", 2360172];
+tabobjet[30] = [3608802, "objets/boomrang.gif", "Boomrang classique", 4, 9, 4, "ARME", 1133646];
+tabobjet[31] = [3610345, "objets/raisin5.png", "Raisin", 4, 13, 1, "MANGER", 9955117];
+tabobjet[32] = [3610548, "objets/lettre.gif", "L&#039;espion", 4, 13, 1, "DETECTEUR", 1275447];
+tabobjet[33] = [3610547, "objets/machette_bleue.gif", "Machette des gentils", 4, 13, 1, "ARME", 1275423];
+tabobjet[34] = [3609948, "objets/naintella.gif", "bocal de nutella", 4, 9, 3, "MANGER", 6409798];
+tabobjet[35] = [3608807, "objets/glaive_vert.gif", "Glaive classique", 4, 9, 5, "ARME", 1133696];
+tabobjet[36] = [3608808, "objets/cube_type2.gif", "Cube à lettres (CFE)", 4, 9, 5, "RUNE", 1133696];
+tabobjet[37] = [3610465, "objets/raisin5.png", "Raisin", 4, 9, 6, "MANGER", 10945886];
+tabobjet[38] = [3605608, "objets/batte.gif", "Batte de base-ball spéciale", 4, 9, 7, "SPECIAL", 925565];
+tabobjet[39] = [3602629, "objets/pack.gif", "Pack de bières", 4, 9, 3, "MANGER", 4862520];
+tabobjet[40] = [3598022, "objets/vendredi13e.png", "Quitte ou Double", 4, 10, 3, "SPECIAL", 347849];
+tabobjet[41] = [3610278, "objets/lancechapin.png", "Lance-Chapin", 4, 10, 8, "SPECIAL", 1241969];
+tabobjet[42] = [3610348, "objets/vinvide.gif", "Bouteille vide", 4, 13, 1, "INUTILE", 1256772];
+tabobjet[43] = [3610347, "objets/vinvide.gif", "Bouteille vide", 4, 13, 1, "INUTILE", 1256772];
+tabobjet[44] = [3610344, "objets/raisin3.png", "Raisin", 4, 13, 1, "MANGER", 9638695];
+tabobjet[45] = [3610331, "objets/grenouille.gif", "Prince charmant", 4, 13, 1, "RUNE", 1256772];
+tabobjet[46] = [3597746, "objets/vendredi13e.png", "Quitte ou Double", 4, 12, 1, "SPECIAL", 332043];
+tabobjet[47] = [3610751, "objets/couronne.gif", "Couronne", 5, 8, 3, "RUNE", 1293236];
+tabobjet[48] = [3607178, "objets/batte.gif", "Batte de base-ball spéciale", 5, 18, 6, "SPECIAL", 1029455];
+tabobjet[49] = [3603530, "objets/mongol2.gif", "Mongolfière", 5, 18, 5, "VEHICULE", 802864];
+tabobjet[50] = [3610607, "objets/tournesol.gif", "Tournesol", 5, 17, 2, "MANGER", 6809051];
+tabobjet[51] = [3606294, "objets/chimie.gif", "Laboratoire du petit chimiste", 5, 9, 2, "RUNE", 971371];
+tabobjet[52] = [3605047, "objets/raisin5.png", "Raisin", 5, 16, 1, "MANGER", 10556116];
+tabobjet[53] = [3598787, "objets/boite_a_outils.gif", "Boîte à Outils", 5, 16, 1, "RUNE", 423183];
+tabobjet[54] = [3604644, "objets/hockey.gif", "Crosse de hockey", 5, 10, 1, "ARME", 857522];
+tabobjet[55] = [3602128, "objets/chaussure_tennis.gif", "Chaussure de tennis", 6, 8, 8, "RUNE", 696293];
+tabobjet[56] = [3610352, "objets/journal.gif", "Nainwak News", 6, 19, 4, "DETECTEUR", 1258136];
+tabobjet[57] = [3604783, "objets/bonzai.gif", "Bonzaï", 6, 19, 5, "RUNE", 867179];
+tabobjet[58] = [3601388, "objets/lancechapin.png", "Lance-Chapin", 6, 19, 7, "SPECIAL", 625483];
+tabobjet[59] = [3601389, "objets/raisin3.png", "Raisin", 6, 19, 7, "MANGER", 7851294];
+tabobjet[60] = [3610678, "objets/couronne.gif", "Couronne", 6, 19, 7, "RUNE", 1283750];
+tabobjet[61] = [3609985, "objets/halteres.gif", "Haltères", 6, 19, 4, "RUNE", 1227411];
+tabobjet[62] = [3609983, "objets/halteres.gif", "Haltères", 6, 19, 4, "RUNE", 1227402];
+tabobjet[63] = [3609944, "objets/marteau_guerre.gif", "Masse d&#039;arme", 6, 19, 4, "ARME", 1724437];
+tabobjet[64] = [3601854, "objets/poulet.gif", "Tripes de poulet", 6, 8, 2, "DETECTEUR", 675918];
+tabobjet[65] = [3610675, "objets/Acoustic.gif", "Guitare Acoustique", 7, 20, 7, "RUNE", 1283657];
+tabobjet[66] = [3610674, "objets/halteres.gif", "Haltères", 7, 20, 7, "RUNE", 1283657];
+tabobjet[67] = [3610673, "objets/livre_vert.gif", "L&#039;ABC d&#039;aire", 7, 20, 7, "RUNE", 1283657];
+tabobjet[68] = [3610671, "objets/gem.gif", "Pierre magique", 7, 20, 7, "RUNE", 1283657];
+tabobjet[69] = [3610670, "objets/bottes.gif", "Les bottes de convocations d&#039;Herr  Moroïd", 7, 20, 7, "ARME", 1353142];
+tabobjet[70] = [3610669, "objets/saliere.gif", "Salière qui tue", 7, 20, 7, "ARME", 1352041];
+tabobjet[71] = [3609607, "objets/batte.gif", "Batte de base-ball spéciale", 7, 20, 4, "SPECIAL", 1203796];
+tabobjet[72] = [3610682, "objets/nounou.gif", "Ours en peluche", 7, 7, 2, "RUNE", 1285652];
+tabobjet[73] = [3610681, "objets/tie.gif", "Tie-fighter", 7, 7, 2, "VEHICULE", 1285652];
+tabobjet[74] = [3609464, "objets/raisin4.png", "Raisin", 7, 6, 7, "MANGER", 10866657];
+tabobjet[75] = [3610676, "objets/perruque.gif", "Capillotracteur", 7, 20, 7, "VEHICULE", 1283657];
+
+</script>
+
+<script type="text/javascript" language="JavaScript">
+ var classeinterface=2;
+</script>
+</head>
+<body onunload="JavaScript: if(window.parent.map.pluscible) window.parent.map.pluscible();">
+<p class="erreur"></p>
+<span class="c1">Position (13,5) sur "Ronain Graou"
+|eb2f2754a73d0029f|</span>
+<div id="select_type" class="sous-titre">
+  <span class="clickable" id="s_tout"><input type="radio" name="r_type" id="fd_tout" value="tout"><label for="fd_tout" onclick="clickLabel(this)">Tout</label></span>
+  <span class="clickable" id="s_nain">| <input type="radio" name="r_type" id="fd_nain" value="nain"><label for="fd_nain" onclick="clickLabel(this)">Les nains</label></span>
+  <span class="clickable" id="s_objet">| <input type="radio" name="r_type" id="fd_objet" value="objet"><label for="fd_objet" onclick="clickLabel(this)">Les objets</label></span>
+  <span class="clickable" id="s_cible" style="display: none;">| <input type="radio" name="r_type" id="fd_macible" value="macible"><label for="fd_macible" onclick="clickLabel(this)" class="macible">Ma Cible</label></span>
+</div>
+<div id="select_categorie" class="sous-titre" style="display: none;">
+<span class="clickable" id="s_toutes"><input type="radio" name="r_categorie" id="fd_-1" value="-1"><label for="fd_-1" onclick="clickLabel(this)">Tous</label></span>
+<span id="select_nain">
+  <span class="clickable" id="s_brave">| <input type="radio" name="r_categorie" id="fd_2" value="2"><label for="fd_2" onclick="clickLabel(this)">Les braves</label></span>
+  <span class="clickable" id="s_sadique">| <input type="radio" name="r_categorie" id="fd_3" value="3"><label for="fd_3" onclick="clickLabel(this)">Les sadiques</label></span>
+  <span class="clickable" id="s_rampant">| <input type="radio" name="r_categorie" id="fd_4" value="4"><label for="fd_4" onclick="clickLabel(this)">Les rampants</label></span>
+  <span class="clickable" id="s_nain_deci">| <input type="radio" name="r_categorie" id="fd_1" value="1"><label for="fd_1" onclick="clickLabel(this)">Les nains-déci</label></span>
+</span>
+<span id="select_objet" class="sous-titre">
+  <span class="clickable" id="s_arme">| <input type="radio" name="r_categorie" id="fd_ARME" value="ARME"><label for="fd_ARME" onclick="clickLabel(this)">Les armes</label></span>
+  <span class="clickable" id="s_rune">| <input type="radio" name="r_categorie" id="fd_RUNE" value="RUNE"><label for="fd_RUNE" onclick="clickLabel(this)">Les runes</label></span>
+  <span class="clickable" id="s_vehicule">| <input type="radio" name="r_categorie" id="fd_VEHICULE" value="VEHICULE"><label for="fd_VEHICULE" onclick="clickLabel(this)">Les véhicules</label></span>
+  <span class="clickable" id="s_detecteur">| <input type="radio" name="r_categorie" id="fd_DETECTEUR" value="DETECTEUR"><label for="fd_DETECTEUR" onclick="clickLabel(this)">Les détecteurs</label></span>
+  <span class="clickable" id="s_inutile">| <input type="radio" name="r_categorie" id="fd_INUTILE" value="INUTILE"><label for="fd_INUTILE" onclick="clickLabel(this)">Les inutiles</label></span>
+  <span class="clickable" id="s_bouffe">| <input type="radio" name="r_categorie" id="fd_MANGER" value="MANGER"><label for="fd_MANGER" onclick="clickLabel(this)">Les bouffes</label></span>
+  <span class="clickable" id="s_joujou">| <input type="radio" name="r_categorie" id="fd_SPECIAL" value="SPECIAL"><label for="fd_SPECIAL" onclick="clickLabel(this)">Les jouets de Schlavbeuk</label></span>
+</span>
+</div>
+<br />
+<div id="pagedetect"></div>
+<script language="JavaScript" type="text/javascript" defer="defer">
+  miseajourpager('18', '275', '275', 'evenpagerlu', '?', 'chatpagerlu', '0', '13', '5', '5a091646bdf3bdeec8ee2f6677d954ff', 'NainXpress');
+  
+  
+initdetect();
+</script>
+</body>
+<!--[if lte IE 8]>
+<script language="Javascript" type="text/javascript">
+function RadioClick(event) {
+  var l=event.element().adjacent("label")[0];
+  if (event.element().checked) {
+    l.addClassName("checked");
+  } else {
+    l.removeClassName("checked");
+  }
+}
+function Radiohover(event){
+  event.element().addClassName("hover");
+  event.stop();
+  return false;
+}
+function Radioout(event){
+  event.element().removeClassName("hover");
+  event.stop();
+  return false;
+}
+$$("span.clickable label").invoke('observe', 'mouseover', Radiohover).invoke('observe','mouseout', Radioout);
+$$("span.clickable input").invoke('observe', 'propertychange', RadioClick);
+</script>
+<![endif]-->
+</html>
