@@ -109,18 +109,15 @@ var Nainwaklet = (function () {
 
     function forEachMatch(regex, string, processMatch) {
         var match;
-        log(regex);
-        log(string);
-        log(processMatch);
-        while (true) {
-            match = regex.exec(string);
-            if (match !== null) {
-                processMatch(match);
-                if (!regex.global) {
+        if (!regex.global) {
+            return regex.exec(string);
+        } else {
+            while (true) {
+                match = regex.exec(string);
+                if (match === null) {
                     break;
                 }
-            } else {
-                break;
+                processMatch(match);
             }
         }
     }
@@ -147,7 +144,6 @@ var Nainwaklet = (function () {
             var regex = /tabavat\[\d+\]\s=\s\[(.*)\];/ig,
                 dwarfs = [];
 
-            log('findDwarfs');
             forEachMatch(regex, html, function (match) {
                 // TODO: not implemented
                 log(match);
