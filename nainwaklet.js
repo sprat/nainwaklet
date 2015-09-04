@@ -112,11 +112,11 @@ var Nainwaklet = (function () {
         function findLocalization(html) {
             // example:
             // <span class="c1">Position (13,5) sur "Ronain Graou" |b95eb2f716c500db6|</span>
-            var re = /<span\sclass="c1">Position\s\((\d*),(\d*)\)\ssur\s"([^"]*)"/im,
+            var re = /<span\sclass="c1">Position\s\((\d+),(\d+)\)\ssur\s"([^"]*)"/i,
                 match = re.exec(html);
             if (match) {
                 return {
-                    position: [match[1], match[2]],
+                    position: [parseInt(match[1], 10), parseInt(match[2], 10)],
                     world: match[3]
                 };
             }
