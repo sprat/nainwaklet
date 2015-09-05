@@ -109,16 +109,17 @@ var Nainwaklet = (function () {
 
     function forEachMatch(regex, string, processMatch) {
         var match;
+
         if (!regex.global) {
-            return regex.exec(string);
-        } else {
-            while (true) {
-                match = regex.exec(string);
-                if (match === null) {
-                    break;
-                }
-                processMatch(match);
+            throw "The global flag should be set for this RegExp: " + regex;
+        }
+
+        while (true) {
+            match = regex.exec(string);
+            if (match === null) {
+                break;
             }
+            processMatch(match);
         }
     }
 
