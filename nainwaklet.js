@@ -1,7 +1,9 @@
 /*global
     window, document, alert, XMLHttpRequest
  */
-
+/*jslint
+    devel: true
+ */
 /* Nainwaklet module */
 var Nainwaklet = (function () {
     'use strict';
@@ -66,6 +68,37 @@ var Nainwaklet = (function () {
     }
     */
 
+    function forEachMatch(regex, string, processMatch) {
+        var match;
+
+        assert(regex.global, 'The RegExp should have the global flag set');
+
+        while (true) {
+            match = regex.exec(string);
+            if (match === null) {
+                break;
+            }
+            processMatch(match);
+        }
+    }
+
+    // Array.prototype.find is available in ES6, but not before
+    function findInArray(array, predicate) {
+        var length = array.length,
+            i = 0,
+            element;
+
+        // Note: a for loop would be better here but I can't/don't want to
+        // disable the jslint warning in the remaining source
+        while (i < length) {
+            element = array[i];
+            if (predicate(element)) {
+                return element;
+            }
+            i += 1;
+        }
+    }
+
     function generateRandomGuestName() {
         var id = Math.round(Math.random() * 1000);
         return 'guest' + id;
@@ -113,20 +146,6 @@ var Nainwaklet = (function () {
         });
     }
 
-    function forEachMatch(regex, string, processMatch) {
-        var match;
-
-        assert(regex.global, 'The RegExp should have the global flag set');
-
-        while (true) {
-            match = regex.exec(string);
-            if (match === null) {
-                break;
-            }
-            processMatch(match);
-        }
-    }
-
     /* detect page */
     var detect = (function () {
         function findLocalization(html) {
@@ -152,7 +171,6 @@ var Nainwaklet = (function () {
             forEachMatch(regex, html, function (match) {
                 // TODO: not implemented
                 log(match);
-                //createDwarfFromMatch(match[1]);
             });
 
             return dwarfs;
@@ -162,8 +180,12 @@ var Nainwaklet = (function () {
             // example:
             // tabobjet[1] = [3609504, "objets/oreiller.gif", "Oreiller", 1, 12, 5, "ARME", 1262774];
             // (id, photo, nom, distance, x, y, poussiere, prendre)
-            var objects = [];
-            // TODO: not implemented
+            var regex = /tabobjet\[\d+\]\s=\s\[(.*)\];/ig,
+                objects = [];
+            forEachMatch(regex, html, function (match) {
+                // TODO: not implemented
+                log(match);
+            });
             return objects;
         }
 
@@ -179,35 +201,35 @@ var Nainwaklet = (function () {
         return createPage('detect', analyze, {});
     }());
 
+    /*
+    // Evénements (tous types d'evts sur 10 jours)
+    createPage('even', log, {duree: 240, type: 'ALL'}),
+    // Fiche de perso
+    createPage('perso', log),
+    // Inventaire
+    createPage('invent', log),
+    // Encyclopédie
+    createPage('encyclo', log)
+    */
+
     /* pages */
     var pages = (function () {
-        var list = [
-                detect
-                /*
-                // Evénements (tous types d'evts sur 10 jours)
-                createPage('even', log, {duree: 240, type: 'ALL'}),
-                // Fiche de perso
-                createPage('perso', log),
-                // Inventaire
-                createPage('invent', log),
-                // Encyclopédie
-                createPage('encyclo', log)
-                */
-            ],
-            get = function (nameOrUrl) {
-                var results = list.filter(function (page) {
-                    return (page.name === nameOrUrl) || (page.url === nameOrUrl);
+        var elements = [detect],
+            getByUrl = function (url) {
+                return findInArray(elements, function (page) {
+                    return page.url === url;
                 });
-
-                if (results) {
-                    return results[0];
-                }
+            },
+            self = {
+                getByUrl: getByUrl
             };
 
-        return Object.freeze({
-            get: get,
-            list: list
+        // add the pages to the object
+        elements.forEach(function (page) {
+            self[page.name] = page;
         });
+
+        return Object.freeze(self);
     }());
 
     /* Spy factory */
@@ -220,7 +242,7 @@ var Nainwaklet = (function () {
                     html = docEl.outerHTML,  // no doctype but we don't mind
                     location = contentWindow.location,
                     url = location.origin + location.pathname,
-                    page = pages.get(url),
+                    page = pages.getByUrl(url),
                     result;
 
                 if (page) {
