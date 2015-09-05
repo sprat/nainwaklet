@@ -4,6 +4,7 @@
 /*jslint
     devel: true
  */
+
 /* Nainwaklet module */
 var Nainwaklet = (function () {
     'use strict';

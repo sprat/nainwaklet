@@ -1,24 +1,24 @@
 /*global
-    QUnit, $, Nainwaklet
+    Nainwaklet, QUnit, $, jslint
+ */
+/*jslint
+    devel: true
  */
 
 (function () {
     'use strict';
 
-    function loadFixture(assert, url, processResponse) {
+    function loadUrl(assert, url, processResponse) {
         var done = assert.async(),
             fail = function () {
-                assert.ok(false, 'Fixture not found: ' + url);
+                assert.ok(false, 'File not found: ' + url);
             };
 
-        $.ajax({url: url})
-            .done(processResponse)
-            .fail(fail)
-            .always(done);
+        $.ajax({
+            url: url,
+            dataType: 'text'  // load url as text, don't try to parse or execute
+        }).done(processResponse).fail(fail).always(done);
     }
-
-    /* Nainwaklet tests */
-    QUnit.module('Nainwaklet');
 
     /*
     QUnit.test('createApplication', function (assert) {
@@ -35,13 +35,25 @@
 
     QUnit.test('detect page', function (assert) {
         var detect = Nainwaklet.pages.detect;
-        loadFixture(assert, 'fixtures/detect.html', function (response) {
+        loadUrl(assert, 'fixtures/detect.html', function (response) {
             var info = detect.analyze(response);
-            assert.strictEqual(info.localization.position[0] , 13, 'X-position is valid');
-            assert.strictEqual(info.localization.position[1] , 5, 'Y-position is valid');
-            assert.strictEqual(info.localization.world , 'Ronain Graou', 'World is valid');
+            assert.strictEqual(info.localization.position[0], 13, 'X-position is valid');
+            assert.strictEqual(info.localization.position[1], 5, 'Y-position is valid');
+            assert.strictEqual(info.localization.world, 'Ronain Graou', 'World is valid');
+
+            // TODO: add more tests about dwarfs & objects
         });
     });
 
-    //TODO: add a jslint check for both nainwaklet.js and this file
+    QUnit.test('JSLint', function (assert) {
+        function checkSource(url) {
+            loadUrl(assert, url, function (source) {
+                var analysis = jslint(source);
+                assert.ok(analysis.ok, url);
+            });
+        }
+
+        checkSource('nainwaklet.js');
+        checkSource('tests.js');
+    });
 }());
