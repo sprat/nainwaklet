@@ -18,6 +18,12 @@ var Nainwaklet = (function () {
                 return;
             };
 
+    function assert(condition, message) {
+        if (!condition) {
+            throw new Error(message || 'Assertion failed');
+        }
+    }
+
     function extend(target, source) {
         Object.keys(source).forEach(function (key) {
             if (target[key] === undefined) {
@@ -110,9 +116,7 @@ var Nainwaklet = (function () {
     function forEachMatch(regex, string, processMatch) {
         var match;
 
-        if (!regex.global) {
-            throw "The global flag should be set for this RegExp: " + regex;
-        }
+        assert(regex.global, 'The RegExp should have the global flag set');
 
         while (true) {
             match = regex.exec(string);
