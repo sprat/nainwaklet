@@ -4,5 +4,21 @@ html, body {
 }
 
 .jslint-report {
-    margin: 10px;
+    margin: 0 10px;
+    overflow: auto;
+}
+
+.jslint-report h1 {
+    margin: 20px 0 10px;
+}
+
+.jslint-report address {
+    float: right;
+}
+
+.jslint-report samp {
+    display: block;
+    padding: 10px;
+    background: #CCC;
+    margin-bottom: 10px;
 }
