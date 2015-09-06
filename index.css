@@ -5,6 +5,12 @@ body {
     margin: 0;
 }
 
+a {
+    color: #666;
+    text-decoration: none;
+    border-bottom: 1px dotted #666;
+}
+
 #hub-container {
     width: 232px;
     float: right;
@@ -40,6 +46,8 @@ body {
 }
 
 .nainwaklet-button:hover {
+    color: #FFFFFF;
+    text-decoration: none;
     background-color: #333333;
     background-image: -webkit-gradient(linear, left top, left bottom, from(#333333), to(#111111));
     background-image: -webkit-linear-gradient(top, #333333, #111111);
