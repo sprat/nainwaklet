@@ -29,19 +29,40 @@
     QUnit.test('pages', function (assert) {
         var pages = Nainwaklet.pages;
         assert.ok(pages, 'Nainwaklet.pages available');
-        assert.ok(pages.detect, 'The detect page is available directly');
-        assert.strictEqual(pages.getByUrl('http://www.nainwak.com/jeu/detect.php'), pages.detect, 'Get the detect page by url');
+        assert.ok(pages.detect, 'Get page by name');
+        assert.strictEqual(pages.getByUrl('http://www.nainwak.com/jeu/detect.php'), pages.detect, 'Get page by url');
     });
 
     QUnit.test('detect page', function (assert) {
         var detect = Nainwaklet.pages.detect;
         loadUrl(assert, 'fixtures/detect.html', function (response) {
             var info = detect.analyze(response);
-            assert.strictEqual(info.localization.position[0], 13, 'X-position is valid');
-            assert.strictEqual(info.localization.position[1], 5, 'Y-position is valid');
-            assert.strictEqual(info.localization.world, 'Ronain Graou', 'World is valid');
 
-            // TODO: add more tests about dwarfs & objects
+            assert.deepEqual(info.position, [13, 5], 'Position');
+            assert.strictEqual(info.monde, 'Monde des sadiques', 'Monde');
+
+            var nains = info.nains;
+            assert.strictEqual(nains.length, 3, 'Nombre de nains');
+
+            //["33966", "avatar_guilde/41ddb8ad2c2be408e27352accf1cc0b6559466bb.png", "Le PheniX", '[Gnouille] [<span style="color:#91005D;">#!</span>]', "13799", "2", "Diablotin(e)", "0", "13", "5", "&quot;Le PheniX est un oiseau qui symbolise l&#039;immortalité et la résurrection.&quot; A quoi bon me tuer ?!?", "o", "", "0"];
+            assert.deepEqual(nains[0], {
+                id: 33966,
+                nom: 'Le PheniX',
+                avatar: 'http://www.nainwak.com/images/avatar_guilde/41ddb8ad2c2be408e27352accf1cc0b6559466bb.png',
+                description: '"Le PheniX est un oiseau qui symbolise l\'immortalité et la résurrection." A quoi bon me tuer ?!?',
+                position: [13, 5]
+            }, 'Nain 1');
+
+            //["33924", "avatar/perso/dab064da974199a53f0e22527f901d523e8869b3.png", "Bourinain", '[G-NOUILLE<span style="color:#00C200;">#sNOUFFF</span>]', "10314", "2", "Cancre (nain-culte)", "0", "13", "5", "Description", "o", "", "0"];
+            assert.deepEqual(nains[1], {
+                id: 33924,
+                nom: 'Bourinain',
+                avatar: 'http://www.nainwak.com/images/avatar/perso/dab064da974199a53f0e22527f901d523e8869b3.png',
+                description: 'Description',
+                position: [14, 5]
+            }, 'Nain 2');
+
+            // TODO: add more tests about objects
         });
     });
 

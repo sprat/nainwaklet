@@ -10,6 +10,7 @@ var Nainwaklet = (function () {
     'use strict';
 
     var nainwakOrigin = 'http://www.nainwak.com',
+        nainwakImagesBaseUrl = nainwakOrigin + '/images/',
         nainwakGameUrl = nainwakOrigin + '/jeu/index.php',
         script = document.scripts[document.scripts.length - 1],
         scriptUrl = script.src,
@@ -147,55 +148,119 @@ var Nainwaklet = (function () {
         });
     }
 
+    function decodeHtmlEntities(str) {
+        /*
+        return str.replace(/&#(\d+);/g, function (dec) {
+            return String.fromCharCode(dec);
+        });
+        */
+        var txt = document.createElement("textarea");
+        txt.innerHTML = str;
+        return txt.value;
+    }
+
+    function arrayStringToObject(string, keys) {
+        /* parse a string containing a representation of a Javascript array */
+        var cleaned = string.replace(/'(.*)'/g, function (str) {
+                var escaped = str.replace(/"/g, '\\"');  // escape inner double-quotes
+                return '"' + escaped + '"';  // wrap in double-quotes
+            }),
+            values = JSON.parse(cleaned),
+            obj = {};
+
+        keys.forEach(function (key, i) {
+            obj[key] = decodeHtmlEntities(values[i]);
+        });
+
+        return obj;
+    }
+
     /* detect page */
     var detect = (function () {
-        function findLocalization(html) {
+        function int(value) {
+            return parseInt(value, 10);
+        }
+
+        function createNain(str) {
+            var keys = 'id,photo,nom,tag,barbe,classe,cote,distance,x,y,description,attaquer,gifler,estCible',
+                spec = arrayStringToObject(str, keys.split(','));
+
+            // TODO: not implemented
+//            switch(classe) {
+//                case 0 : "naindeci"
+//                case 1 : "gentil"
+//                case 2 : "mechant"
+//                case 3 : "rampant"
+//                case 7 : "mutant"
+            log(spec);
+            return {
+                id: int(spec.id),
+                avatar: nainwakImagesBaseUrl + spec.photo,
+                nom: spec.nom,
+                description: spec.description,
+                position: [int(spec.x), int(spec.y)]
+            };
+        }
+
+        function createObjet(str) {
+            var keys = 'id,photo,nom,distance,x,y,categorie,poussiere',
+                spec = arrayStringToObject(str, keys.split(','));
+
+            // TODO: not implemented
+            log(spec);
+            return {
+                id: int(spec.id),
+                position: [int(spec.x), int(spec.y)]
+            };
+        }
+
+        function findLocalisation(html) {
             // example:
             // <span class="c1">Position (13,5) sur "Ronain Graou" |b95eb2f716c500db6|</span>
             var regex = /<span\sclass="c1">Position\s\((\d+),(\d+)\)\ssur\s"([^"]*)"/i,
                 match = regex.exec(html);
             if (match) {
                 return {
-                    position: [parseInt(match[1], 10), parseInt(match[2], 10)],
-                    world: match[3]
+                    position: [int(match[1]), int(match[2])],
+                    monde: match[3]
                 };
             }
         }
 
-        function findDwarfs(html) {
+        function findNains(html) {
             // example:
             // tabavat[1] = ["33966", "avatar_guilde/41ddb8ad2c2be408e27352accf1cc0b6559466bb.png", "Le PheniX", '[Gnouille] [<span style="color:#91005D;">#!</span>]', "13794", "2", "Diablotin(e)", "0", "13", "5", "&quot;Le PheniX est un oiseau qui symbolise l&#039;immortalité et la résurrection.&quot; A quoi bon me tuer ?!?", "o", "", "0"];
-            // (id, photo, nom, tag, barbe, classe, cote, distance, x, y, description, attaquer, gifler, estCible)
-            var regex = /tabavat\[\d+\]\s=\s\[(.*)\];/ig,
-                dwarfs = [];
+            var regex = /tabavat\[\d+\]\s=\s(\[.*\]);/ig,
+                nains = [];
 
             forEachMatch(regex, html, function (match) {
-                // TODO: not implemented
-                log(match);
+                nains.push(createNain(match[1]));
             });
 
-            return dwarfs;
+            return nains;
         }
 
-        function findObjects(html) {
+        function findObjets(html) {
             // example:
             // tabobjet[1] = [3609504, "objets/oreiller.gif", "Oreiller", 1, 12, 5, "ARME", 1262774];
-            // (id, photo, nom, distance, x, y, poussiere, prendre)
-            var regex = /tabobjet\[\d+\]\s=\s\[(.*)\];/ig,
-                objects = [];
+            var regex = /tabobjet\[\d+\]\s=\s(\[.*\]);/ig,
+                objets = [];
+
             forEachMatch(regex, html, function (match) {
-                // TODO: not implemented
-                log(match);
+                objets.push(createObjet(match[1]));
             });
-            return objects;
+
+            return objets;
         }
 
         function analyze(html) {
             log('Analyzing detect...');
+            var localisation = findLocalisation(html);
             return {
-                localization: findLocalization(html),
-                dwarfs: findDwarfs(html),
-                objects: findObjects(html)
+                monde: localisation.monde,
+                position: localisation.position,
+                nains: findNains(html),
+                objets: findObjets(html)
             };
         }
 
