@@ -9,15 +9,16 @@
     'use strict';
 
     function loadUrl(assert, url, processResponse) {
-        var done = assert.async(),
-            fail = function () {
-                assert.ok(false, 'File not found: ' + url);
-            };
+        var done = assert.async();
 
-        $.ajax({
-            url: url,
-            dataType: 'text'  // load url as text, don't try to parse or execute
-        }).done(processResponse).fail(fail).always(done);
+        Nainwaklet.testing.ajax.get(url, function (response) {
+            if (response.status === 200) {
+                processResponse(response.body);
+            } else {
+                assert.ok(false, 'Error while fetching url ' + url + ': ' + response.status);
+            }
+            done();
+        });
     }
 
     /*
@@ -27,14 +28,14 @@
     */
 
     QUnit.test('pages', function (assert) {
-        var pages = Nainwaklet.pages;
+        var pages = Nainwaklet.testing.pages;
         assert.ok(pages, 'Nainwaklet.pages available');
         assert.ok(pages.detect, 'Get page by name');
         assert.strictEqual(pages.getByUrl('http://www.nainwak.com/jeu/detect.php'), pages.detect, 'Get page by url');
     });
 
     QUnit.test('detect page', function (assert) {
-        var detect = Nainwaklet.pages.detect;
+        var detect = Nainwaklet.testing.pages.detect;
         loadUrl(assert, 'fixtures/detect.html', function (response) {
             var info = detect.analyze(response);
 

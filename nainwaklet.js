@@ -37,19 +37,29 @@ var Nainwaklet = (function () {
         return target;
     }
 
-    function httpGet(url, processResponse) {
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', url, true);  // asynchronous
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {  // response received and loaded
-                processResponse({
-                    status: xhr.status,
-                    body: xhr.responseText
-                });
-            }
+    var ajax = (function () {
+        function request(method, url, body, processResponse) {
+            var xhr = new XMLHttpRequest();
+            xhr.open(method, url, true);  // asynchronous
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4) {  // response received and loaded
+                    processResponse({
+                        status: xhr.status,
+                        body: xhr.responseText
+                    });
+                }
+            };
+            xhr.send(body);
+        }
+
+        function get(url, processResponse) {
+            return request('GET', url, null, processResponse);
+        }
+
+        return {
+            get: get
         };
-        xhr.send(null);
-    }
+    }());
 
     function buildQueryParams(params) {
         var pairs = [];
@@ -131,7 +141,7 @@ var Nainwaklet = (function () {
 
         function load(IDS, processResult) {
             var loadUrl = getUrl(IDS);
-            httpGet(loadUrl, function (response) {
+            ajax.get(loadUrl, function (response) {
                 var result = null;
                 if (response.status === 200) {
                     result = analyze(response.body);
@@ -526,12 +536,16 @@ var Nainwaklet = (function () {
         });
     }
 
+
     // module public API
     var api = {
-        pages: pages,
         createUser: createUser,
         createApplication: createApplication,
-        initializeButtons: initializeButtons
+        initializeButtons: initializeButtons,
+        testing: Object.freeze({  // testing API
+            pages: pages,
+            ajax: ajax
+        })
     };
 
     // augment the API if we are on the Nainwak game page
