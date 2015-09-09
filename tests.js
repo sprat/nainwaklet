@@ -25,7 +25,11 @@
 
         Nainwaklet.testing.ajaxRequest(requestUrl, options, function (response) {
             if (response.status === 200) {
-                processResponse(response.body);
+                try {
+                    processResponse(response.body);
+                } catch (e) {
+                    assert.ok(false, e);
+                }
             } else {
                 assert.ok(false, 'Error while fetching url ' + url + ': ' + response.status);
             }
