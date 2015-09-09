@@ -11,17 +11,19 @@
     /* when loading Nainwak test fixtures, we need to force the charset of the
      * response, otherwise we get encoding problems in some browsers...
      */
-    var Latin1FixtureOptions = {mimetype: 'text/html; charset=ISO-8859-1'};
+    var latin1FixtureOptions = {mimetype: 'text/html; charset=ISO-8859-1'};
 
     function getUrl(assert, url, options, processResponse) {
-        var done = assert.async();
+        var done = assert.async(),
+            random = Math.floor(Math.random() * 1000000),
+            requestUrl = url + '?v=' + random;  // prevents caching
 
         if (typeof options === 'function' && processResponse === undefined) {
             processResponse = options;
             options = {};
         }
 
-        Nainwaklet.testing.ajax.request(url, options, function (response) {
+        Nainwaklet.testing.ajaxRequest(requestUrl, options, function (response) {
             if (response.status === 200) {
                 processResponse(response.body);
             } else {
@@ -47,9 +49,10 @@
     QUnit.test('detect page', function (assert) {
         var detect = Nainwaklet.testing.pages.detect;
 
-        getUrl(assert, 'fixtures/detect.html', Latin1FixtureOptions, function (response) {
+        getUrl(assert, 'fixtures/detect.html', latin1FixtureOptions, function (response) {
             var info = detect.analyze(response);
 
+            console.log(info);
             assert.deepEqual(info.position, [13, 5], 'Position');
             assert.strictEqual(info.monde, 'Monde des sadiques', 'Monde');
 

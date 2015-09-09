@@ -37,69 +37,63 @@ var Nainwaklet = (function () {
         return target;
     }
 
-    var ajax = (function () {
-        function parseHeaders(string) {
-            // single string, with each header line separated by a U+000D CR U+000A LF pair,
-            // excluding the status line, and with each header name and header value separated
-            // by a U+003A COLON U+0020 SPACE pair
-            var headers = {},
-                pairs = string.split('\r\n');
+    function parseHttpHeaders(string) {
+        // single string, with each header line separated by a U+000D CR U+000A LF pair,
+        // excluding the status line, and with each header name and header value separated
+        // by a U+003A COLON U+0020 SPACE pair
+        var headers = {},
+            pairs = string.split('\r\n');
 
-            pairs.forEach(function (pair) {
-                if (pair) {
-                    pair = pair.split(': ');
-                    headers[pair[0]] = pair[1];
-                }
-            });
-
-            return headers;
-        }
-
-        function request(url, options, processResponse) {
-            if (typeof options === 'function' && processResponse === undefined) {
-                processResponse = options;
-                options = {};
+        pairs.forEach(function (pair) {
+            if (pair) {
+                pair = pair.split(': ');
+                headers[pair[0]] = pair[1];
             }
-            options = options || {};
-
-            var xhr = new XMLHttpRequest(),
-                method = options.method || 'GET',
-                headers = options.headers || {};
-
-            xhr.open(method, url, true, options.username, options.password);  // async
-
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState === 4) {  // response received and loaded
-                    processResponse({
-                        status: xhr.status,
-                        body: xhr.response,
-                        headers: parseHeaders(xhr.getAllResponseHeaders())
-                    });
-                }
-            };
-
-            // set the response type if provided
-            if (options.responseType) {
-                xhr.responseType = options.responseType;
-            }
-
-            // override mimetype if provided
-            if (options.mimetype) {
-                xhr.overrideMimeType(options.mimetype);
-            }
-
-            // add the headers
-            Object.keys(headers).forEach(function (key) {
-                xhr.setRequestHeader(key, headers[key]);
-            });
-
-            xhr.send(options.data);
-        }
-
-        return Object.freeze({
-            request: request
         });
-    }());
+
+        return headers;
+    }
+
+    function ajaxRequest(url, options, processResponse) {
+        if (typeof options === 'function' && processResponse === undefined) {
+            processResponse = options;
+            options = {};
+        }
+        options = options || {};
+
+        var xhr = new XMLHttpRequest(),
+            method = options.method || 'GET',
+            headers = options.headers || {};
+
+        xhr.open(method, url, true, options.username, options.password);  // async
+
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {  // response received and loaded
+                processResponse({
+                    status: xhr.status,
+                    body: xhr.response,
+                    headers: parseHttpHeaders(xhr.getAllResponseHeaders())
+                });
+            }
+        };
+
+        // set the response type if provided
+        if (options.responseType) {
+            xhr.responseType = options.responseType;
+        }
+
+        // override mimetype if provided
+        if (options.mimetype && xhr.overrideMimeType) {
+            xhr.overrideMimeType(options.mimetype);
+        }
+
+        // add the headers
+        Object.keys(headers).forEach(function (key) {
+            xhr.setRequestHeader(key, headers[key]);
+        });
+
+        xhr.send(options.data);
+    }
 
     function buildQueryParams(params) {
         var pairs = [];
@@ -204,7 +198,7 @@ var Nainwaklet = (function () {
 
         function load(IDS, processResult) {
             var fullUrl = getUrl(IDS);
-            ajax.request(fullUrl, function (response) {
+            ajaxRequest(fullUrl, function (response) {
                 var result = null;
                 if (response.status === 200) {
                     result = analyze(response.body);
@@ -580,7 +574,7 @@ var Nainwaklet = (function () {
         initializeButtons: initializeButtons,
         testing: Object.freeze({  // testing API
             pages: pages,
-            ajax: ajax
+            ajaxRequest: ajaxRequest
         })
     };
 
