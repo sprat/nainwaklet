@@ -71,7 +71,7 @@ var Nainwaklet = (function () {
             if (xhr.readyState === 4) {  // response received and loaded
                 processResponse({
                     status: xhr.status,
-                    body: xhr.response,
+                    body: xhr.responseText,  // always return text
                     headers: parseHttpHeaders(xhr.getAllResponseHeaders())
                 });
             }
