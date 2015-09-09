@@ -8,10 +8,20 @@
 (function () {
     'use strict';
 
-    function loadUrl(assert, url, processResponse) {
+    /* when loading Nainwak test fixtures, we need to force the charset of the
+     * response, otherwise we get encoding problems in some browsers...
+     */
+    var Latin1FixtureOptions = {mimetype: 'text/html; charset=ISO-8859-1'};
+
+    function getUrl(assert, url, options, processResponse) {
         var done = assert.async();
 
-        Nainwaklet.testing.ajax.get(url, function (response) {
+        if (typeof options === 'function' && processResponse === undefined) {
+            processResponse = options;
+            options = {};
+        }
+
+        Nainwaklet.testing.ajax.request(url, options, function (response) {
             if (response.status === 200) {
                 processResponse(response.body);
             } else {
@@ -36,7 +46,8 @@
 
     QUnit.test('detect page', function (assert) {
         var detect = Nainwaklet.testing.pages.detect;
-        loadUrl(assert, 'fixtures/detect.html', function (response) {
+
+        getUrl(assert, 'fixtures/detect.html', Latin1FixtureOptions, function (response) {
             var info = detect.analyze(response);
 
             assert.deepEqual(info.position, [13, 5], 'Position');
@@ -80,7 +91,7 @@
         }
 
         function checkSource(url) {
-            loadUrl(assert, url, function (source) {
+            getUrl(assert, url, function (source) {
                 var analysis = jslint(source),
                     errors = REPORT.error(analysis);
 

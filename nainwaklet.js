@@ -38,27 +38,67 @@ var Nainwaklet = (function () {
     }
 
     var ajax = (function () {
-        function request(method, url, body, processResponse) {
-            var xhr = new XMLHttpRequest();
-            xhr.open(method, url, true);  // asynchronous
+        function parseHeaders(string) {
+            // single string, with each header line separated by a U+000D CR U+000A LF pair,
+            // excluding the status line, and with each header name and header value separated
+            // by a U+003A COLON U+0020 SPACE pair
+            var headers = {},
+                pairs = string.split('\r\n');
+
+            pairs.forEach(function (pair) {
+                if (pair) {
+                    pair = pair.split(': ');
+                    headers[pair[0]] = pair[1];
+                }
+            });
+
+            return headers;
+        }
+
+        function request(url, options, processResponse) {
+            if (typeof options === 'function' && processResponse === undefined) {
+                processResponse = options;
+                options = {};
+            }
+            options = options || {};
+
+            var xhr = new XMLHttpRequest(),
+                method = options.method || 'GET',
+                headers = options.headers || {};
+
+            xhr.open(method, url, true, options.username, options.password);  // async
+
             xhr.onreadystatechange = function () {
                 if (xhr.readyState === 4) {  // response received and loaded
                     processResponse({
                         status: xhr.status,
-                        body: xhr.responseText
+                        body: xhr.response,
+                        headers: parseHeaders(xhr.getAllResponseHeaders())
                     });
                 }
             };
-            xhr.send(body);
+
+            // set the response type if provided
+            if (options.responseType) {
+                xhr.responseType = options.responseType;
+            }
+
+            // override mimetype if provided
+            if (options.mimetype) {
+                xhr.overrideMimeType(options.mimetype);
+            }
+
+            // add the headers
+            Object.keys(headers).forEach(function (key) {
+                xhr.setRequestHeader(key, headers[key]);
+            });
+
+            xhr.send(options.data);
         }
 
-        function get(url, processResponse) {
-            return request('GET', url, null, processResponse);
-        }
-
-        return {
-            get: get
-        };
+        return Object.freeze({
+            request: request
+        });
     }());
 
     function buildQueryParams(params) {
@@ -111,6 +151,29 @@ var Nainwaklet = (function () {
         }
     }
 
+    function decodeHtmlEntities(str) {
+        // TODO: not really efficient, a regex-based implementation would be better
+        var txt = document.createElement("textarea");
+        txt.innerHTML = str;
+        return txt.value;
+    }
+
+    function arrayStringToObject(string, keys) {
+        // parse a string containing a representation of a Javascript array
+        var cleaned = string.replace(/'(.*)'/g, function (str) {
+                var escaped = str.replace(/"/g, '\\"');  // escape inner double-quotes
+                return '"' + escaped + '"';  // wrap in double-quotes
+            }),
+            values = JSON.parse(cleaned),
+            obj = {};
+
+        keys.forEach(function (key, i) {
+            obj[key] = decodeHtmlEntities(values[i]);
+        });
+
+        return obj;
+    }
+
     function generateRandomGuestName() {
         var id = Math.round(Math.random() * 1000);
         return 'guest' + id;
@@ -140,8 +203,8 @@ var Nainwaklet = (function () {
         }
 
         function load(IDS, processResult) {
-            var loadUrl = getUrl(IDS);
-            ajax.get(loadUrl, function (response) {
+            var fullUrl = getUrl(IDS);
+            ajax.request(fullUrl, function (response) {
                 var result = null;
                 if (response.status === 200) {
                     result = analyze(response.body);
@@ -156,33 +219,6 @@ var Nainwaklet = (function () {
             analyze: analyze,
             load: load
         });
-    }
-
-    function decodeHtmlEntities(str) {
-        /*
-        return str.replace(/&#(\d+);/g, function (dec) {
-            return String.fromCharCode(dec);
-        });
-        */
-        var txt = document.createElement("textarea");
-        txt.innerHTML = str;
-        return txt.value;
-    }
-
-    function arrayStringToObject(string, keys) {
-        /* parse a string containing a representation of a Javascript array */
-        var cleaned = string.replace(/'(.*)'/g, function (str) {
-                var escaped = str.replace(/"/g, '\\"');  // escape inner double-quotes
-                return '"' + escaped + '"';  // wrap in double-quotes
-            }),
-            values = JSON.parse(cleaned),
-            obj = {};
-
-        keys.forEach(function (key, i) {
-            obj[key] = decodeHtmlEntities(values[i]);
-        });
-
-        return obj;
     }
 
     /* detect page */
