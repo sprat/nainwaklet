@@ -160,12 +160,12 @@ var Nainwaklet = (function () {
 
     function arrayStringToObject(string, keys) {
         // parse a string containing a representation of a Javascript array
-        var cleaned = string.replace(/'(.*)'/g, function (str) {
-                var escaped = str.replace(/"/g, '\\"');  // escape inner double-quotes
-                return '"' + escaped + '"';  // wrap in double-quotes
+        var obj = {},
+            cleaned = string.replace(/([\[,]\s*)'(.*)'(\s*[,\]])/g, function (ignore, before, inside, after) {
+                var escaped = inside.replace(/"/g, '\\"');  // escape double-quotes inside
+                return before + '"' + escaped + '"' + after;  // wrap in double-quotes
             }),
-            values = JSON.parse(cleaned),
-            obj = {};
+            values = JSON.parse(cleaned);
 
         keys.forEach(function (key, i) {
             obj[key] = decodeHtmlEntities(values[i]);

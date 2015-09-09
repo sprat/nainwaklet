@@ -68,7 +68,7 @@
             //["33924", "avatar/perso/dab064da974199a53f0e22527f901d523e8869b3.png", "Bourinain", '[G-NOUILLE<span style="color:#00C200;">#sNOUFFF</span>]', "10314", "2", "Cancre (nain-culte)", "0", "13", "5", "Description", "o", "", "0"];
             assert.deepEqual(nains[1], {
                 id: 33924,
-                nom: 'Bourinain',
+                nom: "Nainkomp'",
                 avatar: 'http://www.nainwak.com/images/avatar/perso/dab064da974199a53f0e22527f901d523e8869b3.png',
                 description: 'Description',
                 position: [14, 5]
