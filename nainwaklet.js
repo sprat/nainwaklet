@@ -38,17 +38,14 @@ var Nainwaklet = (function () {
     }
 
     function parseHttpHeaders(string) {
-        // single string, with each header line separated by a U+000D CR U+000A LF pair,
-        // excluding the status line, and with each header name and header value separated
-        // by a U+003A COLON U+0020 SPACE pair
         var headers = {},
-            pairs = string.split('\r\n');
+            pairs = string.trim().split('\r\n');
 
         pairs.forEach(function (pair) {
-            if (pair) {
-                pair = pair.split(': ');
-                headers[pair[0]] = pair[1];
-            }
+            var split = pair.trim().split(':'),
+                key = split.shift().trim(),
+                value = split.join(':').trim();
+            headers[key] = value;
         });
 
         return headers;
