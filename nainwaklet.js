@@ -259,6 +259,7 @@ var Nainwaklet = (function () {
             // <span class="c1">Position (13,5) sur "Ronain Graou" |b95eb2f716c500db6|</span>
             var regex = /<span\sclass="c1">Position\s\((\d+),(\d+)\)\ssur\s"([^"]*)"/i,
                 match = regex.exec(html);
+
             if (match) {
                 return {
                     position: [int(match[1]), int(match[2])],
