@@ -1,5 +1,5 @@
 /*global
-    Nainwaklet, QUnit, $, jslint, REPORT
+    Nainwaklet, document, QUnit, jslint, REPORT
  */
 /*jslint
     devel: true
@@ -86,15 +86,19 @@
     });
 
     QUnit.test('JSLint', function (assert) {
-        var $container = $('#jslint-reports');
+        var container = document.getElementById('jslint-reports');
 
         function reportSection(url, errors) {
-            var $section = $('<section class="jslint-report"></section>'),
-                $title = $('<h1></h1>').html(url);
+            var section = document.createElement('section'),
+                title = document.createElement('h1');
 
-            $section.append($title);
-            $section.append(errors);
-            return $section;
+            section.className = 'jslint-report';
+            title.innerHTML = url;
+
+            section.innerHTML = errors;
+            section.insertBefore(title, section.firstChild);
+
+            return section;
         }
 
         function checkSource(url) {
@@ -104,7 +108,7 @@
 
                 assert.ok(analysis.ok, url);
                 if (!analysis.ok) {
-                    $container.append(reportSection(url, errors));
+                    container.appendChild(reportSection(url, errors));
                 }
             });
         }
