@@ -68,7 +68,7 @@ var Nainwaklet = (function () {
             if (xhr.readyState === 4) {  // response received and loaded
                 processResponse({
                     status: xhr.status,
-                    body: xhr.responseText,  // always return text
+                    body: xhr.response || xhr.responseXML || xhr.responseText,
                     headers: parseHttpHeaders(xhr.getAllResponseHeaders())
                 });
             }
@@ -81,7 +81,7 @@ var Nainwaklet = (function () {
 
         // override mimetype if provided
         if (options.mimetype && xhr.overrideMimeType) {
-            xhr.overrideMimeType(options.mimetype);
+            xhr.overrideMimeType(options.mimeType);
         }
 
         // add the headers

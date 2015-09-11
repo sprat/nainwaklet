@@ -8,25 +8,28 @@
 (function () {
     'use strict';
 
-    /* when loading Nainwak test fixtures, we need to force the charset of the
-     * response, otherwise we get encoding problems in some browsers...
-     */
-    var latin1FixtureOptions = {mimetype: 'text/html; charset=ISO-8859-1'};
-
-    function getUrl(assert, url, options, processResponse) {
+    function loadUrl(assert, url, processResponse) {
         var done = assert.async(),
             random = Math.floor(Math.random() * 1000000),
-            requestUrl = url + '?v=' + random;  // prevents caching
+            requestUrl = url + '?v=' + random,  // prevents caching
+            options = {},
+            getBody = function (body) {
+                return body;
+            };
 
-        if (typeof options === 'function' && processResponse === undefined) {
-            processResponse = options;
-            options = {};
+        // HTML files: load as a document, but export to text just after
+        // this solves encoding problems
+        if (url.match(/\.html?$/)) {
+            options = {responseType: 'document'};
+            getBody = function (document) {
+                return document.documentElement.outerHTML;
+            };
         }
 
         Nainwaklet.testing.ajaxRequest(requestUrl, options, function (response) {
             if (response.status === 200) {
                 try {
-                    processResponse(response.body);
+                    processResponse(getBody(response.body));
                 } catch (e) {
                     assert.ok(false, e);
                 }
@@ -53,7 +56,7 @@
     QUnit.test('detect page', function (assert) {
         var detect = Nainwaklet.testing.pages.detect;
 
-        getUrl(assert, 'fixtures/detect.html', latin1FixtureOptions, function (response) {
+        loadUrl(assert, 'fixtures/detect.html', function (response) {
             var info = detect.analyze(response);
 
             console.log(info);
@@ -101,7 +104,7 @@
         }
 
         function checkSource(url) {
-            getUrl(assert, url, function (source) {
+            loadUrl(assert, url, function (source) {
                 var analysis = jslint(source),
                     warnings = formatWarnings(analysis, source);
 
