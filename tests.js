@@ -103,8 +103,8 @@
                 nom: "Surprise de Kine d'Heure",
                 image: "http://www.nainwak.com/images/objets/jouetkinder2_2.gif",
                 categorie: "INUTILE",
-                position: [13, 6]
-                //poussiere: 1271419
+                position: [13, 6],
+                poussiere: 1271419
             }, 'Objet 1');
 
             //tabobjet[2] = [3613897, "objets/banane_sauteuse.gif", "Banane sauteuse", 1, 13, 6, "VEHICULE", 1271419];
@@ -113,8 +113,8 @@
                 nom: "Banane sauteuse",
                 image: "http://www.nainwak.com/images/objets/banane_sauteuse.gif",
                 categorie: "VEHICULE",
-                position: [13, 6]
-                //poussiere: 1271419
+                position: [13, 6],
+                poussiere: 1271419
             }, 'Objet 2');
 
             //tabobjet[3] = [3613896, "objets/naindiana.gif", "Panoplie de Naindiana Jones", 2, 13, 7, "RUNE", 1271419];
@@ -123,8 +123,8 @@
                 nom: "Panoplie de Naindiana Jones",
                 image: "http://www.nainwak.com/images/objets/naindiana.gif",
                 categorie: "RUNE",
-                position: [13, 7]
-                //poussiere: 1271419
+                position: [13, 7],
+                poussiere: 1271419
             }, 'Objet 3');
         });
     });

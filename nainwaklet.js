@@ -243,14 +243,13 @@ var Nainwaklet = (function () {
             var keys = 'id,photo,nom,distance,x,y,categorie,poussiere',
                 spec = arrayStringToObject(str, keys.split(','));
 
-            // TODO: not implemented
-            log(spec);
             return {
                 id: int(spec.id),
                 nom: spec.nom,
                 image: nainwakImagesBaseUrl + spec.photo,
                 categorie: spec.categorie,
-                position: [int(spec.x), int(spec.y)]
+                position: [int(spec.x), int(spec.y)],
+                poussiere: int(spec.poussiere)  // expressed in seconds
             };
         }
 
