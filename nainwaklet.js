@@ -232,8 +232,8 @@ var Nainwaklet = (function () {
             log(spec);
             return {
                 id: int(spec.id),
-                avatar: nainwakImagesBaseUrl + spec.photo,
                 nom: spec.nom,
+                image: nainwakImagesBaseUrl + spec.photo,
                 description: spec.description,
                 position: [int(spec.x), int(spec.y)]
             };
@@ -247,6 +247,9 @@ var Nainwaklet = (function () {
             log(spec);
             return {
                 id: int(spec.id),
+                nom: spec.nom,
+                image: nainwakImagesBaseUrl + spec.photo,
+                categorie: spec.categorie,
                 position: [int(spec.x), int(spec.y)]
             };
         }
