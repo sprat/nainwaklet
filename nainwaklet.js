@@ -262,21 +262,34 @@ var Nainwaklet = (function () {
             var regex = /tabavat\[\d+\]\s=\s(\[.*\]);/ig,
                 keys = 'id,photo,nom,tag,barbe,classe,cote,distance,x,y,description,attaquer,gifler,estCible';
 
+            function getCote(classe) {
+                switch (classe) {
+                case 0:
+                    return "nain-déci";
+                case 1:
+                    return "brave";
+                case 2:
+                    return "sadique";
+                case 3:
+                    return "rampant";
+                case 7:
+                    return "mutant";
+                default:
+                    return "unknown";
+                }
+            }
+
             return processArrays(html, regex, keys.split(','), function (spec) {
                 // TODO: not implemented
-//              switch(classe) {
-//                  case 0 : "naindeci"
-//                  case 1 : "gentil"
-//                  case 2 : "mechant"
-//                  case 3 : "rampant"
-//                  case 7 : "mutant"
                 log(spec);
                 return {
                     id: int(spec.id),
                     nom: spec.nom,
                     image: nainwakImagesBaseUrl + spec.photo,
                     description: spec.description,
-                    position: [int(spec.x), int(spec.y)]
+                    position: [int(spec.x), int(spec.y)],
+                    cote: getCote(int(spec.classe)),
+                    rang: spec.cote
                 };
             });
         }
@@ -290,7 +303,7 @@ var Nainwaklet = (function () {
                     id: int(spec.id),
                     nom: spec.nom,
                     image: nainwakImagesBaseUrl + spec.photo,
-                    categorie: spec.categorie,
+                    categorie: spec.categorie.toLowerCase(),
                     position: [int(spec.x), int(spec.y)],
                     poussiere: int(spec.poussiere)  // expressed in seconds
                 };

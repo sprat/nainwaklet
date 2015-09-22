@@ -73,7 +73,9 @@
                 nom: "Le PheniX",
                 image: "http://www.nainwak.com/images/avatar_guilde/41ddb8ad2c2be408e27352accf1cc0b6559466bb.png",
                 description: "\"Le PheniX est un oiseau qui symbolise l'immortalité et la résurrection.\" A quoi bon me tuer ?!?",
-                position: [13, 5]
+                position: [13, 5],
+                cote: "sadique",
+                rang: "Diablotin(e)"
             }, 'Nain 1');
 
             // ["33924", "avatar/perso/dab064da974199a53f0e22527f901d523e8869b3.png", "Bourinain", '[G-NOUILLE<span style="color:#00C200;">#sNOUFFF</span>]', "10314", "2", "Cancre (nain-culte)", "0", "13", "5", "Description", "o", "", "0"];
@@ -82,16 +84,20 @@
                 nom: "Nainkomp'",
                 image: "http://www.nainwak.com/images/avatar/perso/dab064da974199a53f0e22527f901d523e8869b3.png",
                 description: "Description",
-                position: [14, 5]
+                position: [14, 5],
+                cote: "sadique",
+                rang: "Cancre (nain-culte)"
             }, 'Nain 2');
 
-            // ["57588", "avatar/perso/a1d23b4611fd59736d6ef385c5f5c24cb3e5aca4.png", "pingu", '[LOVE-SKY]', "9645", "2", "Petit-gros (nain-gras)", "1", "13", "6", "je bois pour oublier mais j&#039;oublie d&#039;arreter...", "o", "", "0"];
+            // ["71985", "avatar/choix/TOsmuf4.gif", "Bimme65", '', "0", "3", "Rampant Nain-déci", "2", "13", "6", "Bimme65", "", "", "0"];
             assert.deepEqual(nains[2], {
-                id: 57588,
-                nom: "pingu",
-                image: "http://www.nainwak.com/images/avatar/perso/a1d23b4611fd59736d6ef385c5f5c24cb3e5aca4.png",
-                description: "je bois pour oublier mais j'oublie d'arreter...",
-                position: [13, 6]
+                id: 71985,
+                nom: "Bimme65",
+                image: "http://www.nainwak.com/images/avatar/choix/TOsmuf4.gif",
+                description: "Bimme65",
+                position: [13, 6],
+                cote: "rampant",
+                rang: "Rampant Nain-déci"
             }, 'Nain 3');
 
             var objets = info.objets;
@@ -102,7 +108,7 @@
                 id: 3613899,
                 nom: "Surprise de Kine d'Heure",
                 image: "http://www.nainwak.com/images/objets/jouetkinder2_2.gif",
-                categorie: "INUTILE",
+                categorie: "inutile",
                 position: [13, 6],
                 poussiere: 1271419
             }, 'Objet 1');
@@ -112,7 +118,7 @@
                 id: 3613897,
                 nom: "Banane sauteuse",
                 image: "http://www.nainwak.com/images/objets/banane_sauteuse.gif",
-                categorie: "VEHICULE",
+                categorie: "vehicule",
                 position: [13, 6],
                 poussiere: 1271419
             }, 'Objet 2');
@@ -122,7 +128,7 @@
                 id: 3613896,
                 nom: "Panoplie de Naindiana Jones",
                 image: "http://www.nainwak.com/images/objets/naindiana.gif",
-                categorie: "RUNE",
+                categorie: "rune",
                 position: [13, 7],
                 poussiere: 1271419
             }, 'Objet 3');
