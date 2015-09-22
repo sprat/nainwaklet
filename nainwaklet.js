@@ -357,19 +357,19 @@ var Nainwaklet = (function () {
                     log(result);
                 }
             },
-            enabled = false,
+            isEnabled = false,
             enable = function (value) {
-                var oldEnabled = enabled;
+                var oldEnabled = isEnabled;
 
                 // update the status (and convert to boolean, just in case)
-                enabled = !!value;
+                isEnabled = !!value;
 
-                if (oldEnabled === enabled) {  // nothing to do
+                if (oldEnabled === isEnabled) {  // nothing to do
                     return;
                 }
 
                 // register or unregister the load event handler
-                if (enabled) {
+                if (isEnabled) {
                     frame.addEventListener('load', infoLoaded, false);
                 } else {
                     frame.removeEventListener('load', infoLoaded, false);
@@ -381,7 +381,7 @@ var Nainwaklet = (function () {
 
         return Object.freeze({
             get enabled() {
-                return enabled;
+                return isEnabled;
             },
             set enabled(value) {
                 enable(value);
@@ -411,18 +411,18 @@ var Nainwaklet = (function () {
                 return link;
             }()),
             */
-            enabled = false,
+            isEnabled = false,
             enable = function (value) {
-                var oldEnabled = enabled;
+                var oldEnabled = isEnabled;
 
                 // update the status (and convert to boolean, just in case)
-                enabled = !!value;
+                isEnabled = !!value;
 
-                if (enabled === oldEnabled) {  // nothing to do
+                if (isEnabled === oldEnabled) {  // nothing to do
                     return;
                 }
 
-                if (enabled) {
+                if (isEnabled) {
                     //var doc = container.ownerDocument;
                     //    head = doc.getElementsByTagName('head')[0]
 
@@ -450,7 +450,7 @@ var Nainwaklet = (function () {
 
         return Object.freeze({
             get enabled() {
-                return enabled;
+                return isEnabled;
             },
             set enabled(value) {
                 enable(value);
