@@ -280,7 +280,8 @@ var Nainwaklet = (function () {
             }
 
             return processArrays(html, regex, keys.split(','), function (spec) {
-                // TODO: not implemented
+                // TODO: extract more info: barbe, tag (guilde & perso)
+                // [Perso][Guilde] or [Guilde][Perso] or [PersoGuilde] or [GuildePerso]
                 log(spec);
                 return {
                     id: int(spec.id),
@@ -368,12 +369,11 @@ var Nainwaklet = (function () {
                     html = docEl.outerHTML,  // no doctype but we don't mind
                     location = contentWindow.location,
                     url = location.origin + location.pathname,
-                    page = pages.getByUrl(url),
-                    result;
+                    page = pages.getByUrl(url);
 
                 if (page) {
-                    result = page.analyze(html);
-                    log(result);
+                    // TODO: do something with the result
+                    page.analyze(html);
                 }
             },
             isEnabled = false,
