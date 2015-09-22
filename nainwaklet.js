@@ -18,9 +18,7 @@ var Nainwaklet = (function () {
         scriptChannel = script.getAttribute('data-channel'),
         log = (window.console)
             ? Function.prototype.bind.call(window.console.log, window.console)
-            : function () {
-                return;
-            };
+            : function () {};
 
     function assert(condition, message) {
         if (!condition) {
@@ -111,19 +109,26 @@ var Nainwaklet = (function () {
     }
     */
 
-    // TODO: refactor to findAllMatches so that we can map the arrays of matches
-    function forEachMatch(regex, string, processMatch) {
-        var match;
+    function getAllMatches(regex, text) {
+        assert(regex && regex.exec && regex.test, 'not a RegExp object');
 
-        assert(regex.global, 'The RegExp should have the global flag set');
+        var matches = [],
+            addNextMatch = function () {
+                var match = regex.exec(text);
+                if (match !== null) {
+                    matches.push(match);
+                    return true;
+                }
+                return false;
+            };
 
-        while (true) {
-            match = regex.exec(string);
-            if (match === null) {
-                break;
-            }
-            processMatch(match);
+        if (regex.global) {
+            while (addNextMatch()) {}
+        } else {
+            addNextMatch();
         }
+
+        return matches;
     }
 
     // Array.prototype.find is available in ES6, but not before
@@ -165,9 +170,9 @@ var Nainwaklet = (function () {
     }
 
     function arrayToObject(keys, values) {
-        var obj = {};
+        assert(keys.length === values.length, 'should have the same length');
 
-        assert(keys.length === values.length, 'keys and values should have the same length');
+        var obj = {};
 
         keys.forEach(function (key, i) {
             obj[key] = values[i];
@@ -244,17 +249,13 @@ var Nainwaklet = (function () {
         }
 
         function processArrays(html, regex, keys, createObject) {
-            var results = [];
+            var matches = getAllMatches(regex, html);
 
-            forEachMatch(regex, html, function (match) {
+            return matches.map(function (match) {
                 var values = parseJavascriptArray(match[1]),
-                    spec = arrayToObject(keys, values),
-                    object = createObject(spec);
-
-                results.push(object);
+                    spec = arrayToObject(keys, values);
+                return createObject(spec);
             });
-
-            return results;
         }
 
         function findNains(html) {
