@@ -218,41 +218,6 @@ var Nainwaklet = (function () {
             return parseInt(value, 10);
         }
 
-        function createNain(str) {
-            var keys = 'id,photo,nom,tag,barbe,classe,cote,distance,x,y,description,attaquer,gifler,estCible',
-                spec = arrayStringToObject(str, keys.split(','));
-
-            // TODO: not implemented
-//            switch(classe) {
-//                case 0 : "naindeci"
-//                case 1 : "gentil"
-//                case 2 : "mechant"
-//                case 3 : "rampant"
-//                case 7 : "mutant"
-            log(spec);
-            return {
-                id: int(spec.id),
-                nom: spec.nom,
-                image: nainwakImagesBaseUrl + spec.photo,
-                description: spec.description,
-                position: [int(spec.x), int(spec.y)]
-            };
-        }
-
-        function createObjet(str) {
-            var keys = 'id,photo,nom,distance,x,y,categorie,poussiere',
-                spec = arrayStringToObject(str, keys.split(','));
-
-            return {
-                id: int(spec.id),
-                nom: spec.nom,
-                image: nainwakImagesBaseUrl + spec.photo,
-                categorie: spec.categorie,
-                position: [int(spec.x), int(spec.y)],
-                poussiere: int(spec.poussiere)  // expressed in seconds
-            };
-        }
-
         function findLocalisation(html) {
             // example:
             // <span class="c1">Position (13,5) sur "Ronain Graou" |b95eb2f716c500db6|</span>
@@ -267,40 +232,68 @@ var Nainwaklet = (function () {
             }
         }
 
-        function findNains(html) {
-            // example:
-            // tabavat[1] = ["33966", "avatar_guilde/41ddb8ad2c2be408e27352accf1cc0b6559466bb.png", "Le PheniX", '[Gnouille] [<span style="color:#91005D;">#!</span>]', "13794", "2", "Diablotin(e)", "0", "13", "5", "&quot;Le PheniX est un oiseau qui symbolise l&#039;immortalité et la résurrection.&quot; A quoi bon me tuer ?!?", "o", "", "0"];
-            var regex = /tabavat\[\d+\]\s=\s(\[.*\]);/ig,
-                nains = [];
+        function findArrays(html, regex, keys, processObject) {
+            var results = [],
+                spec;
 
             forEachMatch(regex, html, function (match) {
-                nains.push(createNain(match[1]));
+                spec = arrayStringToObject(match[1], keys);
+                results.push(processObject(spec));
             });
 
-            return nains;
+            return results;
+        }
+
+        function findNains(html) {
+            var regex = /tabavat\[\d+\]\s=\s(\[.*\]);/ig,
+                keys = 'id,photo,nom,tag,barbe,classe,cote,distance,x,y,description,attaquer,gifler,estCible';
+
+            return findArrays(html, regex, keys.split(','), function (spec) {
+                // TODO: not implemented
+//                switch(classe) {
+//                    case 0 : "naindeci"
+//                    case 1 : "gentil"
+//                    case 2 : "mechant"
+//                    case 3 : "rampant"
+//                    case 7 : "mutant"
+                log(spec);
+                return {
+                    id: int(spec.id),
+                    nom: spec.nom,
+                    image: nainwakImagesBaseUrl + spec.photo,
+                    description: spec.description,
+                    position: [int(spec.x), int(spec.y)]
+                };
+            });
         }
 
         function findObjets(html) {
-            // example:
-            // tabobjet[1] = [3609504, "objets/oreiller.gif", "Oreiller", 1, 12, 5, "ARME", 1262774];
             var regex = /tabobjet\[\d+\]\s=\s(\[.*\]);/ig,
-                objets = [];
+                keys = 'id,photo,nom,distance,x,y,categorie,poussiere';
 
-            forEachMatch(regex, html, function (match) {
-                objets.push(createObjet(match[1]));
+            return findArrays(html, regex, keys.split(','), function (spec) {
+                return {
+                    id: int(spec.id),
+                    nom: spec.nom,
+                    image: nainwakImagesBaseUrl + spec.photo,
+                    categorie: spec.categorie,
+                    position: [int(spec.x), int(spec.y)],
+                    poussiere: int(spec.poussiere)  // expressed in seconds
+                };
             });
-
-            return objets;
         }
 
         function analyze(html) {
             log('Analyzing detect...');
-            var localisation = findLocalisation(html);
+            var localisation = findLocalisation(html),
+                nains = findNains(html),
+                objets = findObjets(html);
+
             return {
                 monde: localisation.monde,
                 position: localisation.position,
-                nains: findNains(html),
-                objets: findObjets(html)
+                nains: nains,
+                objets: objets
             };
         }
 
