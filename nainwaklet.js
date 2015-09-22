@@ -111,6 +111,7 @@ var Nainwaklet = (function () {
     }
     */
 
+    // TODO: refactor to findAllMatches so that we can map the arrays of matches
     function forEachMatch(regex, string, processMatch) {
         var match;
 
@@ -149,17 +150,27 @@ var Nainwaklet = (function () {
         return txt.value;
     }
 
-    function arrayStringToObject(string, keys) {
-        // parse a string containing a representation of a Javascript array
-        var obj = {},
-            cleaned = string.replace(/([\[,]\s*)'(.*)'(\s*[,\]])/g, function (ignore, before, inside, after) {
+    function parseJavascriptArray(string) {
+        // parses a string containing a representation of a Javascript array
+        // and returns it
+        var cleaned = string.replace(/([\[,]\s*)'(.*)'(\s*[,\]])/g, function (ignore, before, inside, after) {
                 var escaped = inside.replace(/"/g, '\\"');  // escape double-quotes inside
                 return before + '"' + escaped + '"' + after;  // wrap in double-quotes
             }),
             values = JSON.parse(cleaned);
 
+        return values.map(function (value) {
+            return decodeHtmlEntities(value);
+        });
+    }
+
+    function arrayToObject(keys, values) {
+        var obj = {};
+
+        assert(keys.length === values.length, 'keys and values should have the same length');
+
         keys.forEach(function (key, i) {
-            obj[key] = decodeHtmlEntities(values[i]);
+            obj[key] = values[i];
         });
 
         return obj;
@@ -232,13 +243,15 @@ var Nainwaklet = (function () {
             }
         }
 
-        function findArrays(html, regex, keys, processObject) {
-            var results = [],
-                spec;
+        function processArrays(html, regex, keys, createObject) {
+            var results = [];
 
             forEachMatch(regex, html, function (match) {
-                spec = arrayStringToObject(match[1], keys);
-                results.push(processObject(spec));
+                var values = parseJavascriptArray(match[1]),
+                    spec = arrayToObject(keys, values),
+                    object = createObject(spec);
+
+                results.push(object);
             });
 
             return results;
@@ -248,14 +261,14 @@ var Nainwaklet = (function () {
             var regex = /tabavat\[\d+\]\s=\s(\[.*\]);/ig,
                 keys = 'id,photo,nom,tag,barbe,classe,cote,distance,x,y,description,attaquer,gifler,estCible';
 
-            return findArrays(html, regex, keys.split(','), function (spec) {
+            return processArrays(html, regex, keys.split(','), function (spec) {
                 // TODO: not implemented
-//                switch(classe) {
-//                    case 0 : "naindeci"
-//                    case 1 : "gentil"
-//                    case 2 : "mechant"
-//                    case 3 : "rampant"
-//                    case 7 : "mutant"
+//              switch(classe) {
+//                  case 0 : "naindeci"
+//                  case 1 : "gentil"
+//                  case 2 : "mechant"
+//                  case 3 : "rampant"
+//                  case 7 : "mutant"
                 log(spec);
                 return {
                     id: int(spec.id),
@@ -271,7 +284,7 @@ var Nainwaklet = (function () {
             var regex = /tabobjet\[\d+\]\s=\s(\[.*\]);/ig,
                 keys = 'id,photo,nom,distance,x,y,categorie,poussiere';
 
-            return findArrays(html, regex, keys.split(','), function (spec) {
+            return processArrays(html, regex, keys.split(','), function (spec) {
                 return {
                     id: int(spec.id),
                     nom: spec.nom,
