@@ -280,7 +280,7 @@ var Nainwaklet = (function () {
             }
 
             return processArrays(html, regex, keys.split(','), function (spec) {
-                // TODO: extract more info: barbe, tag (guilde & perso)
+                // TODO: extract more info: tag (guilde & perso)
                 // [Perso][Guilde] or [Guilde][Perso] or [PersoGuilde] or [GuildePerso]
                 log(spec);
                 return {
@@ -290,7 +290,8 @@ var Nainwaklet = (function () {
                     description: spec.description,
                     position: [int(spec.x), int(spec.y)],
                     cote: getCote(int(spec.classe)),
-                    rang: spec.cote
+                    rang: spec.cote,
+                    barbe: int(spec.barbe) / 100
                 };
             });
         }

@@ -75,7 +75,8 @@
                 description: "\"Le PheniX est un oiseau qui symbolise l'immortalité et la résurrection.\" A quoi bon me tuer ?!?",
                 position: [13, 5],
                 cote: "sadique",
-                rang: "Diablotin(e)"
+                rang: "Diablotin(e)",
+                barbe: 137.99
             }, 'Nain 1');
 
             // ["33924", "avatar/perso/dab064da974199a53f0e22527f901d523e8869b3.png", "Bourinain", '[G-NOUILLE<span style="color:#00C200;">#sNOUFFF</span>]', "10314", "2", "Cancre (nain-culte)", "0", "13", "5", "Description", "o", "", "0"];
@@ -86,7 +87,8 @@
                 description: "Description",
                 position: [14, 5],
                 cote: "sadique",
-                rang: "Cancre (nain-culte)"
+                rang: "Cancre (nain-culte)",
+                barbe: 103.14
             }, 'Nain 2');
 
             // ["71985", "avatar/choix/TOsmuf4.gif", "Bimme65", '', "0", "3", "Rampant Nain-déci", "2", "13", "6", "Bimme65", "", "", "0"];
@@ -97,7 +99,8 @@
                 description: "Bimme65",
                 position: [13, 6],
                 cote: "rampant",
-                rang: "Rampant Nain-déci"
+                rang: "Rampant Nain-déci",
+                barbe: 0
             }, 'Nain 3');
 
             var objets = info.objets;
