@@ -258,6 +258,18 @@ var Nainwaklet = (function () {
             });
         }
 
+        function parseTag(tag) {
+            var regex = /<span\s+style=\"color:(#[0-9A-F]{6});\">([^<]*)<\/span>/i,
+                match = regex.exec(tag);
+
+            if (match) {
+                return {
+                    nom: match[2],
+                    couleur: match[1]
+                };
+            }
+        }
+
         function findNains(html) {
             var regex = /tabavat\[\d+\]\s=\s(\[.*\]);/ig,
                 keys = 'id,photo,nom,tag,barbe,classe,cote,distance,x,y,description,attaquer,gifler,estCible';
@@ -280,19 +292,25 @@ var Nainwaklet = (function () {
             }
 
             return processArrays(html, regex, keys.split(','), function (spec) {
-                // TODO: extract more info: tag (guilde & perso)
+                // TODO: extract more info: tag perso
                 // [Perso][Guilde] or [Guilde][Perso] or [PersoGuilde] or [GuildePerso]
-                log(spec);
-                return {
-                    id: int(spec.id),
-                    nom: spec.nom,
-                    image: nainwakImagesBaseUrl + spec.photo,
-                    description: spec.description,
-                    position: [int(spec.x), int(spec.y)],
-                    cote: getCote(int(spec.classe)),
-                    rang: spec.cote,
-                    barbe: int(spec.barbe) / 100
-                };
+                var nain = {
+                        id: int(spec.id),
+                        nom: spec.nom,
+                        image: nainwakImagesBaseUrl + spec.photo,
+                        description: spec.description,
+                        position: [int(spec.x), int(spec.y)],
+                        cote: getCote(int(spec.classe)),
+                        rang: spec.cote,
+                        barbe: int(spec.barbe) / 100
+                    },
+                    tag = parseTag(spec.tag);
+
+                if (tag) {
+                    nain.guilde = tag;
+                }
+
+                return nain;
             });
         }
 

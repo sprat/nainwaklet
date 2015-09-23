@@ -27,15 +27,8 @@
         }
 
         Nainwaklet.testing.ajaxRequest(requestUrl, options, function (response) {
-            if (response.status === 200) {
-                try {
-                    processResponse(getBody(response.body));
-                } catch (e) {
-                    assert.ok(false, e);
-                }
-            } else {
-                assert.ok(false, 'Error while fetching url ' + url + ': ' + response.status);
-            }
+            assert.strictEqual(response.status, 200, 'Loading ' + url);
+            processResponse(getBody(response.body));
             done();
         });
     }
@@ -76,7 +69,11 @@
                 position: [13, 5],
                 cote: "sadique",
                 rang: "Diablotin(e)",
-                barbe: 137.99
+                barbe: 137.99,
+                guilde: {
+                    nom: "#!",
+                    couleur: "#91005D"
+                }
             }, 'Nain 1');
 
             // ["33924", "avatar/perso/dab064da974199a53f0e22527f901d523e8869b3.png", "Bourinain", '[G-NOUILLE<span style="color:#00C200;">#sNOUFFF</span>]', "10314", "2", "Cancre (nain-culte)", "0", "13", "5", "Description", "o", "", "0"];
@@ -158,7 +155,7 @@
                 var analysis = jslint(source),
                     warnings = formatWarnings(analysis, source);
 
-                assert.strictEqual(warnings, '', url);
+                assert.strictEqual(warnings, '', 'JSLinting ' + url);
             });
         }
 
