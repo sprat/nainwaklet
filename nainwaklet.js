@@ -62,11 +62,16 @@ var Nainwaklet = (function () {
 
         xhr.open(method, url, true, options.username, options.password);  // async
 
+        function getBody(xhr) {
+            return xhr.response || xhr.responseText;
+            // TODO: we should use xhr.responseXML in some cases;
+        }
+
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {  // response received and loaded
                 processResponse({
                     status: xhr.status,
-                    body: xhr.response || xhr.responseXML || xhr.responseText,
+                    body: getBody(xhr),
                     headers: parseHttpHeaders(xhr.getAllResponseHeaders())
                 });
             }
@@ -78,7 +83,7 @@ var Nainwaklet = (function () {
         }
 
         // override mimetype if provided
-        if (options.mimetype && xhr.overrideMimeType) {
+        if (options.mimeType && xhr.overrideMimeType) {
             xhr.overrideMimeType(options.mimeType);
         }
 
