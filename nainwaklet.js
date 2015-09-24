@@ -18,7 +18,9 @@ var Nainwaklet = (function () {
         scriptChannel = script.getAttribute('data-channel'),
         log = (window.console)
             ? Function.prototype.bind.call(window.console.log, window.console)
-            : function () {};
+            : function () {
+                return;
+            };
 
     function assert(condition, message) {
         if (!condition) {
@@ -35,64 +37,19 @@ var Nainwaklet = (function () {
         return target;
     }
 
-    function parseHttpHeaders(string) {
-        var headers = {},
-            pairs = string.trim().split('\r\n');
-
-        pairs.forEach(function (pair) {
-            var split = pair.trim().split(':'),
-                key = split.shift().trim(),
-                value = split.join(':').trim();
-            headers[key] = value;
-        });
-
-        return headers;
-    }
-
-    function ajaxRequest(url, options, processResponse) {
-        if (typeof options === 'function' && processResponse === undefined) {
-            processResponse = options;
-            options = {};
-        }
-        options = options || {};
-
-        var xhr = new XMLHttpRequest(),
-            method = options.method || 'GET',
-            headers = options.headers || {};
-
-        xhr.open(method, url, true, options.username, options.password);  // async
-
-        function getBody(xhr) {
-            return xhr.response || xhr.responseText;
-            // TODO: we should use xhr.responseXML in some cases;
-        }
-
+    function loadHTML(url, processResponse) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);  // async
+        xhr.responseType = 'document';
         xhr.onreadystatechange = function () {
             if (xhr.readyState === 4) {  // response received and loaded
                 processResponse({
                     status: xhr.status,
-                    body: getBody(xhr),
-                    headers: parseHttpHeaders(xhr.getAllResponseHeaders())
+                    document: xhr.response
                 });
             }
         };
-
-        // set the response type if provided
-        if (options.responseType) {
-            xhr.responseType = options.responseType;
-        }
-
-        // override mimetype if provided
-        if (options.mimeType && xhr.overrideMimeType) {
-            xhr.overrideMimeType(options.mimeType);
-        }
-
-        // add the headers
-        Object.keys(headers).forEach(function (key) {
-            xhr.setRequestHeader(key, headers[key]);
-        });
-
-        xhr.send(options.data);
+        xhr.send(null);
     }
 
     function buildQueryParams(params) {
@@ -125,10 +82,13 @@ var Nainwaklet = (function () {
                     return true;
                 }
                 return false;
-            };
+            },
+            found;
 
         if (regex.global) {
-            while (addNextMatch()) {}
+            do {
+                found = addNextMatch();
+            } while (found);
         } else {
             addNextMatch();
         }
@@ -153,14 +113,14 @@ var Nainwaklet = (function () {
         }
     }
 
-    function decodeHtmlEntities(str) {
+    function decodeHTMLEntities(str) {
         // TODO: not really efficient, a regex-based implementation would be better
         var txt = document.createElement("textarea");
         txt.innerHTML = str;
         return txt.value;
     }
 
-    function parseJavascriptArray(string) {
+    function parseJSArray(string) {
         // parses a string containing a representation of a Javascript array
         // and returns it
         var cleaned = string.replace(/([\[,]\s*)'(.*)'(\s*[,\]])/g, function (ignore, before, inside, after) {
@@ -170,7 +130,7 @@ var Nainwaklet = (function () {
             values = JSON.parse(cleaned);
 
         return values.map(function (value) {
-            return decodeHtmlEntities(value);
+            return decodeHTMLEntities(value);
         });
     }
 
@@ -216,10 +176,10 @@ var Nainwaklet = (function () {
 
         function load(IDS, processResult) {
             var fullUrl = getUrl(IDS);
-            ajaxRequest(fullUrl, function (response) {
+            loadHTML(fullUrl, function (response) {
                 var result = null;
                 if (response.status === 200) {
-                    result = analyze(response.body);
+                    result = analyze(response.document);
                 }
                 processResult(result);
             });
@@ -239,11 +199,13 @@ var Nainwaklet = (function () {
             return parseInt(value, 10);
         }
 
-        function findLocalisation(html) {
+        function findLocalisation(doc) {
             // example:
             // <span class="c1">Position (13,5) sur "Ronain Graou" |b95eb2f716c500db6|</span>
-            var regex = /<span\sclass="c1">Position\s\((\d+),(\d+)\)\ssur\s"([^"]*)"/i,
-                match = regex.exec(html);
+            var el = doc.getElementsByClassName('c1')[0],
+                text = el.textContent,
+                regex = /Position\s\((\d+),(\d+)\)\ssur\s"([^"]*)"/i,
+                match = regex.exec(text);
 
             if (match) {
                 return {
@@ -253,11 +215,21 @@ var Nainwaklet = (function () {
             }
         }
 
-        function processArrays(html, regex, keys, createObject) {
-            var matches = getAllMatches(regex, html);
+        function getAllScriptsSource(doc) {
+            var sources = Array.prototype.map.call(doc.scripts, function (script) {
+                return script.src
+                    ? ''
+                    : script.innerHTML;
+            });
+            return sources.join('\n');
+        }
+
+        function processScriptArrays(doc, regex, keys, createObject) {
+            var text = getAllScriptsSource(doc),
+                matches = getAllMatches(regex, text);
 
             return matches.map(function (match) {
-                var values = parseJavascriptArray(match[1]),
+                var values = parseJSArray(match[1]),
                     spec = arrayToObject(keys, values);
                 return createObject(spec);
             });
@@ -275,7 +247,7 @@ var Nainwaklet = (function () {
             }
         }
 
-        function findNains(html) {
+        function findNains(doc) {
             var regex = /tabavat\[\d+\]\s=\s(\[.*\]);/ig,
                 keys = 'id,photo,nom,tag,barbe,classe,cote,distance,x,y,description,attaquer,gifler,estCible';
 
@@ -296,7 +268,7 @@ var Nainwaklet = (function () {
                 }
             }
 
-            return processArrays(html, regex, keys.split(','), function (spec) {
+            return processScriptArrays(doc, regex, keys.split(','), function (spec) {
                 // TODO: extract more info: tag perso
                 // [Perso][Guilde] or [Guilde][Perso] or [PersoGuilde] or [GuildePerso]
                 var nain = {
@@ -319,11 +291,11 @@ var Nainwaklet = (function () {
             });
         }
 
-        function findObjets(html) {
+        function findObjets(doc) {
             var regex = /tabobjet\[\d+\]\s=\s(\[.*\]);/ig,
                 keys = 'id,photo,nom,distance,x,y,categorie,poussiere';
 
-            return processArrays(html, regex, keys.split(','), function (spec) {
+            return processScriptArrays(doc, regex, keys.split(','), function (spec) {
                 return {
                     id: int(spec.id),
                     nom: spec.nom,
@@ -335,11 +307,10 @@ var Nainwaklet = (function () {
             });
         }
 
-        function analyze(html) {
-            log('Analyzing detect...');
-            var localisation = findLocalisation(html),
-                nains = findNains(html),
-                objets = findObjets(html);
+        function analyze(doc) {
+            var localisation = findLocalisation(doc),
+                nains = findNains(doc),
+                objets = findObjets(doc);
 
             return {
                 monde: localisation.monde,
@@ -389,15 +360,16 @@ var Nainwaklet = (function () {
         var infoLoaded = function () {
                 var contentWindow = frame.contentWindow,
                     doc = contentWindow.document,
-                    docEl = doc.documentElement,
-                    html = docEl.outerHTML,  // no doctype but we don't mind
                     location = contentWindow.location,
                     url = location.origin + location.pathname,
-                    page = pages.getByUrl(url);
+                    page = pages.getByUrl(url),
+                    result;
 
                 if (page) {
-                    // TODO: do something with the result
-                    page.analyze(html);
+                    // TODO: do something useful with the result
+                    log('Analyzing ' + page.name);
+                    result = page.analyze(doc);
+                    log(result);
                 }
             },
             isEnabled = false,
@@ -618,7 +590,7 @@ var Nainwaklet = (function () {
         initializeButtons: initializeButtons,
         testing: Object.freeze({  // testing API
             pages: pages,
-            ajaxRequest: ajaxRequest
+            loadHTML: loadHTML
         })
     };
 

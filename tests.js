@@ -20,24 +20,18 @@
             url: cacheBustingUrl(url),
             dataType: 'text',
             complete: function (jqXHR) {
-                assert.strictEqual(jqXHR.status, 200, 'Loading JS at ' + url);
+                assert.strictEqual(jqXHR.status, 200, 'Loading ' + url);
                 processData(jqXHR.responseText);
                 done();
             }
         });
     }
 
-    // TODO: refactor and move into nainwaklet.js
-    function loadHTML(assert, url, processResponse) {
-        var done = assert.async(),
-            options = {responseType: 'document'},
-            getBody = function (document) {
-                return document.documentElement.outerHTML;
-            };
-
-        Nainwaklet.testing.ajaxRequest(cacheBustingUrl(url), options, function (response) {
+    function loadHTML(assert, url, processDocument) {
+        var done = assert.async();
+        Nainwaklet.testing.loadHTML(cacheBustingUrl(url), function (response) {
             assert.strictEqual(response.status, 200, 'Loading ' + url);
-            processResponse(getBody(response.body));
+            processDocument(response.document);
             done();
         });
     }
@@ -70,10 +64,9 @@
     QUnit.test('detect page', function (assert) {
         var detect = Nainwaklet.testing.pages.detect;
 
-        loadHTML(assert, 'fixtures/detect.html', function (response) {
-            var info = detect.analyze(response);
+        loadHTML(assert, 'fixtures/detect.html', function (doc) {
+            var info = detect.analyze(doc);
 
-            console.log(info);
             assert.deepEqual(info.position, [13, 5], 'Position');
             assert.strictEqual(info.monde, 'Monde des sadiques', 'Monde');
 
