@@ -8,10 +8,14 @@
 (function () {
     'use strict';
 
+    function cacheBustingUrl(url) {
+        var random = Math.floor(Math.random() * 1000000);
+        return url + '?v=' + random;  // prevents caching
+    }
+
     function loadUrl(assert, url, processResponse) {
         var done = assert.async(),
-            random = Math.floor(Math.random() * 1000000),
-            requestUrl = url + '?v=' + random,  // prevents caching
+            requestUrl = cacheBustingUrl(url),
             options = {},
             getBody = function (body) {
                 return body;
