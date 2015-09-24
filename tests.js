@@ -1,5 +1,5 @@
 /*global
-    Nainwaklet, document, QUnit, jslint
+    Nainwaklet, document, $, QUnit, jslint
  */
 /*jslint
     devel: true
@@ -13,35 +13,52 @@
         return url + '?v=' + random;  // prevents caching
     }
 
-    function loadUrl(assert, url, processResponse) {
-        var done = assert.async(),
-            requestUrl = cacheBustingUrl(url),
-            options = {},
-            getBody = function (body) {
-                return body;
-            };
+    function loadJS(assert, url, processData) {
+        var done = assert.async();
 
-        // HTML files: load as a document, but export to text just after
-        // this solves encoding problems
-        if (url.match(/\.html?$/)) {
-            options = {responseType: 'document'};
+        return $.ajax({
+            url: cacheBustingUrl(url),
+            dataType: 'text',
+            complete: function (jqXHR) {
+                assert.strictEqual(jqXHR.status, 200, 'Loading JS at ' + url);
+                processData(jqXHR.responseText);
+                done();
+            }
+        });
+    }
+
+    // TODO: refactor and move into nainwaklet.js
+    function loadHTML(assert, url, processResponse) {
+        var done = assert.async(),
+            options = {responseType: 'document'},
             getBody = function (document) {
                 return document.documentElement.outerHTML;
             };
-        }
 
-        Nainwaklet.testing.ajaxRequest(requestUrl, options, function (response) {
+        Nainwaklet.testing.ajaxRequest(cacheBustingUrl(url), options, function (response) {
             assert.strictEqual(response.status, 200, 'Loading ' + url);
             processResponse(getBody(response.body));
             done();
         });
     }
 
-    /*
-    QUnit.test('createApplication', function (assert) {
-        assert.ok(Nainwaklet.createApplication, 'Nainwaklet should have an "createApplication" function');
-    });
-    */
+    function getJSLintWarnings(source) {
+        var analysis = jslint(source),
+            sourceLines = source.split(/\r?\n/g),
+            warnings = [];
+
+        analysis.warnings.forEach(function (warning) {
+            var str = '@ line ' + warning.line + ' column ' + warning.column + ': '
+                    + warning.message + '\n'
+                    + sourceLines[warning.line];
+            warnings.push(str);
+        });
+
+        return warnings.join('\n\n');
+    }
+
+
+    /* Tests */
 
     QUnit.test('pages', function (assert) {
         var pages = Nainwaklet.testing.pages;
@@ -53,7 +70,7 @@
     QUnit.test('detect page', function (assert) {
         var detect = Nainwaklet.testing.pages.detect;
 
-        loadUrl(assert, 'fixtures/detect.html', function (response) {
+        loadHTML(assert, 'fixtures/detect.html', function (response) {
             var info = detect.analyze(response);
 
             console.log(info);
@@ -140,30 +157,15 @@
     });
 
     QUnit.test('JSLint', function (assert) {
-        function formatWarnings(analysis, source) {
-            var sourceLines = source.split(/\r?\n/g),
-                warnings = [];
-
-            analysis.warnings.forEach(function (warning) {
-                var str = '@ line ' + warning.line + ' column ' + warning.column + ': '
-                        + warning.message + '\n'
-                        + sourceLines[warning.line];
-                warnings.push(str);
-            });
-
-            return warnings.join('\n\n');
-        }
-
-        function checkSource(url) {
-            loadUrl(assert, url, function (source) {
-                var analysis = jslint(source),
-                    warnings = formatWarnings(analysis, source);
-
+        function check(url) {
+            loadJS(assert, url, function (source) {
+                var warnings = getJSLintWarnings(source);
                 assert.strictEqual(warnings, '', 'JSLinting ' + url);
             });
         }
 
-        checkSource('nainwaklet.js');
-        checkSource('tests.js');
+        // TODO: would be better to extract the scripts filenames used in the test HTML file
+        check('nainwaklet.js');
+        check('tests.js');
     });
 }());
