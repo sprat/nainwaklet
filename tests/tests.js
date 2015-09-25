@@ -158,7 +158,7 @@
         }
 
         // TODO: would be better to extract the scripts filenames used in the test HTML file
-        check('nainwaklet.js');
+        check('../nainwaklet.js');
         check('tests.js');
     });
 }());
