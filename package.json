@@ -1,0 +1,26 @@
+{
+  "name": "nainwaklet",
+  "version": "1.0.0",
+  "description": "Nainwak Hub Bookmarklet",
+  "author": "Sylvain Prat <sylvain.prat@gmail.com>",
+  "contributors": [],
+  "keywords": [
+    "Nainwak"
+  ],
+  "license": "MIT",
+  "private": true,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sprat/nainwaklet.git"
+  },
+  "homepage": "http://sprat.github.io/nainwaklet/",
+  "bugs": {
+    "url": "https://github.com/sprat/nainwaklet/issues"
+  },
+  "main": "nainwaklet.js",
+  "scripts": {
+  },
+  "dependencies": {},
+  "devDependencies": {
+  }
+}
