@@ -16,7 +16,7 @@ var Nainwaklet = (function () {
         scriptUrl = script.src,
         scriptBaseUrl = scriptUrl.substring(0, scriptUrl.lastIndexOf('/') + 1),
         scriptChannel = script.getAttribute('data-channel'),
-        log = (window.console)
+        log = (window.console && window.console.log)
             ? Function.prototype.bind.call(window.console.log, window.console)
             : function () {
                 return;
