@@ -15,12 +15,20 @@ var Nainwaklet = (function () {
         script = document.scripts[document.scripts.length - 1],
         scriptUrl = script.src,
         scriptBaseUrl = scriptUrl.substring(0, scriptUrl.lastIndexOf('/') + 1),
-        scriptChannel = script.getAttribute('data-channel'),
-        log = (window.console && window.console.log)
-            ? Function.prototype.bind.call(window.console.log, window.console)
-            : function () {
-                return;
-            };
+        scriptChannel = script.getAttribute('data-channel');
+
+    var print = (function () {
+        var console = window.console,
+            bind = Function.prototype.bind;
+
+        if (console && console.log && bind) {
+            return bind.call(console.log, console);
+        }
+
+        return function () {
+            return;
+        };
+    }());
 
     function assert(condition, message) {
         if (!condition) {
@@ -367,9 +375,9 @@ var Nainwaklet = (function () {
 
                 if (page) {
                     // TODO: do something useful with the result
-                    log('Analyzing ' + page.name);
+                    print('Analyzing ' + page.name);
                     result = page.analyze(doc);
-                    log(result);
+                    print(result);
                 }
             },
             isEnabled = false,
