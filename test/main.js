@@ -20,6 +20,6 @@ require.config({
     }
 });
 
-require(['qunit', 'test/test_pages', 'test/test_detec'], function (QUnit) {
+require(['qunit', 'test/pages', 'test/detec'], function (QUnit) {
     QUnit.start();
 });
