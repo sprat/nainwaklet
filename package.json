@@ -17,10 +17,7 @@
   "bugs": {
     "url": "https://github.com/sprat/nainwaklet/issues"
   },
-  "main": "nainwaklet.js",
-  "scripts": {
-  },
+  "scripts": {},
   "dependencies": {},
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }
