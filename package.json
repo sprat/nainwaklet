@@ -18,10 +18,10 @@
     "url": "https://github.com/sprat/nainwaklet/issues"
   },
   "scripts": {
-    "server": "http-server -p 8080 ."
+    "server": "live-server"
   },
   "dependencies": {},
   "devDependencies": {
-    "http-server": "^0.8.5"
+    "live-server": "^0.8.1"
   }
 }
