@@ -17,7 +17,11 @@
   "bugs": {
     "url": "https://github.com/sprat/nainwaklet/issues"
   },
-  "scripts": {},
+  "scripts": {
+    "server": "http-server -p 8080 ."
+  },
   "dependencies": {},
-  "devDependencies": {}
+  "devDependencies": {
+    "http-server": "^0.8.5"
+  }
 }
