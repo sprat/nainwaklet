@@ -1,5 +1,5 @@
 /*global define */
-define(['nainwaklet', 'qunit', './utils'], function (Nainwaklet, QUnit, utils) {
+define(['nainwaklet', 'qunit'], function (Nainwaklet, QUnit) {
     'use strict';
 
     QUnit.test('pages', function (assert) {

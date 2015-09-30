@@ -1,10 +1,10 @@
 /*global define */
-define(['nainwaklet', 'qunit', './utils', 'text!./fixtures/detect.html'], function (Nainwaklet, QUnit, utils, detectHTML) {
+define(['nainwaklet', 'qunit', './helper', 'text!./fixtures/detect.html'], function (Nainwaklet, QUnit, helper, detectHTML) {
     'use strict';
 
     QUnit.test('detect', function (assert) {
         var detect = Nainwaklet.testing.pages.detect,
-            doc = utils.parseHTMLDocument(detectHTML),
+            doc = helper.parseHTMLDocument(detectHTML),
             info = detect.analyze(doc);
 
         assert.deepEqual(info.position, [13, 5], 'Position');
