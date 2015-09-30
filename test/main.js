@@ -4,7 +4,7 @@ require.config({
     baseUrl: '../lib',
     paths: {
         'nainwaklet': '../nainwaklet',
-        'tests': '../tests'
+        'test': '../test'
     },
     shim: {
         // TODO: split this script into AMD modules
@@ -20,6 +20,6 @@ require.config({
     }
 });
 
-require(['qunit', 'tests/test_pages', 'tests/test_detec'], function (QUnit) {
+require(['qunit', 'test/test_pages', 'test/test_detec'], function (QUnit) {
     QUnit.start();
 });
