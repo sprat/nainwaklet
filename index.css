@@ -5,6 +5,11 @@ body {
     margin: 0;
 }
 
+.logo {
+    display: inline-block;
+    vertical-align: bottom;
+}
+
 a {
     color: #666;
     text-decoration: none;
