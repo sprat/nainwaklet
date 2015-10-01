@@ -574,7 +574,7 @@ var Nainwaklet = (function () {
             '            b.appendChild(s);',
             '        }',
             '    } else {',
-            '        alert("Ne fonctionne que sur la page jeu de Nainwak");',
+            '        alert("Ne fonctionne que sur Nainwak ! Vous devez être connecté à votre nain dans le jeu.");',
             '    }',
             '}())'
         ];
