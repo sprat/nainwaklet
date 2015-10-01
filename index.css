@@ -5,9 +5,14 @@ body {
     margin: 0;
 }
 
-.logo {
-    display: inline-block;
-    vertical-align: bottom;
+section {
+    float: left;
+}
+
+aside {
+    width: 232px;
+    float: right;
+    margin: 0 0 20px 20px;
 }
 
 a {
@@ -16,10 +21,9 @@ a {
     border-bottom: 1px dotted #666;
 }
 
-#hub-container {
-    width: 232px;
-    float: right;
-    margin: 0 0 20px 20px;
+.logo {
+    display: inline-block;
+    vertical-align: bottom;
 }
 
 .nainwaklet-button {

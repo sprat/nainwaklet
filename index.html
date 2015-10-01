@@ -10,14 +10,21 @@
 <body>
     <h1><img class="logo" src="favicon.png" alt="logo"> Hub #!</h1>
 
-    <div id="hub-container">Hub</div>
+    <section role="main">
+        <p>Le hub fonctionne de la manière suivante :</p>
+        <ol>
+            <li>Glissez ce button dans vos marques-pages Internet :<br>
+                <a class="nainwaklet-button" href="#" title="Hub #!" data-channel="#!">Hub #!</a>
+            </li>
+            <li>Lorsque vous êtes connecté sur <a href="http://www.nainwak.com/">Nainwak</a>, cliquez sur le bouton !</li>
+        </ol>
 
-    <p>
-        Glissez le button ci-dessous dans vos marques-pages Internet.
-        Puis, lorsque vous êtes connecté à votre nain, cliquez sur le
-        button pour activer/désactiver le Hub.<br>
-        <a class="nainwaklet-button" href="#" title="Hub #!" data-channel="#!">Hub #!</a>
-    </p>
+    </section>
+
+    <aside>
+        <p>➜ Lancer les <a href="tests.html">tests</a></p>
+        <div id="hub-container">Hub</div>
+    </aside>
 
     <script type="text/javascript">
         Nainwaklet.initializeButtons();
@@ -26,9 +33,5 @@
             container: document.getElementById('hub-container')
         });
     </script>
-
-    <p>
-        Lancer les <a href="tests.html">tests</a>
-    </p>
 </body>
 </html>
