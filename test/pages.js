@@ -1,4 +1,3 @@
-/*global define */
 define(['nainwaklet', 'qunit'], function (Nainwaklet, QUnit) {
     'use strict';
 

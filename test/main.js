@@ -1,4 +1,4 @@
-/*global require */
+/*global require, QUnit */
 require.config({
     urlArgs: 'v=' + (new Date()).getTime(),  // prevents caching
     baseUrl: '../lib',

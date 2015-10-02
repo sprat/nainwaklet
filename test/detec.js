@@ -1,4 +1,3 @@
-/*global define */
 define(['nainwaklet', 'qunit', './helper', 'text!./fixtures/detect.html'], function (Nainwaklet, QUnit, helper, detectHTML) {
     'use strict';
 

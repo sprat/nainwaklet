@@ -1,12 +1,5 @@
-/*global
-    window, document, alert, XMLHttpRequest
- */
-/*jslint
-    devel: true
- */
-
 /* Nainwaklet module */
-var Nainwaklet = (function () {
+window.Nainwaklet = (function () {
     'use strict';
 
     var nainwakOrigin = 'http://www.nainwak.com',
@@ -17,7 +10,8 @@ var Nainwaklet = (function () {
         scriptBaseUrl = scriptUrl.substring(0, scriptUrl.lastIndexOf('/') + 1),
         scriptChannel = script.getAttribute('data-channel');
 
-    var print = (function () {
+    var log = (function () {
+        /* eslint-disable no-console */
         var console = window.console,
             bind = Function.prototype.bind;
 
@@ -28,6 +22,7 @@ var Nainwaklet = (function () {
         return function () {
             return;
         };
+        /* eslint-enable no-console */
     }());
 
     function assert(condition, message) {
@@ -375,9 +370,9 @@ var Nainwaklet = (function () {
 
                 if (page) {
                     // TODO: do something useful with the result
-                    print('Analyzing ' + page.name);
+                    log('Analyzing ' + page.name);
                     result = page.analyze(doc);
-                    print(result);
+                    log(result);
                 }
             },
             isEnabled = false,
