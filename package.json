@@ -17,16 +17,16 @@
   "bugs": {
     "url": "https://github.com/sprat/nainwaklet/issues"
   },
-  "scripts": {
-    "server": "live-server",
-    "lint": "esw nainwaklet.js test",
-    "watch": "npm run lint -- -w"
-  },
   "dependencies": {},
   "devDependencies": {
     "eslint": "^1.5.1",
     "eslint-watch": "^2.1.2",
     "live-server": "^0.8.1"
+  },
+  "scripts": {
+    "server": "live-server",
+    "lint": "esw nainwaklet.js test",
+    "watch": "npm run lint -- -w"
   },
   "eslintConfig": {
     "rules": {
