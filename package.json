@@ -18,10 +18,28 @@
     "url": "https://github.com/sprat/nainwaklet/issues"
   },
   "scripts": {
-    "server": "live-server"
+    "server": "live-server",
+    "lint": "esw nainwaklet.js test",
+    "watch": "npm run lint -- -w"
   },
   "dependencies": {},
   "devDependencies": {
+    "eslint": "^1.5.1",
+    "eslint-watch": "^2.1.2",
     "live-server": "^0.8.1"
+  },
+  "eslintConfig": {
+    "rules": {
+      "indent": [2, 4],
+      "quotes": [2, "single", "avoid-escape"],
+      "linebreak-style": [2, "unix"],
+      "semi": [2, "always"],
+      "no-trailing-spaces": [2]
+    },
+    "env": {
+      "browser": true,
+      "amd": true
+    },
+    "extends": "eslint:recommended"
   }
 }
