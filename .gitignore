@@ -1,4 +1,6 @@
-.settings/
+.DS_Store
+.settings
 .project
 node_modules
 npm-debug.log
+.lintcache
