@@ -17,16 +17,16 @@ define(['nainwaklet', 'qunit', './helper', 'text!./fixtures/detect.html'], funct
         // ["33966", "avatar_guilde/41ddb8ad2c2be408e27352accf1cc0b6559466bb.png", "Le PheniX", '[Gnouille] [<span style="color:#91005D;">#!</span>]', "13799", "2", "Diablotin(e)", "0", "13", "5", "&quot;Le PheniX est un oiseau qui symbolise l&#039;immortalité et la résurrection.&quot; A quoi bon me tuer ?!?", "o", "", "0"];
         assert.deepEqual(nains[0], {
             id: 33966,
-            nom: "Le PheniX",
-            image: "http://www.nainwak.com/images/avatar_guilde/41ddb8ad2c2be408e27352accf1cc0b6559466bb.png",
+            nom: 'Le PheniX',
+            image: 'http://www.nainwak.com/images/avatar_guilde/41ddb8ad2c2be408e27352accf1cc0b6559466bb.png',
             description: "\"Le PheniX est un oiseau qui symbolise l'immortalité et la résurrection.\" A quoi bon me tuer ?!?",
             position: [13, 5],
-            cote: "sadique",
-            rang: "Diablotin(e)",
+            cote: 'sadique',
+            rang: 'Diablotin(e)',
             barbe: 137.99,
             guilde: {
-                nom: "#!",
-                couleur: "#91005D"
+                nom: '#!',
+                couleur: '#91005D'
             }
         }, 'Nain 1');
 
@@ -34,23 +34,23 @@ define(['nainwaklet', 'qunit', './helper', 'text!./fixtures/detect.html'], funct
         assert.deepEqual(nains[1], {
             id: 33924,
             nom: "Nainkomp'",
-            image: "http://www.nainwak.com/images/avatar/perso/dab064da974199a53f0e22527f901d523e8869b3.png",
-            description: "Description",
+            image: 'http://www.nainwak.com/images/avatar/perso/dab064da974199a53f0e22527f901d523e8869b3.png',
+            description: 'Description',
             position: [14, 5],
-            cote: "sadique",
-            rang: "Cancre (nain-culte)",
+            cote: 'sadique',
+            rang: 'Cancre (nain-culte)',
             barbe: 103.14
         }, 'Nain 2');
 
         // ["71985", "avatar/choix/TOsmuf4.gif", "Bimme65", '', "0", "3", "Rampant Nain-déci", "2", "13", "6", "Bimme65", "", "", "0"];
         assert.deepEqual(nains[2], {
             id: 71985,
-            nom: "Bimme65",
-            image: "http://www.nainwak.com/images/avatar/choix/TOsmuf4.gif",
-            description: "Bimme65",
+            nom: 'Bimme65',
+            image: 'http://www.nainwak.com/images/avatar/choix/TOsmuf4.gif',
+            description: 'Bimme65',
             position: [13, 6],
-            cote: "rampant",
-            rang: "Rampant Nain-déci",
+            cote: 'rampant',
+            rang: 'Rampant Nain-déci',
             barbe: 0
         }, 'Nain 3');
 
@@ -61,8 +61,8 @@ define(['nainwaklet', 'qunit', './helper', 'text!./fixtures/detect.html'], funct
         assert.deepEqual(objets[0], {
             id: 3613899,
             nom: "Surprise de Kine d'Heure",
-            image: "http://www.nainwak.com/images/objets/jouetkinder2_2.gif",
-            categorie: "inutile",
+            image: 'http://www.nainwak.com/images/objets/jouetkinder2_2.gif',
+            categorie: 'inutile',
             position: [13, 6],
             poussiere: 1271419
         }, 'Objet 1');
@@ -70,9 +70,9 @@ define(['nainwaklet', 'qunit', './helper', 'text!./fixtures/detect.html'], funct
         //tabobjet[2] = [3613897, "objets/banane_sauteuse.gif", "Banane sauteuse", 1, 13, 6, "VEHICULE", 1271419];
         assert.deepEqual(objets[1], {
             id: 3613897,
-            nom: "Banane sauteuse",
-            image: "http://www.nainwak.com/images/objets/banane_sauteuse.gif",
-            categorie: "vehicule",
+            nom: 'Banane sauteuse',
+            image: 'http://www.nainwak.com/images/objets/banane_sauteuse.gif',
+            categorie: 'vehicule',
             position: [13, 6],
             poussiere: 1271419
         }, 'Objet 2');
@@ -80,9 +80,9 @@ define(['nainwaklet', 'qunit', './helper', 'text!./fixtures/detect.html'], funct
         //tabobjet[3] = [3613896, "objets/naindiana.gif", "Panoplie de Naindiana Jones", 2, 13, 7, "RUNE", 1271419];
         assert.deepEqual(objets[2], {
             id: 3613896,
-            nom: "Panoplie de Naindiana Jones",
-            image: "http://www.nainwak.com/images/objets/naindiana.gif",
-            categorie: "rune",
+            nom: 'Panoplie de Naindiana Jones',
+            image: 'http://www.nainwak.com/images/objets/naindiana.gif',
+            categorie: 'rune',
             position: [13, 7],
             poussiere: 1271419
         }, 'Objet 3');

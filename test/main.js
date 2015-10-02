@@ -1,6 +1,6 @@
 /*global require */
 require.config({
-    urlArgs: "v=" + (new Date()).getTime(),  // prevents caching
+    urlArgs: 'v=' + (new Date()).getTime(),  // prevents caching
     baseUrl: '../lib',
     paths: {
         'nainwaklet': '../nainwaklet',

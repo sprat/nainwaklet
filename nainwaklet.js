@@ -123,7 +123,7 @@ var Nainwaklet = (function () {
 
     function decodeHTMLEntities(str) {
         // TODO: not really efficient, a regex-based implementation would be better
-        var txt = document.createElement("textarea");
+        var txt = document.createElement('textarea');
         txt.innerHTML = str;
         return txt.value;
     }
@@ -262,17 +262,17 @@ var Nainwaklet = (function () {
             function getCote(classe) {
                 switch (classe) {
                 case 0:
-                    return "nain-déci";
+                    return 'nain-déci';
                 case 1:
-                    return "brave";
+                    return 'brave';
                 case 2:
-                    return "sadique";
+                    return 'sadique';
                 case 3:
-                    return "rampant";
+                    return 'rampant';
                 case 7:
-                    return "mutant";
+                    return 'mutant';
                 default:
-                    return "unknown";
+                    return 'unknown';
                 }
             }
 
@@ -586,7 +586,7 @@ var Nainwaklet = (function () {
         Array.prototype.forEach.call(_buttons, function (button) {
             var channel = button.getAttribute('data-channel'),
                 href = getInjectionUrl(channel);
-            button.setAttribute("href", href);
+            button.setAttribute('href', href);
         });
     }
 

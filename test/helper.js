@@ -32,5 +32,5 @@ define(function () {
     // module API
     return {
         parseHTMLDocument: parseHTMLDocument
-    }
+    };
 });
