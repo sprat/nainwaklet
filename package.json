@@ -21,24 +21,43 @@
   "devDependencies": {
     "eslint": "^1.5.1",
     "eslint-watch": "^2.1.2",
-    "live-server": "^0.8.1"
+    "live-server": "^0.8.1",
+    "npm-run-all": "^1.2.11"
   },
   "scripts": {
     "server": "live-server",
-    "lint": "esw nainwaklet.js test",
-    "watch": "npm run lint -- -w"
+    "server:tests": "npm run server -- --open=tests.html",
+    "lint": "esw app test",
+    "watch:lint": "npm run lint -- --watch",
+    "dev": "npm-run-all --parallel server:tests watch:lint"
   },
   "eslintConfig": {
     "rules": {
-      "indent": [2, 4],
-      "quotes": [2, "single", "avoid-escape"],
-      "linebreak-style": [2, "unix"],
-      "semi": [2, "always"],
-      "no-trailing-spaces": [2]
+      "indent": [
+        2,
+        4
+      ],
+      "quotes": [
+        2,
+        "single",
+        "avoid-escape"
+      ],
+      "linebreak-style": [
+        2,
+        "unix"
+      ],
+      "semi": [
+        2,
+        "always"
+      ],
+      "no-trailing-spaces": [
+        2
+      ]
     },
     "env": {
       "browser": true,
-      "amd": true
+      "amd": true,
+      "qunit": true
     },
     "extends": "eslint:recommended"
   }

@@ -1,15 +1,21 @@
-define(['nainwaklet', 'qunit', './helper', 'text!./fixtures/detect.html'], function (Nainwaklet, QUnit, helper, detectHTML) {
+define(['app/pages/detect', 'html', 'text!./fixtures/detect.html'], function (detect, html, detectHTML) {
     'use strict';
 
-    QUnit.test('detect', function (assert) {
-        var detect = Nainwaklet.testing.pages.detect,
-            doc = helper.parseHTMLDocument(detectHTML),
-            info = detect.analyze(doc);
+    QUnit.module('detect');
+
+    var detectDoc = html.parseDocument(detectHTML);
+
+    QUnit.test('localisation', function (assert) {
+        var info = detect.analyze(detectDoc);
 
         assert.deepEqual(info.position, [13, 5], 'Position');
         assert.strictEqual(info.monde, 'Monde des sadiques', 'Monde');
+    });
 
-        var nains = info.nains;
+    QUnit.test('nains', function (assert) {
+        var info = detect.analyze(detectDoc),
+            nains = info.nains;
+
         assert.strictEqual(nains.length, 3, 'Nombre de nains');
 
         // TODO: add more tests about nains
@@ -52,9 +58,13 @@ define(['nainwaklet', 'qunit', './helper', 'text!./fixtures/detect.html'], funct
             rang: 'Rampant Nain-déci',
             barbe: 0
         }, 'Nain 3');
+    });
 
-        var objets = info.objets;
-        assert.strictEqual(nains.length, 3, "Nombre d'objets");
+    QUnit.test('objets', function (assert) {
+        var info = detect.analyze(detectDoc),
+            objets = info.objets;
+
+        assert.strictEqual(objets.length, 3, "Nombre d'objets");
 
         // [3613899, "objets/jouetkinder2_2.gif", "Surprise de Kine d&#039;Heure", 1, 13, 6, "INUTILE", 1271419];
         assert.deepEqual(objets[0], {

@@ -5,6 +5,10 @@ body {
     margin: 0;
 }
 
+h2 {
+    margin-top: 2em;
+}
+
 section {
     float: left;
 }
@@ -18,7 +22,10 @@ aside {
 a {
     color: #666;
     text-decoration: none;
-    border-bottom: 1px dotted #666;
+}
+
+a:hover {
+    text-decoration: underline;
 }
 
 .logo {
@@ -27,7 +34,7 @@ a {
 }
 
 .nainwaklet-button {
-    margin: 10px 0;
+    margin: 5px 0;
 }
 
 /* button design */

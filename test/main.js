@@ -1,25 +1,15 @@
-/*global require, QUnit */
-require.config({
-    urlArgs: 'v=' + (new Date()).getTime(),  // prevents caching
-    baseUrl: '../lib',
-    paths: {
-        'nainwaklet': '../nainwaklet',
-        'test': '../test'
-    },
-    shim: {
-        // TODO: split this script into AMD modules
-        'nainwaklet': {
-            exports: 'Nainwaklet'
-        },
-        'qunit': {
-            exports: 'QUnit',
-            init: function() {
-                QUnit.config.autostart = false;
-            }
-        }
-    }
-});
+require(['../app/require-config.js', '../lib/vendor/qunit.js'], function () {
+    var tests = [
+        'test/nainwak',
+        'test/pages',
+        'test/detect'
+    ];
 
-require(['qunit', 'test/pages', 'test/detec'], function (QUnit) {
-    QUnit.start();
+    // don't autostart QUnit
+    QUnit.config.autostart = false;
+
+    // start QUnit after the test modules are loaded
+    require(tests, function () {
+        QUnit.start();
+    });
 });
