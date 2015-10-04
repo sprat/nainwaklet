@@ -8,6 +8,12 @@ define(['app/nainwak'], function (nainwak) {
         assert.strictEqual(nainwak.gameUrl('detect'), 'http://www.nainwak.com/jeu/detect.php', 'Detect URL');
     });
 
+    QUnit.test('pages.list', function (assert) {
+        var pages = nainwak.pages;
+        assert.ok(pages.list.length > 0, 'Non-empty list');
+        assert.strictEqual(pages.list[0], pages.byName('detect'), 'First element is the detect page');
+    });
+
     QUnit.test('pages.byName', function (assert) {
         var pages = nainwak.pages;
         assert.strictEqual(pages.byName('detect').name, 'detect', 'Detect page by name');

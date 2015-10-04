@@ -14,6 +14,7 @@ define(['array'], function (array) {
         }
 
         return Object.freeze({
+            list: pages,
             byName: byName,
             byUrl: byUrl
         });
