@@ -1,8 +1,8 @@
 /* Application factory */
-define(['./spy', './hub', './user'], function (createSpy, createHub, createUser) {
-    function createApplication(conf) {
+define(['./spy', './hub', './user'], function (Spy, Hub, User) {
+    function Application(conf) {
         var _conf = conf || {},
-            user = _conf.user || createUser(),
+            user = _conf.user || User(),
             channel = _conf.channel || 'default',
             container = _conf.container || window.document.body,
             spyFrame = _conf.spyFrame,  // should be the frame element
@@ -10,11 +10,11 @@ define(['./spy', './hub', './user'], function (createSpy, createHub, createUser)
             spy;
 
         if (container) {
-            hub = createHub(container, user, channel);
+            hub = Hub(container, user, channel);
         }
 
         if (spyFrame) {
-            spy = createSpy(spyFrame, user, channel);
+            spy = Spy(spyFrame, user, channel);
         }
 
         function destroy() {
@@ -35,5 +35,5 @@ define(['./spy', './hub', './user'], function (createSpy, createHub, createUser)
         });
     }
 
-    return createApplication;
+    return Application;
 });

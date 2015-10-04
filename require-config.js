@@ -1,5 +1,5 @@
 require.config({
-    urlArgs: 'nocache=' + (new Date()).getTime(),  // prevents caching
+    urlArgs: 'cachebust=' + (new Date()).getTime(),  // prevents caching
     baseUrl: 'lib',
     paths: {
         'app': '../app',
@@ -8,5 +8,5 @@ require.config({
         'test': '../test',
         'images': '../images'
     },
-    packages: ['app/pages']
+    packages: ['app/nainwak']
 });

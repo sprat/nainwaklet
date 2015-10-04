@@ -7,12 +7,12 @@ define(['require'], function (require) {
         return 'guest' + id;
     }
 
-    function createUser(name, avatar) {
+    function User(name, avatar) {
         return Object.freeze({
             name: name || generateRandomGuestName(),
             avatar: avatar || defaultAvatarUrl
         });
     }
 
-    return createUser;
+    return User;
 });

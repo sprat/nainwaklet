@@ -1,7 +1,6 @@
-require(['../app/require-config.js', '../lib/vendor/qunit.js'], function () {
+require(['../require-config.js', '../lib/vendor/qunit.js'], function () {
     var tests = [
         'test/nainwak',
-        'test/pages',
         'test/detect'
     ];
 

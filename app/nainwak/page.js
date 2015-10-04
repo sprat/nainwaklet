@@ -1,7 +1,7 @@
 /* Page factory */
-define(['app/nainwak', 'url', 'html', 'extend'], function (nainwak, url, html, extend) {
-    function createPage(name, analyze, loadParams) {
-        var url = nainwak.gameUrl(name);
+define(['./urls', 'url', 'html', 'extend'], function (urls, url, html, extend) {
+    function Page(name, analyze, loadParams) {
+        var url = urls.gameUrl(name);
 
         function getUrl(IDS) {
             var params = {
@@ -32,5 +32,5 @@ define(['app/nainwak', 'url', 'html', 'extend'], function (nainwak, url, html, e
         });
     }
 
-    return createPage;
+    return Page;
 });

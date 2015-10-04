@@ -1,5 +1,5 @@
 /* detect page */
-define(['./page', 'app/nainwak', 'array', 'regexp'], function (createPage, nainwak, array, regexp) {
+define(['./page', './urls', 'array', 'regexp'], function (Page, urls, array, regexp) {
     function int(value) {
         return parseInt(value, 10);
     }
@@ -79,7 +79,7 @@ define(['./page', 'app/nainwak', 'array', 'regexp'], function (createPage, nainw
             var nain = {
                     id: int(spec.id),
                     nom: spec.nom,
-                    image: nainwak.imageUrl(spec.photo),
+                    image: urls.imageUrl(spec.photo),
                     description: spec.description,
                     position: [int(spec.x), int(spec.y)],
                     cote: getCote(int(spec.classe)),
@@ -104,7 +104,7 @@ define(['./page', 'app/nainwak', 'array', 'regexp'], function (createPage, nainw
             return {
                 id: int(spec.id),
                 nom: spec.nom,
-                image: nainwak.imageUrl(spec.photo),
+                image: urls.imageUrl(spec.photo),
                 categorie: spec.categorie.toLowerCase(),
                 position: [int(spec.x), int(spec.y)],
                 poussiere: int(spec.poussiere)  // expressed in seconds
@@ -125,5 +125,5 @@ define(['./page', 'app/nainwak', 'array', 'regexp'], function (createPage, nainw
         };
     }
 
-    return createPage('detect', analyze, {});
+    return Page('detect', analyze, {});
 });

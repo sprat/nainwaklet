@@ -1,19 +1,19 @@
-define(['app/pages/detect', 'html', 'text!./fixtures/detect.html'], function (detect, html, detectHTML) {
+define(['app/nainwak/detect', 'html', 'text!./fixtures/detect.html'], function (detect, html, detectHTML) {
     'use strict';
 
-    QUnit.module('detect');
+    QUnit.module('app/nainwak/detect');
 
-    var detectDoc = html.parseDocument(detectHTML);
+    var doc = html.parseDocument(detectHTML);
 
     QUnit.test('localisation', function (assert) {
-        var info = detect.analyze(detectDoc);
+        var info = detect.analyze(doc);
 
         assert.deepEqual(info.position, [13, 5], 'Position');
         assert.strictEqual(info.monde, 'Monde des sadiques', 'Monde');
     });
 
     QUnit.test('nains', function (assert) {
-        var info = detect.analyze(detectDoc),
+        var info = detect.analyze(doc),
             nains = info.nains;
 
         assert.strictEqual(nains.length, 3, 'Nombre de nains');
@@ -61,7 +61,7 @@ define(['app/pages/detect', 'html', 'text!./fixtures/detect.html'], function (de
     });
 
     QUnit.test('objets', function (assert) {
-        var info = detect.analyze(detectDoc),
+        var info = detect.analyze(doc),
             objets = info.objets;
 
         assert.strictEqual(objets.length, 3, "Nombre d'objets");

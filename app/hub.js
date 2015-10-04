@@ -2,7 +2,7 @@
 define(['require'], function (require) {
     var hubUrl = require.toUrl('../hub.html');
 
-    function createHub(container) {  /*, user, channel*/
+    function Hub(container) {  /*, user, channel*/
         var containerContent = null,  // original content of the container
             ui = (function () {  // create the hub UI
                 var iframe = document.createElement('iframe');
@@ -59,5 +59,5 @@ define(['require'], function (require) {
         });
     }
 
-    return createHub;
+    return Hub;
 });

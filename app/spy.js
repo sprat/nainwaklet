@@ -1,6 +1,6 @@
 /* Spy factory */
 define(['./pages', 'log'], function (pages, log) {
-    function createSpy(frame) {  /*user, channel*/
+    function Spy(frame) {  /*user, channel*/
         //IDS = url.parseQueryParams(frame.location).IDS,
         var infoLoaded = function () {
                 var contentWindow = frame.contentWindow,
@@ -49,5 +49,5 @@ define(['./pages', 'log'], function (pages, log) {
         });
     }
 
-    return createSpy;
+    return Spy;
 });
