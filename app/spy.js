@@ -1,5 +1,5 @@
 /* Spy factory */
-define(['./pages', 'log'], function (pages, log) {
+define(['./nainwak', 'log'], function (nainwak, log) {
     function Spy(frame) {  /*user, channel*/
         //IDS = url.parseQueryParams(frame.location).IDS,
         var infoLoaded = function () {
@@ -7,7 +7,7 @@ define(['./pages', 'log'], function (pages, log) {
                     doc = contentWindow.document,
                     location = contentWindow.location,
                     url = location.origin + location.pathname,
-                    page = pages.getByUrl(url),
+                    page = nainwak.pages.byUrl(url),
                     result;
 
                 if (page) {
