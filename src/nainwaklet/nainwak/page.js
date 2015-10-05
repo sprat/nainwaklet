@@ -1,7 +1,7 @@
 /* Page factory */
-define(['./urls', 'url', 'html', 'extend'], function (urls, url, html, extend) {
+define(['./urls', 'utils/url', 'utils/html', 'utils/extend'], function (urls, url, html, extend) {
     function Page(name, analyze, loadParams) {
-        var url = urls.gameUrl(name);
+        var baseUrl = urls.gameUrl(name);
 
         function getUrl(IDS) {
             var params = {
@@ -10,7 +10,7 @@ define(['./urls', 'url', 'html', 'extend'], function (urls, url, html, extend) {
             if (loadParams) {
                 extend(params, loadParams);
             }
-            return url + '?' + url.buildQueryParams(params);
+            return baseUrl + '?' + url.buildQueryParams(params);
         }
 
         function load(IDS, processResult) {
@@ -26,7 +26,7 @@ define(['./urls', 'url', 'html', 'extend'], function (urls, url, html, extend) {
 
         return Object.freeze({
             name: name,
-            url: url,  // base URL without query parameters
+            url: baseUrl,  // base URL without query parameters
             analyze: analyze,
             load: load
         });

@@ -1,5 +1,4 @@
 /* eslint-disable no-console */
-
 /* log function */
 define(function () {
     var console = window.console,

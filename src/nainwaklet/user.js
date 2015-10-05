@@ -1,6 +1,6 @@
 /* User factory */
-define(['require'], function (require) {
-    var defaultAvatarUrl = require.toUrl('images/avatar.png');
+define(['./config'], function (config) {
+    var defaultAvatarUrl = config.imageUrl('avatar.png');
 
     function generateRandomGuestName() {
         var id = Math.round(Math.random() * 1000);

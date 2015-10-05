@@ -1,12 +1,5 @@
-/* HTML/DOM utilities */
+/* HTML utilities */
 define(function () {
-    function decodeEntities(string) {
-        // TODO: not really efficient, a regex-based implementation would be better
-        var txt = document.createElement('textarea');
-        txt.innerHTML = string;
-        return txt.value;
-    }
-
     function parseDocument(html) {
         /*
         var parser = new DOMParser();
@@ -35,7 +28,6 @@ define(function () {
     }
 
     return {
-        decodeEntities: decodeEntities,
         parseDocument: parseDocument,
         load: load
     };

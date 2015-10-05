@@ -1,12 +1,14 @@
-require.config({
+var require = {
     urlArgs: 'cachebust=' + (new Date()).getTime(),  // prevents caching
-    baseUrl: 'lib',
+    baseUrl: 'src',
     paths: {
-        'app': '../app',
-        'require': 'vendor/require',
-        'text': 'vendor/text',
-        'test': '../test',
-        'images': '../images'
+        nainwaklet: 'nainwaklet',
+        utils: 'utils',
+        require: 'vendor/require',
+        text: 'vendor/text',
+        qunit: 'vendor/qunit', 
+        tests: 'tests',
+        images: '../images'
     },
-    packages: ['app/nainwak']
-});
+    packages: ['nainwaklet', 'nainwaklet/nainwak', 'tests']
+};

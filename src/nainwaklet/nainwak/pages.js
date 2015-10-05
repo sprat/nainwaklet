@@ -1,5 +1,5 @@
 /* Collection of pages */
-define(['array'], function (array) {
+define(['utils/array'], function (array) {
     function Pages(pages) {
         function byUrl(url) {
             return array.find(pages, function (page) {

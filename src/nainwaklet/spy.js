@@ -1,5 +1,5 @@
 /* Spy factory */
-define(['./nainwak', 'log'], function (nainwak, log) {
+define(['./nainwak', 'utils/log'], function (nainwak, log) {
     function Spy(frame) {  /*user, channel*/
         //IDS = url.parseQueryParams(frame.location).IDS,
         var infoLoaded = function () {

@@ -1,5 +1,5 @@
 /* detect page */
-define(['./page', './urls', 'array', 'regexp'], function (Page, urls, array, regexp) {
+define(['./page', './urls', 'utils/array', 'utils/regexp'], function (Page, urls, array, regexp) {
     function int(value) {
         return parseInt(value, 10);
     }

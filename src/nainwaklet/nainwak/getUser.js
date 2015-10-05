@@ -1,5 +1,5 @@
 /* Nainwak URLs */
-define(['app/user', './urls'], function (User, urls) {
+define(['../user', './urls'], function (User, urls) {
     /* Get the Nainwak User info from the menu frame */
     function getUser(window) {
         if (!urls.isInGame(window)) {

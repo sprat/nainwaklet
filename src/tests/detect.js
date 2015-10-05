@@ -1,7 +1,7 @@
-define(['app/nainwak/detect', 'html', 'text!./fixtures/detect.html'], function (detect, html, detectHTML) {
+define(['nainwaklet/nainwak/detect', 'utils/html', 'text!./fixtures/detect.html'], function (detect, html, detectHTML) {
     'use strict';
 
-    QUnit.module('app/nainwak/detect');
+    QUnit.module('nainwaklet/nainwak/detect');
 
     var doc = html.parseDocument(detectHTML);
 

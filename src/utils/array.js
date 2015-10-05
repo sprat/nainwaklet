@@ -1,7 +1,14 @@
 /* Array utilities */
-define(['./assert', './html'], function (assert, html) {
+define(['./assert'], function (assert) {
+    function decodeEntities(string) {
+        // TODO: not really efficient, a regex-based implementation would be better
+        var txt = document.createElement('textarea');
+        txt.innerHTML = string;
+        return txt.value;
+    }
+
     // parses a string containing a representation of a Javascript array
-    // and returns it
+    // with JSON-compatible values and returns it
     function parse(string) {
         var cleaned = string.replace(/([\[,]\s*)'(.*)'(\s*[,\]])/g, function (ignore, before, inside, after) {
                 var escaped = inside.replace(/"/g, '\\"');  // escape double-quotes inside
@@ -10,7 +17,7 @@ define(['./assert', './html'], function (assert, html) {
             values = JSON.parse(cleaned);
 
         return values.map(function (value) {
-            return html.decodeEntities(value);
+            return decodeEntities(value);
         });
     }
 

@@ -19,15 +19,18 @@
   },
   "dependencies": {},
   "devDependencies": {
+    "amdclean": "^2.7.0",
     "eslint": "^1.5.1",
     "eslint-watch": "^2.1.2",
     "live-server": "^0.8.1",
-    "npm-run-all": "^1.2.11"
+    "npm-run-all": "^1.2.11",
+    "requirejs": "^2.1.20"
   },
   "scripts": {
     "server": "live-server",
     "server:tests": "npm run server -- --open=tests.html",
-    "lint": "esw app test",
+    "lint": "esw src --ignore-pattern src/vendor/*",
+    "build": "node src/build.js",
     "watch:lint": "npm run lint -- --watch",
     "dev": "npm-run-all --parallel server:tests watch:lint"
   },

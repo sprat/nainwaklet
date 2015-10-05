@@ -5,7 +5,11 @@
     <title>Hub #!</title>
     <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
     <link rel="stylesheet" type="text/css" href="css/index.css">
+    <script src="require-config.js"></script>
+    <script src="src/vendor/require.js"></script>
+    <!-- 
     <script type="text/javascript" src="dist/nainwaklet.js"></script>
+     -->
 </head>
 <body>
     <h1><img class="logo" src="images/favicon.png" alt="logo"> Hub #!</h1>
@@ -34,10 +38,12 @@
     </aside>
 
     <script type="text/javascript">
-        Nainwaklet.initializeButtons();
-        Nainwaklet.createApplication({
-            channel: '#!',
-            container: document.getElementById('hub-container')
+        require(['nainwaklet'], function(nainwaklet) {
+            nainwaklet.initializeButtons();
+            nainwaklet.Application({
+                channel: '#!',
+                container: document.getElementById('hub-container')
+            });
         });
     </script>
 </body>

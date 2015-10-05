@@ -1,13 +1,11 @@
 /* Hub factory */
-define(['require'], function (require) {
-    var hubUrl = require.toUrl('../hub.html');
-
+define(['./config'], function (config) {
     function Hub(container) {  /*, user, channel*/
         var containerContent = null,  // original content of the container
             ui = (function () {  // create the hub UI
                 var iframe = document.createElement('iframe');
                 iframe.setAttribute('class', 'nainwaklet-hub');
-                iframe.setAttribute('src', hubUrl);
+                iframe.setAttribute('src', config.hubUrl());
                 iframe.style.width = '100%';
                 iframe.style.border = 0;
                 return iframe;
