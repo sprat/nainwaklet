@@ -3,7 +3,6 @@ define(['./config', './nainwak', './user', './app', './buttons'], function (conf
     'use strict';
 
     var scriptUrl = config.scriptUrl();
-    console.log(scriptUrl);
 
     // module public API
     var api = {
