@@ -1,31 +1,38 @@
 /* Hub class */
-define(['./nainwak', './settings', './spy', './dashboard', './user'], function (nainwak, settings, Spy, Dashboard, User) {
-    function getContainerElement(container) {
-        var doc = window.document;
-        if (container === undefined) {
-            container = doc.body;
-        } else if (container.nodeType === undefined) {  // it's not a node
-            // we assume it's a selector
-            container = doc.querySelector(container);
+define(['./nainwak', './settings', './spy', './dashboard', './user', 'utils/extend'], function (nainwak, settings, Spy, Dashboard, User, extend) {
+    function getElement(target) {
+        if (target === undefined || target === null) {
+            return target;
         }
-        return container;
+
+        if (target.nodeType !== undefined) {
+            return target;  // it's already a node
+        }
+
+        // so, we assume it's a selector
+        return window.document.querySelector(target);
     }
 
     function Hub(conf) {
-        var _conf = conf || {},
-            user = _conf.user || User(),
-            channel = _conf.channel || 'default',
-            container = getContainerElement(_conf.container),
-            infoFrame = _conf.infoFrame,  // should be the frame element
-            dashboard,
-            spy;
+        var dashboard,
+            spy,
+            newConf = {  // default conf
+                user: User(),  // anonymous user
+                channel: 'default',  // default channel
+                container: window.document.body,  // dashboard container
+                infoFrame: undefined  // info frame
+            };
 
-        if (container) {
-            dashboard = Dashboard(container, user, channel);
+        extend(newConf, conf);
+        newConf.container = getElement(newConf.container);
+        newConf.infoFrame = getElement(newConf.infoFrame);
+
+        if (newConf.container) {
+            dashboard = Dashboard(newConf);
         }
 
-        if (infoFrame) {
-            spy = Spy(infoFrame, user, channel);
+        if (newConf.infoFrame) {
+            spy = Spy(newConf);
         }
 
         function destroy() {
@@ -39,7 +46,8 @@ define(['./nainwak', './settings', './spy', './dashboard', './user'], function (
         }
 
         return Object.freeze({
-            user: user,
+            user: newConf.user,
+            channel: newConf.channel,
             dashboard: dashboard,
             spy: spy,
             destroy: destroy

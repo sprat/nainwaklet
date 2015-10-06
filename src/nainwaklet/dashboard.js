@@ -3,8 +3,9 @@ define(['./settings', 'utils/css'], function (settings, css) {
     css.insertLink('http://www.nainwak.com/css/cadre2.css', document);
     css.insertLink(settings.getCssUrl('dashboard.css'), document);
 
-    function Dashboard(container) {  /*, user, channel*/
-        var containerContent = null,  // original content of the container
+    function Dashboard(conf) {
+        var container = conf.container,
+            containerContent = null,  // initial content of the container
             ui = (function() {
                 var dashboard = document.createElement('div'),
                     title = document.createElement('div'),
@@ -12,7 +13,7 @@ define(['./settings', 'utils/css'], function (settings, css) {
 
                 dashboard.className = 'nainwaklet-dashboard';
                 title.className = 'VNT title';
-                title.innerText = 'Hub {channel}';
+                title.innerText = 'Hub ' + conf.channel + ' [' + conf.user.name + ']';
                 content.className = 'TV content';
                 content.innerText = 'Chargement en cours...';
                 dashboard.appendChild(title);
