@@ -1,5 +1,5 @@
 /* Module API */
-define(['./config', './nainwak', './user', './app', './buttons'], function (config, nainwak, User, Application, buttons) {
+define(['./config', './nainwak', './user', './hub', './buttons'], function (config, nainwak, User, Hub, buttons) {
     'use strict';
 
     var scriptUrl = config.scriptUrl();
@@ -7,19 +7,19 @@ define(['./config', './nainwak', './user', './app', './buttons'], function (conf
     // module public API
     var api = {
         User: User,
-        Application: Application,
+        Hub: Hub,
         initializeButtons: buttons.initialize.bind(buttons, scriptUrl)
     };
 
-    // create an application object if we are in the Nainwak game page
+    // create an Hub object if we are in the Nainwak game page
     if (nainwak.isInGame(window)) {
-        api.application = Application({
+        api.hub = Hub({
             user: nainwak.getUser(window),
             channel: config.channel,
             container: window.frames.pub.document.body,
-            spyFrame: window.frames.info.frameElement
+            infoFrame: window.frames.info.frameElement
         });
     }
 
-    return Object.freeze(api);
+    return api;
 });

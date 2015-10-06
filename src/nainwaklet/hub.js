@@ -1,59 +1,48 @@
-/* Hub factory */
-define(['./config'], function (config) {
-    function Hub(container) {  /*, user, channel*/
-        var containerContent = null,  // original content of the container
-            ui = (function () {  // create the hub UI
-                var iframe = document.createElement('iframe');
-                iframe.setAttribute('class', 'nainwaklet-hub');
-                iframe.setAttribute('src', config.hubUrl());
-                iframe.style.width = '100%';
-                iframe.style.border = 0;
-                return iframe;
-            }()),
-            isEnabled = false,
-            enable = function (value) {
-                var oldEnabled = isEnabled;
+/* Hub class */
+define(['./spy', './dashboard', './user'], function (Spy, Dashboard, User) {
+    function getContainerElement(container) {
+        var doc = window.document;
+        if (container === undefined) {
+            container = doc.body;
+        } else if (container.nodeType === undefined) {  // it's not a node
+            // we assume it's a selector
+            container = doc.querySelector(container);
+        }
+        return container;
+    }
 
-                // update the status (and convert to boolean, just in case)
-                isEnabled = !!value;
+    function Hub(conf) {
+        var _conf = conf || {},
+            user = _conf.user || User(),
+            channel = _conf.channel || 'default',
+            container = getContainerElement(_conf.container),
+            infoFrame = _conf.infoFrame,  // should be the frame element
+            dashboard,
+            spy;
 
-                if (isEnabled === oldEnabled) {  // nothing to do
-                    return;
-                }
+        if (container) {
+            dashboard = Dashboard(container, user, channel);
+        }
 
-                if (isEnabled) {
-                    //var doc = container.ownerDocument;
-                    //    head = doc.getElementsByTagName('head')[0]
+        if (infoFrame) {
+            spy = Spy(infoFrame, user, channel);
+        }
 
-                    // add the CSS element to the head
-                    //head.appendChild(cssLink);
+        function destroy() {
+            if (spy) {
+                spy.enabled = false;
+            }
 
-                    // backup the initial content
-                    containerContent = container.innerHTML;
-
-                    // replace by our UI
-                    container.innerHTML = '';
-                    container.appendChild(ui);
-                } else {
-                    // restore the initial content
-                    container.innerHTML = containerContent;
-                    containerContent = null;
-
-                    // remove the CSS element
-                    //cssLink.parentNode.removeChild(cssLink);
-                }
-            };
-
-        // start enabled
-        enable(true);
+            if (dashboard) {
+                dashboard.enabled = false;
+            }
+        }
 
         return Object.freeze({
-            get enabled() {
-                return isEnabled;
-            },
-            set enabled(value) {
-                enable(value);
-            }
+            user: user,
+            dashboard: dashboard,
+            spy: spy,
+            destroy: destroy
         });
     }
 

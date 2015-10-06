@@ -34,15 +34,15 @@
     </section>
 
     <aside>
-        <div id="hub-container">Hub</div>
+        <div id="hub-container">Loading the Hub...</div>
     </aside>
 
     <script type="text/javascript">
         require(['nainwaklet'], function(nainwaklet) {
             nainwaklet.initializeButtons();
-            nainwaklet.Application({
+            nainwaklet.Hub({
                 channel: '#!',
-                container: document.getElementById('hub-container')
+                container: '#hub-container'
             });
         });
     </script>
