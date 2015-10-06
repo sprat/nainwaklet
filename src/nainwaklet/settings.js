@@ -7,10 +7,15 @@ define(['require'], function (require) {
         return require.toUrl('images/' + name);
     }
 
+    function getCssUrl(name) {
+        return require.toUrl('css/' + name);
+    }
+
     return {
         scriptUrl: scriptUrl,
         hubUrl: hubUrl,
         channel: 'default',
-        getImageUrl: getImageUrl
+        getImageUrl: getImageUrl,
+        getCssUrl: getCssUrl
     };
 });

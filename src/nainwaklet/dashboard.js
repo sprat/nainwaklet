@@ -1,14 +1,23 @@
 /* Dashboard class */
-define(['./settings'], function (settings) {
+define(['./settings', 'utils/css'], function (settings, css) {
+    css.insertLink('http://www.nainwak.com/css/cadre2.css', document);
+    css.insertLink(settings.getCssUrl('dashboard.css'), document);
+
     function Dashboard(container) {  /*, user, channel*/
         var containerContent = null,  // original content of the container
-            ui = (function () {  // create the hub UI
-                var iframe = document.createElement('iframe');
-                iframe.setAttribute('class', 'nainwaklet-hub');
-                iframe.setAttribute('src', settings.hubUrl);
-                iframe.style.width = '100%';
-                iframe.style.border = 0;
-                return iframe;
+            ui = (function() {
+                var dashboard = document.createElement('div'),
+                    title = document.createElement('div'),
+                    content = document.createElement('div');
+
+                dashboard.className = 'nainwaklet-dashboard';
+                title.className = 'VNT title';
+                title.innerText = 'Hub {channel}';
+                content.className = 'TV content';
+                content.innerText = 'Chargement en cours...';
+                dashboard.appendChild(title);
+                dashboard.appendChild(content);
+                return dashboard;
             }()),
             isEnabled = false,
             enable = function (value) {
