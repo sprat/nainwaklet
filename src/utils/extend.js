@@ -1,9 +1,12 @@
 /* extend function */
 define(function () {
-    function extend(target, source) {
-        Object.keys(source).forEach(function (key) {
-            if (target[key] === undefined) {
-                target[key] = source[key];
+    function extend(target) {
+        var sources = Array.prototype.slice.call(arguments, 1);
+        sources.forEach(function(source) {
+            if (source) {
+                Object.keys(source).forEach(function (prop) {
+                    target[prop] = source[prop];
+                });
             }
         });
         return target;
