@@ -24,17 +24,14 @@ define(['./assert'], function (assert) {
     // similar to Array.prototype.find which is only available in ES6
     function find(array, predicate) {
         var length = array.length,
-            i = 0,
+            i,
             element;
 
-        // Note: a for loop would be better here but I can't/don't want to
-        // disable the jslint warning in the remaining source
-        while (i < length) {
+        for (i = 0; i < length; i += 1) {
             element = array[i];
             if (predicate(element)) {
                 return element;
             }
-            i += 1;
         }
     }
 
