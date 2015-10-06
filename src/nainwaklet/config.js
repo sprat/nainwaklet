@@ -7,7 +7,7 @@ define(['require'], function (require) {
     */
 
     function scriptUrl() {
-        return require.toUrl('.');
+        return require.toUrl('nainwakletDist');
     }
 
     function imageUrl(name) {

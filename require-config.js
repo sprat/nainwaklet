@@ -8,6 +8,7 @@ var require = {
         text: 'vendor/text',
         qunit: 'vendor/qunit', 
         tests: 'tests',
+        nainwakletDist: '../dist/nainwaklet.js',
         images: '../images'
     },
     packages: ['nainwaklet', 'nainwaklet/nainwak', 'tests']

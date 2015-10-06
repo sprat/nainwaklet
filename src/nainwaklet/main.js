@@ -2,11 +2,14 @@
 define(['./config', './nainwak', './user', './app', './buttons'], function (config, nainwak, User, Application, buttons) {
     'use strict';
 
+    var scriptUrl = config.scriptUrl();
+    console.log(scriptUrl);
+
     // module public API
     var api = {
         User: User,
         Application: Application,
-        initializeButtons: buttons.initialize.bind(buttons, config.scriptUrl())
+        initializeButtons: buttons.initialize.bind(buttons, scriptUrl)
     };
 
     // create an application object if we are in the Nainwak game page
