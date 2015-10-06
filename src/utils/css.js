@@ -1,5 +1,9 @@
 /* CSS utilities */
-define(function () {
+define(['utils/array'], function (array) {
+    function head(document) {
+        return document.getElementsByTagName('head')[0];
+    }
+
     function createLink(url) {
         var link = document.createElement('link');
         link.setAttribute('rel', 'stylesheet');
@@ -8,9 +12,23 @@ define(function () {
         return link;
     }
 
+    function findLink(url, document) {
+        var links = head(document).getElementsByTagName('link');
+        return array.find(links, function(link) {
+            return link.href === url;
+        });
+    }
+
     function insertLink(url, document) {
-        var link = createLink(url);
-        document.getElementsByTagName('head')[0].appendChild(link);
+        // check if there's already a link with this url in the document
+        var link = findLink(url, document);
+        if (link) {
+            return;
+        }
+
+        // otherwise, create and return it
+        link = createLink(url);
+        head(document).appendChild(link);
         return link;
     }
 
