@@ -8,8 +8,7 @@ var fs = require('fs'),
 
 console.log('Building the distribution...');
 requirejs.optimize({
-    // TODO: needed?
-    //findNestedDependencies: true,
+    findNestedDependencies: true,  // optimize nested dependencies too
     mainConfigFile: path.join(root, 'require-config.js'),
     name: 'nainwaklet',
     optimize: 'none',
