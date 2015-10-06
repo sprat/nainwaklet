@@ -29,8 +29,8 @@
   },
   "scripts": {
     "server": "live-server",
-    "lint": "esw .",
-    "watch:lint": "esw . --watch",
+    "lint": "esw",
+    "watch:lint": "esw --watch",
     "build": "node build/build.js",
     "watch:build": "nodemon --watch src --watch build --watch require-config.js build/build.js",
     "make": "npm-run-all --sequential lint build",
