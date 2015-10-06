@@ -1,11 +1,11 @@
 /* Dashboard class */
-define(['./config'], function (config) {
+define(['./settings'], function (settings) {
     function Dashboard(container) {  /*, user, channel*/
         var containerContent = null,  // original content of the container
             ui = (function () {  // create the hub UI
                 var iframe = document.createElement('iframe');
                 iframe.setAttribute('class', 'nainwaklet-hub');
-                iframe.setAttribute('src', config.hubUrl);
+                iframe.setAttribute('src', settings.hubUrl);
                 iframe.style.width = '100%';
                 iframe.style.border = 0;
                 return iframe;

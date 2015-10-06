@@ -1,5 +1,5 @@
 /* Initialize the bookmarklet buttons */
-define(['./nainwak', './config'], function (nainwak, config) {
+define(['./nainwak', './settings'], function (nainwak, settings) {
     function getInjectionUrl(scriptUrl, channel) {
         var lines = [
             'javascript:(function () {',
@@ -37,7 +37,7 @@ define(['./nainwak', './config'], function (nainwak, config) {
         var buttons = document.querySelectorAll(selector || '.nainwaklet');
         Array.prototype.forEach.call(buttons, function (button) {
             var channel = button.getAttribute('data-channel'),
-                href = getInjectionUrl(config.scriptUrl, channel);
+                href = getInjectionUrl(settings.scriptUrl, channel);
             button.setAttribute('href', href);
         });
     }

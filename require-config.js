@@ -1,3 +1,5 @@
+/*global require:true */
+/*exported require */
 var require = {
     urlArgs: 'cachebust=' + (new Date()).getTime(),  // prevents caching
     baseUrl: 'src',
@@ -6,9 +8,9 @@ var require = {
         utils: 'utils',
         require: 'vendor/require',
         text: 'vendor/text',
-        qunit: 'vendor/qunit', 
+        qunit: 'vendor/qunit',
         tests: 'tests',
-        nainwakletDist: '../dist/nainwaklet.js',
+        dist: '../dist',
         images: '../images'
     },
     packages: ['nainwaklet', 'nainwaklet/nainwak', 'tests']

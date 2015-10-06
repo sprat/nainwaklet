@@ -1,12 +1,6 @@
+/* Development settings */
 define(['require'], function (require) {
-
-    /*
-    var script = document.scripts[document.scripts.length - 1],
-        scriptUrl = script.src,
-        scriptChannel = script.getAttribute('data-channel');
-    */
-
-    var scriptUrl = require.toUrl('nainwakletDist'),
+    var scriptUrl = require.toUrl('dist/nainwaklet.js'),
         hubUrl = require.toUrl('../../hub.html');
 
     function getImageUrl(name) {

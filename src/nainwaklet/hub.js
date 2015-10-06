@@ -1,5 +1,5 @@
 /* Hub class */
-define(['./nainwak', './config', './spy', './dashboard', './user'], function (nainwak, config, Spy, Dashboard, User) {
+define(['./nainwak', './settings', './spy', './dashboard', './user'], function (nainwak, settings, Spy, Dashboard, User) {
     function getContainerElement(container) {
         var doc = window.document;
         if (container === undefined) {
@@ -54,7 +54,7 @@ define(['./nainwak', './config', './spy', './dashboard', './user'], function (na
 
         return Hub({
             user: nainwak.getUser(window),
-            channel: config.channel,
+            channel: settings.channel,
             container: window.frames.pub.document.body,
             infoFrame: window.frames.info.frameElement
         });

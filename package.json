@@ -29,10 +29,10 @@
   },
   "scripts": {
     "server": "live-server",
-    "lint": "esw src",
-    "watch:lint": "esw src --watch",
-    "build": "node src/build.js",
-    "watch:build": "nodemon --watch src --watch require-config.js src/build.js",
+    "lint": "esw .",
+    "watch:lint": "esw . --watch",
+    "build": "node build/build.js",
+    "watch:build": "nodemon --watch src --watch build --watch require-config.js build/build.js",
     "make": "npm-run-all --sequential lint build",
     "watch": "npm-run-all --parallel watch:lint watch:build",
     "dev": "npm-run-all --parallel server watch:lint watch:build"
