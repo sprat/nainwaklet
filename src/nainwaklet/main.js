@@ -1,25 +1,11 @@
 /* Module API */
-define(['./config', './nainwak', './user', './hub', './buttons'], function (config, nainwak, User, Hub, buttons) {
+define(['./user', './hub', './bookmarklets'], function (User, Hub, bookmarklets) {
     'use strict';
 
-    var scriptUrl = config.scriptUrl();
-
-    // module public API
-    var api = {
+    return {
+        initBookmarklets: bookmarklets.initialize,
         User: User,
         Hub: Hub,
-        initializeButtons: buttons.initialize.bind(buttons, scriptUrl)
+        hub: Hub.createOnNainwak()
     };
-
-    // create an Hub object if we are in the Nainwak game page
-    if (nainwak.isInGame(window)) {
-        api.hub = Hub({
-            user: nainwak.getUser(window),
-            channel: config.channel,
-            container: window.frames.pub.document.body,
-            infoFrame: window.frames.info.frameElement
-        });
-    }
-
-    return api;
 });

@@ -1,6 +1,6 @@
 /* User factory */
 define(['./config'], function (config) {
-    var defaultAvatarUrl = config.imageUrl('avatar.png');
+    var defaultAvatarUrl = config.getImageUrl('avatar.png');
 
     function generateRandomGuestName() {
         var id = Math.round(Math.random() * 1000);

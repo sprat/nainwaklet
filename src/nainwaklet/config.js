@@ -6,22 +6,17 @@ define(['require'], function (require) {
         scriptChannel = script.getAttribute('data-channel');
     */
 
-    function scriptUrl() {
-        return require.toUrl('nainwakletDist');
-    }
+    var scriptUrl = require.toUrl('nainwakletDist'),
+        hubUrl = require.toUrl('../../hub.html');
 
-    function imageUrl(name) {
+    function getImageUrl(name) {
         return require.toUrl('images/' + name);
-    }
-
-    function hubUrl() {
-        return require.toUrl('../../hub.html');
     }
 
     return {
         scriptUrl: scriptUrl,
-        imageUrl: imageUrl,
         hubUrl: hubUrl,
-        channel: 'default'
+        channel: 'default',
+        getImageUrl: getImageUrl
     };
 });

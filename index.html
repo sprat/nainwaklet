@@ -18,7 +18,7 @@
         <p>Le hub fonctionne de la manière suivante :</p>
         <ol>
             <li>Glissez ce button dans vos marques-pages Internet ➜
-                <a class="nainwaklet-button" href="#" title="Hub #!" data-channel="#!">Hub #!</a>
+                <a class="nainwaklet" data-channel="#!" href="#" title="Hub #!">Hub #!</a>
             </li>
             <li>Lorsque vous êtes connecté sur <a href="http://www.nainwak.com/" target="_blank">Nainwak</a>,
               cliquez sur le bouton !</li>
@@ -39,7 +39,7 @@
 
     <script type="text/javascript">
         require(['nainwaklet'], function(nainwaklet) {
-            nainwaklet.initializeButtons();
+            nainwaklet.initBookmarklets();
             nainwaklet.Hub({
                 channel: '#!',
                 container: '#hub-container'

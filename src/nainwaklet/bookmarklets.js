@@ -1,5 +1,5 @@
 /* Initialize the bookmarklet buttons */
-define(['./nainwak'], function (nainwak) {
+define(['./nainwak', './config'], function (nainwak, config) {
     function getInjectionUrl(scriptUrl, channel) {
         var lines = [
             'javascript:(function () {',
@@ -8,12 +8,12 @@ define(['./nainwak'], function (nainwak) {
             '        u = l.origin + l.pathname,',
             '        d = document,',
             '        b = d.body,',
-            '        n = "Nainwaklet",',
+            '        n = "nainwaklet",',
             '        i = n + "Script",',
             '        s = d.getElementById(i);',
             '    if (u === "' + nainwak.gameUrl() + '") {',
             '        if (s) {',
-            '            w[n].app.destroy();',
+            '            w[n].hub.destroy();',
             '            w[n] = null;',
             '            b.removeChild(s);',
             '        } else {',
@@ -33,11 +33,11 @@ define(['./nainwak'], function (nainwak) {
         return lines.join('\n').replace(/\s+/g, ' ');
     }
 
-    function initialize(scriptUrl, buttons) {
-        buttons = buttons || document.querySelectorAll('.nainwaklet-button');
+    function initialize(selector) {
+        var buttons = document.querySelectorAll(selector || '.nainwaklet');
         Array.prototype.forEach.call(buttons, function (button) {
             var channel = button.getAttribute('data-channel'),
-                href = getInjectionUrl(scriptUrl, channel);
+                href = getInjectionUrl(config.scriptUrl, channel);
             button.setAttribute('href', href);
         });
     }

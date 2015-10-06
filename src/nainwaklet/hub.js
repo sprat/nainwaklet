@@ -1,5 +1,5 @@
 /* Hub class */
-define(['./spy', './dashboard', './user'], function (Spy, Dashboard, User) {
+define(['./nainwak', './config', './spy', './dashboard', './user'], function (nainwak, config, Spy, Dashboard, User) {
     function getContainerElement(container) {
         var doc = window.document;
         if (container === undefined) {
@@ -45,6 +45,22 @@ define(['./spy', './dashboard', './user'], function (Spy, Dashboard, User) {
             destroy: destroy
         });
     }
+
+    // create an Hub object running on the Nainwak game page
+    function createOnNainwak() {
+        if (!nainwak.isInGame(window)) {
+            return;
+        }
+
+        return Hub({
+            user: nainwak.getUser(window),
+            channel: config.channel,
+            container: window.frames.pub.document.body,
+            infoFrame: window.frames.info.frameElement
+        });
+    }
+
+    Hub.createOnNainwak = createOnNainwak;
 
     return Hub;
 });

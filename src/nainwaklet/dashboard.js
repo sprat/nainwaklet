@@ -5,7 +5,7 @@ define(['./config'], function (config) {
             ui = (function () {  // create the hub UI
                 var iframe = document.createElement('iframe');
                 iframe.setAttribute('class', 'nainwaklet-hub');
-                iframe.setAttribute('src', config.hubUrl());
+                iframe.setAttribute('src', config.hubUrl);
                 iframe.style.width = '100%';
                 iframe.style.border = 0;
                 return iframe;
