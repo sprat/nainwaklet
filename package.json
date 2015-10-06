@@ -23,16 +23,19 @@
     "eslint": "^1.5.1",
     "eslint-watch": "^2.1.2",
     "live-server": "^0.8.1",
+    "nodemon": "^1.7.1",
     "npm-run-all": "^1.2.11",
     "requirejs": "^2.1.20"
   },
   "scripts": {
     "server": "live-server",
-    "server:tests": "npm run server -- --open=tests.html",
-    "lint": "esw src --ignore-pattern src/vendor/*",
+    "lint": "esw src",
+    "watch:lint": "esw src --watch",
     "build": "node src/build.js",
-    "watch:lint": "npm run lint -- --watch",
-    "dev": "npm-run-all --parallel server:tests watch:lint"
+    "watch:build": "nodemon --watch src src/build.js",
+    "make": "npm-run-all --sequential lint build",
+    "watch": "npm-run-all --parallel watch:lint watch:build",
+    "dev": "npm-run-all --parallel server watch:lint watch:build"
   },
   "eslintConfig": {
     "rules": {

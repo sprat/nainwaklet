@@ -1,10 +1,12 @@
 /*global __dirname */
+/* eslint-disable no-console */
 var fs = require('fs'),
     path = require('path'),
     requirejs = require('requirejs'),
     amdclean = require('amdclean'),
     root = path.join(__dirname, '..');
 
+console.log('Building the distribution...');
 requirejs.optimize({
     // TODO: needed?
     //findNestedDependencies: true,
@@ -22,5 +24,6 @@ requirejs.optimize({
             });
         // TODO: uglify
         fs.writeFileSync(outputFile, cleaned);
+        console.log('Build OK');
     }
 });
