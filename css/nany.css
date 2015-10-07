@@ -51,10 +51,19 @@ a.nanylet:hover {
 }
 
 .nany .title {
-    font-size: 1.2em;
+    font-size: 1.25em;
     font-weight: bold;
     color: #FFF;
 }
+
+/*
+.nany .logo {
+    width: 32px;
+    height: 32px;
+    background: url(../images/favicon.png);
+    background-size: cover;
+}
+*/
 
 /* Cadres Nainwak :
  * 0 : Jaune/marron (Page d'accueil)
@@ -77,6 +86,7 @@ a.nanylet:hover {
   -o-border-image: url("//www.nainwak.com/images/interface/contour/7/VTV.png") 8 14 8 stretch;
   border-image: url("//www.nainwak.com/images/interface/contour/7/VTV.png") 8 14 fill stretch;
 }
+
 .nany div.VNT {
   border-width: 8px 14px;
   border-style: solid;
@@ -87,6 +97,7 @@ a.nanylet:hover {
   -o-border-image: url("//www.nainwak.com/images/interface/contour/7/VNT.png") 8 14 stretch;
   border-image: url("//www.nainwak.com/images/interface/contour/7/VNT.png") 8 14 fill stretch;
 }
+
 .nany div.VTT {
   border-width: 8px 14px;
   border-style: solid;
@@ -97,6 +108,7 @@ a.nanylet:hover {
   -o-border-image: url("//www.nainwak.com/images/interface/contour/7/VTT.png") 8 14 stretch;
   border-image: url("//www.nainwak.com/images/interface/contour/7/VTT.png") 8 14 fill stretch;
 }
+
 .nany div.TNT {
   border-width: 8px 14px;
   border-style: solid;
@@ -107,6 +119,7 @@ a.nanylet:hover {
   -o-border-image: url("//www.nainwak.com/images/interface/contour/7/TNT.png") 8 14 stretch;
   border-image: url("//www.nainwak.com/images/interface/contour/7/TNT.png") 8 14 fill stretch;
 }
+
 .nany div.TBNT {
   border-width: 10px 14px 8px;
   border-style: solid;
@@ -117,6 +130,7 @@ a.nanylet:hover {
   -o-border-image: url("//www.nainwak.com/images/interface/contour/7/TBNT.png") 10 14 8 stretch;
   border-image: url("//www.nainwak.com/images/interface/contour/7/TBNT.png") 10 14 8 fill stretch;
 }
+
 .nany div.VT {
   border-width: 8px 14px 0px;
   border-style: solid;
@@ -127,6 +141,7 @@ a.nanylet:hover {
   -o-border-image: url("//www.nainwak.com/images/interface/contour/7/VT.png") 8 14 0 stretch;
   border-image: url("//www.nainwak.com/images/interface/contour/7/VT.png") 8 14 0 fill stretch;
 }
+
 .nany div.T {
   border-width: 0px 14px;
   border-style: solid;
@@ -137,6 +152,7 @@ a.nanylet:hover {
   -o-border-image: url("//www.nainwak.com/images/interface/contour/7/T.png") 0 14 stretch;
   border-image: url("//www.nainwak.com/images/interface/contour/7/T.png") 0 14 fill stretch;
 }
+
 .nany div.TV {
   border-width: 0px 14px 8px;
   border-style: solid;
@@ -147,6 +163,7 @@ a.nanylet:hover {
   -o-border-image: url("//www.nainwak.com/images/interface/contour/7/TV.png") 0 14 0 stretch;
   border-image: url("//www.nainwak.com/images/interface/contour/7/TV.png") 0 14 8 fill stretch;
 }
+
 .nany div.TTV {
   border-width: 10px 14px 8px;
   border-style: solid;
