@@ -3,14 +3,10 @@
 <head>
     <meta charset="utf-8">
     <title>Nany</title>
-    <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
-    <link rel="stylesheet" type="text/css" href="css/nany.css">
-    <link rel="stylesheet" type="text/css" href="css/index.css">
-    <script src="require-config.js"></script>
-    <script src="src/vendor/require.js"></script>
-    <!-- 
-    <script type="text/javascript" src="dist/nany.js"></script>
-     -->
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="css/nany.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="dist/nany.js"></script>
 </head>
 <body>
     <h1><img class="logo" src="images/favicon.png" alt="logo"> Nany</h1>
@@ -37,16 +33,14 @@
     </section>
 
     <aside>
-        <div id="hub-container">Loading the Hub...</div>
+        Chargement du Nany...
     </aside>
 
     <script type="text/javascript">
-        require(['nany'], function(nany) {
-            nany.initBookmarklets();
-            nany.Hub({
-                channel: '#!',
-                container: '#hub-container'
-            });
+        nany.initBookmarklets();
+        nany.Hub({
+            channel: '#!',
+            container: 'aside'
         });
     </script>
 </body>
