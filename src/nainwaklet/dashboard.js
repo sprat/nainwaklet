@@ -3,7 +3,7 @@ define(['./settings', 'utils/css'], function (settings, css) {
     var cssUrls = [
         'http://www.nainwak.com/css/cadre2.css',
         settings.getCssUrl('dashboard.css')
-    ]
+    ];
 
     function Dashboard(conf) {
         var container = conf.container,

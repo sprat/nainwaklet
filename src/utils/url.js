@@ -1,7 +1,7 @@
 /* URL utilities */
 define(function () {
     function parse(url, document) {
-        var doc = document || window.document
+        var doc = document || window.document,
             a = doc.createElement('a');
         a.href = url;
         return a;
