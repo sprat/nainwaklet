@@ -4,12 +4,12 @@ var require = {
     urlArgs: 'cachebust=' + (new Date()).getTime(),  // prevents caching
     baseUrl: 'src',
     paths: {
-        require: 'vendor/require',
-        text: 'vendor/text',
-        qunit: 'vendor/qunit',
-        dist: '../dist',
-        images: '../images',
-        css: '../css'
+        'require': 'vendor/require',
+        'text': 'vendor/text',
+        'qunit': 'vendor/qunit',
+        'dist': '../dist',
+        'images': '../images',
+        'css': '../css'
     },
     packages: ['nainwaklet', 'nainwaklet/nainwak', 'tests']
 };
