@@ -2,31 +2,35 @@
 <html lang="fr">
 <head>
     <meta charset="utf-8">
-    <title>Hub #!</title>
+    <title>Nany</title>
     <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="css/nany.css">
     <link rel="stylesheet" type="text/css" href="css/index.css">
     <script src="require-config.js"></script>
     <script src="src/vendor/require.js"></script>
     <!-- 
-    <script type="text/javascript" src="dist/nainy.js"></script>
+    <script type="text/javascript" src="dist/nany.js"></script>
      -->
 </head>
 <body>
-    <h1><img class="logo" src="images/favicon.png" alt="logo"> Hub #!</h1>
+    <h1><img class="logo" src="images/favicon.png" alt="logo"> Nany</h1>
 
     <section role="main">
-        <p>Le hub fonctionne de la manière suivante :</p>
+        <p>Le «&#x202F;Nany&#x202F;» fonctionne de la manière suivante :</p>
         <ol>
-            <li>Glissez ce button dans vos marques-pages Internet ➜
-                <a class="nainy" data-channel="#!" href="#" title="Hub #!">Hub #!</a>
-            </li>
-            <li>Lorsque vous êtes connecté sur <a href="http://www.nainwak.com/" target="_blank">Nainwak</a>,
-              cliquez sur le bouton !</li>
+            <li>Glissez l'un des boutons ci-dessous dans vos marques-pages Internet</li>
+            <li>Lorsque vous êtes connecté sur <a href="http://www.nainwak.com/" target="_blank">Nainwak</a>
+              dans la partie «&#x202F;jeu&#x202F;», cliquez sur le marque-page !</li>
         </ol>
+
+        <p>
+            <a class="nanylet" data-channel="#!" href="#" title="Nany #!">Nany #!</a>
+            <a class="nanylet" data-channel="Gnouille" href="#" title="Nany #!">Nany Gnouille</a>
+        </p>
 
         <h2>Développement</h2>
         <ul>
-            <li>Github: <a href="https://github.com/sprat/nainy" target="_blank">nainy</a></li>
+            <li>Github: <a href="https://github.com/sprat/nany" target="_blank">nany</a></li>
             <li>Vérifier les <a href="tests.html" target="_blank">tests</a></li>
             <li>Voir les  <a href="cadres.html" target="_blank">cadres</a></li>
         </ul>
@@ -38,9 +42,9 @@
     </aside>
 
     <script type="text/javascript">
-        require(['nainy'], function(nainy) {
-            nainy.initBookmarklets();
-            nainy.Hub({
+        require(['nany'], function(nany) {
+            nany.initBookmarklets();
+            nany.Hub({
                 channel: '#!',
                 container: '#hub-container'
             });

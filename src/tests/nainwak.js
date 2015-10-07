@@ -1,4 +1,4 @@
-define(['nainy/nainwak'], function (nainwak) {
+define(['nany/nainwak'], function (nainwak) {
     'use strict';
 
     QUnit.module('nainwak');

@@ -10,17 +10,17 @@ console.log('Building the distribution...');
 requirejs.optimize({
     findNestedDependencies: true,  // optimize nested dependencies too
     mainConfigFile: path.join(root, 'require-config.js'),
-    name: 'nainy',
+    name: 'nany',
     optimize: 'none',
     paths: {
-        'nainy/settings': 'nainy/settings.build'
+        'nany/settings': 'nany/settings.build'
     },
-    out: path.join(root, 'dist/nainy.js'),
+    out: path.join(root, 'dist/nany.js'),
     onModuleBundleComplete: function(data) {
         var outputFile = data.path,
             cleaned = amdclean.clean({
                 filePath: outputFile,
-                globalModules: ['nainy']
+                globalModules: ['nany']
                 //aggressiveOptimizations: false,
                 //transformAMDChecks: false
             });

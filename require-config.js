@@ -11,5 +11,5 @@ var require = {
         'images': '../images',
         'css': '../css'
     },
-    packages: ['nainy', 'nainy/nainwak', 'tests']
+    packages: ['nany', 'nany/nainwak', 'tests']
 };

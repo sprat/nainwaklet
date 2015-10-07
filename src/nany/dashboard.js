@@ -1,17 +1,12 @@
 /* Dashboard class */
 define(['./settings', 'utils/css', 'utils/html'], function (settings, css, html) {
-    var cssUrls = [
-        'http://www.nainwak.com/css/cadre2.css',
-        settings.getCssUrl('dashboard.css')
-    ];
-
     function Dashboard(conf) {
         var container = conf.container,
             //user = conf.user,
             containerContent = null,  // initial content of the container
             ui = (function() {
                 var h = html.renderer(document),
-                    title = h.div('Hub ' + conf.channel, {
+                    title = h.div('nany ' + conf.channel, {
                         className: 'VNT title'
                     }),
                     content = h.div('Chargement en cours...', {
@@ -19,7 +14,7 @@ define(['./settings', 'utils/css', 'utils/html'], function (settings, css, html)
                     });
 
                 return h.div([title, content], {
-                    className: 'nainy-dashboard'
+                    className: 'nany'
                 });
             }()),
             isEnabled = false,
@@ -38,9 +33,9 @@ define(['./settings', 'utils/css', 'utils/html'], function (settings, css, html)
 
                     // insert the CSS files
                     // Note: we never remove them!
-                    cssUrls.forEach(function(url) {
-                        css.insertLink(url, doc);
-                    });
+                    // TODO: this should not be done here in the dashboard
+                    // => in the parent page or bookmarklet?
+                    css.insertLink(settings.cssUrl, doc);
 
                     // backup the initial content
                     containerContent = container.innerHTML;

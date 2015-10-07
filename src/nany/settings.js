@@ -6,15 +6,12 @@ define(['require', 'utils/url'], function (require, url) {
         return location.href;
     }
 
-    var scriptUrl = fullUrl('dist/nainy.js');
-
-    function getCssUrl(name) {
-        return fullUrl('css/' + name);
-    }
+    var scriptUrl = fullUrl('dist/nany.js'),
+        cssUrl = fullUrl('css/nany.css');
 
     return {
         channel: 'default',
         scriptUrl: scriptUrl,
-        getCssUrl: getCssUrl
+        cssUrl: cssUrl
     };
 });

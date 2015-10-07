@@ -1,5 +1,5 @@
 {
-  "name": "nainy",
+  "name": "nany",
   "version": "1.0.0",
   "description": "Nainwak Hub Bookmarklet",
   "author": "Sylvain Prat <sylvain.prat@gmail.com>",
@@ -11,11 +11,11 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/sprat/nainy.git"
+    "url": "git+https://github.com/sprat/nany.git"
   },
-  "homepage": "http://sprat.github.io/nainy/",
+  "homepage": "http://sprat.github.io/nany/",
   "bugs": {
-    "url": "https://github.com/sprat/nainy/issues"
+    "url": "https://github.com/sprat/nany/issues"
   },
   "dependencies": {},
   "devDependencies": {
