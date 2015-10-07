@@ -6,7 +6,7 @@ define(['./settings', 'utils/css', 'utils/html'], function (settings, css, html)
             containerContent = null,  // initial content of the container
             ui = (function() {
                 var h = html.renderer(document),
-                    title = h.div('nany ' + conf.channel, {
+                    title = h.div('Nany ' + conf.channel, {
                         className: 'VNT title'
                     }),
                     content = h.div('Chargement en cours...', {
