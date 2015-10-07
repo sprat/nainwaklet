@@ -1,7 +1,7 @@
 /* Nainwak URLs */
-define(['../user', './urls'], function (User, urls) {
+define(['./urls'], function (urls) {
     /* Get the Nainwak User info from the menu frame */
-    function getUser(window) {
+    function get(window) {
         if (!urls.isInGame(window)) {
             return;
         }
@@ -10,11 +10,15 @@ define(['../user', './urls'], function (User, urls) {
             doc = frame.document,
             title = doc.querySelector('.news-titre'),
             name = title.querySelector('td:last-child').innerHTML,
-            avatar = title.querySelector('td:first-child img').src;
-        return User(name, avatar);
+            image = title.querySelector('td:first-child img').src;
+
+        return {
+            nom: name,
+            image: image
+        };
     }
 
     return {
-        getUser: getUser
+        get: get
     };
 });

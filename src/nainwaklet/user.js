@@ -1,6 +1,6 @@
 /* User factory */
-define(['./settings'], function (settings) {
-    var defaultImageUrl = settings.getImageUrl('avatar.png');
+define(['./nainwak'], function (nainwak) {
+    var defaultImageUrl = nainwak.imageUrl('avatar/choix/mechant.gif');
 
     function generateRandomGuestName() {
         var id = Math.round(Math.random() * 1000);

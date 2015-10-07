@@ -26,7 +26,7 @@ define(['nainwaklet/nainwak'], function (nainwak) {
         assert.notOk(nainwak.isInGame(window), 'Non-game window');
     });
 
-    // TODO: test getUser
+    // TODO: test getNain
 
     QUnit.test('pages.list', function (assert) {
         var pages = nainwak.pages;

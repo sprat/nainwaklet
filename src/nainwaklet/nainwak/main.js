@@ -1,4 +1,4 @@
-define(['./urls', './getUser', './pages', './detect'], function (urls, getUser, Pages, detect) {
+define(['./urls', './nain', './pages', './detect'], function (urls, nain, Pages, detect) {
     /*
     // Evénements (tous types d'evts sur 10 jours)
     Page('even', log, {duree: 240, type: 'ALL'}),
@@ -15,7 +15,7 @@ define(['./urls', './getUser', './pages', './detect'], function (urls, getUser, 
         gameUrl: urls.gameUrl,
         imageUrl: urls.imageUrl,
         isInGame: urls.isInGame,
-        getUser: getUser,
+        getNain: nain.get,
         pages: pages
     };
 });

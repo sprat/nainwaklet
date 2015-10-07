@@ -8,10 +8,6 @@ define(['require', 'utils/url'], function (require, url) {
 
     var scriptUrl = fullUrl('dist/nainwaklet.js');
 
-    function getImageUrl(name) {
-        return fullUrl('images/' + name);
-    }
-
     function getCssUrl(name) {
         return fullUrl('css/' + name);
     }
@@ -19,7 +15,6 @@ define(['require', 'utils/url'], function (require, url) {
     return {
         channel: 'default',
         scriptUrl: scriptUrl,
-        getImageUrl: getImageUrl,
         getCssUrl: getCssUrl
     };
 });

@@ -60,8 +60,9 @@ define(['./nainwak', './settings', './spy', './dashboard', './user', 'utils/exte
             return;
         }
 
+        var nain = nainwak.getNain(window);
         return Hub({
-            user: nainwak.getUser(window),
+            user: User(nain.nom, nain.image),
             channel: settings.channel,
             container: window.frames.pub.document.body,
             infoFrame: window.frames.info.frameElement
