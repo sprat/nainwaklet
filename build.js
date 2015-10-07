@@ -4,7 +4,7 @@ var fs = require('fs'),
     path = require('path'),
     requirejs = require('requirejs'),
     amdclean = require('amdclean'),
-    root = path.join(__dirname, '..');
+    root = __dirname;
 
 console.log('Building the distribution...');
 requirejs.optimize({
@@ -12,6 +12,9 @@ requirejs.optimize({
     mainConfigFile: path.join(root, 'require-config.js'),
     name: 'nainwaklet',
     optimize: 'none',
+    paths: {
+        'nainwaklet/settings': 'nainwaklet/settings.build'
+    },
     out: path.join(root, 'dist/nainwaklet.js'),
     onModuleBundleComplete: function(data) {
         var outputFile = data.path,
