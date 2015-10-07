@@ -19,7 +19,7 @@ define(['./settings', 'utils/css', 'utils/html'], function (settings, css, html)
                     });
 
                 return h.div([title, content], {
-                    className: 'nainwaklet-dashboard'
+                    className: 'nainy-dashboard'
                 });
             }()),
             isEnabled = false,

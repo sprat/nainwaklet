@@ -8,7 +8,7 @@
     <script src="require-config.js"></script>
     <script src="src/vendor/require.js"></script>
     <!-- 
-    <script type="text/javascript" src="dist/nainwaklet.js"></script>
+    <script type="text/javascript" src="dist/nainy.js"></script>
      -->
 </head>
 <body>
@@ -18,7 +18,7 @@
         <p>Le hub fonctionne de la manière suivante :</p>
         <ol>
             <li>Glissez ce button dans vos marques-pages Internet ➜
-                <a class="nainwaklet" data-channel="#!" href="#" title="Hub #!">Hub #!</a>
+                <a class="nainy" data-channel="#!" href="#" title="Hub #!">Hub #!</a>
             </li>
             <li>Lorsque vous êtes connecté sur <a href="http://www.nainwak.com/" target="_blank">Nainwak</a>,
               cliquez sur le bouton !</li>
@@ -26,7 +26,7 @@
 
         <h2>Développement</h2>
         <ul>
-            <li>Github: <a href="https://github.com/sprat/nainwaklet" target="_blank">nainwaklet</a></li>
+            <li>Github: <a href="https://github.com/sprat/nainy" target="_blank">nainy</a></li>
             <li>Vérifier les <a href="tests.html" target="_blank">tests</a></li>
             <li>Voir les  <a href="cadres.html" target="_blank">cadres</a></li>
         </ul>
@@ -38,9 +38,9 @@
     </aside>
 
     <script type="text/javascript">
-        require(['nainwaklet'], function(nainwaklet) {
-            nainwaklet.initBookmarklets();
-            nainwaklet.Hub({
+        require(['nainy'], function(nainy) {
+            nainy.initBookmarklets();
+            nainy.Hub({
                 channel: '#!',
                 container: '#hub-container'
             });

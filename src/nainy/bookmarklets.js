@@ -8,7 +8,7 @@ define(['./nainwak', './settings'], function (nainwak, settings) {
             '        u = l.origin + l.pathname,',
             '        d = document,',
             '        b = d.body,',
-            '        n = "nainwaklet",',
+            '        n = "nainy",',
             '        i = n + "Script",',
             '        s = d.getElementById(i);',
             '    if (u === "' + nainwak.gameUrl() + '") {',
@@ -34,7 +34,7 @@ define(['./nainwak', './settings'], function (nainwak, settings) {
     }
 
     function initialize(selector) {
-        var buttons = document.querySelectorAll(selector || '.nainwaklet');
+        var buttons = document.querySelectorAll(selector || '.nainy');
         Array.prototype.forEach.call(buttons, function (button) {
             var channel = button.getAttribute('data-channel'),
                 href = getInjectionUrl(settings.scriptUrl, channel);

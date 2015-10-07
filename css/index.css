@@ -33,12 +33,12 @@ a:hover {
     vertical-align: bottom;
 }
 
-a.nainwaklet {
+a.nainy {
     margin: 5px 0;
 }
 
 /* button design */
-a.nainwaklet {
+a.nainy {
     padding: 10px 20px;
     text-decoration: none;
     display: inline-block;
@@ -61,7 +61,7 @@ a.nainwaklet {
     box-shadow: #999 2px 2px 2px;
 }
 
-a.nainwaklet:hover {
+a.nainy:hover {
     color: #FFFFFF;
     text-decoration: none;
     background-color: #333333;

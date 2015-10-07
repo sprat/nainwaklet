@@ -6,7 +6,7 @@ define(['require', 'utils/url'], function (require, url) {
         return location.href;
     }
 
-    var scriptUrl = fullUrl('dist/nainwaklet.js');
+    var scriptUrl = fullUrl('dist/nainy.js');
 
     function getCssUrl(name) {
         return fullUrl('css/' + name);
