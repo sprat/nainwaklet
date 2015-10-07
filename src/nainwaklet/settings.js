@@ -1,20 +1,24 @@
 /* Development settings */
-define(['require'], function (require) {
-    var scriptUrl = require.toUrl('dist/nainwaklet.js'),
-        hubUrl = require.toUrl('../../hub.html');
+define(['require', 'utils/url'], function (require, url) {
+    function fullUrl(path) {
+        var relativeUrl = require.toUrl(path),
+            location = url.parse(relativeUrl);
+        return location.href;
+    }
+
+    var scriptUrl = fullUrl('dist/nainwaklet.js');
 
     function getImageUrl(name) {
-        return require.toUrl('images/' + name);
+        return fullUrl('images/' + name);
     }
 
     function getCssUrl(name) {
-        return require.toUrl('css/' + name);
+        return fullUrl('css/' + name);
     }
 
     return {
-        scriptUrl: scriptUrl,
-        hubUrl: hubUrl,
         channel: 'default',
+        scriptUrl: scriptUrl,
         getImageUrl: getImageUrl,
         getCssUrl: getCssUrl
     };
