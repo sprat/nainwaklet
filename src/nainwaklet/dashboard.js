@@ -1,5 +1,5 @@
 /* Dashboard class */
-define(['./settings', 'utils/css'], function (settings, css) {
+define(['./settings', 'utils/css', 'utils/html'], function (settings, css, html) {
     var cssUrls = [
         'http://www.nainwak.com/css/cadre2.css',
         settings.getCssUrl('dashboard.css')
@@ -10,18 +10,17 @@ define(['./settings', 'utils/css'], function (settings, css) {
             //user = conf.user,
             containerContent = null,  // initial content of the container
             ui = (function() {
-                var dashboard = document.createElement('div'),
-                    title = document.createElement('div'),
-                    content = document.createElement('div');
+                var h = html.renderer(document),
+                    title = h.div('Hub ' + conf.channel, {
+                        className: 'VNT title'
+                    }),
+                    content = h.div('Chargement en cours...', {
+                        className: 'TV content'
+                    });
 
-                dashboard.className = 'nainwaklet-dashboard';
-                title.className = 'VNT title';
-                title.innerText = 'Hub ' + conf.channel;
-                content.className = 'TV content';
-                content.innerText = 'Chargement en cours...';
-                dashboard.appendChild(title);
-                dashboard.appendChild(content);
-                return dashboard;
+                return h.div([title, content], {
+                    className: 'nainwaklet-dashboard'
+                });
             }()),
             isEnabled = false,
             enable = function (value) {
