@@ -7,6 +7,10 @@ define(function () {
         return a;
     }
 
+    function normalize(url, document) {
+        return parse(url).href;
+    }
+
     function buildQueryParams(params) {
         var pairs = [];
         Object.keys(params).forEach(function (key) {
@@ -20,6 +24,7 @@ define(function () {
 
     return {
         parse: parse,
+        normalize: normalize,
         buildQueryParams: buildQueryParams
     };
 });

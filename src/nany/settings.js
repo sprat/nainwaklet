@@ -1,9 +1,8 @@
 /* Development settings */
-define(['require', 'utils/url'], function (require, url) {
+define(['require', 'utils/url'], function (require, urlUtils) {
     function fullUrl(path) {
-        var relativeUrl = require.toUrl(path),
-            location = url.parse(relativeUrl);
-        return location.href;
+        var relativeUrl = require.toUrl(path);
+        return urlUtils.normalize(relativeUrl);
     }
 
     var scriptUrl = fullUrl('dist/nany.js'),

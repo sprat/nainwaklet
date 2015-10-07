@@ -1,14 +1,15 @@
 /* CSS utilities */
-define(['utils/array'], function (array) {
+define(['utils/array', 'utils/url'], function (array, urlUtils) {
     function findHead(document) {
         var doc = document || window.document;
         return doc.getElementsByTagName('head')[0];
     }
 
     function findLink(url, document) {
-        var links = findHead(document).getElementsByTagName('link');
+        var href = urlUtils.normalize(url, document),
+            links = findHead(document).getElementsByTagName('link');
         return array.find(links, function(link) {
-            return link.href === url;
+            return link.href === href;
         });
     }
 
