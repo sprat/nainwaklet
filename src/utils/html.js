@@ -1,15 +1,10 @@
 /* HTML utilities */
 define(function () {
     function parseDocument(html) {
-        /*
+        // The HTML parsing is not supported on all the browsers, maybe we
+        // should use a polyfill?
         var parser = new DOMParser();
         return parser.parseFromString(html, 'text/html');
-        */
-        var doc = document.implementation.createHTMLDocument('');
-        doc.open();
-        doc.write(html);
-        doc.close();
-        return doc;
     }
 
     function load(url, processResponse) {
