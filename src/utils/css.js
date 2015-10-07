@@ -1,22 +1,24 @@
 /* CSS utilities */
 define(['utils/array'], function (array) {
-    function head(document) {
-        return document.getElementsByTagName('head')[0];
+    function findHead(document) {
+        var doc = document || window.document;
+        return doc.getElementsByTagName('head')[0];
     }
 
-    function createLink(url) {
-        var link = document.createElement('link');
+    function findLink(url, document) {
+        var links = findHead(document).getElementsByTagName('link');
+        return array.find(links, function(link) {
+            return link.href === url;
+        });
+    }
+
+    function createLink(url, document) {
+        var doc = document || window.document,
+            link = doc.createElement('link');
         link.setAttribute('rel', 'stylesheet');
         link.setAttribute('type', 'text/css');
         link.setAttribute('href', url);
         return link;
-    }
-
-    function findLink(url, document) {
-        var links = head(document).getElementsByTagName('link');
-        return array.find(links, function(link) {
-            return link.href === url;
-        });
     }
 
     function insertLink(url, document) {
@@ -27,8 +29,8 @@ define(['utils/array'], function (array) {
         }
 
         // otherwise, create and return it
-        link = createLink(url);
-        head(document).appendChild(link);
+        link = createLink(url, document);
+        findHead(document).appendChild(link);
         return link;
     }
 
