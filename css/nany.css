@@ -1,4 +1,4 @@
-/* button design */
+/* Nany Bookmarklet */
 a.nanylet {
     padding: 10px 20px;
     text-decoration: none;
@@ -35,6 +35,7 @@ a.nanylet:hover {
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, startColorstr=#333333, endColorstr=#111111);
 }
 
+/* Nany Dashboard */
 .nany {
     font-size: 8.0pt;
     font-family: Verdana, Arial;
@@ -55,16 +56,16 @@ a.nanylet:hover {
     color: #FFF;
 }
 
-/* Contours Nainwak :
- * 0 : jaune/marron (page d'accueil)
- * 1 : bleu (braves)
- * 2 : rouge (sadiques)
- * 3 : vert (rampants)
- * 4 : orange (halloween)
- * 5 : rose (pacific?)
- * 6 : vert foncé (saint patrick?)
- * 7 : violet (mutants)
- * 8 : noir
+/* Cadres Nainwak :
+ * 0 : Jaune/marron (Page d'accueil)
+ * 1 : Bleu (Braves)
+ * 2 : Rouge (Sadiques)
+ * 3 : Vert (Rampants)
+ * 4 : Orange (Halloween)
+ * 5 : Rose (Pacific Nainwak ?)
+ * 6 : Vert foncé (Saint-Patrick ?)
+ * 7 : Violet (Mutants)
+ * 8 : Noir
  */
 .nany div.VTV {
   border-width: 8px 14px;
@@ -156,4 +157,3 @@ a.nanylet:hover {
   -o-border-image: url("//www.nainwak.com/images/interface/contour/7/TTV.png") 10 14 8 stretch;
   border-image: url("//www.nainwak.com/images/interface/contour/7/TTV.png") 10 14 8 fill stretch;
 }
-.nany div.coul { background-position: -32px 0;}
