@@ -1,11 +1,14 @@
 /* Module API */
-define(['./user', './hub', './bookmarklets'], function (User, Hub, bookmarklets) {
+define(['./user', './application', './bookmarklets', './runOnNainwak'], function (User, Application, bookmarklets, runOnNainwak) {
     'use strict';
 
-    return {
+    var module = {
         initBookmarklets: bookmarklets.initialize,
         User: User,
-        Hub: Hub,
-        hub: Hub.createOnNainwak()
+        Application: Application
     };
+
+    runOnNainwak(module);
+
+    return module;
 });

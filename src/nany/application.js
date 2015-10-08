@@ -1,5 +1,5 @@
-/* Hub class */
-define(['./nainwak', './settings', './spy', './dashboard', './user', 'utils/extend'], function (nainwak, settings, Spy, Dashboard, User, extend) {
+/* Application class */
+define(['./spy', './dashboard', './user', 'utils/extend'], function (Spy, Dashboard, User, extend) {
     function getElement(target) {
         if (target === undefined || target === null) {
             return target;
@@ -13,7 +13,7 @@ define(['./nainwak', './settings', './spy', './dashboard', './user', 'utils/exte
         return window.document.querySelector(target);
     }
 
-    function Hub(conf) {
+    function Application(conf) {
         var dashboard,
             spy,
             newConf = {  // default conf
@@ -54,22 +54,5 @@ define(['./nainwak', './settings', './spy', './dashboard', './user', 'utils/exte
         });
     }
 
-    // create an Hub object running on the Nainwak game page
-    function createOnNainwak() {
-        if (!nainwak.isInGame(window)) {
-            return;
-        }
-
-        var nain = nainwak.getNain(window);
-        return Hub({
-            user: User(nain.nom, nain.image),
-            channel: settings.channel,
-            container: window.frames.pub.document.body,
-            infoFrame: window.frames.info.frameElement
-        });
-    }
-
-    Hub.createOnNainwak = createOnNainwak;
-
-    return Hub;
+    return Application;
 });

@@ -1,5 +1,5 @@
 /* Dashboard class */
-define(['./settings', 'utils/css', 'utils/html'], function (settings, css, html) {
+define(['./settings', 'utils/html'], function (settings, html) {
     function Dashboard(conf) {
         var container = conf.container,
             //user = conf.user,
@@ -29,14 +29,6 @@ define(['./settings', 'utils/css', 'utils/html'], function (settings, css, html)
                 }
 
                 if (isEnabled) {
-                    var doc = container.ownerDocument;
-
-                    // insert the CSS files
-                    // Note: we never remove them!
-                    // TODO: this should not be done here in the dashboard
-                    // => in the parent page or bookmarklet?
-                    css.insertLink(settings.cssUrl, doc);
-
                     // backup the initial content
                     containerContent = container.innerHTML;
 

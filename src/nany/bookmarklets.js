@@ -13,7 +13,7 @@ define(['./nainwak', './settings'], function (nainwak, settings) {
             '        s = d.getElementById(i);',
             '    if (u === "' + nainwak.gameUrl() + '") {',
             '        if (s) {',
-            '            w[n].hub.destroy();',
+            '            w[n].app.destroy();',
             '            w[n] = null;',
             '            b.removeChild(s);',
             '        } else {',
