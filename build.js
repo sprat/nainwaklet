@@ -4,7 +4,22 @@ var fs = require('fs'),
     path = require('path'),
     requirejs = require('requirejs'),
     amdclean = require('amdclean'),
-    root = __dirname;
+    root = __dirname,
+    startLines = [
+        '/*!',
+        ' * Nainy application & library',
+        ' * https://github.com/sprat/nany',
+        ' *',
+        ' * Copyright 2015 by Sylvain Prat',
+        ' * Released under the MIT licence.',
+        ' *',
+        ' * THIS IS A GENERATED FILE, DO NOT EDIT',
+        ' */',
+        ';(function() {'
+    ],
+    endLines = [
+        '}());'
+    ];
 
 console.log('Building the distribution...');
 requirejs.optimize({
@@ -20,9 +35,13 @@ requirejs.optimize({
         var outputFile = data.path,
             cleaned = amdclean.clean({
                 filePath: outputFile,
-                globalModules: ['nany']
+                globalModules: ['nany'],
                 //aggressiveOptimizations: false,
                 //transformAMDChecks: false
+                wrap: {
+                    start: startLines.join('\n') + '\n',
+                    end: '\n' + endLines.join('\n')
+                }
             });
         // TODO: uglify
         fs.writeFileSync(outputFile, cleaned);
