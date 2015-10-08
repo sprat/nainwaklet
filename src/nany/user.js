@@ -1,5 +1,5 @@
 /* User factory */
-define(['./nainwak'], function (nainwak) {
+define(function () {
     function generateRandomGuestName() {
         var id = Math.round(Math.random() * 1000);
         return 'guest' + id;

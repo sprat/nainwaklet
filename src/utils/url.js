@@ -8,7 +8,7 @@ define(function () {
     }
 
     function normalize(url, document) {
-        return parse(url).href;
+        return parse(url, document).href;
     }
 
     function buildQueryParams(params) {
