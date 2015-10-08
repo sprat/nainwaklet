@@ -2,10 +2,18 @@
 /* eslint-disable no-console */
 var fs = require('fs'),
     path = require('path'),
+    process = require('process'),
     requirejs = require('requirejs'),
     amdclean = require('amdclean'),
+    uglifyJS = require('uglify-js'),
     root = __dirname,
-    startLines = [
+    dist = path.join(root, 'dist'),
+    filenames = {
+        uncompressed: 'nany.js',
+        compressed: 'nany.min.js',
+        map: 'nany.min.js.map'
+    },
+    preambleLines = [
         '/*!',
         ' * Nainy application & library',
         ' * https://github.com/sprat/nany',
@@ -14,37 +22,59 @@ var fs = require('fs'),
         ' * Released under the MIT licence.',
         ' *',
         ' * THIS IS A GENERATED FILE, DO NOT EDIT',
-        ' */',
-        ';(function() {'
+        ' */'
     ],
-    endLines = [
-        '}());'
-    ];
+    preamble = preambleLines.join('\n') + '\n';
 
-console.log('Building the distribution...');
+console.log('Build started');
+console.log('- Optimizing...');
 requirejs.optimize({
-    findNestedDependencies: true,  // optimize nested dependencies too
     mainConfigFile: path.join(root, 'require-config.js'),
     name: 'nany',
-    optimize: 'none',
+    findNestedDependencies: true,  // optimize nested dependencies too
+    optimize: 'none',  // don't optimize yet, it will be done later
     paths: {
         'nany/settings': 'nany/settings.build'
     },
-    out: path.join(root, 'dist/nany.js'),
-    onModuleBundleComplete: function(data) {
-        var outputFile = data.path,
-            cleaned = amdclean.clean({
-                filePath: outputFile,
-                globalModules: ['nany'],
-                //aggressiveOptimizations: false,
-                //transformAMDChecks: false
-                wrap: {
-                    start: startLines.join('\n') + '\n',
-                    end: '\n' + endLines.join('\n')
-                }
-            });
-        // TODO: uglify
-        fs.writeFileSync(outputFile, cleaned);
-        console.log('Build OK');
+    out: path.join(dist, filenames.uncompressed),
+    onModuleBundleComplete: function() {
+        var cwd = process.cwd(),
+            cleaned,
+            compressed;
+
+        // change working dir to dist dir
+        process.chdir(dist);
+
+        console.log('- Cleaning the AMD modules...');
+        cleaned = amdclean.clean({
+            filePath: filenames.uncompressed,
+            globalModules: ['nany'],
+            //aggressiveOptimizations: false,
+            //transformAMDChecks: false
+            wrap: {
+                start: preamble + ';(function() {'
+            }
+        });
+
+        console.log('- Saving the uncompressed file');
+        fs.writeFileSync(filenames.uncompressed, cleaned);
+
+        console.log('- Compressing...');
+        compressed = uglifyJS.minify(filenames.uncompressed, {
+            warnings: true,
+            comments: /^!.*/,  // keep comments starting with '!'
+            outSourceMap: filenames.map
+        });
+
+        console.log('- Saving the compressed file');
+        fs.writeFileSync(filenames.compressed, preamble + compressed.code);
+
+        console.log('- Saving the map file');
+        fs.writeFileSync(filenames.map, compressed.map);
+
+        // back to the previous directory
+        process.chdir(cwd);
+
+        console.log('Build finished');
     }
 });
