@@ -2,27 +2,36 @@
 define(['./user', './application', './bookmarklets', './nainwak', './settings', 'utils/css'], function (User, Application, bookmarklets, nainwak, settings, css) {
     'use strict';
 
-    var module = {
-        initBookmarklets: bookmarklets.initialize,
-        User: User,
-        Application: Application
-    };
+    function unset(obj, key) {
+        try {
+            delete obj[key];
+        } catch (e) {
+            obj[key] = undefined;
+        }
+    }
 
-    // create an Application running on the Nainwak game
-    function runOnNainwak() {
-        if (!nainwak.isInGame(window)) {
+    function toggleApp(window) {
+        var name = 'nanyApplication',  // global app name
+            app = window[name];
+
+        // if the application is already launched, kill it
+        if (app) {
+            app.destroy();
+            unset(window, name);
             return;
         }
 
-        var pubDoc = window.frames.pub.document,
-            infoFrame = window.frames.info.frameElement,
+        // start the application
+        var frames = window.frames,
+            pubDoc = frames.pub.document,
+            infoFrame = frames.info.frameElement,
             nain = nainwak.getNain(window);
 
         // insert the CSS file if needed (we never remove it!)
         css.insertLink(settings.cssUrl, pubDoc);
 
         // create the Hub and assign it to the external api
-        module.app = Application({
+        window[name] = Application({
             user: User(nain.nom, nain.image),
             channel: settings.channel,
             container: pubDoc.body,
@@ -30,7 +39,18 @@ define(['./user', './application', './bookmarklets', './nainwak', './settings', 
         });
     }
 
+    // toggle the Application on the Nainwak game page
+    function runOnNainwak() {
+        if (nainwak.isInGame(window)) {
+            toggleApp(window);
+        }
+    }
+
     runOnNainwak();
 
-    return module;
+    return Object.freeze({
+        initBookmarklets: bookmarklets.initialize,
+        User: User,
+        Application: Application
+    });
 });
