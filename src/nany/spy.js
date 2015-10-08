@@ -1,8 +1,8 @@
 /* Spy factory */
 define(['./nainwak', 'utils/log'], function (nainwak, log) {
-    function Spy(conf) {  /*user, channel*/
-        //IDS = url.parseQueryParams(frame.location).IDS,
+    function Spy(conf) {
         var frame = conf.infoFrame,
+            //IDS = url.parseQueryParams(frame.location).IDS,
             infoLoaded = function () {
                 var contentWindow = frame.contentWindow,
                     doc = contentWindow.document,
