@@ -1,0 +1,29 @@
+/* Nany Dashboard */
+.nany {
+    font-size: 8.0pt;
+    font-family: Verdana, Arial;
+}
+
+.nany a {
+    color: #BB6600;
+    text-decoration: none;
+}
+
+.nany a:hover {
+    text-decoration: underline;
+}
+
+.nany .title {
+    font-size: 1.25em;
+    font-weight: bold;
+    color: #FFF;
+}
+
+/*
+.nany .logo {
+    width: 32px;
+    height: 32px;
+    background: url(../images/favicon.png);
+    background-size: cover;
+}
+*/
