@@ -2,12 +2,11 @@
 /*exported require */
 var require = {
     urlArgs: 'cachebust=' + (new Date()).getTime(),  // prevents caching
-    baseUrl: 'src',
+    baseUrl: 'js',
     paths: {
         'require': 'vendor/require',
         'text': 'vendor/text',
         'qunit': 'vendor/qunit',
-        'dist': '../dist',
         'css': '../css'
     },
     packages: ['nany', 'nany/nainwak', 'tests']

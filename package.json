@@ -32,12 +32,12 @@
   "scripts": {
     "server": "live-server",
     "lint": "esw",
-    "build:js": "node build.js",
+    "build:js": "node js/build.js",
     "build:css": "cleancss --source-map --output css/nany.min.css css/nany.css",
     "build": "npm-run-all --sequential lint build:js build:css",
     "watch:lint": "esw --watch",
-    "watch:build:js": "nodemon --ignore dist build.js",
-    "watch:build:css": "nodemon -e css --ignore *.min.css --exec npm run build:css",
+    "watch:build:js": "nodemon -e js --ignore js/nany.js --ignore js/nany.min.js js/build.js",
+    "watch:build:css": "nodemon -e css --ignore css/nany.min.css --exec npm run build:css",
     "watch": "npm-run-all --parallel watch:lint watch:build:js watch:build:css",
     "dev": "npm-run-all --parallel server watch:lint watch:build:js watch:build:css"
   },

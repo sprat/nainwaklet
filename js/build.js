@@ -6,34 +6,35 @@ var fs = require('fs'),
     requirejs = require('requirejs'),
     amdclean = require('amdclean'),
     uglifyJS = require('uglify-js'),
-    root = __dirname,
-    dist = path.join(root, 'dist'),
+    cwd = process.cwd(),
+    jsDir = __dirname,
+    distDir = jsDir,
     filenames = {
         uncompressed: 'nany.js',
         compressed: 'nany.min.js',
         map: 'nany.min.js.map'
     },
-    preambleFile = path.join(root, 'src', 'nany', 'preamble.js'),
+    preambleFile = path.join(jsDir, 'nany', 'preamble.js'),
     preamble = fs.readFileSync(preambleFile);
 
 console.log('Build started');
 console.log('- Optimizing...');
 requirejs.optimize({
-    mainConfigFile: path.join(root, 'require-config.js'),
+    baseUrl: jsDir,
+    mainConfigFile: path.join(jsDir, 'require-config.js'),
     name: 'nany',
     findNestedDependencies: true,  // optimize nested dependencies too
     optimize: 'none',  // don't optimize yet, it will be done later
     paths: {
         'nany/settings': 'nany/settings.production'
     },
-    out: path.join(dist, filenames.uncompressed),
+    out: path.join(distDir, filenames.uncompressed),
     onModuleBundleComplete: function () {
-        var cwd = process.cwd(),
-            cleaned,
+        var cleaned,
             compressed;
 
         // change working dir to dist dir
-        process.chdir(dist);
+        process.chdir(distDir);
 
         console.log('- Cleaning the AMD modules...');
         cleaned = amdclean.clean({
@@ -56,9 +57,9 @@ requirejs.optimize({
         fs.writeFileSync(filenames.compressed, preamble + compressed.code);
         fs.writeFileSync(filenames.map, compressed.map);
 
-        // back to the previous directory
-        process.chdir(cwd);
-
         console.log('Build finished');
     }
 });
+
+// back to the initial directory
+process.chdir(cwd);
