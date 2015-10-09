@@ -24,7 +24,7 @@ requirejs.optimize({
     findNestedDependencies: true,  // optimize nested dependencies too
     optimize: 'none',  // don't optimize yet, it will be done later
     paths: {
-        'nany/settings': 'nany/settings.build'
+        'nany/settings': 'nany/settings.production'
     },
     out: path.join(dist, filenames.uncompressed),
     onModuleBundleComplete: function() {

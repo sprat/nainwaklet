@@ -6,7 +6,7 @@ define(['require', 'utils/url'], function (require, urlUtils) {
     }
 
     var scriptUrl = fullUrl('dist/nany.js'),
-        cssUrl = fullUrl('dist/nany.css');
+        cssUrl = fullUrl('css/nany.css');
 
     return {
         channel: 'default',
