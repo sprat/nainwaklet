@@ -1,10 +1,12 @@
-/* User factory */
 define(function () {
+    'use strict';
+
     function generateRandomGuestName() {
         var id = Math.round(Math.random() * 1000);
         return 'guest' + id;
     }
 
+    /* User class */
     function User(name, image) {
         return Object.freeze({
             name: name || generateRandomGuestName(),

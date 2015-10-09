@@ -1,5 +1,6 @@
-/* Application class */
 define(['./spy', './dashboard', './user', 'utils/extend'], function (Spy, Dashboard, User, extend) {
+    'use strict';
+
     function getElement(target) {
         if (target === undefined || target === null) {
             return target;
@@ -13,6 +14,7 @@ define(['./spy', './dashboard', './user', 'utils/extend'], function (Spy, Dashbo
         return window.document.querySelector(target);
     }
 
+    /* Application class */
     function Application(conf) {
         var dashboard,
             spy,

@@ -1,5 +1,7 @@
-/* Spy factory */
 define(['./nainwak', 'utils/log'], function (nainwak, log) {
+    'use strict';
+
+    /* Spy class */
     function Spy(conf) {
         var frame = conf.infoFrame,
             //IDS = url.parseQueryParams(frame.location).IDS,

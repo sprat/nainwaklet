@@ -1,5 +1,7 @@
-/* Dashboard class */
 define(['./settings', 'utils/html'], function (settings, html) {
+    'use strict';
+
+    /* Dashboard class */
     function Dashboard(conf) {
         var container = conf.container,
             //user = conf.user,

@@ -1,5 +1,6 @@
-/* Initialize the bookmarklet buttons */
 define(['./nainwak', './settings'], function (nainwak, settings) {
+    'use strict';
+
     function getInjectionUrl(scriptUrl, channel) {
         var lines = [
             'javascript:(function () {',
@@ -28,6 +29,7 @@ define(['./nainwak', './settings'], function (nainwak, settings) {
         return lines.join('\n').replace(/\s+/g, ' ');
     }
 
+    /* Initialize the bookmarklet buttons */
     function initialize(selector) {
         var buttons = document.querySelectorAll(selector || '.nanylet');
         Array.prototype.forEach.call(buttons, function (button) {

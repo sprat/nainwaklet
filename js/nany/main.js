@@ -1,4 +1,3 @@
-/* Module API */
 define(['./user', './application', './bookmarklets', './nainwak', './settings', 'utils/css'], function (User, Application, bookmarklets, nainwak, settings, css) {
     'use strict';
 
