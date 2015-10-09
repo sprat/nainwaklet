@@ -13,7 +13,7 @@ var fs = require('fs'),
         compressed: 'nany.min.js',
         map: 'nany.min.js.map'
     },
-    preambleFile = path.join(root, 'build.preamble.txt'),
+    preambleFile = path.join(root, 'src', 'nany', 'preamble.js'),
     preamble = fs.readFileSync(preambleFile);
 
 console.log('Build started');
@@ -27,7 +27,7 @@ requirejs.optimize({
         'nany/settings': 'nany/settings.production'
     },
     out: path.join(dist, filenames.uncompressed),
-    onModuleBundleComplete: function() {
+    onModuleBundleComplete: function () {
         var cwd = process.cwd(),
             cleaned,
             compressed;
@@ -45,8 +45,6 @@ requirejs.optimize({
                 start: preamble + ';(function() {'
             }
         });
-
-        console.log('- Saving the uncompressed file');
         fs.writeFileSync(filenames.uncompressed, cleaned);
 
         console.log('- Compressing...');
@@ -55,11 +53,7 @@ requirejs.optimize({
             comments: /^!.*/,  // keep comments starting with '!'
             outSourceMap: filenames.map
         });
-
-        console.log('- Saving the compressed file');
         fs.writeFileSync(filenames.compressed, preamble + compressed.code);
-
-        console.log('- Saving the map file');
         fs.writeFileSync(filenames.map, compressed.map);
 
         // back to the previous directory
