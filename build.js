@@ -13,18 +13,8 @@ var fs = require('fs'),
         compressed: 'nany.min.js',
         map: 'nany.min.js.map'
     },
-    preambleLines = [
-        '/*!',
-        ' * Nainy application & library',
-        ' * https://github.com/sprat/nany',
-        ' *',
-        ' * Copyright 2015 by Sylvain Prat',
-        ' * Released under the MIT licence.',
-        ' *',
-        ' * THIS IS A GENERATED FILE, DO NOT EDIT',
-        ' */'
-    ],
-    preamble = preambleLines.join('\n') + '\n';
+    preambleFile = path.join(root, 'build.preamble.txt'),
+    preamble = fs.readFileSync(preambleFile);
 
 console.log('Build started');
 console.log('- Optimizing...');

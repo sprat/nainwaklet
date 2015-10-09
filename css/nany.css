@@ -1,6 +1,3 @@
-/* Preamble comment for the build file */
-@import url("nany/preamble.css");
-
 /* Development CSS files */
 @import url("nany/bookmarklet.css");
 @import url("nany/contours.css");

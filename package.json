@@ -33,7 +33,7 @@
     "server": "live-server",
     "lint": "esw",
     "build:js": "node build.js",
-    "build:css": "cleancss -o dist/nany.css css/nany.css",
+    "build:css": "cleancss -o dist/nany.css build.preamble.txt css/nany.css",
     "build": "npm-run-all --sequential lint build:js build:css",
     "watch:lint": "esw --watch",
     "watch:build:js": "nodemon --ignore dist build.js",
