@@ -1,4 +1,4 @@
-/* Production settings */
+/* Build settings */
 define(['utils/url'], function (urlUtils) {
     var script = document.scripts[document.scripts.length - 1],
         scriptUrl = script.src,  // should be the nany.js dist file url

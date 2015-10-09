@@ -6,8 +6,7 @@ var fs = require('fs'),
     requirejs = require('requirejs'),
     amdclean = require('amdclean'),
     uglifyJS = require('uglify-js'),
-    cwd = process.cwd(),
-    jsDir = __dirname,
+    jsDir = path.join(__dirname, '..'),
     distDir = jsDir,
     filenames = {
         uncompressed: 'nany.js',
@@ -26,7 +25,7 @@ requirejs.optimize({
     findNestedDependencies: true,  // optimize nested dependencies too
     optimize: 'none',  // don't optimize yet, it will be done later
     paths: {
-        'nany/settings': 'nany/settings.production'
+        'nany/settings': 'build/settings'
     },
     out: path.join(distDir, filenames.uncompressed),
     onModuleBundleComplete: function () {
@@ -60,6 +59,3 @@ requirejs.optimize({
         console.log('Build finished');
     }
 });
-
-// back to the initial directory
-process.chdir(cwd);

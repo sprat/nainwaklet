@@ -5,7 +5,7 @@ define(['require', 'utils/url'], function (require, urlUtils) {
         return urlUtils.normalize(relativeUrl);
     }
 
-    var scriptUrl = fullUrl('dist/nany.js'),
+    var scriptUrl = fullUrl('js/nany.js'),
         cssUrl = fullUrl('css/nany.css');
 
     return {
