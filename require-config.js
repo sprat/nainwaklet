@@ -7,8 +7,7 @@ var require = {
         'require': 'vendor/require',
         'text': 'vendor/text',
         'qunit': 'vendor/qunit',
-        'dist': '../dist',
-        'css': '../css'
+        'dist': '../dist'
     },
     packages: ['nany', 'nany/nainwak', 'tests']
 };

@@ -11,6 +11,7 @@ define(['./nainwak', 'utils/log'], function (nainwak, log) {
                     page = nainwak.pages.byUrl(url),
                     result;
 
+                log('Navigation to ' + url);
                 if (page) {
                     // TODO: do something useful with the result
                     log('Analyzing ' + page.name);

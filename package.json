@@ -20,22 +20,26 @@
   "dependencies": {},
   "devDependencies": {
     "amdclean": "^2.7.0",
+    "clean-css": "^3.4.5",
     "eslint": "^1.5.1",
     "eslint-watch": "^2.1.2",
     "live-server": "^0.8.1",
     "nodemon": "^1.7.1",
     "npm-run-all": "^1.2.11",
-    "requirejs": "^2.1.20"
+    "requirejs": "^2.1.20",
+    "uglify-js": "^2.4.24"
   },
   "scripts": {
     "server": "live-server",
     "lint": "esw",
+    "build:js": "node build.js",
+    "build:css": "cleancss -o dist/nany.css css/nany.css",
+    "build": "npm-run-all --sequential lint build:js build:css",
     "watch:lint": "esw --watch",
-    "build": "node build.js",
-    "watch:build": "nodemon --ignore dist build.js",
-    "make": "npm-run-all --sequential lint build",
-    "watch": "npm-run-all --parallel watch:lint watch:build",
-    "dev": "npm-run-all --parallel server watch:lint watch:build"
+    "watch:build:js": "nodemon --ignore dist build.js",
+    "watch:build:css": "nodemon -e css --ignore dist --exec npm run build:css",
+    "watch": "npm-run-all --parallel watch:lint watch:build:js watch:build:css",
+    "dev": "npm-run-all --parallel server watch:lint watch:build:js watch:build:css"
   },
   "eslintConfig": {
     "rules": {
