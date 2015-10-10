@@ -5,7 +5,7 @@
  * Copyright 2015 by Sylvain Prat
  * Released under the MIT licence.
  */
-var nany_user, nany_nainwak_urls, nany_nainwak_nain, utils_assert, utils_array, nany_nainwak_pages, utils_url, utils_extend, utils_html, nany_nainwak_page, utils_regexp, nany_nainwak_detect, nany_nainwak_main, nany_nainwak, utils_log, nany_spy, nany_settings, nany_dashboard, nany_application, nany_bookmarklets, utils_css, nany_main, nany;
+var nany_user, nany_nainwak_urls, nany_nainwak_nain, utils_assert, utils_array, nany_nainwak_pages, utils_url, utils_extend, utils_html, nany_nainwak_page, utils_regexp, nany_nainwak_detect, nany_nainwak_main, nany_nainwak, utils_log, nany_spy, nany_dashboard, nany_application, nany_nanylet, utils_unset, utils_css, nany_main, nany;
 nany_user = function () {
   function generateRandomGuestName() {
     var id = Math.round(Math.random() * 1000);
@@ -565,17 +565,7 @@ nany_spy = function (nainwak, log) {
   }
   return Spy;
 }(nany_nainwak, utils_log);
-nany_settings = function () {
-  /* Build settings */
-  var script = document.scripts[document.scripts.length - 1], scriptUrl = script.src,
-    // should be the nany dist file url
-    channel = script.getAttribute('data-channel');
-  return {
-    channel: channel,
-    scriptUrl: scriptUrl
-  };
-}();
-nany_dashboard = function (settings, html) {
+nany_dashboard = function (html) {
   /* Dashboard class */
   function Dashboard(conf) {
     var container = conf.container,
@@ -620,7 +610,7 @@ nany_dashboard = function (settings, html) {
     });
   }
   return Dashboard;
-}(nany_settings, utils_html);
+}(utils_html);
 nany_application = function (Spy, Dashboard, User, extend) {
   function getElement(target) {
     if (target === undefined || target === null) {
@@ -671,8 +661,8 @@ nany_application = function (Spy, Dashboard, User, extend) {
   }
   return Application;
 }(nany_spy, nany_dashboard, nany_user, utils_extend);
-nany_bookmarklets = function (nainwak, settings) {
-  function getInjectionUrl(scriptUrl, channel) {
+nany_nanylet = function (nainwak) {
+  function generateHref(scriptUrl, channel) {
     var lines = [
       'javascript:(function () {',
       'var w = window,',
@@ -699,16 +689,18 @@ nany_bookmarklets = function (nainwak, settings) {
     ];
     return lines.join('\n').replace(/\s+/g, ' ');
   }
-  /* Initialize the bookmarklet buttons */
-  function initialize(selector) {
-    var buttons = document.querySelectorAll(selector || '.nanylet');
-    Array.prototype.forEach.call(buttons, function (button) {
-      var channel = button.getAttribute('data-channel'), href = getInjectionUrl(settings.scriptUrl, channel);
-      button.setAttribute('href', href);
-    });
+  return { generateHref: generateHref };
+}(nany_nainwak);
+utils_unset = function () {
+  function unset(obj, key) {
+    try {
+      delete obj[key];
+    } catch (e) {
+      obj[key] = undefined;
+    }
   }
-  return { initialize: initialize };
-}(nany_nainwak, nany_settings);
+  return unset;
+}();
 utils_css = function (array, urlUtils) {
   function findHead(document) {
     var doc = document || window.document;
@@ -743,18 +735,42 @@ utils_css = function (array, urlUtils) {
     insertLink: insertLink
   };
 }(utils_array, utils_url);
-nany_main = function (User, Application, bookmarklets, nainwak, settings, css) {
-  function unset(obj, key) {
-    try {
-      delete obj[key];
-    } catch (e) {
-      obj[key] = undefined;
-    }
+nany_main = function (User, Application, nanylet, nainwak, assert, unset, css, url) {
+  var scripts = document.scripts, script = scripts[scripts.length - 1], scriptUrl = script && script.src ? script.src : getScriptUrlWithRequire(), cssUrl = scriptUrl.replace(/\bjs\b/g, 'css'),
+    // replace 'js' by 'css'
+    channel = script.getAttribute('data-channel') || 'default';
+  function getScriptUrlWithRequire() {
+    var relativeUrl = require.toUrl('nany.min.js');
+    return url.normalize(relativeUrl);
   }
-  function toggleApp(window) {
+  /* Initialize the bookmarklets buttons */
+  function initializeNanylets(selector) {
+    var buttons = document.querySelectorAll(selector || '.nanylet');
+    Array.prototype.forEach.call(buttons, function (button) {
+      var channel = button.getAttribute('data-channel'), href = nanylet.generateHref(scriptUrl, channel);
+      button.setAttribute('href', href);
+    });
+  }
+  function startApplicationOnNainwak(name, window) {
+    var frames = window.frames, pubDoc = frames.pub.document, infoFrame = frames.info.frameElement, nain = nainwak.getNain(window);
+    // insert the CSS file if needed (we never remove it!)
+    css.insertLink(cssUrl, pubDoc);
+    // create the Hub and assign it to the external api
+    window[name] = Application({
+      user: User(nain.nom, nain.image),
+      channel: channel,
+      container: pubDoc.body,
+      infoFrame: infoFrame
+    });
+  }
+  // toggle the Application on the Nainwak game page
+  function runOnNainwak(window) {
     var name = 'nanyApplication',
       // global app name
       app = window[name];
+    if (!nainwak.isInGame(window)) {
+      return;
+    }
     // if the application is already launched, kill it
     if (app) {
       app.destroy();
@@ -762,30 +778,15 @@ nany_main = function (User, Application, bookmarklets, nainwak, settings, css) {
       return;
     }
     // start the application
-    var frames = window.frames, pubDoc = frames.pub.document, infoFrame = frames.info.frameElement, nain = nainwak.getNain(window), cssUrl = settings.scriptUrl.replace(/\bjs\b/g, 'css');
-    // insert the CSS file if needed (we never remove it!)
-    css.insertLink(cssUrl, pubDoc);
-    // create the Hub and assign it to the external api
-    window[name] = Application({
-      user: User(nain.nom, nain.image),
-      channel: settings.channel,
-      container: pubDoc.body,
-      infoFrame: infoFrame
-    });
+    startApplicationOnNainwak(name, window);
   }
-  // toggle the Application on the Nainwak game page
-  function runOnNainwak() {
-    if (nainwak.isInGame(window)) {
-      toggleApp(window);
-    }
-  }
-  runOnNainwak();
+  runOnNainwak(window);
   return Object.freeze({
-    initBookmarklets: bookmarklets.initialize,
+    initializeNanylets: initializeNanylets,
     User: User,
     Application: Application
   });
-}(nany_user, nany_application, nany_bookmarklets, nany_nainwak, nany_settings, utils_css);
+}(nany_user, nany_application, nany_nanylet, nany_nainwak, utils_assert, utils_unset, utils_css, utils_url);
 nany = function (main) {
   return main;
 }(nany_main);

@@ -1,4 +1,4 @@
-define(['./settings', 'utils/html'], function (settings, html) {
+define(['utils/html'], function (html) {
     'use strict';
 
     /* Dashboard class */

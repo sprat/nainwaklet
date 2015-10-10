@@ -1,7 +1,7 @@
-define(['./nainwak', './settings'], function (nainwak, settings) {
+define(['./nainwak'], function (nainwak) {
     'use strict';
 
-    function getInjectionUrl(scriptUrl, channel) {
+    function generateHref(scriptUrl, channel) {
         var lines = [
             'javascript:(function () {',
             'var w = window,',
@@ -29,17 +29,7 @@ define(['./nainwak', './settings'], function (nainwak, settings) {
         return lines.join('\n').replace(/\s+/g, ' ');
     }
 
-    /* Initialize the bookmarklet buttons */
-    function initialize(selector) {
-        var buttons = document.querySelectorAll(selector || '.nanylet');
-        Array.prototype.forEach.call(buttons, function (button) {
-            var channel = button.getAttribute('data-channel'),
-                href = getInjectionUrl(settings.scriptUrl, channel);
-            button.setAttribute('href', href);
-        });
-    }
-
     return {
-        initialize: initialize
+        generateHref: generateHref
     };
 });

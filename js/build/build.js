@@ -15,9 +15,6 @@ requirejs.optimize({
     baseUrl: jsDir,
     mainConfigFile: path.join(jsDir, 'require-config.js'),
     name: 'nany',
-    paths: {
-        'nany/settings': 'build/settings'
-    },
     wrap: {
         startFile: preambleFile
     },
