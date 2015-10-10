@@ -5,13 +5,13 @@
  * Copyright 2015 by Sylvain Prat
  * Released under the MIT licence.
  */
-;(function() {/* User factory */
 var nany_user, nany_nainwak_urls, nany_nainwak_nain, utils_assert, utils_array, nany_nainwak_pages, utils_url, utils_extend, utils_html, nany_nainwak_page, utils_regexp, nany_nainwak_detect, nany_nainwak_main, nany_nainwak, utils_log, nany_spy, nany_settings, nany_dashboard, nany_application, nany_bookmarklets, utils_css, nany_main, nany;
 nany_user = function () {
   function generateRandomGuestName() {
     var id = Math.round(Math.random() * 1000);
     return 'guest' + id;
   }
+  /* User class */
   function User(name, image) {
     return Object.freeze({
       name: name || generateRandomGuestName(),
@@ -524,6 +524,7 @@ utils_log = function () {
   };
 }();
 nany_spy = function (nainwak, log) {
+  /* Spy class */
   function Spy(conf) {
     var frame = conf.infoFrame,
       //IDS = url.parseQueryParams(frame.location).IDS,
@@ -565,6 +566,7 @@ nany_spy = function (nainwak, log) {
   return Spy;
 }(nany_nainwak, utils_log);
 nany_settings = function (urlUtils) {
+  /* Build settings */
   var script = document.scripts[document.scripts.length - 1], scriptUrl = script.src,
     // should be the nany.js dist file url
     scriptBaseUrl = scriptUrl.slice(0, scriptUrl.lastIndexOf('/') + 1), cssUrl = urlUtils.normalize(scriptBaseUrl + '../css/nany.min.css'), channel = script.getAttribute('data-channel');
@@ -575,6 +577,7 @@ nany_settings = function (urlUtils) {
   };
 }(utils_url);
 nany_dashboard = function (settings, html) {
+  /* Dashboard class */
   function Dashboard(conf) {
     var container = conf.container,
       //user = conf.user,
@@ -630,6 +633,7 @@ nany_application = function (Spy, Dashboard, User, extend) {
     // so, we assume it's a selector
     return window.document.querySelector(target);
   }
+  /* Application class */
   function Application(conf) {
     var dashboard, spy, newConf = {
         // default conf
@@ -696,6 +700,7 @@ nany_bookmarklets = function (nainwak, settings) {
     ];
     return lines.join('\n').replace(/\s+/g, ' ');
   }
+  /* Initialize the bookmarklet buttons */
   function initialize(selector) {
     var buttons = document.querySelectorAll(selector || '.nanylet');
     Array.prototype.forEach.call(buttons, function (button) {
@@ -786,4 +791,4 @@ nany = function (main) {
   return main;
 }(nany_main);
 window.nany = nany;
-}());
+//# sourceMappingURL=nany.js.map
