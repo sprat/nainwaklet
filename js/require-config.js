@@ -6,8 +6,7 @@ var require = {
     paths: {
         'require': 'vendor/require',
         'text': 'vendor/text',
-        'qunit': 'vendor/qunit',
-        'css': '../css'
+        'qunit': 'vendor/qunit'
     },
     packages: ['nany', 'nany/nainwak', 'tests']
 };
