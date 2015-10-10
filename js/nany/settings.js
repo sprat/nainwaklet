@@ -7,12 +7,10 @@ define(['require', 'utils/url'], function (require, urlUtils) {
         return urlUtils.normalize(relativeUrl);
     }
 
-    var scriptUrl = fullUrl('js/nany.js'),
-        cssUrl = fullUrl('css/nany.css');
+    var scriptUrl = fullUrl('js/nany.js');
 
     return {
         channel: 'default',
-        scriptUrl: scriptUrl,
-        cssUrl: cssUrl
+        scriptUrl: scriptUrl
     };
 });

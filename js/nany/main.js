@@ -24,10 +24,11 @@ define(['./user', './application', './bookmarklets', './nainwak', './settings', 
         var frames = window.frames,
             pubDoc = frames.pub.document,
             infoFrame = frames.info.frameElement,
-            nain = nainwak.getNain(window);
+            nain = nainwak.getNain(window),
+            cssUrl = settings.scriptUrl.replace(/\bjs\b/g, 'css');
 
         // insert the CSS file if needed (we never remove it!)
-        css.insertLink(settings.cssUrl, pubDoc);
+        css.insertLink(cssUrl, pubDoc);
 
         // create the Hub and assign it to the external api
         window[name] = Application({

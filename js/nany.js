@@ -565,17 +565,16 @@ nany_spy = function (nainwak, log) {
   }
   return Spy;
 }(nany_nainwak, utils_log);
-nany_settings = function (urlUtils) {
+nany_settings = function () {
   /* Build settings */
   var script = document.scripts[document.scripts.length - 1], scriptUrl = script.src,
-    // should be the nany.js dist file url
-    scriptBaseUrl = scriptUrl.slice(0, scriptUrl.lastIndexOf('/') + 1), cssUrl = urlUtils.normalize(scriptBaseUrl + '../css/nany.min.css'), channel = script.getAttribute('data-channel');
+    // should be the nany dist file url
+    channel = script.getAttribute('data-channel');
   return {
     channel: channel,
-    scriptUrl: scriptUrl,
-    cssUrl: cssUrl
+    scriptUrl: scriptUrl
   };
-}(utils_url);
+}();
 nany_dashboard = function (settings, html) {
   /* Dashboard class */
   function Dashboard(conf) {
@@ -763,9 +762,9 @@ nany_main = function (User, Application, bookmarklets, nainwak, settings, css) {
       return;
     }
     // start the application
-    var frames = window.frames, pubDoc = frames.pub.document, infoFrame = frames.info.frameElement, nain = nainwak.getNain(window);
+    var frames = window.frames, pubDoc = frames.pub.document, infoFrame = frames.info.frameElement, nain = nainwak.getNain(window), cssUrl = settings.scriptUrl.replace(/\bjs\b/g, 'css');
     // insert the CSS file if needed (we never remove it!)
-    css.insertLink(settings.cssUrl, pubDoc);
+    css.insertLink(cssUrl, pubDoc);
     // create the Hub and assign it to the external api
     window[name] = Application({
       user: User(nain.nom, nain.image),
