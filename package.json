@@ -66,8 +66,7 @@
     },
     "env": {
       "browser": true,
-      "amd": true,
-      "qunit": true
+      "amd": true
     },
     "extends": "eslint:recommended"
   }

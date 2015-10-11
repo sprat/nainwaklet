@@ -1,4 +1,4 @@
-define(['nany/nainwak/detect', 'utils/html', 'text!./fixtures/detect.html'], function (detect, html, detectHTML) {
+define(['qunit', 'nany/nainwak/detect', 'utils/html', 'text!./fixtures/detect.html'], function (QUnit, detect, html, detectHTML) {
     'use strict';
 
     QUnit.module('nainwak/detect');
