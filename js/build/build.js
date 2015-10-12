@@ -31,15 +31,14 @@ requirejs.optimize({
             uncompressedFileMapDeclaration = '\n//# sourceMappingURL=' + uncompressedFileMap,
             compressedFile = uncompressedFile.replace('.js', '.min.js'),
             compressedFileMap = compressedFile + '.map',
-            cleaned,
-            minified;
+            result;
 
         // change working dir
         process.chdir(outDir);
 
         // run amdclean
         console.log('- Cleaning the AMD modules...');
-        cleaned = amdclean.clean({
+        result = amdclean.clean({
             filePath: uncompressedFile,
             sourceMap: fs.readFileSync(uncompressedFileMap, 'utf-8'),
             globalModules: [data.name],
@@ -55,12 +54,12 @@ requirejs.optimize({
             //aggressiveOptimizations: false,
             //transformAMDChecks: false
         });
-        fs.writeFileSync(uncompressedFile, cleaned.code + uncompressedFileMapDeclaration);
-        fs.writeFileSync(uncompressedFileMap, cleaned.map);
+        fs.writeFileSync(uncompressedFile, result.code + uncompressedFileMapDeclaration);
+        fs.writeFileSync(uncompressedFileMap, result.map);
 
         // run uglifyJS
         console.log('- Compressing...');
-        minified = uglifyJS.minify(uncompressedFile, {
+        result = uglifyJS.minify(uncompressedFile, {
             inSourceMap: uncompressedFileMap,
             outSourceMap: compressedFileMap,
             //warnings: true,
@@ -68,8 +67,8 @@ requirejs.optimize({
                 comments: /^!/  // keep comments starting with '!'
             }
         });
-        fs.writeFileSync(compressedFile, minified.code);
-        fs.writeFileSync(compressedFileMap, minified.map);
+        fs.writeFileSync(compressedFile, result.code);
+        fs.writeFileSync(compressedFileMap, result.map);
 
         console.log('Build finished');
     }
