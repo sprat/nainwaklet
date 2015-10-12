@@ -24,13 +24,17 @@
     "eslint": "^1.5.1",
     "eslint-watch": "^2.1.2",
     "live-server": "^0.8.1",
+    "mocha-phantomjs": "^4.0.1",
+    "node-qunit-phantomjs": "^1.2.1",
     "nodemon": "^1.7.1",
     "npm-run-all": "^1.2.11",
+    "qunitjs": "^1.19.0",
     "requirejs": "^2.1.20",
     "uglify-js": "^2.4.24"
   },
   "scripts": {
     "server": "live-server",
+    "test": "mocha-phantomjs tests.html",
     "lint": "esw",
     "build:js": "node js/build/build.js",
     "build:css": "cleancss --source-map --output css/nany.min.css css/nany.css",

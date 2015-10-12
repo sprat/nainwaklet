@@ -1,4 +1,5 @@
-require(['qunit'], function (QUnit) {
+/*global mocha, mochaPhantomJS */
+define(function (require) {
     var tests = [
         'tests/nainwak',
         'tests/detect'
@@ -6,6 +7,10 @@ require(['qunit'], function (QUnit) {
 
     // load the test modules and start QUnit
     require(tests, function () {
-        QUnit.start();
+        if (window.mochaPhantomJS) {
+            mochaPhantomJS.run();
+        } else {
+            mocha.run();
+        }
     });
 });

@@ -1,20 +1,11 @@
-/*global require:true QUnit */
+/*global require:true */
 /*exported require */
 var require = {
     urlArgs: 'cachebust=' + (new Date()).getTime(),  // prevents caching
     baseUrl: 'js',
     paths: {
         'require': 'vendor/require',
-        'text': 'vendor/text',
-        'qunit': 'vendor/qunit'
+        'text': 'vendor/text'
     },
-    shim: {
-        'qunit': {
-            exports: 'QUnit',
-            init: function () {
-                QUnit.config.autostart = false;  // don't start QUnit yet
-            }
-        }
-    },
-    packages: ['nany', 'nany/nainwak', 'tests']
+    packages: ['nany', 'nany/nainwak']
 };

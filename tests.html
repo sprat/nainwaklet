@@ -4,12 +4,20 @@
     <meta charset="utf-8">
     <title>Tests</title>
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
-    <link rel="stylesheet" href="css/qunit.css">
-    <script src="js/require-config.js"></script>
-    <script src="js/vendor/require.js" data-main="tests"></script>
+    <link rel="stylesheet" href="css/mocha.css">
 </head>
 <body>
-    <div id="qunit"></div>
-    <div id="qunit-fixture"></div>
+    <div id="mocha">
+        <h1>Tests</h1>
+    </div>
+
+    <script src="js/vendor/chai.js"></script>
+    <script src="js/vendor/mocha.js"></script>
+    <script>
+    mocha.setup('tdd');
+    window.assert = chai.assert;
+    </script>
+    <script src="js/require-config.js"></script>
+    <script src="js/vendor/require.js" data-main="tests/main"></script>
 </body>
 </html>
