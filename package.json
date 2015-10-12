@@ -41,7 +41,7 @@
     "watch:js": "nodemon -e js --ignore js/nany.js --ignore js/nany.min.js --exec npm run build:js",
     "watch:css": "nodemon -e css --ignore css/nany.min.css --exec npm run build:css",
     "watch": "npm-run-all --parallel watch:js watch:css",
-    "dev": "npm-run-all --parallel server watch"
+    "dev": "npm-run-all --parallel server watch:js watch:css"
   },
   "eslintConfig": {
     "rules": {
