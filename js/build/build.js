@@ -7,6 +7,7 @@ var fs = require('fs'),
     amdclean = require('amdclean'),
     uglifyJS = require('uglify-js'),
     jsDir = path.join(__dirname, '..'),
+    distDir = path.join(jsDir, '..', 'dist'),
     preambleFile = path.join(__dirname, 'preamble.js');
 
 console.log('Build started');
@@ -18,7 +19,7 @@ requirejs.optimize({
     wrap: {
         startFile: preambleFile
     },
-    out: path.join(jsDir, 'nany.js'),
+    out: path.join(distDir, 'nany.js'),
     findNestedDependencies: true,  // optimize nested dependencies too
     optimize: 'none',  // don't compress yet, it will be done at a later stage
     generateSourceMaps: true,  // generate source maps

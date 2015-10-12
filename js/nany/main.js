@@ -7,6 +7,7 @@ define(['./user', './application', './nanylet', './nainwak', 'utils/assert', 'ut
         cssUrl = scriptUrl.replace(/\bjs\b/g, 'css'), // replace 'js' by 'css'
         channel = script.getAttribute('data-channel') || 'default';
 
+    // TODO: use module.config instead
     function getScriptUrlWithRequire() {
         var relativeUrl = require.toUrl('nany.min.js');
         return url.normalize(relativeUrl);
