@@ -33,8 +33,8 @@
   },
   "scripts": {
     "server": "live-server",
-    "lint": "esw",
     "test": "phantomjs ./node_modules/qunit-phantomjs-runner/runner.js ./tests.html",
+    "lint": "esw",
     "build:js": "node js/build/build.js",
     "build:css": "cleancss --source-map --output css/nany.min.css css/nany.css",
     "build": "npm-run-all --sequential lint build:js build:css",
@@ -69,8 +69,7 @@
     },
     "env": {
       "browser": true,
-      "amd": true,
-      "qunit": true
+      "amd": true
     },
     "extends": "eslint:recommended"
   }

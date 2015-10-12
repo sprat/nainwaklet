@@ -1,3 +1,4 @@
+/* global QUnit */
 define(['nany/nainwak/detect', 'utils/html', 'text!./fixtures/detect.html'], function (detect, html, detectHTML) {
     'use strict';
 

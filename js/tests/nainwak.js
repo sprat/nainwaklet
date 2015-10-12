@@ -1,3 +1,4 @@
+/* global QUnit */
 define(['nany/nainwak'], function (nainwak) {
     'use strict';
 

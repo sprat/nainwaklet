@@ -1,3 +1,4 @@
+/* global QUnit */
 var tests = [
     'tests/nainwak',
     'tests/detect'
