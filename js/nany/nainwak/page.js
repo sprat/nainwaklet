@@ -13,9 +13,9 @@ define(['./urls', 'utils/url', 'utils/html', 'utils/extend'], function (urls, ur
             return baseUrl + '?' + url.buildQueryParams(params);
         }
 
-        function load(IDS, processResult) {
+        function fetch(IDS, processResult) {
             var fullUrl = getUrl(IDS);
-            html.load(fullUrl, function (response) {
+            html.fetch(fullUrl, function (response) {
                 var result = null;
                 if (response.status === 200) {
                     result = analyze(response.document);
@@ -28,7 +28,7 @@ define(['./urls', 'utils/url', 'utils/html', 'utils/extend'], function (urls, ur
             name: name,
             url: baseUrl,  // base URL without query parameters
             analyze: analyze,
-            load: load
+            fetch: fetch
         });
     }
 

@@ -27,7 +27,7 @@ define(['utils/extend'], function (extend) {
         //return parser.parseFromString(html, 'text/html');
     }
 
-    function load(url, processResponse) {
+    function fetch(url, processResponse) {
         var xhr = new XMLHttpRequest();
         xhr.open('GET', url, true);  // async
         xhr.responseType = 'document';
@@ -82,7 +82,7 @@ define(['utils/extend'], function (extend) {
 
     return {
         parseDocument: parseDocument,
-        load: load,
+        fetch: fetch,
         renderer: renderer
     };
 });
