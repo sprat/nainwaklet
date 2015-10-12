@@ -41,15 +41,43 @@ define(['./page', './urls', 'utils/array', 'utils/regexp'], function (Page, urls
     }
 
     function parseTag(tag) {
-        var regex = /<span\s+style=\"color:(#[0-9A-F]{6});\">([^<]*)<\/span>/i,
-            match = regex.exec(tag);
+        var doubleTagRegex = /\[(.*?)\]\s*\[(.*?)\]/,
+            singleTagRegex = /\[(.*?)\]/,
+            guildeRegex = /<span\s+style=\"color:(#[0-9A-F]{6});\">([^<]*)<\/span>/i,
+            result = {},
+            match,
+            elements;
+
+        // find the tag elements
+        match = doubleTagRegex.exec(tag);
+        elements = match ? [match[1], match[2]] : [tag.replace(singleTagRegex, '$1')];
+
+        // determine which element is guilde
+        match = guildeRegex.exec(elements[0]);
+        if (!match) {
+            // swap the elements
+            elements = [elements[1], elements[0]];
+            match = guildeRegex.exec(elements[0]);
+        }
 
         if (match) {
-            return {
+            result.guilde = {
                 nom: match[2],
                 couleur: match[1]
             };
         }
+
+        if (elements[1]) {
+            result.perso = elements[1];
+        }
+
+        // TODO: extract tag format?
+        // 1. [Perso][Guilde]
+        // 2. [Guilde][Perso]
+        // 3. [PersoGuilde]
+        // 4. [GuildePerso]
+
+        return result;
     }
 
     function findNains(doc) {
@@ -74,8 +102,6 @@ define(['./page', './urls', 'utils/array', 'utils/regexp'], function (Page, urls
         }
 
         return processScriptArrays(doc, regex, keys.split(','), function (spec) {
-            // TODO: extract more info: tag perso
-            // [Perso][Guilde] or [Guilde][Perso] or [PersoGuilde] or [GuildePerso]
             var nain = {
                     id: int(spec.id),
                     nom: spec.nom,
@@ -89,7 +115,7 @@ define(['./page', './urls', 'utils/array', 'utils/regexp'], function (Page, urls
                 tag = parseTag(spec.tag);
 
             if (tag) {
-                nain.guilde = tag;
+                nain.tag = tag;
             }
 
             return nain;

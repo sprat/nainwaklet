@@ -19,7 +19,6 @@ define(['nany/nainwak/detect', 'utils/html', 'text!./fixtures/detect.html'], fun
 
         assert.strictEqual(nains.length, 3, 'Nombre de nains');
 
-        // TODO: add more tests about nains
         // ["33966", "avatar_guilde/41ddb8ad2c2be408e27352accf1cc0b6559466bb.png", "Le PheniX", '[Gnouille] [<span style="color:#91005D;">#!</span>]', "13799", "2", "Diablotin(e)", "0", "13", "5", "&quot;Le PheniX est un oiseau qui symbolise l&#039;immortalité et la résurrection.&quot; A quoi bon me tuer ?!?", "o", "", "0"];
         assert.deepEqual(nains[0], {
             id: 33966,
@@ -30,13 +29,16 @@ define(['nany/nainwak/detect', 'utils/html', 'text!./fixtures/detect.html'], fun
             cote: 'sadique',
             rang: 'Diablotin(e)',
             barbe: 137.99,
-            guilde: {
-                nom: '#!',
-                couleur: '#91005D'
+            tag: {
+                guilde: {
+                    nom: '#!',
+                    couleur: '#91005D'
+                },
+                perso: 'Gnouille'
             }
         }, 'Nain 1');
 
-        // ["33924", "avatar/perso/dab064da974199a53f0e22527f901d523e8869b3.png", "Bourinain", '[G-NOUILLE<span style="color:#00C200;">#sNOUFFF</span>]', "10314", "2", "Cancre (nain-culte)", "0", "13", "5", "Description", "o", "", "0"];
+        // ["33924", "avatar/perso/dab064da974199a53f0e22527f901d523e8869b3.png", "Nainkomp'", '[Perso]', "10314", "2", "Cancre (nain-culte)", "1", "14", "5", "Description", "o", "", "0"];
         assert.deepEqual(nains[1], {
             id: 33924,
             nom: "Nainkomp'",
@@ -45,7 +47,10 @@ define(['nany/nainwak/detect', 'utils/html', 'text!./fixtures/detect.html'], fun
             position: [14, 5],
             cote: 'sadique',
             rang: 'Cancre (nain-culte)',
-            barbe: 103.14
+            barbe: 103.14,
+            tag: {
+                perso: 'Perso'
+            }
         }, 'Nain 2');
 
         // ["71985", "avatar/choix/TOsmuf4.gif", "Bimme65", '', "0", "3", "Rampant Nain-déci", "2", "13", "6", "Bimme65", "", "", "0"];
@@ -57,7 +62,8 @@ define(['nany/nainwak/detect', 'utils/html', 'text!./fixtures/detect.html'], fun
             position: [13, 6],
             cote: 'rampant',
             rang: 'Rampant Nain-déci',
-            barbe: 0
+            barbe: 0,
+            tag: {}
         }, 'Nain 3');
     });
 
