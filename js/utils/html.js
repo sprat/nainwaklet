@@ -18,10 +18,13 @@ define(['utils/extend'], function (extend) {
     ];
 
     function parseDocument(html) {
-        // The HTML parsing is not supported on all the browsers, maybe we
-        // should use a polyfill?
-        var parser = new DOMParser();
-        return parser.parseFromString(html, 'text/html');
+        var doc = document.implementation.createHTMLDocument('');
+        doc.documentElement.innerHTML = html;
+        return doc;
+
+        // The following implementation is not supported by PhantomJS:
+        //var parser = new DOMParser();
+        //return parser.parseFromString(html, 'text/html');
     }
 
     function load(url, processResponse) {

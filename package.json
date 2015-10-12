@@ -26,12 +26,15 @@
     "live-server": "^0.8.1",
     "nodemon": "^1.7.1",
     "npm-run-all": "^1.2.11",
+    "phantomjs": "^1.9.18",
+    "qunit-phantomjs-runner": "^2.1.0",
     "requirejs": "^2.1.20",
     "uglify-js": "^2.4.24"
   },
   "scripts": {
     "server": "live-server",
     "lint": "esw",
+    "test": "phantomjs ./node_modules/qunit-phantomjs-runner/runner.js ./tests.html",
     "build:js": "node js/build/build.js",
     "build:css": "cleancss --source-map --output css/nany.min.css css/nany.css",
     "build": "npm-run-all --sequential lint build:js build:css",
