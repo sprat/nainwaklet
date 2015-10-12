@@ -1,21 +1,15 @@
-define(['./user', './application', './nanylet', './nainwak', 'utils/assert', 'utils/unset', 'utils/css', 'utils/url'], function (User, Application, nanylet, nainwak, assert, unset, css, url) {
+define(['./user', './application', './nanylet', './nainwak', 'utils/assert', 'utils/unset', 'utils/css'], function (User, Application, nanylet, nainwak, assert, unset, css) {
     'use strict';
 
     var scripts = document.scripts,
-        script = scripts[scripts.length - 1],
-        scriptUrl = (script && script.src) ? script.src : getScriptUrlWithRequire(),
-        cssUrl = scriptUrl.replace(/\bjs\b/g, 'css'), // replace 'js' by 'css'
-        channel = script.getAttribute('data-channel') || 'default';
-
-    // TODO: use module.config instead
-    function getScriptUrlWithRequire() {
-        var relativeUrl = require.toUrl('nany.min.js');
-        return url.normalize(relativeUrl);
-    }
+        currentScript = scripts[scripts.length - 1];
 
     /* Initialize the bookmarklets buttons */
-    function initializeNanylets(selector) {
+    function initializeNanylets(selector, scriptUrl) {
         var buttons = document.querySelectorAll(selector || '.nanylet');
+
+        // Note: the script src won't work if the module is loaded by an AMD loader
+        scriptUrl = scriptUrl || currentScript.src;
 
         Array.prototype.forEach.call(buttons, function (button) {
             var channel = button.getAttribute('data-channel'),
@@ -25,7 +19,9 @@ define(['./user', './application', './nanylet', './nainwak', 'utils/assert', 'ut
     }
 
     function startApplicationOnNainwak(name, window) {
-        var frames = window.frames,
+        var channel = currentScript.getAttribute('data-channel') || 'default',
+            cssUrl = currentScript.src.replace(/\bjs\b/g, 'css'), // replace 'js' by 'css'
+            frames = window.frames,
             pubDoc = frames.pub.document,
             infoFrame = frames.info.frameElement,
             nain = nainwak.getNain(window);
