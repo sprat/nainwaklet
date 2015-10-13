@@ -1,5 +1,5 @@
 /* HTML utilities */
-define(['utils/extend'], function (extend) {
+define(['./extend'], function (extend) {
     var tags = [
         'a', 'abbr', 'address', 'area', 'article', 'aside', 'audio', 'b',
         'base', 'bdi', 'bdo', 'blockquote', 'body', 'br', 'button', 'canvas',
@@ -16,6 +16,13 @@ define(['utils/extend'], function (extend) {
         'tfoot', 'th', 'thead', 'time', 'title', 'tr', 'track', 'u', 'ul',
         'var', 'video', 'wbr'
     ];
+
+    function decodeEntities(string) {
+        // TODO: not really efficient, a regex-based implementation would be better
+        var txt = document.createElement('textarea');
+        txt.innerHTML = string;
+        return txt.value;
+    }
 
     function parseDocument(html) {
         var doc = document.implementation.createHTMLDocument('');
@@ -82,6 +89,7 @@ define(['utils/extend'], function (extend) {
 
     return {
         parseDocument: parseDocument,
+        decodeEntities: decodeEntities,
         fetch: fetch,
         renderer: renderer
     };

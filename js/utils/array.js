@@ -1,12 +1,5 @@
 /* Array utilities */
-define(['./assert'], function (assert) {
-    function decodeEntities(string) {
-        // TODO: not really efficient, a regex-based implementation would be better
-        var txt = document.createElement('textarea');
-        txt.innerHTML = string;
-        return txt.value;
-    }
-
+define(['./assert', './html'], function (assert, html) {
     // parses a string containing a representation of a Javascript array
     // with JSON-compatible values and returns it
     function parse(string) {
@@ -16,9 +9,7 @@ define(['./assert'], function (assert) {
             }),
             values = JSON.parse(cleaned);
 
-        return values.map(function (value) {
-            return decodeEntities(value);
-        });
+        return values.map(html.decodeEntities);
     }
 
     // similar to Array.prototype.find which is only available in ES6
