@@ -2,7 +2,7 @@
 define(['nany/nainwak'], function (nainwak) {
     'use strict';
 
-    QUnit.module('nainwak');
+    QUnit.module('nany/nainwak');
 
     QUnit.test('gameUrl', function (assert) {
         assert.strictEqual(nainwak.gameUrl(), 'http://www.nainwak.com/jeu/index.php', 'Default URL is the index page');

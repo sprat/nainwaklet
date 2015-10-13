@@ -1,8 +1,8 @@
 /* global QUnit */
-define(['nany/nainwak/detect', 'utils/html', 'text!./fixtures/detect.html'], function (detect, html, detectHTML) {
+define(['nany/nainwak/detect', 'utils/html', 'text!../fixtures/detect.html'], function (detect, html, detectHTML) {
     'use strict';
 
-    QUnit.module('nainwak/detect');
+    QUnit.module('nany/nainwak/detect');
 
     var doc = html.parseDocument(detectHTML);
 

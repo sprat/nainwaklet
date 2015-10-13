@@ -1,7 +1,7 @@
 /* global QUnit */
 var tests = [
-    'tests/nainwak',
-    'tests/detect'
+    'tests/nany/nainwak',
+    'tests/nany/detect'
 ];
 
 // don't start QUnit yet
