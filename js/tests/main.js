@@ -1,5 +1,6 @@
 /* global QUnit */
 var tests = [
+    'tests/utils/base64',
     'tests/nany/nainwak',
     'tests/nany/detect'
 ];
