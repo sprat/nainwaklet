@@ -5,7 +5,8 @@ var require = {
     baseUrl: 'js',
     paths: {
         'require': 'vendor/require',
-        'text': 'vendor/text'
+        'text': 'vendor/text',
+        'pusher': 'vendor/pusher'
     },
     packages: ['nany', 'nany/nainwak']
 };

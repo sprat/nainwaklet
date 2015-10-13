@@ -1,4 +1,4 @@
-define(['./spy', './dashboard', './user', 'utils/extend'], function (Spy, Dashboard, User, extend) {
+define(['./spy', './dashboard', './user', './connection', 'utils/extend'], function (Spy, Dashboard, User, Connection, extend) {
     'use strict';
 
     function getElement(target) {
@@ -28,6 +28,9 @@ define(['./spy', './dashboard', './user', 'utils/extend'], function (Spy, Dashbo
         extend(newConf, conf);
         newConf.container = getElement(newConf.container);
         newConf.infoFrame = getElement(newConf.infoFrame);
+
+        // create a connection to the channel
+        newConf.connection = Connection(newConf.channel);
 
         if (newConf.container) {
             dashboard = Dashboard(newConf);
