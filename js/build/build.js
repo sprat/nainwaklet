@@ -1,75 +1,100 @@
-/*global __dirname */
-/* eslint-disable no-console */
+/*eslint-env node */
+/*eslint-disable no-console */
+
 var fs = require('fs'),
     path = require('path'),
-    process = require('process'),
     requirejs = require('requirejs'),
     amdclean = require('amdclean'),
     uglifyJS = require('uglify-js'),
-    jsDir = path.join(__dirname, '..'),
-    distDir = path.join(jsDir, '..', 'dist'),
-    preambleFile = path.join(__dirname, 'preamble.js');
+    buildDir = __dirname,
+    srcDir = path.join(buildDir, '..'),
+    distDir = path.join(srcDir, '..', 'dist'),
+    requireConfig = path.join(srcDir, 'require-config.js'),
+    preambleFile = path.join(buildDir, 'preamble.js'),
+    preamble = fs.readFileSync(preambleFile, 'utf-8');
 
-console.log('Build started');
-console.log('- Optimizing...');
-requirejs.optimize({
-    baseUrl: jsDir,
-    mainConfigFile: path.join(jsDir, 'require-config.js'),
-    name: 'nany',
-    wrap: {
-        startFile: preambleFile
-    },
-    out: path.join(distDir, 'nany.js'),
-    findNestedDependencies: true,  // optimize nested dependencies too
-    optimize: 'none',  // don't compress yet, it will be done at a later stage
-    generateSourceMaps: true,  // generate source maps
-    preserveLicenseComments: false,  // unset because it interferes with generateSourceMaps
-    onModuleBundleComplete: function (data) {
-        var outDir = path.dirname(data.path),
-            uncompressedFile = path.basename(data.path),
-            uncompressedFileMap = uncompressedFile + '.map',
-            uncompressedFileMapDeclaration = '\n//# sourceMappingURL=' + uncompressedFileMap,
-            compressedFile = uncompressedFile.replace('.js', '.min.js'),
-            compressedFileMap = compressedFile + '.map',
-            result;
+// transform AMD modules to regular modules with AMDclean
+function cleanAMD(source, outputFile, globalModules) {
+    console.log('- Cleaning the AMD modules...');
 
-        // change working dir
-        process.chdir(outDir);
+    var outputFilename = path.basename(outputFile),
+        srcPath = path.relative(outputFile, srcDir),
+        srcRoot = srcPath.split(path.sep).join('/'),  // convert path to url
+        result;
 
-        // run amdclean
-        console.log('- Cleaning the AMD modules...');
-        result = amdclean.clean({
-            filePath: uncompressedFile,
-            sourceMap: fs.readFileSync(uncompressedFileMap, 'utf-8'),
-            globalModules: [data.name],
-            wrap: false, // do not use with sourceMapWithCode
-            esprima: {
-                source: uncompressedFile
-            },
-            escodegen: {
-                file: uncompressedFile,
-                sourceMap: true,
-                sourceMapWithCode: true
-            }
-            //aggressiveOptimizations: false,
-            //transformAMDChecks: false
-        });
-        fs.writeFileSync(uncompressedFile, result.code + uncompressedFileMapDeclaration);
-        fs.writeFileSync(uncompressedFileMap, result.map);
+    result = amdclean.clean(source.code, {
+        globalModules: globalModules,
+        sourceMap: source.map,
+        wrap: false, // can't use that with sourceMap options
+        esprima: {
+            loc: true,
+            source: outputFilename
+        },
+        escodegen: {
+            sourceMap: true,
+            sourceMapWithCode: true,
+            // can't find a way to include the sources (from the input source
+            // map) into the target source map, so we need to set the source
+            // map root url properly
+            sourceMapRoot: srcRoot
+        }
+        //aggressiveOptimizations: false,
+        //transformAMDChecks: false
+    });
+    // escodegen does not add the source map line by itself
+    result.code += '\n//# sourceMappingURL=' + outputFilename + '.map';
+    return result;
+}
 
-        // run uglifyJS
-        console.log('- Compressing...');
-        result = uglifyJS.minify(uncompressedFile, {
-            inSourceMap: uncompressedFileMap,
-            outSourceMap: compressedFileMap,
-            //warnings: true,
-            output: {
-                comments: /^!/  // keep comments starting with '!'
-            }
-        });
-        fs.writeFileSync(compressedFile, result.code);
-        fs.writeFileSync(compressedFileMap, result.map);
+// compress with uglifyJS
+function compress(source, outputFile) {
+    console.log('- Compressing...');
 
-        console.log('Build finished');
-    }
-});
+    var outputFilename = path.basename(outputFile);
+
+    return uglifyJS.minify(source.code, {
+        fromString: true,
+        inSourceMap: JSON.parse(source.map),
+        outSourceMap: outputFilename + '.map',
+        wrap: true,
+        output: {
+            preamble: preamble
+            //comments: /^!/  // keep comments starting with '!'
+        }
+    });
+}
+
+function optimize(moduleName) {
+    console.log('Build started');
+    console.log('- Optimizing the AMD modules...');
+    requirejs.optimize({
+        baseUrl: srcDir,
+        mainConfigFile: requireConfig,
+        name: moduleName,
+        wrap: {
+            start: preamble + '\n'
+        },
+        findNestedDependencies: true,  // optimize nested dependencies too
+        optimize: 'none',  // don't compress yet, it will be done at a later stage
+        generateSourceMaps: true,  // generate source maps
+        preserveLicenseComments: false,  // unset because it interferes with generateSourceMaps
+        out: function (code, map) {
+            var outputFile = path.join(distDir, moduleName + '.min.js'),
+                outputFilename = path.basename(outputFile),
+                source = {
+                    code: code,
+                    map: map
+                };
+
+            source = cleanAMD(source, outputFilename, [moduleName]);
+            source = compress(source, outputFilename);
+
+            fs.writeFileSync(outputFile, source.code);
+            fs.writeFileSync(outputFile + '.map', source.map);
+
+            console.log('Build finished');
+        }
+    });
+}
+
+optimize('nany');
