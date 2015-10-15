@@ -7,8 +7,7 @@ define(['pusher', 'utils/base64', 'utils/log'], function (Pusher, base64, log) {
             }),
             safeChannelName = base64.encodeUrl(channelName);
 
-        log('Connecting to ' + channelName);
-        log(safeChannelName);
+        log('Connecting to channel ' + channelName + ' [' + safeChannelName + ']');
 
         function onMessage(data) {
             log(data);
@@ -36,12 +35,12 @@ define(['pusher', 'utils/base64', 'utils/log'], function (Pusher, base64, log) {
         // letters, numbers and the following punctuation _ - = @ , . ;
         // => we use base64url encoding for the channel name
 
+        log('Connecting to channel ' + channelName + ' [' + safeChannelName + ']');
+
         function onMessage(data) {
             log(data);
         }
 
-        log('Connecting to ' + channelName);
-        log(safeChannelName);
         channel = pusher.subscribe(safeChannelName);
         channel.bind('msg', onMessage);
 
