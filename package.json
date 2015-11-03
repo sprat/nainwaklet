@@ -36,7 +36,7 @@
     "test": "phantomjs ./node_modules/qunit-phantomjs-runner/runner.js ./tests.html",
     "prebuild:js": "npm run lint -s && npm run test -s",
     "build:js": "node js/build/build.js",
-    "build:css": "cleancss --source-map --output dist/nany.min.css css/nany.css",
+    "build:css": "cleancss --source-map --source-map-inline-sources --output dist/nany.min.css css/nany.css",
     "build": "npm run build:js -s && npm run build:css -s",
     "watch:js": "nodemon -e js --ignore dist --exec npm run build:js -s",
     "watch:css": "nodemon -e css --ignore dist --exec npm run build:css -s",
