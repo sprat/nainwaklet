@@ -1,5 +1,7 @@
-/* extend function */
 define(function () {
+    /* extend function */
+    'use strict';
+
     function extend(target) {
         var sources = Array.prototype.slice.call(arguments, 1);
         sources.forEach(function(source) {

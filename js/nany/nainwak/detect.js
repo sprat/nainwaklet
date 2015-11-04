@@ -1,5 +1,7 @@
-/* detect page */
 define(['./page', './urls', 'utils/array'], function (Page, urls, array) {
+    /* detect page */
+    'use strict';
+
     function int(value) {
         return parseInt(value, 10);
     }

@@ -1,4 +1,7 @@
 define(function () {
+    /* Base64 conversion functions */
+    'use strict';
+
     function rpad(string, length, pad) {
         for (; length > 0; length -= 1) {
             string += pad;

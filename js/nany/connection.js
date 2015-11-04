@@ -1,4 +1,6 @@
 define(['pusher', 'utils/base64', 'utils/log'], function (Pusher, base64, log) {
+    'use strict';
+
     /*
     function Connection(channelName) {
         var pubnub = PUBNUB.init({

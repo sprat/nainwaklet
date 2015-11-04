@@ -1,5 +1,7 @@
-/* Page factory */
 define(['./urls', 'utils/url', 'utils/html', 'utils/extend'], function (urls, url, html, extend) {
+    'use strict';
+
+    /* Page class */
     function Page(name, analyze, loadParams) {
         var baseUrl = urls.gameUrl(name);
 

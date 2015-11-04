@@ -1,5 +1,7 @@
-/* HTML utilities */
 define(['./extend'], function (extend) {
+    /* HTML utilities */
+    'use strict';
+
     var tags = [
         'a', 'abbr', 'address', 'area', 'article', 'aside', 'audio', 'b',
         'base', 'bdi', 'bdo', 'blockquote', 'body', 'br', 'button', 'canvas',

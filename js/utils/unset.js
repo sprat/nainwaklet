@@ -1,5 +1,5 @@
-/* safe unset */
 define(function () {
+    /* safe unset */
     'use strict';
 
     function unset(obj, key) {

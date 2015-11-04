@@ -1,5 +1,7 @@
-/* Collection of pages */
 define(['utils/array'], function (array) {
+    /* Collection of pages */
+    'use strict';
+
     function Pages(pages) {
         function byUrl(url) {
             return array.find(pages, function (page) {

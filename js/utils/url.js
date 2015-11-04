@@ -1,5 +1,7 @@
-/* URL utilities */
 define(function () {
+    /* URL utilities */
+    'use strict';
+
     function parse(url, document) {
         var doc = document || window.document,
             a = doc.createElement('a');

@@ -1,5 +1,7 @@
-/* CSS utilities */
 define(['utils/array', 'utils/url'], function (array, urlUtils) {
+    /* CSS utilities */
+    'use strict';
+
     function findHead(document) {
         var doc = document || window.document;
         return doc.getElementsByTagName('head')[0];

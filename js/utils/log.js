@@ -1,6 +1,8 @@
 /* eslint-disable no-console */
-/* log function */
 define(function () {
+    /* log function */
+    'use strict';
+
     var console = window.console,
         bind = Function.prototype.bind;
 

@@ -1,4 +1,6 @@
 define(['./urls', './nain', './pages', './detect'], function (urls, nain, Pages, detect) {
+    'use strict';
+
     /*
     // Evénements (tous types d'evts sur 10 jours)
     Page('even', log, {duree: 240, type: 'ALL'}),
@@ -9,6 +11,7 @@ define(['./urls', './nain', './pages', './detect'], function (urls, nain, Pages,
     // Encyclopédie
     Page('encyclo', log)
     */
+
     var pages = Pages([detect]);
 
     return {

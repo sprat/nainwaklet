@@ -15,6 +15,8 @@ var fs = require('fs'),
 
 // transform AMD modules to regular modules with AMDclean
 function cleanAMD(source, outputFile, globalModules) {
+    'use strict';
+
     console.log('- Cleaning the AMD modules...');
 
     var outputFilename = path.basename(outputFile),
@@ -48,6 +50,8 @@ function cleanAMD(source, outputFile, globalModules) {
 
 // compress with uglifyJS
 function compress(source, outputFile) {
+    'use strict';
+
     console.log('- Compressing...');
 
     var outputFilename = path.basename(outputFile);
@@ -65,6 +69,8 @@ function compress(source, outputFile) {
 }
 
 function optimize(moduleName) {
+    'use strict';
+
     console.log('Build started');
     console.log('- Optimizing the AMD modules...');
     requirejs.optimize({

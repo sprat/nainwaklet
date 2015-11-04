@@ -1,5 +1,7 @@
-/* Array utilities */
 define(['./assert', './html'], function (assert, html) {
+    /* Array utilities */
+    'use strict';
+
     // parses a string containing a representation of a Javascript array
     // with JSON-compatible values and returns it
     function parse(string) {

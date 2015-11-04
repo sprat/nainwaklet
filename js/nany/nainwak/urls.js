@@ -1,13 +1,15 @@
-/* Nainwak URLs */
 define(function () {
-    var origin = 'http://www.nainwak.com';
+    /* Nainwak URLs */
+    'use strict';
+
+    var baseUrl = 'http://www.nainwak.com';
 
     function gameUrl(page) {
-        return origin + '/jeu/' + (page || 'index') + '.php';
+        return baseUrl + '/jeu/' + (page || 'index') + '.php';
     }
 
     function imageUrl(path) {
-        return origin + '/images/' + path;
+        return baseUrl + '/images/' + path;
     }
 
     /* Check if we are in the Nainwak game page */

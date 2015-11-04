@@ -1,5 +1,6 @@
-/* Nainwak URLs */
 define(['./urls'], function (urls) {
+    'use strict';
+
     /* Get the Nainwak User info from the menu frame */
     function get(window) {
         if (!urls.isInGame(window)) {
