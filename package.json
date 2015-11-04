@@ -23,6 +23,7 @@
     "clean-css": "^3.4.5",
     "eslint": "^1.5.1",
     "live-server": "^0.8.1",
+    "node-qunit-phantomjs": "^1.2.2",
     "nodemon": "^1.7.1",
     "npm-run-all": "^1.2.11",
     "phantomjs": "^1.9.18",
@@ -33,7 +34,7 @@
   "scripts": {
     "server": "live-server",
     "lint": "eslint .",
-    "test": "phantomjs ./node_modules/qunit-phantomjs-runner/runner.js ./tests.html",
+    "test": "node-qunit-phantomjs ./tests.html",
     "prebuild:js": "npm run lint -s && npm run test -s",
     "build:js": "node js/build/build.js",
     "build:css": "cleancss --source-map --source-map-inline-sources --output dist/nany.min.css css/nany.css",
