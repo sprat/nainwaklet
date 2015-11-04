@@ -28,7 +28,7 @@
     "phantomjs": "^1.9.18",
     "qunit-phantomjs-runner": "^2.1.0",
     "requirejs": "^2.1.20",
-    "uglify-js": "^2.4.24"
+    "uglify-js": "git+https://github.com/mishoo/UglifyJS2.git"
   },
   "scripts": {
     "server": "live-server",
