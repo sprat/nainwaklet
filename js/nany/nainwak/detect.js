@@ -1,5 +1,5 @@
 /* detect page */
-define(['./page', './urls', 'utils/array', 'utils/regexp'], function (Page, urls, array, regexp) {
+define(['./page', './urls', 'utils/array'], function (Page, urls, array) {
     function int(value) {
         return parseInt(value, 10);
     }
@@ -31,13 +31,17 @@ define(['./page', './urls', 'utils/array', 'utils/regexp'], function (Page, urls
 
     function processScriptArrays(doc, regex, keys, createObject) {
         var text = getAllScriptsSource(doc),
-            matches = regexp.getAllMatches(regex, text);
+            objs = [];
 
-        return matches.map(function (match) {
-            var values = array.parse(match[1]),
-                spec = array.toObject(keys, values);
-            return createObject(spec);
+        // process all matches
+        text.replace(regex, function (all, valuesStr) {
+            var values = array.parse(valuesStr),
+                spec = array.toObject(keys, values),
+                obj = createObject(spec);
+            objs.push(obj);
         });
+
+        return objs;
     }
 
     function parseTag(tag) {
