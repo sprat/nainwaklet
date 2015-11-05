@@ -36,9 +36,10 @@ function cleanAMD(source, outputFile, globalModules) {
         escodegen: {
             sourceMap: true,
             sourceMapWithCode: true,
-            // can't find a way to include the sources (from the input source
-            // map) into the target source map, so we need to set the source
-            // map root url properly
+            /* FIXME: can't find a way to preserve the sourcesContent info from
+             * the input source map into the target source map, so we need to
+             * set the source map root
+             */
             sourceMapRoot: srcRoot
         }
         //aggressiveOptimizations: false,
