@@ -1,5 +1,6 @@
 /*eslint-env node */
 /*eslint-disable no-console */
+/*eslint-disable no-unused-vars */
 
 var fs = require('fs'),
     path = require('path'),
@@ -28,6 +29,7 @@ function cleanAMD(source, outputFile, globalModules) {
         globalModules: globalModules,
         sourceMap: source.map,
         wrap: false, // can't use that with sourceMap options
+        removeUseStricts: false,  // keep 'use strict' statements
         esprima: {
             loc: true,
             source: outputFilename
@@ -77,6 +79,7 @@ function build(moduleName) {
         baseUrl: srcDir,
         mainConfigFile: requireConfig,
         name: moduleName,
+        useStrict: true,
         wrap: {
             start: preamble + '\n'
         },
