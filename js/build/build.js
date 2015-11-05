@@ -68,7 +68,7 @@ function compress(source, outputFile) {
     });
 }
 
-function optimize(moduleName) {
+function build(moduleName) {
     'use strict';
 
     console.log('Build started');
@@ -103,4 +103,4 @@ function optimize(moduleName) {
     });
 }
 
-optimize('nany');
+build('nany');
