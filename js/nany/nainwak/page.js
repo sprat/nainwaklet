@@ -1,4 +1,4 @@
-define(['./urls', 'utils/url', 'utils/html', 'utils/extend'], function (urls, url, html, extend) {
+define(['./urls', 'utils/querystring', 'utils/html', 'utils/extend'], function (urls, querystring, html, extend) {
     'use strict';
 
     /* Page class */
@@ -12,7 +12,7 @@ define(['./urls', 'utils/url', 'utils/html', 'utils/extend'], function (urls, ur
             if (loadParams) {
                 extend(params, loadParams);
             }
-            return baseUrl + '?' + url.buildQueryParams(params);
+            return baseUrl + '?' + querystring.encode(params);
         }
 
         function fetch(IDS, processResult) {
