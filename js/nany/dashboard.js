@@ -8,7 +8,7 @@ define(['utils/html'], function (html) {
             containerContent = null,  // initial content of the container
             ui = (function() {
                 var h = html.renderer(document),
-                    title = h.div('Nany ' + conf.channel, {
+                    title = h.div(conf.channel, {
                         className: 'VNT title'
                     }),
                     content = h.div('Chargement en cours...', {
