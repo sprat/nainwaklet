@@ -1,46 +1,46 @@
-define(['./spy', './dashboard', './user', './channel', 'utils/extend'], function (Spy, Dashboard, User, Channel, extend) {
+define(['./spy', './dashboard', './user', './channel'], function (Spy, Dashboard, User, Channel) {
     'use strict';
 
     function getElement(target) {
         if (target === undefined || target === null) {
-            return target;
+            return;
         }
 
         if (target.nodeType !== undefined) {
-            return target;  // it's already a node
+            // it's already a node
+            return target;
         }
 
-        // so, we assume it's a selector
+        // otherwise, we assume it's a selector
         return window.document.querySelector(target);
     }
 
     /* Application class */
     function Application(conf) {
-        var dashboard,
+        var user,
+            channelName,
+            container,
+            infoFrame,
+            dashboard,
             spy,
             channel;
 
-        conf = extend({  // default conf
-            user: User(),  // anonymous user
-            channel: 'default',  // default channel
-            container: window.document.body,  // dashboard container
-            infoFrame: undefined  // info frame
-        }, conf);
+        conf = conf || {};
+        user = conf.user || User();
 
-        conf.container = getElement(conf.container);
-        conf.infoFrame = getElement(conf.infoFrame);
-
-        // create the connection to the channel
-        channel = Channel(conf.channel);
+        // create the (communication) channel
+        channelName = conf.channel || 'default';
+        channel = Channel(channelName);
         channel.connect();
-        conf.channel = channel;
 
-        if (conf.container) {
-            dashboard = Dashboard(conf);
-        }
+        // create the dashboard
+        container = getElement(conf.container || window.document.body);
+        dashboard = Dashboard(container, channel);
 
-        if (conf.infoFrame) {
-            spy = Spy(conf);
+        // create the spy
+        infoFrame = getElement(conf.infoFrame);
+        if (infoFrame) {
+            spy = Spy(infoFrame);
         }
 
         function destroy() {
@@ -54,8 +54,8 @@ define(['./spy', './dashboard', './user', './channel', 'utils/extend'], function
         }
 
         return Object.freeze({
-            user: conf.user,
-            channel: conf.channel,
+            user: user,
+            channel: channel,
             dashboard: dashboard,
             spy: spy,
             destroy: destroy

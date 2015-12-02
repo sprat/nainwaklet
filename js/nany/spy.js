@@ -2,10 +2,9 @@ define(['./nainwak', 'utils/log'], function (nainwak, log) {
     'use strict';
 
     /* Spy class */
-    function Spy(conf) {
-        var frame = conf.infoFrame,
-            //IDS = url.parseQueryParams(frame.location).IDS,
-            infoLoaded = function () {
+    function Spy(frame) {
+        //IDS = url.parseQueryParams(frame.location).IDS,
+        var infoLoaded = function () {
                 var contentWindow = frame.contentWindow,
                     doc = contentWindow.document,
                     location = contentWindow.location,
