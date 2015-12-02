@@ -5,7 +5,8 @@
     var tests = [
         'tests/utils/base64',
         'tests/nany/nainwak',
-        'tests/nany/detect'
+        'tests/nany/detect',
+        'tests/nany/channel'
     ];
 
     // don't start QUnit yet

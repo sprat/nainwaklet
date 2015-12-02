@@ -6,7 +6,12 @@ var require = {
     paths: {
         'require': 'vendor/require',
         'text': 'vendor/text',
-        'pusher': 'vendor/pusher'
+        'pubnub': 'vendor/pubnub'
+    },
+    shim: {
+        'pubnub': {
+            exports: 'PUBNUB'
+        }
     },
     packages: ['nany', 'nany/nainwak']
 };
