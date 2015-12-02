@@ -82,6 +82,7 @@ define(['pubnub', 'utils/base64', 'utils/log'], function (PUBNUB, base64, log) {
         }
 
         return {
+            name: name,
             connect: connect,
             disconnect: disconnect,
             publish: publish,

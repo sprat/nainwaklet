@@ -4,11 +4,12 @@ define(['utils/html'], function (html) {
     /* Dashboard class */
     function Dashboard(conf) {
         var container = conf.container,
+            channel = conf.channel,
             //user = conf.user,
             containerContent = null,  // initial content of the container
             ui = (function() {
                 var h = html.renderer(document),
-                    title = h.div(conf.channel, {
+                    title = h.div(channel.name, {
                         className: 'VNT title'
                     }),
                     content = h.div('Chargement en cours...', {

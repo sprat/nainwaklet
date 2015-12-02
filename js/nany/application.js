@@ -18,29 +18,29 @@ define(['./spy', './dashboard', './user', './channel', 'utils/extend'], function
     function Application(conf) {
         var dashboard,
             spy,
-            //channel,
-            newConf = {  // default conf
-                user: User(),  // anonymous user
-                channel: 'default',  // default channel
-                container: window.document.body,  // dashboard container
-                infoFrame: undefined  // info frame
-            };
+            channel;
 
-        extend(newConf, conf);
-        newConf.container = getElement(newConf.container);
-        newConf.infoFrame = getElement(newConf.infoFrame);
+        conf = extend({  // default conf
+            user: User(),  // anonymous user
+            channel: 'default',  // default channel
+            container: window.document.body,  // dashboard container
+            infoFrame: undefined  // info frame
+        }, conf);
 
-        // create a connection to the channel
-        //channel = Channel(newConf.channel);
-        //channel.connect();
-        //newConf.channel = channel;
+        conf.container = getElement(conf.container);
+        conf.infoFrame = getElement(conf.infoFrame);
 
-        if (newConf.container) {
-            dashboard = Dashboard(newConf);
+        // create the connection to the channel
+        channel = Channel(conf.channel);
+        channel.connect();
+        conf.channel = channel;
+
+        if (conf.container) {
+            dashboard = Dashboard(conf);
         }
 
-        if (newConf.infoFrame) {
-            spy = Spy(newConf);
+        if (conf.infoFrame) {
+            spy = Spy(conf);
         }
 
         function destroy() {
@@ -54,8 +54,8 @@ define(['./spy', './dashboard', './user', './channel', 'utils/extend'], function
         }
 
         return Object.freeze({
-            user: newConf.user,
-            channel: newConf.channel,
+            user: conf.user,
+            channel: conf.channel,
             dashboard: dashboard,
             spy: spy,
             destroy: destroy
