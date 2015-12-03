@@ -11,12 +11,9 @@ define(['pubnub', 'tinyemitter', 'utils/base64'], function (PUBNUB, EventEmitter
                 subscribe_key: 'sub-c-38ae8020-6d33-11e5-bf4b-0619f8945a4f'
             });
 
-        function emit(event, data) {
-            emitter.emit(event, data);
-        }
-
-        // send a message to the channel
-        function send(topic, data) {
+        // publish a message to the channel
+        function publish(topic, data) {
+            var self = this;
             pubnub.publish({
                 channel: safeName,
                 message: {
@@ -24,7 +21,7 @@ define(['pubnub', 'tinyemitter', 'utils/base64'], function (PUBNUB, EventEmitter
                     data: data
                 },
                 callback: function() {
-                    emit('sent');
+                    emitter.emit('published', topic, data, self);
                 }
             });
         }
@@ -32,23 +29,24 @@ define(['pubnub', 'tinyemitter', 'utils/base64'], function (PUBNUB, EventEmitter
         // connect to channel
         function connect() {
             // TODO: perform some checks before subscribing?
-            emitter.emit('connecting');
+            var self = this;
+            emitter.emit('connecting', self);
             pubnub.subscribe({
                 channel: safeName,
                 message: function (message) {
-                    emit(message.topic, message.data);
+                    emitter.emit(message.topic, message.data, self);
                 },
                 connect: function () {
-                    emit('connected');
+                    emitter.emit('connected', self);
                 },
                 disconnect: function () {
-                    emit('disconnected');
+                    emitter.emit('disconnected', self);
                 },
                 reconnect: function () {
-                    emit('reconnected');
+                    emitter.emit('reconnected', self);
                 },
                 error: function (error) {
-                    emit('error', error);
+                    emitter.emit('error', error, self);
                 }
             });
         }
@@ -56,8 +54,12 @@ define(['pubnub', 'tinyemitter', 'utils/base64'], function (PUBNUB, EventEmitter
         // disconnect from channel
         function disconnect() {
             // TODO: perform some checks before unsubscribing?
+            var self = this;
             pubnub.unsubscribe({
-                channel: safeName
+                channel: safeName,
+                callback: function () {
+                    emitter.emit('disconnected', self);
+                }
             });
         }
 
@@ -65,7 +67,7 @@ define(['pubnub', 'tinyemitter', 'utils/base64'], function (PUBNUB, EventEmitter
             name: name,
             connect: connect,
             disconnect: disconnect,
-            send: send,
+            publish: publish,
             on: emitter.on.bind(emitter),
             off: emitter.off.bind(emitter),
             once: emitter.once.bind(emitter)
