@@ -2,6 +2,7 @@ define(['./extend'], function (extend) {
     /* HTML utilities */
     'use strict';
 
+    // TODO: remove this list of tags, it takes too much space...
     var tags = [
         'a', 'abbr', 'address', 'area', 'article', 'aside', 'audio', 'b',
         'base', 'bdi', 'bdo', 'blockquote', 'body', 'br', 'button', 'canvas',
