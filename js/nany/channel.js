@@ -1,4 +1,4 @@
-define(['pubnub', 'tinyemitter', 'utils/base64'], function (PUBNUB, EventEmitter, base64) {
+define(['pubnub', 'tinyemitter', 'utils/assert', 'utils/base64'], function (PUBNUB, EventEmitter, assert, base64) {
     'use strict';
 
     function Channel(name) {
@@ -6,6 +6,10 @@ define(['pubnub', 'tinyemitter', 'utils/base64'], function (PUBNUB, EventEmitter
         // TODO: authentication?
         var safeName = base64.encodeUrl(name),
             emitter = new EventEmitter(),
+            reservedTopics = [
+                'connecting', 'connected', 'disconnected', 'reconnected',
+                'error', 'published'
+            ],
             pubnub = PUBNUB({
                 publish_key: 'pub-c-8be41a11-cbc5-4427-a5ad-e18cf5a466e4',
                 subscribe_key: 'sub-c-38ae8020-6d33-11e5-bf4b-0619f8945a4f'
@@ -14,6 +18,10 @@ define(['pubnub', 'tinyemitter', 'utils/base64'], function (PUBNUB, EventEmitter
         // publish a message to the channel
         function publish(topic, data) {
             var self = this;
+
+            // make sure we can't publish on a "reserved" channel topic
+            assert(reservedTopics.indexOf(topic) === -1, 'Reserved topic: ' + topic);
+
             pubnub.publish({
                 channel: safeName,
                 message: {
@@ -28,9 +36,10 @@ define(['pubnub', 'tinyemitter', 'utils/base64'], function (PUBNUB, EventEmitter
 
         // connect to channel
         function connect() {
-            // TODO: perform some checks before subscribing?
             var self = this;
+
             emitter.emit('connecting', self);
+
             pubnub.subscribe({
                 channel: safeName,
                 message: function (message) {
@@ -53,8 +62,8 @@ define(['pubnub', 'tinyemitter', 'utils/base64'], function (PUBNUB, EventEmitter
 
         // disconnect from channel
         function disconnect() {
-            // TODO: perform some checks before unsubscribing?
             var self = this;
+
             pubnub.unsubscribe({
                 channel: safeName,
                 callback: function () {
