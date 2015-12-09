@@ -14,7 +14,7 @@ var fs = require('fs'),
     preamble = fs.readFileSync(preambleFile, 'utf-8');
 
 // transform AMD modules to regular modules with AMDclean
-function cleanAMD(source, outputFile, globalModules) {
+function cleanAMD(source, outputFile, moduleName, modulesConfig) {
     'use strict';
 
     console.log('- Cleaning the AMD modules...');
@@ -25,7 +25,7 @@ function cleanAMD(source, outputFile, globalModules) {
         result;
 
     result = amdclean.clean(source.code, {
-        globalModules: globalModules,
+        globalModules: [moduleName],
         sourceMap: source.map,
         wrap: false, // can't use that with sourceMap options
         removeUseStricts: false,  // keep 'use strict' statements
@@ -41,7 +41,8 @@ function cleanAMD(source, outputFile, globalModules) {
              * set the source map root
              */
             sourceMapRoot: srcRoot
-        }
+        },
+        config: modulesConfig || {}
         //aggressiveOptimizations: false,
         //transformAMDChecks: false
     });
@@ -63,14 +64,14 @@ function compress(source, outputFile) {
         inSourceMap: JSON.parse(source.map),
         outSourceMap: outputFilename + '.map',
         wrap: true,
+        //mangle: false,
         output: {
             preamble: preamble
-            //comments: /^!/  // keep comments starting with '!'
         }
     });
 }
 
-function build(moduleName) {
+function build(moduleName, modulesConfig) {
     'use strict';
 
     console.log('Build started');
@@ -95,7 +96,7 @@ function build(moduleName) {
                     map: map
                 };
 
-            source = cleanAMD(source, outputFilename, [moduleName]);
+            source = cleanAMD(source, outputFilename, moduleName, modulesConfig);
             source = compress(source, outputFilename);
 
             fs.writeFileSync(outputFile, source.code);
@@ -106,4 +107,9 @@ function build(moduleName) {
     });
 }
 
-build('nany');
+build('nany', {
+    'nany/channel': {
+        publishKey: 'pub-c-8be41a11-cbc5-4427-a5ad-e18cf5a466e4',
+        subscribeKey: 'sub-c-38ae8020-6d33-11e5-bf4b-0619f8945a4f'
+    }
+});

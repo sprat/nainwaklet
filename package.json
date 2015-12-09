@@ -19,7 +19,7 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "amdclean": "^2.7.0",
+    "amdclean": "sprat/amdclean#module-special-dependency-fixes",
     "clean-css": "^3.4.5",
     "eslint": "^1.5.1",
     "live-server": "^0.8.1",

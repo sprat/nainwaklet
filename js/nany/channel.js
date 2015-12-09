@@ -1,8 +1,7 @@
-define(['pubnub', 'tinyemitter', 'utils/assert', 'utils/base64'], function (PUBNUB, EventEmitter, assert, base64) {
+define(['module', 'pubnub', 'tiny-emitter', 'utils/assert', 'utils/base64'], function (module, PUBNUB, EventEmitter, assert, base64) {
     'use strict';
 
     function Channel(name) {
-        // TODO: move API keys in RequireJS configuration
         // TODO: authentication?
         var safeName = base64.encodeUrl(name),
             emitter = new EventEmitter(),
@@ -10,9 +9,10 @@ define(['pubnub', 'tinyemitter', 'utils/assert', 'utils/base64'], function (PUBN
                 'connecting', 'connected', 'disconnected', 'reconnected',
                 'error', 'published'
             ],
+            config = module.config(),
             pubnub = PUBNUB({
-                publish_key: 'pub-c-8be41a11-cbc5-4427-a5ad-e18cf5a466e4',
-                subscribe_key: 'sub-c-38ae8020-6d33-11e5-bf4b-0619f8945a4f'
+                publish_key: config.publishKey,
+                subscribe_key: config.subscribeKey
             });
 
         // publish a message to the channel
