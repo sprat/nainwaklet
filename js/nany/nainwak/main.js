@@ -1,4 +1,4 @@
-define(['./urls', './nain', './pages', './detect'], function (urls, nain, Pages, detect) {
+define(['./urls', './nain', './pages', './detect', './invent'], function (urls, nain, Pages, detect, invent) {
     'use strict';
 
     /*
@@ -12,7 +12,7 @@ define(['./urls', './nain', './pages', './detect'], function (urls, nain, Pages,
     Page('encyclo', log)
     */
 
-    var pages = Pages([detect]);
+    var pages = Pages([detect, invent]);
 
     return {
         gameUrl: urls.gameUrl,
