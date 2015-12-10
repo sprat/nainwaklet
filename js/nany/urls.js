@@ -2,26 +2,30 @@ define(function () {
     /* Nainwak URLs */
     'use strict';
 
-    var baseUrl = 'http://www.nainwak.com';
+    var baseUrl = 'http://www.nainwak.com',
+        gameUrl;
 
-    function gameUrl(page) {
-        return baseUrl + '/jeu/' + (page || 'index') + '.php';
+    function getPageUrl(page) {
+        return baseUrl + '/jeu/' + page + '.php';
     }
 
-    function imageUrl(path) {
+    function getImageUrl(path) {
         return baseUrl + '/images/' + path;
     }
+
+    gameUrl = getPageUrl('index');
 
     /* Check if we are in the Nainwak game page */
     function isInGame(window) {
         var loc = window.location,
             pageUrl = loc.origin + loc.pathname;
-        return pageUrl === gameUrl();
+        return pageUrl === gameUrl;
     }
 
     return {
         gameUrl: gameUrl,
-        imageUrl: imageUrl,
+        getPageUrl: getPageUrl,
+        getImageUrl: getImageUrl,
         isInGame: isInGame
     };
 });

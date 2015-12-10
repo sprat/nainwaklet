@@ -12,7 +12,7 @@ define(['./urls'], function (urls) {
             '    n = "nany",',
             '    i = n + "Script",',
             '    s = d.getElementById(i);',
-            'if (u === "' + urls.gameUrl() + '") {',
+            'if (u === "' + urls.gameUrl + '") {',
             '    if (s) b.removeChild(s);',
             '    s = d.createElement("script");',
             '    s.id = i;',

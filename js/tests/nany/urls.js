@@ -4,13 +4,16 @@ define(['nany/urls'], function (urls) {
 
     QUnit.module('nany/urls');
 
-    QUnit.test('gameUrl', function (assert) {
-        assert.strictEqual(urls.gameUrl(), 'http://www.nainwak.com/jeu/index.php', 'Default URL is the index page');
-        assert.strictEqual(urls.gameUrl('detect'), 'http://www.nainwak.com/jeu/detect.php', 'Detect URL');
+    QUnit.test('getPageUrl', function (assert) {
+        assert.strictEqual(urls.getPageUrl('detect'), 'http://www.nainwak.com/jeu/detect.php', 'Detect URL');
     });
 
-    QUnit.test('imageUrl', function (assert) {
-        assert.strictEqual(urls.imageUrl('avatar/perso/test.png'), 'http://www.nainwak.com/images/avatar/perso/test.png', 'Image URL');
+    QUnit.test('getImageUrl', function (assert) {
+        assert.strictEqual(urls.getImageUrl('avatar/perso/test.png'), 'http://www.nainwak.com/images/avatar/perso/test.png', 'Image URL');
+    });
+
+    QUnit.test('gameUrl', function (assert) {
+        assert.strictEqual(urls.gameUrl, 'http://www.nainwak.com/jeu/index.php', 'Game URL is the index page');
     });
 
     QUnit.test('isInGame', function (assert) {
@@ -20,7 +23,7 @@ define(['nany/urls'], function (urls) {
         // Note: the link will mimick the location API
         window.location = link;
 
-        link.href = urls.gameUrl();
+        link.href = urls.gameUrl;
         assert.ok(urls.isInGame(window), 'Game window');
 
         link.href = 'http://www.google.com';

@@ -111,7 +111,7 @@ define(['./page', 'nany/urls', 'utils/array'], function (Page, urls, array) {
             var nain = {
                     id: int(spec.id),
                     nom: spec.nom,
-                    image: urls.imageUrl(spec.photo),
+                    image: urls.getImageUrl(spec.photo),
                     description: spec.description,
                     position: [int(spec.x), int(spec.y)],
                     cote: getCote(int(spec.classe)),
@@ -136,7 +136,7 @@ define(['./page', 'nany/urls', 'utils/array'], function (Page, urls, array) {
             return {
                 id: int(spec.id),
                 nom: spec.nom,
-                image: urls.imageUrl(spec.photo),
+                image: urls.getImageUrl(spec.photo),
                 categorie: spec.categorie.toLowerCase(),
                 position: [int(spec.x), int(spec.y)],
                 poussiere: int(spec.poussiere)  // expressed in seconds

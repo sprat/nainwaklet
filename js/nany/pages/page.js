@@ -3,7 +3,7 @@ define(['nany/urls', 'utils/querystring', 'utils/ajax', 'utils/extend', 'utils/l
 
     /* Page class */
     function Page(name, analyze, loadParams, ringUpdateUrl) {
-        var baseUrl = urls.gameUrl(name);
+        var baseUrl = urls.getPageUrl(name);
 
         function getUrl(IDS) {
             var params = {
