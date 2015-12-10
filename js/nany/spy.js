@@ -9,15 +9,11 @@ define(['./nainwak', 'utils/log'], function (nainwak, log) {
                     doc = contentWindow.document,
                     location = contentWindow.location,
                     url = location.origin + location.pathname,
-                    page = nainwak.pages.byUrl(url),
-                    result;
+                    page = nainwak.pages.byUrl(url);
 
                 log('Navigation to ' + url);
                 if (page) {
-                    // TODO: do something useful with the result
-                    log('Analyzing ' + page.name);
-                    result = page.analyze(doc);
-                    log(result);
+                    page.process(doc);
                 }
             },
             isEnabled = false,
