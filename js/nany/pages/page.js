@@ -1,4 +1,4 @@
-define(['./urls', 'utils/querystring', 'utils/ajax', 'utils/extend', 'utils/log'], function (urls, querystring, ajax, extend, log) {
+define(['nany/urls', 'utils/querystring', 'utils/ajax', 'utils/extend', 'utils/log'], function (urls, querystring, ajax, extend, log) {
     'use strict';
 
     /* Page class */

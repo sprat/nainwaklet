@@ -1,4 +1,4 @@
-define(['./nainwak', 'utils/log'], function (nainwak, log) {
+define(['./pages', 'utils/log'], function (pages, log) {
     'use strict';
 
     /* Spy class */
@@ -9,7 +9,7 @@ define(['./nainwak', 'utils/log'], function (nainwak, log) {
                     doc = contentWindow.document,
                     location = contentWindow.location,
                     url = location.origin + location.pathname,
-                    page = nainwak.pages.byUrl(url);
+                    page = pages.byUrl(url);
 
                 log('Navigation to ' + url);
                 if (page) {

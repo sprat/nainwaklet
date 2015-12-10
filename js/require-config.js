@@ -20,5 +20,5 @@ var require = {
             subscribeKey: 'sub-c-38ae8020-6d33-11e5-bf4b-0619f8945a4f'
         }
     },
-    packages: ['nany', 'nany/nainwak']
+    packages: ['nany', 'nany/pages']
 };

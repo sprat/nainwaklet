@@ -1,4 +1,4 @@
-define(['./page', './urls', 'utils/array'], function (Page, urls, array) {
+define(['./page', 'nany/urls', 'utils/array'], function (Page, urls, array) {
     /* detect page */
     'use strict';
 

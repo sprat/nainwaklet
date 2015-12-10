@@ -1,4 +1,4 @@
-define(['./user', './application', './nanylet', './nainwak', 'utils/assert', 'utils/unset', 'utils/css'], function (User, Application, nanylet, nainwak, assert, unset, css) {
+define(['./user', './application', './nain', './urls', './nanylet', 'utils/assert', 'utils/unset', 'utils/css'], function (User, Application, Nain, urls, nanylet, assert, unset, css) {
     'use strict';
 
     var scripts = document.scripts,
@@ -24,7 +24,7 @@ define(['./user', './application', './nanylet', './nainwak', 'utils/assert', 'ut
             frames = window.frames,
             pubDoc = frames.pub.document,
             infoFrame = frames.info.frameElement,
-            nain = nainwak.getNain(window);
+            nain = Nain.get(window);
 
         // insert the CSS file if needed (we never remove it!)
         css.insertLink(cssUrl, pubDoc);
@@ -43,7 +43,7 @@ define(['./user', './application', './nanylet', './nainwak', 'utils/assert', 'ut
         var name = 'nanyApplication',  // global app name
             app = window[name];
 
-        if (!nainwak.isInGame(window)) {
+        if (!urls.isInGame(window)) {
             return;
         }
 

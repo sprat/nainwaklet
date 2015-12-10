@@ -1,5 +1,4 @@
-define(['utils/array'], function (array) {
-    /* Collection of pages */
+define(['./detect', './invent', 'utils/array'], function (detect, invent, array) {
     'use strict';
 
     function Pages(pages) {
@@ -22,5 +21,11 @@ define(['utils/array'], function (array) {
         });
     }
 
-    return Pages;
+    /*
+    Page('even', log, {duree: 240, type: 'ALL'}),
+    Page('perso', log),
+    Page('invent', log),
+    Page('encyclo', log)
+    */
+    return Pages([detect, invent]);
 });
