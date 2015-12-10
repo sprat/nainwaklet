@@ -1,4 +1,4 @@
-define(['./urls', 'utils/querystring', 'utils/html', 'utils/extend'], function (urls, querystring, html, extend) {
+define(['./urls', 'utils/querystring', 'utils/ajax', 'utils/extend'], function (urls, querystring, ajax, extend) {
     'use strict';
 
     /* Page class */
@@ -16,11 +16,15 @@ define(['./urls', 'utils/querystring', 'utils/html', 'utils/extend'], function (
         }
 
         function fetch(IDS, processResult) {
-            var fullUrl = getUrl(IDS);
-            html.fetch(fullUrl, function (response) {
+            var fullUrl = getUrl(IDS),
+                options = {
+                    responseType: 'document'
+                };
+
+            ajax.get(fullUrl, options, function (response) {
                 var result = null;
                 if (response.status === 200) {
-                    result = analyze(response.document);
+                    result = analyze(response.data);
                 }
                 processResult(result);
             });

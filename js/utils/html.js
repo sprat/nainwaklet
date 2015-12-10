@@ -37,21 +37,6 @@ define(['./extend'], function (extend) {
         //return parser.parseFromString(html, 'text/html');
     }
 
-    function fetch(url, processResponse) {
-        var xhr = new XMLHttpRequest();
-        xhr.open('GET', url, true);  // async
-        xhr.responseType = 'document';
-        xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4) {  // response received and loaded
-                processResponse({
-                    status: xhr.status,
-                    document: xhr.response
-                });
-            }
-        };
-        xhr.send(null);
-    }
-
     function renderer(document) {
         var h = {};
 
@@ -93,7 +78,6 @@ define(['./extend'], function (extend) {
     return {
         parseDocument: parseDocument,
         decodeEntities: decodeEntities,
-        fetch: fetch,
         renderer: renderer
     };
 });
