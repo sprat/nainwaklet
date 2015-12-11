@@ -4,6 +4,7 @@
 
     var tests = [
         'tests/utils/base64',
+        'tests/utils/htmlentities',
         'tests/nany/urls',
         'tests/nany/channel',
         'tests/nany/pages/main',

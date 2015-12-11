@@ -20,13 +20,6 @@ define(['./extend'], function (extend) {
         'var', 'video', 'wbr'
     ];
 
-    function decodeEntities(string) {
-        // TODO: not really efficient, a regex-based implementation would be better
-        var txt = document.createElement('textarea');
-        txt.innerHTML = string;
-        return txt.value;
-    }
-
     function parseDocument(html) {
         var doc = document.implementation.createHTMLDocument('');
         doc.documentElement.innerHTML = html;
@@ -101,7 +94,6 @@ define(['./extend'], function (extend) {
     return {
         parseDocument: parseDocument,
         getDocumentSource: getDocumentSource,
-        decodeEntities: decodeEntities,
         renderer: renderer
     };
 });

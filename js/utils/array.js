@@ -1,4 +1,4 @@
-define(['./assert', './html'], function (assert, html) {
+define(['./assert', './htmlentities'], function (assert, htmlentities) {
     /* Array utilities */
     'use strict';
 
@@ -11,7 +11,7 @@ define(['./assert', './html'], function (assert, html) {
             }),
             values = JSON.parse(cleaned);
 
-        return values.map(html.decodeEntities);
+        return values.map(htmlentities.decode);
     }
 
     // similar to Array.prototype.find which is only available in ES6
