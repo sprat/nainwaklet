@@ -35,7 +35,9 @@ define(['./spy', './dashboard', './user', './channel'], function (Spy, Dashboard
 
         // create the dashboard
         container = getElement(conf.container || window.document.body);
-        dashboard = Dashboard(container, channel);
+        if (container) {
+            dashboard = Dashboard(container, channel);
+        }
 
         // create the spy
         infoFrame = getElement(conf.infoFrame);
@@ -51,6 +53,8 @@ define(['./spy', './dashboard', './user', './channel'], function (Spy, Dashboard
             if (dashboard) {
                 dashboard.enabled = false;
             }
+
+            channel.disconnect();
         }
 
         return Object.freeze({
