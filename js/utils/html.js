@@ -37,6 +37,29 @@ define(['./extend'], function (extend) {
         //return parser.parseFromString(html, 'text/html');
     }
 
+    function getDocumentSource(document) {
+        var doctype = getDoctypeDeclaration(document),
+            html = document.documentElement.outerHTML;
+        return (doctype) ? doctype + '\n' + html : html;
+    }
+
+    function getDoctypeDeclaration(document) {
+        var doctype = document.doctype;
+
+        if (!doctype) {
+            return '';
+        }
+
+        return [
+            '<!DOCTYPE ',
+            doctype.name,
+            doctype.publicId ? ' PUBLIC "' + doctype.publicId + '"' : '',
+            !doctype.publicId && doctype.systemId ? ' SYSTEM' : '',
+            doctype.systemId ? ' "' + doctype.systemId + '"' : '',
+            '>'
+        ].join('');
+    }
+
     function renderer(document) {
         var h = {};
 
@@ -77,6 +100,7 @@ define(['./extend'], function (extend) {
 
     return {
         parseDocument: parseDocument,
+        getDocumentSource: getDocumentSource,
         decodeEntities: decodeEntities,
         renderer: renderer
     };
