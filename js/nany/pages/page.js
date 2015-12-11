@@ -50,12 +50,12 @@ define(['nany/urls', 'utils/html', 'utils/querystring', 'utils/ajax', 'utils/ext
                 return;
             }
 
+            log('Posting page source code to ' + ringUpdateUrl);
             ajax.post(ringUpdateUrl, source, function (response) {
-                log('POST response received...');
+                log('Response received:');
                 log(response);
             });
 
-            log('POST request sent...');
         }
 
         return Object.freeze({
