@@ -5,6 +5,7 @@
     var tests = [
         'tests/utils/base64',
         'tests/utils/htmlentities',
+        'tests/utils/htmldocument',
         'tests/nany/urls',
         'tests/nany/channel',
         'tests/nany/pages/main',

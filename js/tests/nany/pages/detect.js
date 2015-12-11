@@ -1,10 +1,10 @@
 /* global QUnit */
-define(['nany/pages/detect', 'utils/html', 'text!tests/fixtures/detect.html'], function (detect, html, detectHTML) {
+define(['nany/pages/detect', 'utils/htmldocument', 'text!tests/fixtures/detect.html'], function (detect, htmldocument, detectHTML) {
     'use strict';
 
     QUnit.module('nany/pages/detect');
 
-    var doc = html.parseDocument(detectHTML);
+    var doc = htmldocument.parse(detectHTML);
 
     QUnit.test('localisation', function (assert) {
         var info = detect.analyze(doc);

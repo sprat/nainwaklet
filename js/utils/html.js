@@ -20,39 +20,6 @@ define(['./extend'], function (extend) {
         'var', 'video', 'wbr'
     ];
 
-    function parseDocument(html) {
-        var doc = document.implementation.createHTMLDocument('');
-        doc.documentElement.innerHTML = html;
-        return doc;
-
-        // The following implementation is not supported by PhantomJS:
-        //var parser = new DOMParser();
-        //return parser.parseFromString(html, 'text/html');
-    }
-
-    function getDocumentSource(document) {
-        var doctype = getDoctypeDeclaration(document),
-            html = document.documentElement.outerHTML;
-        return (doctype) ? doctype + '\n' + html : html;
-    }
-
-    function getDoctypeDeclaration(document) {
-        var doctype = document.doctype;
-
-        if (!doctype) {
-            return '';
-        }
-
-        return [
-            '<!DOCTYPE ',
-            doctype.name,
-            doctype.publicId ? ' PUBLIC "' + doctype.publicId + '"' : '',
-            !doctype.publicId && doctype.systemId ? ' SYSTEM' : '',
-            doctype.systemId ? ' "' + doctype.systemId + '"' : '',
-            '>'
-        ].join('');
-    }
-
     function renderer(document) {
         var h = {};
 
@@ -92,8 +59,6 @@ define(['./extend'], function (extend) {
     }
 
     return {
-        parseDocument: parseDocument,
-        getDocumentSource: getDocumentSource,
         renderer: renderer
     };
 });

@@ -1,4 +1,4 @@
-define(['nany/urls', 'utils/html', 'utils/querystring', 'utils/ajax', 'utils/extend', 'utils/log'], function (urls, html, querystring, ajax, extend, log) {
+define(['nany/urls', 'utils/htmldocument', 'utils/querystring', 'utils/ajax', 'utils/extend', 'utils/log'], function (urls, htmldocument, querystring, ajax, extend, log) {
     'use strict';
 
     /* Page class */
@@ -44,7 +44,7 @@ define(['nany/urls', 'utils/html', 'utils/querystring', 'utils/ajax', 'utils/ext
         }
 
         function sendRingUpdate(doc) {
-            var source = html.getDocumentSource(doc);
+            var source = htmldocument.serialize(doc);
 
             if (!ringUpdateUrl) {
                 return;
