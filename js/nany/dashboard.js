@@ -1,19 +1,19 @@
-define(['utils/html'], function (html) {
+define(['utils/renderer'], function (renderer) {
     'use strict';
 
     /* Dashboard class */
     function Dashboard(container, channel) {
         var containerContent = null,  // initial content of the container
             ui = (function() {
-                var h = html.renderer(document),
-                    title = h.div(channel.name, {
+                var render = renderer(document),
+                    title = render('div', channel.name, {
                         className: 'VNT title'
                     }),
-                    content = h.div('Chargement en cours...', {
+                    content = render('div', 'Chargement en cours...', {
                         className: 'TV content'
                     });
 
-                return h.div([title, content], {
+                return render('div', [title, content], {
                     className: 'nany'
                 });
             }()),
