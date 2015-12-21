@@ -6,5 +6,5 @@ define(['./page'], function (Page) {
         // nothing to do here yet
     }
 
-    return Page('invent', analyze, {}, 'http://httpbin.org/post');
+    return Page('invent', analyze, {}, 'http://dordogne.nainwak.free.fr/idee.php');
 });
