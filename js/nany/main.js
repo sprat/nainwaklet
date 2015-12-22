@@ -23,7 +23,6 @@ define(['./user', './application', './nain', './urls', './nanylet', 'utils/asser
             cssUrl = currentScript.src.replace(/\bjs\b/g, 'css'), // replace 'js' by 'css'
             frames = window.frames,
             pubDoc = frames.pub.document,
-            infoFrame = frames.info.frameElement,
             nain = Nain.get(window);
 
         // insert the CSS file if needed (we never remove it!)
@@ -33,8 +32,7 @@ define(['./user', './application', './nain', './urls', './nanylet', 'utils/asser
         window[name] = Application({
             user: User(nain.nom, nain.image),
             channel: channel,
-            container: pubDoc.body,
-            infoFrame: infoFrame
+            container: pubDoc.body
         });
     }
 

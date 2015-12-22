@@ -20,7 +20,6 @@ define(['./spy', './dashboard', './user', './channel'], function (Spy, Dashboard
         var user,
             channelName,
             container,
-            infoFrame,
             dashboard,
             spy,
             channel;
@@ -35,15 +34,10 @@ define(['./spy', './dashboard', './user', './channel'], function (Spy, Dashboard
 
         // create the dashboard
         container = getElement(conf.container || window.document.body);
-        if (container) {
-            dashboard = Dashboard(container, channel, user);
-        }
+        dashboard = Dashboard(container, channel, user);
 
-        // create the spy
-        infoFrame = getElement(conf.infoFrame);
-        if (infoFrame) {
-            spy = Spy(infoFrame, user);
-        }
+        // create the spy, if an info frame is available
+        spy = Spy(user);
 
         function destroy() {
             if (spy) {

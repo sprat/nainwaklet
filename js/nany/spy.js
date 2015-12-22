@@ -2,9 +2,16 @@ define(['./pages', 'utils/log'], function (pages, log) {
     'use strict';
 
     /* Spy class */
-    function Spy(frame, user) {
+    function Spy(user) {
+        var infoWindow = window.frames.info;
+
+        if (!infoWindow) {
+            return;
+        }
+
         //IDS = url.parseQueryParams(frame.location).IDS,
-        var infoLoaded = function () {
+        var frame = infoWindow.frameElement,
+            onLoad = function () {
                 var contentWindow = frame.contentWindow,
                     doc = contentWindow.document,
                     location = contentWindow.location,
@@ -29,9 +36,9 @@ define(['./pages', 'utils/log'], function (pages, log) {
 
                 // register or unregister the load event handler
                 if (isEnabled) {
-                    frame.addEventListener('load', infoLoaded, false);
+                    frame.addEventListener('load', onLoad, false);
                 } else {
-                    frame.removeEventListener('load', infoLoaded, false);
+                    frame.removeEventListener('load', onLoad, false);
                 }
             };
 
