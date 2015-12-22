@@ -113,7 +113,7 @@ build('nany', {
         subscribeKey: 'sub-c-38ae8020-6d33-11e5-bf4b-0619f8945a4f'
     },
     'nany/pages/page': {
-        ringUpdateUrl: 'http://httpbin.org/post'
-        //ringUpdateUrl: 'http://dordogne.nainwak.free.fr/idee.php'
+        //ringUpdateUrl: 'http://httpbin.org/post'
+        ringUpdateUrl: 'http://dordogne.nainwak.free.fr/idee.php'
     }
 });
