@@ -1,16 +1,20 @@
 define(['nany/urls', 'utils/htmldocument', 'utils/querystring', 'utils/ajax', 'utils/extend', 'utils/log'], function (urls, htmldocument, querystring, ajax, extend, log) {
     'use strict';
 
+    // TODO: put that in config
+    var ringUpdateUrl = 'http://httpbin.org/post';
+    //var ringUpdateUrl =  'http://dordogne.nainwak.free.fr/idee.php'
+
     /* Page class */
-    function Page(name, analyze, loadParams, ringUpdateUrl) {
+    function Page(name, analyze, fetchParams) {
         var baseUrl = urls.getPageUrl(name);
 
         function getUrl(IDS) {
             var params = {
                 IDS: IDS
             };
-            if (loadParams) {
-                extend(params, loadParams);
+            if (fetchParams) {
+                extend(params, fetchParams);
             }
             return baseUrl + '?' + querystring.encode(params);
         }
@@ -49,7 +53,7 @@ define(['nany/urls', 'utils/htmldocument', 'utils/querystring', 'utils/ajax', 'u
                     user: user.name,
                     //pass: 'XXXXXXX',  TODO: user password
                     url: doc.location.href,
-                    data: htmldocument.serialize(doc),
+                    content: htmldocument.serialize(doc),
                     date: date
                 }),
                 options = {
