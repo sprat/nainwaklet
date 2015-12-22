@@ -1,9 +1,5 @@
-define(['nany/urls', 'utils/htmldocument', 'utils/querystring', 'utils/ajax', 'utils/extend', 'utils/log'], function (urls, htmldocument, querystring, ajax, extend, log) {
+define(['module', 'nany/urls', 'utils/htmldocument', 'utils/querystring', 'utils/ajax', 'utils/extend', 'utils/log'], function (module, urls, htmldocument, querystring, ajax, extend, log) {
     'use strict';
-
-    // TODO: put that in config
-    var ringUpdateUrl = 'http://httpbin.org/post';
-    //var ringUpdateUrl =  'http://dordogne.nainwak.free.fr/idee.php'
 
     /* Page class */
     function Page(name, analyze, fetchParams) {
@@ -49,7 +45,8 @@ define(['nany/urls', 'utils/htmldocument', 'utils/querystring', 'utils/ajax', 'u
         }
 
         function sendRingUpdate(doc, date, user) {
-            var data = JSON.stringify({
+            var ringUpdateUrl = module.config().ringUpdateUrl,
+                data = JSON.stringify({
                     user: user.name,
                     //pass: 'XXXXXXX',  TODO: user password
                     url: doc.location.href,
