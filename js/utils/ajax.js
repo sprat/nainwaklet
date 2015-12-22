@@ -12,7 +12,7 @@ define(function () {
         xhr.open(method, url, true);  // async
 
         if (options.contentType) {
-            xhr.setRequestHeader("Content-Type", options.contentType);
+            xhr.setRequestHeader('Content-Type', options.contentType);
         }
 
         if (options.responseType) {
