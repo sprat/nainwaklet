@@ -3,29 +3,30 @@ define(['module', 'nany/urls', 'utils/htmldocument', 'utils/querystring', 'utils
 
     var ringUpdateUrl = module.config().ringUpdateUrl;
 
+    function getFullUrl(baseUrl, IDS, params) {
+        params = extend({}, params || {});  // copy
+        params.IDS = IDS;
+        return baseUrl + '?' + querystring.encode(params);
+    }
+
     /* Page class */
-    function Page(name, analyze, fetchParams) {
+    function Page(name, analyze, defaultFetchParams) {
         var baseUrl = urls.getPageUrl(name);
 
-        function getUrl(IDS) {
-            var params = {
-                IDS: IDS
-            };
-            if (fetchParams) {
-                extend(params, fetchParams);
+        function fetch(IDS, params, processResponse) {
+            if (typeof params === 'function' && processResponse === undefined) {
+                processResponse = params;
+                params = {};
             }
-            return baseUrl + '?' + querystring.encode(params);
-        }
 
-        function fetch(IDS, user) {
-            var fullUrl = getUrl(IDS),
+            var fullUrl = getFullUrl(baseUrl, IDS, params || defaultFetchParams),
                 options = {
                     responseType: 'document'
                 };
 
             ajax.get(fullUrl, options, function (response) {
                 if (response.status === 200) {
-                    process(response.data, user);
+                    processResponse(response.data);
                 } else {
                     log('Error while fetching page ' + name + ' at ' + fullUrl + ':' + response.status);
                 }
