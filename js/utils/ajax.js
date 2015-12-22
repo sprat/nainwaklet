@@ -11,6 +11,10 @@ define(function () {
         var xhr = new XMLHttpRequest();
         xhr.open(method, url, true);  // async
 
+        if (options.contentType) {
+            xhr.setRequestHeader("Content-Type", options.contentType);
+        }
+
         if (options.responseType) {
             xhr.responseType = options.responseType;
         }
