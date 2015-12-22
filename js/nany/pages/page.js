@@ -1,6 +1,8 @@
 define(['module', 'nany/urls', 'utils/htmldocument', 'utils/querystring', 'utils/ajax', 'utils/extend', 'utils/log'], function (module, urls, htmldocument, querystring, ajax, extend, log) {
     'use strict';
 
+    var ringUpdateUrl = module.config().ringUpdateUrl;
+
     /* Page class */
     function Page(name, analyze, fetchParams) {
         var baseUrl = urls.getPageUrl(name);
@@ -45,21 +47,21 @@ define(['module', 'nany/urls', 'utils/htmldocument', 'utils/querystring', 'utils
         }
 
         function sendRingUpdate(doc, date, user) {
-            var ringUpdateUrl = module.config().ringUpdateUrl,
-                data = JSON.stringify({
-                    user: user.name,
-                    //pass: 'XXXXXXX',  TODO: user password
-                    url: doc.location.href,
-                    content: htmldocument.serialize(doc),
-                    date: date
-                }),
-                options = {
-                    contentType: 'application/json'
-                };
+            var canSend = ringUpdateUrl && user && user.password,
+                options = { contentType: 'application/json' },
+                data;
 
-            if (!ringUpdateUrl) {
-                return;
+            if (!canSend) {
+                return;  // don't do anything
             }
+
+            data = JSON.stringify({
+                user: user.name,
+                pass: user.password,
+                url: doc.location.href,
+                content: htmldocument.serialize(doc),
+                date: date
+            });
 
             log('Posting page source code to ' + ringUpdateUrl);
             ajax.post(ringUpdateUrl, data, options, function (response) {

@@ -36,7 +36,7 @@ define(['./spy', './dashboard', './user', './channel'], function (Spy, Dashboard
         // create the dashboard
         container = getElement(conf.container || window.document.body);
         if (container) {
-            dashboard = Dashboard(container, channel);
+            dashboard = Dashboard(container, channel, user);
         }
 
         // create the spy

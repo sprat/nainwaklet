@@ -2,18 +2,28 @@ define(['utils/renderer'], function (renderer) {
     'use strict';
 
     /* Dashboard class */
-    function Dashboard(container, channel) {
+    function Dashboard(container, channel, user) {
         var containerContent = null,  // initial content of the container
             ui = (function() {
-                var render = renderer(document),
-                    title = render('div', channel.name, {
+                var h = renderer(document),
+                    title = h('div', channel.name, {
                         className: 'VNT title'
                     }),
-                    content = render('div', 'Chargement en cours...', {
+                    content = h('div', [
+                        h('label', 'Mot de passe'),
+                        h('input', [], {
+                            type: 'password',
+                            onchange: function (event) {
+                                var password = event.target.value;
+                                user.updatePassword(password);
+                                content.innerHTML = 'MAJ auto active';
+                            }
+                        })
+                    ], {
                         className: 'TV content'
                     });
 
-                return render('div', [title, content], {
+                return h('div', [title, content], {
                     className: 'nany'
                 });
             }()),

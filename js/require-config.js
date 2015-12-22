@@ -7,7 +7,8 @@ var require = {
         'require': 'vendor/require',
         'text': 'vendor/text',
         'pubnub': 'vendor/pubnub',
-        'tiny-emitter': 'vendor/tiny-emitter'
+        'tiny-emitter': 'vendor/tiny-emitter',
+        'md5': 'vendor/md5'
     },
     shim: {
         'pubnub': {
