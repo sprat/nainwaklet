@@ -15,7 +15,7 @@ define(['nany/urls', 'utils/htmldocument', 'utils/querystring', 'utils/ajax', 'u
             return baseUrl + '?' + querystring.encode(params);
         }
 
-        function fetch(IDS) {
+        function fetch(IDS, user) {
             var fullUrl = getUrl(IDS),
                 options = {
                     responseType: 'document'
@@ -23,15 +23,16 @@ define(['nany/urls', 'utils/htmldocument', 'utils/querystring', 'utils/ajax', 'u
 
             ajax.get(fullUrl, options, function (response) {
                 if (response.status === 200) {
-                    process(response.data);
+                    process(response.data, user);
                 } else {
                     log('Error while fetching page ' + name + ' at ' + fullUrl + ':' + response.status);
                 }
             });
         }
 
-        function process(doc) {
-            var analysis;
+        function process(doc, user) {
+            var date = Date.now(),  // unix timestamp
+                analysis;
 
             log('Processing ' + name);
 
@@ -40,22 +41,30 @@ define(['nany/urls', 'utils/htmldocument', 'utils/querystring', 'utils/ajax', 'u
                 log(analysis);
             }
 
-            sendRingUpdate(doc);
+            sendRingUpdate(doc, date, user);
         }
 
-        function sendRingUpdate(doc) {
-            var source = htmldocument.serialize(doc);
+        function sendRingUpdate(doc, date, user) {
+            var data = JSON.stringify({
+                    user: user.name,
+                    //pass: 'XXXXXXX',  TODO: user password
+                    url: doc.location.href,
+                    data: htmldocument.serialize(doc),
+                    date: date
+                }),
+                options = {
+                    contentType: 'application/json'
+                };
 
             if (!ringUpdateUrl) {
                 return;
             }
 
             log('Posting page source code to ' + ringUpdateUrl);
-            ajax.post(ringUpdateUrl, source, function (response) {
+            ajax.post(ringUpdateUrl, data, options, function (response) {
                 log('Response received:');
                 log(response);
             });
-
         }
 
         return Object.freeze({

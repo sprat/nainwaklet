@@ -42,7 +42,7 @@ define(['./spy', './dashboard', './user', './channel'], function (Spy, Dashboard
         // create the spy
         infoFrame = getElement(conf.infoFrame);
         if (infoFrame) {
-            spy = Spy(infoFrame);
+            spy = Spy(infoFrame, user);
         }
 
         function destroy() {

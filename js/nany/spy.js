@@ -2,7 +2,7 @@ define(['./pages', 'utils/log'], function (pages, log) {
     'use strict';
 
     /* Spy class */
-    function Spy(frame) {
+    function Spy(frame, user) {
         //IDS = url.parseQueryParams(frame.location).IDS,
         var infoLoaded = function () {
                 var contentWindow = frame.contentWindow,
@@ -13,7 +13,7 @@ define(['./pages', 'utils/log'], function (pages, log) {
 
                 log('Navigation to ' + url);
                 if (page) {
-                    page.process(doc);
+                    page.process(doc, user);
                 }
             },
             isEnabled = false,
