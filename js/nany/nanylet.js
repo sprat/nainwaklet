@@ -22,7 +22,7 @@ define(['./urls'], function (urls) {
             '    s.setAttribute("data-channel", "' + channel + '");',
             '    b.appendChild(s);',
             '} else {',
-            '    alert("Erreur : ce script ne fonctionne que dans la partie jeu de Nainwak !");',
+            '    alert("Erreur : le nany ne fonctionne que dans la partie jeu de Nainwak !");',
             '}',
             '}())'
         ];
