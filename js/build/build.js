@@ -64,7 +64,7 @@ function compress(source, outputFile) {
         inSourceMap: JSON.parse(source.map),
         outSourceMap: outputFilename + '.map',
         wrap: true,
-        //mangle: false,
+        mangle: false,
         output: {
             preamble: preamble
         }
