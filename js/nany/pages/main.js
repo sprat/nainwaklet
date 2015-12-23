@@ -1,4 +1,4 @@
-define(['./detect', './invent', 'utils/array'], function (detect, invent, array) {
+define(['./page', './detect', 'utils/array'], function (Page, detect, array) {
     'use strict';
 
     function Pages(pages) {
@@ -21,11 +21,15 @@ define(['./detect', './invent', 'utils/array'], function (detect, invent, array)
         });
     }
 
-    /*
-    Page('even', log, {duree: 240, type: 'ALL'}),
-    Page('perso', log),
-    Page('invent', log),
-    Page('encyclo', log)
-    */
-    return Pages([detect, invent]);
+    var invent = Page('invent'),
+        perso = Page('perso'),
+        encyclo = Page('encyclo'),
+        even = Page('even', {
+            fetchParams: {
+                duree: 240,
+                type: 'ALL'
+            }
+        });
+
+    return Pages([detect, invent, perso, encyclo, even]);
 });

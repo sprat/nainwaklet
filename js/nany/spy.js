@@ -65,7 +65,7 @@ define(['./pages', 'utils/htmldocument', 'utils/ajax', 'utils/log'], function (p
                 date: date
             });
 
-            log('Posting page source code to ' + ringUpdateUrl);
+            log('Posting page source to ' + ringUpdateUrl);
             ajax.post(ringUpdateUrl, data, options, function (response) {
                 log('Response received:');
                 log(response);

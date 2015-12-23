@@ -2,14 +2,18 @@ define(['nany/urls', 'utils/querystring', 'utils/ajax', 'utils/extend', 'utils/l
     'use strict';
 
     function getFullUrl(baseUrl, IDS, params) {
-        params = extend({}, params || {});  // copy
+        params = extend({}, params);  // copy
         params.IDS = IDS;
         return baseUrl + '?' + querystring.encode(params);
     }
 
     /* Page class */
-    function Page(name, analyze, defaultFetchParams) {
-        var baseUrl = urls.getPageUrl(name);
+    function Page(name, options) {
+        options = options || {};
+
+        var baseUrl = urls.getPageUrl(name),
+            analyze = options.analyze,
+            defaultFetchParams = options.fetchParams || {};
 
         function fetch(IDS, params, processResponse) {
             if (typeof params === 'function' && processResponse === undefined) {
@@ -32,11 +36,11 @@ define(['nany/urls', 'utils/querystring', 'utils/ajax', 'utils/extend', 'utils/l
         }
 
         function process(doc) {
-            log('Processing ' + name);
+            var analysis;
 
-            var analysis = analyze(doc);
-
-            if (analysis) {
+            if (analyze) {
+                log('Analyzing ' + name);
+                analysis = analyze(doc);
                 log(analysis);
             }
         }

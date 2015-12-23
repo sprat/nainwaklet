@@ -157,5 +157,7 @@ define(['./page', 'nany/urls', 'utils/array'], function (Page, urls, array) {
         };
     }
 
-    return Page('detect', analyze, {});
+    return Page('detect', {
+        analyze: analyze
+    });
 });
