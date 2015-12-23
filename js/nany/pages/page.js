@@ -1,7 +1,5 @@
-define(['module', 'nany/urls', 'utils/htmldocument', 'utils/querystring', 'utils/ajax', 'utils/extend', 'utils/log'], function (module, urls, htmldocument, querystring, ajax, extend, log) {
+define(['nany/urls', 'utils/querystring', 'utils/ajax', 'utils/extend', 'utils/log'], function (urls, querystring, ajax, extend, log) {
     'use strict';
-
-    var ringUpdateUrl = module.config().ringUpdateUrl;
 
     function getFullUrl(baseUrl, IDS, params) {
         params = extend({}, params || {});  // copy
@@ -33,42 +31,12 @@ define(['module', 'nany/urls', 'utils/htmldocument', 'utils/querystring', 'utils
             });
         }
 
-        function process(doc, user) {
-            var date = Date.now(),  // unix timestamp
-                analysis;
+        function process(doc) {
+            var analysis = analyze(doc);
 
-            log('Processing ' + name);
-
-            analysis = analyze(doc);
             if (analysis) {
                 log(analysis);
             }
-
-            sendRingUpdate(doc, date, user);
-        }
-
-        function sendRingUpdate(doc, date, user) {
-            var canSend = ringUpdateUrl && user && user.password,
-                options = { contentType: 'application/json' },
-                data;
-
-            if (!canSend) {
-                return;  // don't do anything
-            }
-
-            data = JSON.stringify({
-                user: user.name,
-                pass: user.password,
-                url: doc.location.href,
-                content: htmldocument.serialize(doc),
-                date: date
-            });
-
-            log('Posting page source code to ' + ringUpdateUrl);
-            ajax.post(ringUpdateUrl, data, options, function (response) {
-                log('Response received:');
-                log(response);
-            });
         }
 
         return Object.freeze({

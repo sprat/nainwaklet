@@ -2,8 +2,11 @@ define(['utils/renderer'], function (renderer) {
     'use strict';
 
     /* Dashboard class */
-    function Dashboard(container, channel, user) {
-        var containerContent = null,  // initial content of the container
+    function Dashboard(conf) {
+        var container = conf.container,
+            channel = conf.channel,
+            user = conf.user,
+            containerContent = null,  // initial content of the container
             ui = (function() {
                 var h = renderer(document),
                     title = h('div', channel.name, {

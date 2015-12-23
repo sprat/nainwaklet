@@ -1,46 +1,77 @@
-define(['./pages', 'utils/log'], function (pages, log) {
+define(['./pages', 'utils/htmldocument', 'utils/ajax', 'utils/log'], function (pages, htmldocument, ajax, log) {
     'use strict';
 
     /* Spy class */
-    function Spy(user) {
-        var infoWindow = window.frames.info;
+    function Spy(conf) {
+        var infoWindow = window.frames.info,
+            frame = infoWindow ? infoWindow.frameElement : null,
+            isEnabled = false,
+            user = conf.user,
+            ringUpdateUrl = conf.ringUpdateUrl;
+
+        //IDS = url.parseQueryParams(frame.location).IDS,
 
         if (!infoWindow) {
             return;
         }
 
-        //IDS = url.parseQueryParams(frame.location).IDS,
-        var frame = infoWindow.frameElement,
-            onLoad = function () {
-                var contentWindow = frame.contentWindow,
-                    doc = contentWindow.document,
-                    location = contentWindow.location,
-                    url = location.origin + location.pathname,
-                    page = pages.byUrl(url);
+        function onLoad() {
+            var contentWindow = frame.contentWindow,
+                doc = contentWindow.document,
+                location = contentWindow.location,
+                url = location.origin + location.pathname,
+                page = pages.byUrl(url);
 
-                log('Navigation to ' + url);
-                if (page) {
-                    page.process(doc, user);
-                }
-            },
-            isEnabled = false,
-            enable = function (value) {
-                var oldEnabled = isEnabled;
+            log('Navigation to ' + url);
+            if (page) {
+                log('Processing ' + page.name);
+                page.process(doc);
+                sendRingUpdate(ringUpdateUrl, doc, user);
+            }
+        }
 
-                // update the status (and convert to boolean, just in case)
-                isEnabled = !!value;
+        function enable(value) {
+            var oldEnabled = isEnabled;
 
-                if (oldEnabled === isEnabled) {  // nothing to do
-                    return;
-                }
+            // update the status (and convert to boolean, just in case)
+            isEnabled = !!value;
 
-                // register or unregister the load event handler
-                if (isEnabled) {
-                    frame.addEventListener('load', onLoad, false);
-                } else {
-                    frame.removeEventListener('load', onLoad, false);
-                }
-            };
+            if (oldEnabled === isEnabled) {  // nothing to do
+                return;
+            }
+
+            // register or unregister the load event handler
+            if (isEnabled) {
+                frame.addEventListener('load', onLoad, false);
+            } else {
+                frame.removeEventListener('load', onLoad, false);
+            }
+        }
+
+        function sendRingUpdate(ringUpdateUrl, doc, user) {
+            var date = Date.now(),  // unix timestamp
+                canSend = ringUpdateUrl && user && user.password,
+                options = { contentType: 'application/json' },
+                data;
+
+            if (!canSend) {
+                return;  // don't do anything
+            }
+
+            data = JSON.stringify({
+                user: user.name,
+                pass: user.password,
+                url: doc.location.href,
+                content: htmldocument.serialize(doc),
+                date: date
+            });
+
+            log('Posting page source code to ' + ringUpdateUrl);
+            ajax.post(ringUpdateUrl, data, options, function (response) {
+                log('Response received:');
+                log(response);
+            });
+        }
 
         // start enabled
         enable(true);

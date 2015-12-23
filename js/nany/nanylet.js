@@ -1,7 +1,11 @@
 define(['./urls'], function (urls) {
     'use strict';
 
-    function generateHref(scriptUrl, channel) {
+    function generateHref(scriptUrl, button) {
+        var channel = button.getAttribute('data-channel'),
+            ringUpdateUrl = button.getAttribute('data-ring-update-url') || '';
+
+        // TODO: maybe we can use a template and the text plugin here?
         var lines = [
             'javascript:(function () {',
             'var w = window,',
@@ -20,6 +24,7 @@ define(['./urls'], function (urls) {
             '    s.src = "' + scriptUrl + '";',
             '    s.async = false;',
             '    s.setAttribute("data-channel", "' + channel + '");',
+            '    s.setAttribute("data-ring-update-url", "' + ringUpdateUrl + '");',
             '    b.appendChild(s);',
             '} else {',
             '    alert("Erreur : le nany ne fonctionne que dans la partie jeu de Nainwak !");',

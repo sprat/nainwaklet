@@ -12,14 +12,14 @@ define(['./user', './application', './nain', './urls', './nanylet', 'utils/asser
         scriptUrl = scriptUrl || currentScript.src;
 
         Array.prototype.forEach.call(buttons, function (button) {
-            var channel = button.getAttribute('data-channel'),
-                href = nanylet.generateHref(scriptUrl, channel);
+            var href = nanylet.generateHref(scriptUrl, button);
             button.setAttribute('href', href);
         });
     }
 
     function startApplicationOnNainwak(name, window) {
         var channel = currentScript.getAttribute('data-channel') || 'default',
+            ringUpdateUrl = currentScript.getAttribute('data-ring-update-url') || '',
             cssUrl = currentScript.src.replace(/\bjs\b/g, 'css'), // replace 'js' by 'css'
             frames = window.frames,
             pubDoc = frames.pub.document,
@@ -32,7 +32,8 @@ define(['./user', './application', './nain', './urls', './nanylet', 'utils/asser
         window[name] = Application({
             user: User(nain.nom, nain.image),
             channel: channel,
-            container: pubDoc.body
+            container: pubDoc.body,
+            ringUpdateUrl: ringUpdateUrl
         });
     }
 

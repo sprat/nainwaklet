@@ -25,19 +25,21 @@ define(['./spy', './dashboard', './user', './channel'], function (Spy, Dashboard
             channel;
 
         conf = conf || {};
-        user = conf.user || User();
+        conf.user = conf.user || User();
+
+        conf.container = getElement(conf.container || window.document.body);
 
         // create the (communication) channel
         channelName = conf.channel || 'default';
         channel = Channel(channelName);
         channel.connect();
+        conf.channel = channel;
 
         // create the dashboard
-        container = getElement(conf.container || window.document.body);
-        dashboard = Dashboard(container, channel, user);
+        dashboard = Dashboard(conf);
 
-        // create the spy, if an info frame is available
-        spy = Spy(user);
+        // create the spy (if an info frame is available)
+        spy = Spy(conf);
 
         function destroy() {
             if (spy) {
