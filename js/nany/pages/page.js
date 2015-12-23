@@ -32,6 +32,8 @@ define(['nany/urls', 'utils/querystring', 'utils/ajax', 'utils/extend', 'utils/l
         }
 
         function process(doc) {
+            log('Processing ' + name);
+
             var analysis = analyze(doc);
 
             if (analysis) {

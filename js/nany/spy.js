@@ -24,7 +24,6 @@ define(['./pages', 'utils/htmldocument', 'utils/ajax', 'utils/log'], function (p
 
             log('Navigation to ' + url);
             if (page) {
-                log('Processing ' + page.name);
                 page.process(doc);
                 sendRingUpdate(ringUpdateUrl, doc, user);
             }
