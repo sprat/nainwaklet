@@ -4,21 +4,20 @@ define(['./pages', 'utils/htmldocument', 'utils/ajax', 'utils/log'], function (p
     /* Spy class */
     function Spy(conf) {
         var infoWindow = window.frames.info,
-            frame = infoWindow ? infoWindow.frameElement : null,
+            infoFrame = infoWindow ? infoWindow.frameElement : null,
             isEnabled = false,
             user = conf.user,
             ringUpdateUrl = conf.ringUpdateUrl;
 
-        //IDS = url.parseQueryParams(frame.location).IDS,
+        //IDS = url.parseQueryParams(infoFrame.location).IDS,
 
-        if (!infoWindow) {
+        if (!infoWindow || !infoFrame) {
             return;
         }
 
         function onLoad() {
-            var contentWindow = frame.contentWindow,
-                doc = contentWindow.document,
-                location = contentWindow.location,
+            var doc = infoWindow.document,
+                location = infoWindow.location,
                 url = location.origin + location.pathname,
                 page = pages.byUrl(url);
 
@@ -41,9 +40,9 @@ define(['./pages', 'utils/htmldocument', 'utils/ajax', 'utils/log'], function (p
 
             // register or unregister the load event handler
             if (isEnabled) {
-                frame.addEventListener('load', onLoad, false);
+                infoFrame.addEventListener('load', onLoad, false);
             } else {
-                frame.removeEventListener('load', onLoad, false);
+                infoFrame.removeEventListener('load', onLoad, false);
             }
         }
 
