@@ -17,21 +17,17 @@ define(['./spy', './dashboard', './user', './channel'], function (Spy, Dashboard
 
     /* Application class */
     function Application(conf) {
-        var user,
-            channelName,
-            container,
+        var channel,
             dashboard,
-            spy,
-            channel;
+            spy;
 
         conf = conf || {};
+        conf.channel = conf.channel || 'default';
+        conf.container = getElement(conf.container || window.document.body);
         conf.user = conf.user || User();
 
-        conf.container = getElement(conf.container || window.document.body);
-
         // create the (communication) channel
-        channelName = conf.channel || 'default';
-        channel = Channel(channelName);
+        channel = Channel(conf.channel);
         channel.connect();
         conf.channel = channel;
 
@@ -54,7 +50,7 @@ define(['./spy', './dashboard', './user', './channel'], function (Spy, Dashboard
         }
 
         return Object.freeze({
-            user: user,
+            user: conf.user,
             channel: channel,
             dashboard: dashboard,
             spy: spy,
