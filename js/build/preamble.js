@@ -1,4 +1,4 @@
-/*!
+/**
  * Nainy Application & Library
  * https://github.com/sprat/nany
  *
