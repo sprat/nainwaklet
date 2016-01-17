@@ -4,10 +4,6 @@
       2,
       4
     ],
-    "strict": [
-      2,
-      "function"
-    ],
     "quotes": [
       2,
       "single",
@@ -27,7 +23,7 @@
   },
   "env": {
     "browser": true,
-    "amd": true
+    "node": true
   },
   "extends": "eslint:recommended"
 }
