@@ -33,6 +33,7 @@
     "smokestack": "^3.4.1",
     "tap-closer": "^1.0.0",
     "tape": "^4.4.0",
+    "tape-catch": "^1.0.4",
     "tiny-emitter": "^1.0.2",
     "uglify-js": "^2.6.0"
   },
