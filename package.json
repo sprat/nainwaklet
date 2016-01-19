@@ -17,7 +17,11 @@
   "bugs": {
     "url": "https://github.com/sprat/nany/issues"
   },
-  "dependencies": {},
+  "dependencies": {
+    "md5": "^2.0.0",
+    "pubnub": "^3.7.18",
+    "tiny-emitter": "^1.0.2"
+  },
   "devDependencies": {
     "brfs": "^1.4.2",
     "browserify": "^13.0.0",
@@ -26,15 +30,12 @@
     "exorcist": "^0.4.0",
     "faucet": "0.0.1",
     "live-server": "^0.8.1",
-    "md5": "^2.0.0",
     "nodemon": "^1.7.1",
     "npm-run-all": "^1.2.11",
-    "pubnub": "^3.7.18",
     "smokestack": "^3.4.1",
     "tap-closer": "^1.0.0",
     "tape": "^4.4.0",
     "tape-catch": "^1.0.4",
-    "tiny-emitter": "^1.0.2",
     "uglify-js": "^2.6.0"
   },
   "scripts": {
