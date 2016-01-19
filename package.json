@@ -36,15 +36,14 @@
     "tap-closer": "^1.0.0",
     "tape": "^4.4.0",
     "tape-catch": "^1.0.4",
-    "tape-run": "^2.1.2",
     "uglify-js": "^2.6.0"
   },
   "scripts": {
     "server": "live-server --no-browser",
     "lint": "eslint . --cache",
     "pretest": "browserify -t brfs -d lib/tests/index.js > dist/nany.tests.js",
-    "test": "tape-run < dist/nany.tests.js --render=\"faucet\"",
-    "test2": "tap-closer < dist/nany.tests.js | smokestack | faucet",
+    "test": "tap-closer < dist/nany.tests.js | smokestack | faucet",
+    "test-broth": "tap-closer < dist/nany.tests.js | broth chrome | faucet",
     "prebuild:js": "npm run lint -s && npm run test -s",
     "build:js": "browserify lib/index.js -dv -s nany | exorcist dist/nany.js.map > dist/nany.js",
     "postbuild:js": "uglifyjs dist/nany.js -c warnings=false -m -o dist/nany.min.js --comments --in-source-map dist/nany.js.map --source-map dist/nany.min.js.map --source-map-url nany.min.js.map",
