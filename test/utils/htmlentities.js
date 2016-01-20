@@ -1,5 +1,5 @@
 var test = require('tape-catch'),
-    htmlentities = require('../../utils/htmlentities');
+    htmlentities = require('../../lib/utils/htmlentities');
 
 
 test('htmlentities: encode', function (assert) {

@@ -43,7 +43,7 @@
   "scripts": {
     "server": "live-server --no-browser",
     "lint": "eslint . --cache",
-    "pretest": "browserify -t brfs -d lib/tests/index.js > dist/nany.tests.js",
+    "pretest": "browserify -t brfs -d test > dist/nany.tests.js",
     "test": "tap-closer < dist/nany.tests.js | smokestack | faucet",
     "test-broth": "tap-closer < dist/nany.tests.js | broth chrome | faucet",
     "test-tape-run": "tap-closer < dist/nany.tests.js | tape-run",

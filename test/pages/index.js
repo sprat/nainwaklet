@@ -1,5 +1,5 @@
 var test = require('tape-catch'),
-    pages = require('../../pages');
+    pages = require('../../lib/pages');
 
 
 test('pages: list', function (assert) {

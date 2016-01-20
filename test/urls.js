@@ -1,5 +1,5 @@
 var test = require('tape-catch'),
-    urls = require('../urls');
+    urls = require('../lib/urls');
 
 
 test('urls: getPageUrl', function (assert) {

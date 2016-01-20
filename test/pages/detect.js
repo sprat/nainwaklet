@@ -1,6 +1,6 @@
 var test = require('tape-catch'),
-    detect = require('../../pages/detect'),
-    htmldocument = require('../../utils/htmldocument'),
+    detect = require('../../lib/pages/detect'),
+    htmldocument = require('../../lib/utils/htmldocument'),
     path = require('path'),
     fs = require('fs'),
     detectHTML = fs.readFileSync(path.join(__dirname, '..', 'fixtures', 'detect.html'), 'utf8'),

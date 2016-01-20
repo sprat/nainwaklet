@@ -1,5 +1,5 @@
 var test = require('tape-catch'),
-    htmldocument = require('../../utils/htmldocument'),
+    htmldocument = require('../../lib/utils/htmldocument'),
     path = require('path'),
     fs = require('fs'),
     helloWorldHTML = fs.readFileSync(path.join(__dirname, '..', 'fixtures', 'hello_world.html'), 'utf8');
