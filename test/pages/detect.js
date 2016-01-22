@@ -1,10 +1,10 @@
 var test = require('tape-catch'),
-    detect = require('../../lib/pages/detect'),
-    htmldocument = require('../../lib/utils/htmldocument'),
     path = require('path'),
     fs = require('fs'),
+    helpers = require('../helpers'),
+    detect = require('../../lib/pages/detect'),
     detectHTML = fs.readFileSync(path.join(__dirname, '..', 'fixtures', 'detect.html'), 'utf8'),
-    doc = htmldocument.parse(detectHTML);
+    doc = helpers.parseHTMLDocument(detectHTML);
 
 
 test('detect: localisation', function (assert) {

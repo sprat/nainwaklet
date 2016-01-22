@@ -21,6 +21,7 @@
     "array-find": "^1.0.0",
     "htmldec": "0.0.1",
     "md5": "^2.0.0",
+    "print-html": "0.0.2",
     "pubnub": "^3.7.18",
     "querystring2": "^1.0.0",
     "tiny-emitter": "^1.0.2",
