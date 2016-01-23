@@ -48,7 +48,7 @@
     "uglify-js": "^2.6.0"
   },
   "scripts": {
-    "server": "live-server --no-browser",
+    "start": "live-server --no-browser",
     "lint": "eslint . --cache",
     "pretest": "browserify -t brfs -d test > dist/nany.tests.js",
     "test": "tap-closer < dist/nany.tests.js | smokestack | faucet",
