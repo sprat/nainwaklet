@@ -12,23 +12,12 @@ test('urls: getImageUrl', function (assert) {
     assert.end();
 });
 
-test('urls: gameUrl', function (assert) {
-    assert.strictEqual(urls.gameUrl, 'http://www.nainwak.com/jeu/index.php', 'Game URL is the index page');
-    assert.end();
-});
-
-test('urls: isInGame', function (assert) {
-    var window = {},
-        link = document.createElement('a');
-
-    // Note: the link will mimick the location API
-    window.location = link;
-
-    link.href = urls.gameUrl;
-    assert.ok(urls.isInGame(window), 'Game window');
-
-    link.href = 'http://www.google.com';
-    assert.notOk(urls.isInGame(window), 'Non-game window');
-
+test('urls: isGameUrl', function (assert) {
+    assert.ok(urls.isGameUrl('http://www.nainwak.com/jeu/index.php'), 'Canonical game url');
+    assert.ok(urls.isGameUrl('http://nainwak.com/jeu/index.php'), 'No www game url');
+    assert.ok(urls.isGameUrl('https://www.nainwak.com/jeu/index.php'), 'Https game url');
+    assert.notOk(urls.isGameUrl('http://www.nainwak.com/'), 'Nainwak, but not game 1');
+    assert.notOk(urls.isGameUrl('http://www.nainwak.com/jeu/even.php'), 'Nainwak, but not game 2');
+    assert.notOk(urls.isGameUrl('http://www.google.fr'), 'External url');
     assert.end();
 });
