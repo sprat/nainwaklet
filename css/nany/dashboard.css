@@ -3,6 +3,13 @@
     font-size: 8.0pt;
     font-family: Verdana, Arial;
     text-align: left;
+    box-sizing: border-box;
+}
+
+.nany *,
+.nany *:before,
+.nany *:after {
+  box-sizing: inherit;
 }
 
 .nany a {
@@ -18,4 +25,9 @@
     font-size: 1.25em;
     font-weight: bold;
     color: #FFF;
+}
+
+.nany input,
+.nany button {
+    width: 100%;
 }
