@@ -1,0 +1,211 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title></title>
+<link rel="stylesheet" href="/css/main.css" type="text/css">
+<link rel="stylesheet" href="/css/cadre1.css" type="text/css">
+<!--[if IE]>
+<link rel="stylesheet" href="/css/ie.css" type="text/css" />
+<![endif]-->
+<style type="text/css">
+.plus {
+  background-image: url("/images/interface/add.png");
+  width: 16px;
+  height: 16px;
+}
+.moins {
+  background-image: url("/images/interface/del.png");
+  width: 16px;
+  height: 16px;
+}
+.clef {
+  background-image: url("/images/interface/clef.png");
+  width: 16px;
+  height: 16px;
+  display: inline-block;
+}
+.bloc_droit { text-align: right; padding-right: 6px;}
+#sPV, #sForce, #sPrecis, #sIntell, #sPG {font-weight: bold}
+#sDescription {font-style: italic}
+</style>
+<script src="/js/scriptaculous/prototype.js" type="text/javascript">
+</script>
+<script language="Javascript" type="text/javascript">
+var cotes = ["naindeci", "gentil", "mechant", "rampant", , , , "mutant"];
+var IDS = '2a067e7f51edfef55755149fc952a435';
+var nbtrain = 1;
+var ab = 0;
+var tagGuilde = 'Gorgones';
+var couleurTagGuilde = '#da6400';
+var description = 'Quitte à taper un petit level, tapez Rêveur ! Gagnant de la palme d&#039;or du meilleur nom de nain.';
+function init() {
+  if (tagGuilde=='') $('f_typeTag').disable();
+  if ('fade976ec961a21e13af618e54476d1a5c285d7a.png'=='') $('f_typeAvatar1').disable();
+  clef();
+  $('sDescription').innerHTML = (description=='')? '(pas de description)' : description;
+  $('sBarbe').innerHTML = (6806/100).toLocaleString();
+  $('sRang').addClassName(cotes[1]);
+  $('sPV').innerHTML = (109+39);
+  $('sPVBase').innerHTML = (109+39);
+  $('sBVie').innerHTML = ((39>=0)? '+' : '')+'39';
+  $('sForce').innerHTML = (31+-27);
+  $('sBForce').innerHTML = ((-27>=0)? '+' : '')+'-27';
+  $('sPrecis').innerHTML = (310+0);
+  $('sBPrecis').innerHTML = ((0>=0)? '+' : '')+'0';
+  $('sIntell').innerHTML = (90+22);
+  $('sBIntell').innerHTML = ((22>=0)? '+' : '')+'22';
+  $('sPG').innerHTML = (0+1);
+  $('sRangCible').addClassName(cotes[2]);
+  $('sBarbeCible').innerHTML = (6168/100).toLocaleString();
+  $('sBarbeChass').innerHTML = (5480/100).toLocaleString();
+}
+function tagChange() {
+  var typeTag = $F('f_typeTag');
+  var tagPerso = $F('f_tag').replace(/(<([^>]+)>)/ig, '');
+  var sTag = '';
+  switch (typeTag) {
+  case '1':
+    sTag = tagPerso+'<span style="color:'+couleurTagGuilde+'">'+tagGuilde+'</span>';
+    break;
+  case '2':
+    sTag = '<span style="color:'+couleurTagGuilde+'">'+tagGuilde+'</span>'+tagPerso;
+    break;
+  case '3':
+    sTag = tagPerso+'][<span style="color:'+couleurTagGuilde+'">'+tagGuilde+'</span>';
+    break;
+  case '4':
+    sTag = '<span style="color:'+couleurTagGuilde+'">'+tagGuilde+'</span>]['+tagPerso;
+    break;
+  default:
+    sTag = tagPerso;
+    break;
+  }
+  $('s_Tag').innerHTML = '['+sTag+']';
+}
+function train(c) {
+  if (ab==0) {
+    if (c==1) window.location.href="train.php?IDS="+IDS+"&t=PV&nb="+nbtrain;
+    if (c==2) window.location.href="train.php?IDS="+IDS+"&t=PF&nb="+nbtrain;
+    if (c==3) window.location.href="train.php?IDS="+IDS+"&t=PP&nb="+nbtrain;
+    if (c==4) window.location.href="train.php?IDS="+IDS+"&t=PI&nb="+nbtrain;
+    if (c==5) window.location.href="redemp.php?IDS="+IDS;
+    ab = 1;
+    return true;
+  } else return false;
+}
+function clef(action) {
+  $('action').setValue(action);
+  $('b_tag', 'b_nom', 'b_des', 'b_arme', 'b_img', 'b_img2', 'b_maj').invoke('hide');
+  switch(action) {
+  case 'img':
+    $('b_img', 'b_img2', 'b_maj').invoke('show');
+    break;
+  case 'des':
+    $('b_des', 'b_maj').invoke('show');
+    break;
+  case 'nom':
+    $('b_nom', 'b_maj').invoke('show');
+    break;
+  case 'tag':
+    $('b_tag', 'b_maj').invoke('show');
+    break;
+  case 'arme':
+    $('b_arme', 'b_maj').invoke('show');
+    break;
+  default :
+    break;
+  }
+}
+</script>
+
+<script type="text/javascript" language="JavaScript">
+ var classeinterface=1;
+</script>
+</head>
+<body onload="init()">
+<div class="erreur"></div>
+<table border="0">
+<tr>
+<td><div class="VNT news-titre"><table width="100%"><tr><td align="left"><img src="/images/avatar_guilde/fade976ec961a21e13af618e54476d1a5c285d7a.png"><div class="clef coul" onclick="clef('img')"></div></td><td align="center" class="news-titre"><b><span id="s_Tag">[Hosse<span style="color:#DA6400;">Gorgones</span>]</span><div class="clef coul" onclick="clef('tag')"></div> Palme<div class="clef coul" onclick="clef('nom')"></div></b></table></div>
+<div class="T news-text" align="center"><b><span id="sRang">Ami(e) des nains-béciles (des bêtes)</span>, Longueur de la barbe <span id="sBarbe"></span>cm</b></div>
+<div class="T news-text">Armé de ton(ta) Tuba [perso]<div class="clef coul" onclick="clef('arme')"></div></div>
+<div class="T news-text"><span id="sDescription"></span><div class="clef coul" onclick="clef('des')"></div></div>
+<div class="TTV news-text">
+<table class="bloc-perso">
+  <tr><td class="bloc_droit">Points de Vie</td><td align="left"><span id="sPV"></span>/<span id="sPVBase"></span> [109 <span id="sBVie"></span>]</td><td><div class="plus coul" onclick="train(1)"></div></td><td>(coût : 18 points d'XP)</td></tr>
+  <tr><td colspan="4">&nbsp;</td></tr>
+  <tr><td class="bloc_droit">Force</td><td align="left"><span id="sForce"></span> [31 <span id="sBForce"></span>]</td><td><div class="plus coul" onclick="train(2)"></div></td><td>(coût : 18 points d'XP)</td></tr>
+  <tr><td class="bloc_droit">Précision</td><td align="left"><span id="sPrecis"></span> [310 <span id="sBPrecis"></span>]</td><td><div class="plus coul" onclick="train(3)"></div></td><td>(coût : 18 points d'XP)</td></tr>
+  <tr><td class="bloc_droit">Intelligence</td><td align="left"><span id="sIntell"></span> [90 <span id="sBIntell"></span>]</td><td><div class="plus coul" onclick="train(4)"></div></td><td>(coût : 18 points d'XP)</td></tr>
+  <tr><td colspan="2">&nbsp;</td><td align="center">X</td><td><input type="texte" maxlength="2" style="width: 2em" value="1" onchange="Javascript:nbtrain=this.value;">entrainement(s)</td></tr>
+  <tr><td class="bloc_droit">Points d'Honneur</td><td align="left" colspan="3"><span id="sPG"></span> [0 +1]</td></tr>
+  <tr><td class="bloc_droit">Points de Côté</td><td align="left" colspan="3"><b>13</b></td></tr>
+  <tr><td class="bloc_droit">Points de Ridicule</td><td align="left" colspan="3"><b>1</b></td></tr>
+  <tr><td class="bloc_droit">Points de Honte</td><td align="left"><b>0</b></td>
+  <script language="Javascript" type="text/javascript">
+    document.writeln('<td'+((0>0)? '><div class="moins coul" onclick="train(5)"></div></td><td>(coût : 2 points d\'honneur)' : ' colspan="2">')+'</td>');
+  </script>
+  </tr>
+  <tr><td class="bloc_droit">Points d'XP</td><td align="left" colspan="3"><b>5</b></td></tr>
+  <tr><td colspan="4">&nbsp;</td></tr>
+  <tr><td class="bloc_droit">Nombre d'ennemis tués</td><td align="left" colspan="3"><b>16</b></td></tr>
+  <tr><td class="bloc_droit">Nombre de morts</td><td align="left" colspan="3"><b>2</b></td></tr>
+  <tr><td class="bloc_droit">Nombre de gifles données</td><td align="left" colspan="3"><b>186</b></td></tr>
+  <tr><td class="bloc_droit">Nombre de gifles reçues</td><td align="left" colspan="3"><b>0</b></td></tr>
+  <tr><td colspan="4">&nbsp;</td></tr>
+  <tr><td class="bloc_droit" valign="top">Votre cible</td><td align="left" class="cible" colspan="3">Nelson<br><span id="sRangCible">Cancre (nain-culte)</span><br>Longueur de la barbe&nbsp;:&nbsp;<span id="sBarbeCible"></span>cm</td></tr>
+  <tr><td class="bloc_droit">Nombre de chasseurs</td><td align="left" colspan="3"><b>2 (Longueur moyenne de la barbe&nbsp;:&nbsp;<span id="sBarbeChass"></span>cm)</b></td></tr>
+</table>
+</div></td>
+<td width="20">&nbsp;</td>
+<td>
+<form enctype="multipart/form-data" action="perso.php" method="post">
+<input type="hidden" name="MAX_FILE_SIZE" value="4096">
+<input type="hidden" name="action" id="action" value="">
+<input type="hidden" name="IDS" value="2a067e7f51edfef55755149fc952a435">
+<table class="text-normal" border="0">
+<tr id="b_tag"><td class="bloc_droit">Tag perso</td>
+<td><input type="text" name="tag" id="f_tag" value="Hosse" style="width: 10em" maxlength="10" onchange="tagChange()"></td>
+<td><select name="typeTag" id="f_typeTag" onchange="tagChange()">
+    <option value="1" selected="selected">[PersoGuilde]</option>
+    <option value="2" >[GuildePerso]</option>
+    <option value="3" >[Perso][Guilde]</option>
+    <option value="4" >[Guilde][Perso]</option>
+  </select></td>
+</tr>
+<tr id="b_nom">
+<td class="bloc_droit">Nom du nain</td>
+<td colspan="2"><input type="text" name="nvNain" size="40" maxlength="40" value="Palme"></td>
+</tr>
+<tr id="b_des">
+<td class="bloc_droit">Description</td>
+<td colspan="2"><input type="text" name="description" size="40" value="Quitte à taper un petit level, tapez Rêveur ! Gagnant de la palme d&#039;or du meilleur nom de nain."></td>
+</tr>
+<tr id="b_arme">
+<td class="bloc_droit">Arme perso</td>
+<td><input type="text" name="nomArme" size="40" maxlength="40" value="Tuba"></td>
+<td>(<i>ne pas mettre d'article</i>)</td>
+</tr>
+<tr id="b_img"><td class="bloc_droit">Image perso</td>
+<td><input type="file" name="userfile" style="width: 20em"></td>
+<td>(<i>ne pas mettre d'URL</i>)</td>
+</tr>
+<tr id="b_img2"><td></td>
+<td><input type="radio" name="typeAvatar" id="f_typeAvatar1" value="O" checked="checked" /><label for="f_typeAvatar1"><img src="/images/avatar_guilde/fade976ec961a21e13af618e54476d1a5c285d7a.png" alt="L'avatar de la guilde"></label></td>
+<td><input type="radio" name="typeAvatar" id="f_typeAvatar2" value="N"  /><label for="f_typeAvatar2"><img src="/images/avatar/choix/Wallace.gif" alt="L'avatar perso"></label></td>
+</tr>
+<tr id="b_maj">
+<td colspan="3"><input type="submit" value="Mettre à jour mes options"></td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+<script language="Javascript" type="text/javascript">
+
+
+</script>
+</body>
+</html>
+
