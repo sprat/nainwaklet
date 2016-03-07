@@ -2,13 +2,13 @@ var test = require('tape-catch'),
     path = require('path'),
     fs = require('fs'),
     helpers = require('../helpers'),
-    detect = require('../../lib/pages/detect'),
-    detectHTML = fs.readFileSync(path.join(__dirname, '..', 'fixtures', 'detect.html'), 'utf8'),
-    doc = helpers.parseHTMLDocument(detectHTML);
+    page = require('../../lib/pages/detect'),
+    html = fs.readFileSync(path.join(__dirname, '..', 'fixtures', 'detect.html'), 'utf8'),
+    doc = helpers.parseHTMLDocument(html);
 
 
 test('detect: localisation', function (assert) {
-    var info = detect.analyze(doc);
+    var info = page.analyze(doc);
 
     assert.deepEqual(info.position, [13, 5], 'Position');
     assert.strictEqual(info.monde, 'Monde des sadiques', 'Monde');
@@ -17,7 +17,7 @@ test('detect: localisation', function (assert) {
 });
 
 test('detect: nains', function (assert) {
-    var info = detect.analyze(doc),
+    var info = page.analyze(doc),
         nains = info.nains;
 
     assert.strictEqual(nains.length, 3, 'Nombre de nains');
@@ -73,7 +73,7 @@ test('detect: nains', function (assert) {
 });
 
 test('detect: objets', function (assert) {
-    var info = detect.analyze(doc),
+    var info = page.analyze(doc),
         objets = info.objets;
 
     assert.strictEqual(objets.length, 3, "Nombre d'objets");
