@@ -15,7 +15,7 @@ test('perso.analyze', function (assert) {
     Ami(e) des nains-béciles (des bêtes), Longueur de la barbe 68,06cm
     Armé de ton(ta) Tuba [perso]
     Quitte à taper un petit level, tapez Rêveur ! Gagnant de la palme d'or du meilleur nom de nain.
-    Points de Vie   148/148 [109 +39]
+    Points de Vie   138/148 [109 +39]
     Force   4 [31 -27]
     Précision   310 [310 +0]
     Intelligence    112 [90 +22]
@@ -36,13 +36,17 @@ test('perso.analyze', function (assert) {
 
     assert.deepEqual(info, {
         barbe: 68.06,
-        vie: 148,
+        vie: 138,
+        vieTotal: 148,
         vieBase: 109,
         vieBonus: 39,
+        force: 4,
         forceBase: 31,
         forceBonus: -27,
+        precision: 310,
         precisionBase: 310,
         precisionBonus: 0,
+        intelligence: 112,
         intelligenceBase: 90,
         intelligenceBonus: 22
     });
