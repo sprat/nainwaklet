@@ -7,7 +7,7 @@ var test = require('tape-catch'),
     doc = helpers.parseHTMLDocument(html);
 
 
-test('perso', function (assert) {
+test('perso.analyze', function (assert) {
     var info = page.analyze(doc);
 
     /*

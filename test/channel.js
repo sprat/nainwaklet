@@ -3,7 +3,7 @@ var test = require('tape-catch'),
     log = require('../lib/log');
 
 
-test('channel: connect, disconnect and events', function (assert) {
+test('channel', function (assert) {
     var channel = Channel('#test-channel'),
         topic = 'chat',
         dataToSend = {

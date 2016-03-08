@@ -7,7 +7,7 @@ var test = require('tape-catch'),
     doc = helpers.parseHTMLDocument(html);
 
 
-test('detect: localisation', function (assert) {
+test('detect.analyze: localisation', function (assert) {
     var info = page.analyze(doc);
 
     assert.deepEqual(info.position, [13, 5], 'Position');
@@ -16,7 +16,7 @@ test('detect: localisation', function (assert) {
     assert.end();
 });
 
-test('detect: nains', function (assert) {
+test('detect.analyze: nains', function (assert) {
     var info = page.analyze(doc),
         nains = info.nains;
 
@@ -72,7 +72,7 @@ test('detect: nains', function (assert) {
     assert.end();
 });
 
-test('detect: objets', function (assert) {
+test('detect.analyze: objets', function (assert) {
     var info = page.analyze(doc),
         objets = info.objets;
 
