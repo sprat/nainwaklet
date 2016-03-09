@@ -35,6 +35,7 @@ test('perso.analyze', function (assert) {
     */
 
     assert.deepEqual(info, {
+        rang: 'Ami(e) des nains-béciles (des bêtes)',
         barbe: 68.06,
         vie: 138,
         vieTotal: 148,
