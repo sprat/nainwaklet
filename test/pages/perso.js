@@ -48,7 +48,10 @@ test('perso.analyze', function (assert) {
         precisionBonus: 0,
         intelligence: 112,
         intelligenceBase: 90,
-        intelligenceBonus: 22
+        intelligenceBonus: 22,
+        honneur: 1,
+        honneurBase: 0,
+        honneurBonus: 1
     });
     assert.end();
 });
