@@ -37,6 +37,7 @@ test('perso.analyze', function (assert) {
     assert.deepEqual(info, {
         rang: 'Ami(e) des nains-béciles (des bêtes)',
         barbe: 68.06,
+        description: "Quitte à taper un petit level, tapez Rêveur ! Gagnant de la palme d'or du meilleur nom de nain.",
         vie: 138,
         vieTotal: 148,
         vieBase: 109,
