@@ -38,6 +38,12 @@ test('perso.analyze', function (assert) {
         rang: 'Ami(e) des nains-béciles (des bêtes)',
         barbe: 68.06,
         description: "Quitte à taper un petit level, tapez Rêveur ! Gagnant de la palme d'or du meilleur nom de nain.",
+        tag: {
+            guilde: 'Gorgones',
+            couleur: '#da6400',
+            perso: 'Hosse',
+            format: 1
+        },
         vie: 138,
         vieTotal: 148,
         vieBase: 109,
