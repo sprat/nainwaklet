@@ -31,10 +31,10 @@ test('perso.analyze', function (assert) {
     Votre cible Nelson
     Cancre (nain-culte)
     Longueur de la barbe : 61,68cm
-    Nombre de chasseurs 3 (Longueur moyenne de la barbe : 55cm)
+    Nombre de chasseurs 2 (Longueur moyenne de la barbe : 54,80cm)
     */
 
-    // TODO: point de cote, de ridicule, de honte, d'XP, tués, morts, gifles, cible (nom, cote, point de cote, barbe), chasseurs (nombre, barbe)
+    // TODO: cible (nom, cote, point de cote, barbe), chasseurs (nombre, barbe)
     assert.deepEqual(info, {
         nom: 'Palme',
         image: '/images/avatar_guilde/fade976ec961a21e13af618e54476d1a5c285d7a.png',
@@ -66,7 +66,15 @@ test('perso.analyze', function (assert) {
         intelligenceBonus: 22,
         honneur: 1,
         honneurBase: 0,
-        honneurBonus: 1
+        honneurBonus: 1,
+        cote: 13,
+        ridicule: 1,
+        honte: 0,
+        xp: 5,
+        tues: 16,
+        morts: 2,
+        giflesDonnees: 186,
+        giflesRecues: 0
     });
     assert.end();
 });
