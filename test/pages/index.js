@@ -15,13 +15,10 @@ test('pages.byName', function (assert) {
 });
 
 test('pages.byUrl', function (assert) {
-    var detectPage = pages.byUrl('http://www.nainwak.com/jeu/detect.php');
+    var detectPage = pages.byUrl('/jeu/detect.php');
     assert.strictEqual(detectPage, pages.byName('detect'), 'Detect page');
 
-    var evenPage = pages.byUrl('http://www.nainwak.com/jeu/even.php?duree=240&typeALL');
-    assert.strictEqual(evenPage, pages.byName('even'), 'Event page with query string');
-
-    var invalidPage = pages.byUrl('http://www.nainwak.com/jeu/invalid.php');
+    var invalidPage = pages.byUrl('/jeu/invalid.php');
     assert.strictEqual(invalidPage, undefined, 'Invalid page');
 
     assert.end();
