@@ -39,8 +39,10 @@ test('perso.analyze', function (assert) {
         barbe: 68.06,
         description: "Quitte à taper un petit level, tapez Rêveur ! Gagnant de la palme d'or du meilleur nom de nain.",
         tag: {
-            guilde: 'Gorgones',
-            couleur: '#da6400',
+            guilde: {
+                nom: 'Gorgones',
+                couleur: '#DA6400'
+            },
             perso: 'Hosse',
             type: 1
         },

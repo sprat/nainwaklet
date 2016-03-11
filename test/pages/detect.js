@@ -37,7 +37,8 @@ test('detect.analyze: nains', function (assert) {
                 nom: '#!',
                 couleur: '#91005D'
             },
-            perso: 'Gnouille'
+            perso: 'Gnouille',
+            type: 3
         }
     }, 'Nain 1');
 
