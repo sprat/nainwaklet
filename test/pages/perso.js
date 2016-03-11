@@ -80,6 +80,10 @@ test('perso.analyze', function (assert) {
             classe: 'sadique',
             rang: 'Cancre (nain-culte)',
             barbe: 61.68
+        },
+        chasseurs: {
+            nombre: 2,
+            barbe: 54.80
         }
     });
     assert.end();
