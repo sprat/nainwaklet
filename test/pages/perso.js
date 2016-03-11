@@ -42,7 +42,7 @@ test('perso.analyze', function (assert) {
             guilde: 'Gorgones',
             couleur: '#da6400',
             perso: 'Hosse',
-            format: 1
+            type: 1
         },
         vie: 138,
         vieTotal: 148,
