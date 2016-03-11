@@ -2,7 +2,8 @@ var test = require('tape-catch'),
     path = require('path'),
     fs = require('fs'),
     helpers = require('../helpers'),
-    page = require('../../lib/pages/detect'),
+    pages = require('../../lib/pages'),
+    page = pages.byName('detect'),
     html = fs.readFileSync(path.join(__dirname, '..', 'fixtures', 'detect.html'), 'utf8'),
     doc = helpers.parseHTMLDocument(html);
 
