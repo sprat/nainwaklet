@@ -29,7 +29,7 @@ test('detect.analyze: nains', function (assert) {
         image: '/images/avatar_guilde/41ddb8ad2c2be408e27352accf1cc0b6559466bb.png',
         description: "\"Le PheniX est un oiseau qui symbolise l'immortalité et la résurrection.\" A quoi bon me tuer ?!?",
         position: [13, 5],
-        cote: 'sadique',
+        classe: 'sadique',
         rang: 'Diablotin(e)',
         barbe: 137.99,
         tag: {
@@ -49,7 +49,7 @@ test('detect.analyze: nains', function (assert) {
         image: '/images/avatar/perso/dab064da974199a53f0e22527f901d523e8869b3.png',
         description: 'Description',
         position: [14, 5],
-        cote: 'sadique',
+        classe: 'sadique',
         rang: 'Cancre (nain-culte)',
         barbe: 103.14,
         tag: {
@@ -64,7 +64,7 @@ test('detect.analyze: nains', function (assert) {
         image: '/images/avatar/choix/TOsmuf4.gif',
         description: 'Bimme65',
         position: [13, 6],
-        cote: 'rampant',
+        classe: 'rampant',
         rang: 'Rampant Nain-déci',
         barbe: 0,
         tag: {}

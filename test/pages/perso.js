@@ -39,7 +39,7 @@ test('perso.analyze', function (assert) {
         nom: 'Palme',
         image: '/images/avatar_guilde/fade976ec961a21e13af618e54476d1a5c285d7a.png',
         rang: 'Ami(e) des nains-béciles (des bêtes)',
-        cote: 'brave',
+        classe: 'brave',
         barbe: 68.06,
         description: "Quitte à taper un petit level, tapez Rêveur ! Gagnant de la palme d'or du meilleur nom de nain.",
         arme: 'Tuba',
