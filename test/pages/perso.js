@@ -75,6 +75,14 @@ test('perso.analyze', function (assert) {
         morts: 2,
         giflesDonnees: 186,
         giflesRecues: 0
+        /*
+        cible: {
+            nom: 'Nelson',
+            classe: 'sadique',
+            rang: 'Cancre (nain-culte)',
+            barbe: 61.68
+        }
+        */
     });
     assert.end();
 });
