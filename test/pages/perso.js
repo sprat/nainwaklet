@@ -34,9 +34,10 @@ test('perso.analyze', function (assert) {
     Nombre de chasseurs 3 (Longueur moyenne de la barbe : 55cm)
     */
 
-    // TODO: image, point de cote, de ridicule, de honte, d'XP, tués, morts, gifles, cible (nom, cote, point de cote, barbe), chasseurs (nombre, barbe)
+    // TODO: point de cote, de ridicule, de honte, d'XP, tués, morts, gifles, cible (nom, cote, point de cote, barbe), chasseurs (nombre, barbe)
     assert.deepEqual(info, {
         nom: 'Palme',
+        image: '/images/avatar_guilde/fade976ec961a21e13af618e54476d1a5c285d7a.png',
         rang: 'Ami(e) des nains-béciles (des bêtes)',
         cote: 'brave',
         barbe: 68.06,
