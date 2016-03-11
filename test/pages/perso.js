@@ -10,31 +10,6 @@ var test = require('tape-catch'),
 test('perso.analyze', function (assert) {
     var info = page.analyze(doc);
 
-    /*
-    [HosseGorgones] Palme
-    Ami(e) des nains-béciles (des bêtes), Longueur de la barbe 68,06cm
-    Armé de ton(ta) Tuba [perso]
-    Quitte à taper un petit level, tapez Rêveur ! Gagnant de la palme d'or du meilleur nom de nain.
-    Points de Vie   138/148 [109 +39]
-    Force   4 [31 -27]
-    Précision   310 [310 +0]
-    Intelligence    112 [90 +22]
-    Points d'Honneur    1 [0 +1]
-    Points de Côté  13
-    Points de Ridicule  1
-    Points de Honte 0
-    Points d'XP 5
-    Nombre d'ennemis tués   16
-    Nombre de morts 2
-    Nombre de gifles données    186
-    Nombre de gifles reçues 0
-    Votre cible Nelson
-    Cancre (nain-culte)
-    Longueur de la barbe : 61,68cm
-    Nombre de chasseurs 2 (Longueur moyenne de la barbe : 54,80cm)
-    */
-
-    // TODO: cible (nom, cote, point de cote, barbe), chasseurs (nombre, barbe)
     assert.deepEqual(info, {
         nom: 'Palme',
         image: '/images/avatar_guilde/fade976ec961a21e13af618e54476d1a5c285d7a.png',
@@ -86,5 +61,6 @@ test('perso.analyze', function (assert) {
             barbe: 54.80
         }
     });
+
     assert.end();
 });
