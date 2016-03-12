@@ -7,7 +7,6 @@ var test = require('tape-catch'),
     html = fs.readFileSync(path.join(__dirname, '..', 'fixtures', 'invent.html'), 'utf8'),
     doc = helpers.parseHTMLDocument(html);
 
-
 test('invent.analyze: objets', function (assert) {
     var info = page.analyze(doc);
 
@@ -129,6 +128,21 @@ test('invent.analyze: objets', function (assert) {
         collant: false,
         reparable: false,
         poussiere: 951613
+    });
+
+    assert.end();
+});
+
+test('invent.analyze: pager', function (assert) {
+    var info = page.analyze(doc);
+
+    assert.deepEqual(info.pager, {
+        PA: 2,
+        vie: 149,
+        vieTotal: 159,
+        position: [14, 7],
+        messagesNonLus: 0,
+        evenementsNonLus: false
     });
 
     assert.end();
