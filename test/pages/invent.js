@@ -142,7 +142,8 @@ test('invent.analyze: pager', function (assert) {
         vieTotal: 159,
         position: [14, 7],
         messagesNonLus: 0,
-        evenementsNonLus: false
+        evenementsNonLus: false,
+        chatNonLu: false
     });
 
     assert.end();
