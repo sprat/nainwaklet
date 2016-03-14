@@ -112,3 +112,11 @@ test('detect.analyze: objets', function (assert) {
 
     assert.end();
 });
+
+test('detect.analyze: pager', function (assert) {
+    var info = page.analyze(doc);
+
+    assert.notStrictEqual(info.pager, undefined);
+
+    assert.end();
+});
