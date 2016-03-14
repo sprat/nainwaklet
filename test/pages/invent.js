@@ -136,14 +136,14 @@ test('invent.analyze: objets', function (assert) {
 test('invent.analyze: pager', function (assert) {
     var info = page.analyze(doc);
 
+    // miseajourpager('2', '149', '159', 'evenpagerlu', '?', 'chatpagerlu', '0', '14', '7', '305033d8ab52e3547c32fe17046b09d7', 'NainXpress');
     assert.deepEqual(info.pager, {
         PA: 2,
         vie: 149,
         vieTotal: 159,
         position: [14, 7],
         messagesNonLus: 0,
-        evenementsNonLus: false,
-        chatNonLu: false
+        nainxpressNonLu: false
     });
 
     assert.end();

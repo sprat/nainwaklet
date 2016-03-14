@@ -47,14 +47,14 @@ test('even.analyze: evenements', function (assert) {
 test('even.analyze: pager', function (assert) {
     var info = page.analyze(doc, timestamp);
 
+    // miseajourpager('17', '159', '159', 'evenpagerlu', '?', 'chatpagernonlu', '2', '14', '7', 'e48d22f62e941a14eb927c8f9d36c6b2', '<b>NainXpress</b>');
     assert.deepEqual(info.pager, {
         PA: 17,
         vie: 159,
         vieTotal: 159,
         position: [14, 7],
-        messagesNonLus: 0,
-        evenementsNonLus: false,
-        chatNonLu: false
+        messagesNonLus: 2,
+        nainxpressNonLu: true
     });
 
     assert.end();
