@@ -23,7 +23,7 @@ test('detect.analyze: nains', function (assert) {
 
     assert.strictEqual(nains.length, 3, 'Nombre de nains');
 
-    // ["33966", "avatar_guilde/41ddb8ad2c2be408e27352accf1cc0b6559466bb.png", "Le PheniX", '[Gnouille] [<span style="color:#91005D;">#!</span>]', "13799", "2", "Diablotin(e)", "0", "13", "5", "&quot;Le PheniX est un oiseau qui symbolise l&#039;immortalité et la résurrection.&quot; A quoi bon me tuer ?!?", "o", "", "0"];
+    // ["33966", "avatar_guilde/41ddb8ad2c2be408e27352accf1cc0b6559466bb.png", "Le PheniX", '[Gnouille] [<span style="color:#91005D;">#!</span>]', "13799", "2", "Diablotin(e)", "0", "13", "5", "&quot;Le PheniX est un oiseau qui symbolise l&#039;immortalité et la résurrection.&quot; A quoi bon me tuer ?!?", "o", "o", "0"];
     assert.deepEqual(nains[0], {
         id: 33966,
         nom: 'Le PheniX',
@@ -40,10 +40,13 @@ test('detect.analyze: nains', function (assert) {
             },
             perso: 'Gnouille',
             type: 3
-        }
+        },
+        attaquable: true,
+        autreAction: 'gifler',
+        estCible: false
     }, 'Nain 1');
 
-    // ["33924", "avatar/perso/dab064da974199a53f0e22527f901d523e8869b3.png", "Nainkomp'", '[Perso]', "10314", "2", "Cancre (nain-culte)", "1", "14", "5", "Description", "o", "", "0"];
+    // ["33924", "avatar/perso/dab064da974199a53f0e22527f901d523e8869b3.png", "Nainkomp'", '[Perso]', "10314", "2", "Cancre (nain-culte)", "1", "14", "5", "Description", "o", "", "1"];
     assert.deepEqual(nains[1], {
         id: 33924,
         nom: "Nainkomp'",
@@ -55,7 +58,10 @@ test('detect.analyze: nains', function (assert) {
         barbe: 103.14,
         tag: {
             perso: 'Perso'
-        }
+        },
+        attaquable: true,
+        autreAction: undefined,
+        estCible: true
     }, 'Nain 2');
 
     // ["71985", "avatar/choix/TOsmuf4.gif", "Bimme65", '', "0", "3", "Rampant Nain-déci", "2", "13", "6", "Bimme65", "", "", "0"];
@@ -68,7 +74,10 @@ test('detect.analyze: nains', function (assert) {
         classe: 'rampant',
         rang: 'Rampant Nain-déci',
         barbe: 0,
-        tag: {}
+        tag: {},
+        attaquable: false,
+        autreAction: undefined,
+        estCible: false
     }, 'Nain 3');
 
     assert.end();
