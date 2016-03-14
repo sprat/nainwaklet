@@ -1,31 +1,36 @@
 body {
-    font-family: Verdana, Arial;
-    font-size: 13px;
+    font-family: 'Lato', sans-serif;
+    /*font-family: Verdana, Arial;*/
+    font-size: 16px;
+    line-height: 1.4em;
     padding: 0 20px;
     margin: 0;
 }
 
 h2 {
-    margin-top: 2em;
+    margin: 2em 0 1em;
 }
 
-section {
-    float: left;
+p {
+    margin: 1em 0;
 }
 
-aside {
-    width: 232px;
-    float: right;
-    margin: 0 0 20px 20px;
+ol, ul {
+    margin: -1em 0 1em;
+}
+
+ol {
+    list-style: decimal outside;
+    padding-left: 1.2em;
 }
 
 a {
     color: #666;
-    text-decoration: none;
+    text-decoration: underline;
 }
 
 a:hover {
-    text-decoration: underline;
+    color: #33C;
 }
 
 .logo {
@@ -33,6 +38,10 @@ a:hover {
     vertical-align: bottom;
 }
 
+.buttons {
+    margin-top: 2em;
+}
+
 a.nanylet {
-    margin: 5px;
+    margin-right: 5px;
 }

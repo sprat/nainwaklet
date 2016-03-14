@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>Nany</title>
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
     <link rel="stylesheet" href="dist/nany.min.css">
     <link rel="stylesheet" href="css/index.css">
 </head>
@@ -11,38 +12,28 @@
     <h1><img class="logo" src="images/favicon.png" alt="logo"> Nany</h1>
 
     <section role="main">
-        <p>Le nany fonctionne de la manière suivante :</p>
+        <p>Le <a href="https://github.com/sprat/nany">Nany</a> est un outil de
+        guilde qui se greffe directement dans le jeu Nainwak à la place de
+        la publicité.</p>
+
+        <p>Pour utiliser le Nany :</p>
         <ol>
-            <li>Glissez l'un des boutons ci-dessous dans vos marques-pages Internet</li>
-            <li>Lorsque vous êtes connecté sur <a href="http://www.nainwak.com/">Nainwak</a>
-              dans la partie jeu, cliquez sur le bouton !</li>
+            <li>Glissez l'un des boutons ci-dessous dans vos marques-pages
+            Internet (uniquement la première fois)</li>
+            <li>Connectez-vous sur <a href="http://www.nainwak.com/">Nainwak</a>
+            puis cliquez sur « Jouer ! »</li>
+            <li>Cliquez sur le bouton du Nany !</li>
         </ol>
 
         <!-- Branding: ɴᴀɴʏ or [ɴ] -->
-        <p>
+        <p class="buttons">
             <a class="nanylet" data-channel="Gorgones" data-ring-update-url="http://gorgones.nainwak.free.fr/idee.php" href="#" title="[ɴ] Gorgones">[ɴ] Gorgones</a>
             <a class="nanylet" data-channel="Gorgones" data-ring-update-url="http://dordogne.nainwak.free.fr/idee.php" href="#" title="[ɴ] Gorgones (dordogne)">[ɴ] Gorgones (dordogne)</a>
             <a class="nanylet" data-channel="Gorgones" data-ring-update-url="http://httpbin.org/post" href="#" title="[ɴ] Gorgones (httpbin)">[ɴ] Gorgones (httpbin)</a>
         </p>
-
-        <h2>Développement</h2>
-        <ul>
-            <li>Github: <a href="https://github.com/sprat/nany">nany</a></li>
-            <li>Lancer les <a href="tests.html">tests</a></li>
-        </ul>
     </section>
 
-    <aside>
-        Chargement du Nany...
-    </aside>
-
     <script src="dist/nany.min.js"></script>
-    <script type="text/javascript">
-        nany.initializeNanylets();
-        nany.Application({
-            channel: 'Gorgones',
-            container: 'aside'
-        });
-    </script>
+    <script type="text/javascript">nany.initializeNanylets();</script>
 </body>
 </html>
