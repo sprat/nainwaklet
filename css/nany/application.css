@@ -1,6 +1,6 @@
 /* Nany Application CSS */
 .nany {
-    font-size: 8.0pt;
+    font-size: 8pt;
     font-family: Verdana, Arial;
     text-align: left;
     box-sizing: border-box;
@@ -30,4 +30,51 @@
 .nany input,
 .nany button {
     width: 100%;
+}
+
+.nany button::-moz-focus-inner,
+.nany input::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+}
+
+.nany-info {
+    position: relative;
+    display: inline-block;
+    margin-left: 10px;
+    font-weight: normal;
+}
+
+.nany-info-trigger {
+    color: #FFF;
+    background: #333;
+    padding: 2px 5px;
+    border: 1px solid #222;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.nany-info-content {
+    display: none;
+    position: absolute;
+    z-index: 1;
+    top: 100%;
+    left: 0;
+    padding: 10px;
+    border: 1px solid #666;
+    -moz-box-shadow: 2px 2px 5px 0px #333;
+    -webkit-box-shadow: 2px 2px 5px 0px #333;
+    -o-box-shadow: 2px 2px 5px 0px #333;
+    box-shadow: 2px 2px 5px 0px #333;
+    background: #EEE;
+    color: #000;
+    white-space: nowrap;
+}
+
+.nany-info:hover .nany-info-content,
+.nany-info-trigger:focus + .nany-info-content {
+    display: inherit;
 }
