@@ -3,7 +3,7 @@ var test = require('tape-catch'),
     fs = require('fs'),
     helpers = require('../helpers'),
     pages = require('../../lib/pages'),
-    page = pages.byName('invent'),
+    page = pages.byType('invent'),
     html = fs.readFileSync(path.join(__dirname, '..', 'fixtures', 'invent.html'), 'utf8'),
     doc = helpers.parseHTMLDocument(html);
 
