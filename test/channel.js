@@ -10,7 +10,7 @@ test('channel', function (assert) {
             message: 'Hello world!'
         };
 
-    assert.plan(8);
+    assert.plan(10);
 
     // subscribe to the "connecting" event
     channel.on('connecting', function (chan) {
@@ -42,8 +42,17 @@ test('channel', function (assert) {
     });
 
     // subscribe to the topic
+    channel.on('message:chat', function (data, chan) {
+        log('4. Message received on topic');
+
+        // check event data
+        assert.deepEqual(data, dataToSend, 'Data in message event');
+        assert.strictEqual(chan, channel, 'Channel in message event');
+    });
+
+    // subscribe to all messages
     channel.on('message', function (topic, data, chan) {
-        log('4. Message received');
+        log('5. Message received');
 
         // check event data
         assert.strictEqual(topic, 'chat', 'Topic in message event');
@@ -56,7 +65,7 @@ test('channel', function (assert) {
 
     // subscribe to the "disconnected" event
     channel.on('disconnected', function (chan) {
-        log('5. Disconnected');
+        log('6. Disconnected');
 
         // check event data
         assert.strictEqual(chan, channel, 'Channel in disconnected event');
