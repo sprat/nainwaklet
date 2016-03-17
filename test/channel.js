@@ -17,7 +17,7 @@ test('channel', function (assert) {
         log('1. Connecting');
 
         // check event data
-        assert.equal(chan, channel, 'Channel in connecting event');
+        assert.strictEqual(chan, channel, 'Channel in connecting event');
     });
 
     // subscribe to the "connected" event
@@ -25,7 +25,7 @@ test('channel', function (assert) {
         log('2. Connected');
 
         // check event data
-        assert.equal(chan, channel, 'Channel in connected event');
+        assert.strictEqual(chan, channel, 'Channel in connected event');
 
         // publish to a topic
         channel.publish(topic, dataToSend);
@@ -36,18 +36,19 @@ test('channel', function (assert) {
         log('3. Message published');
 
         // check event data
-        assert.equal(topic, 'chat', 'Topic in published event');
+        assert.strictEqual(topic, 'chat', 'Topic in published event');
         assert.deepEqual(data, dataToSend, 'Data in published event');
-        assert.equal(chan, channel, 'Channel in published event');
+        assert.strictEqual(chan, channel, 'Channel in published event');
     });
 
     // subscribe to the topic
-    channel.on(topic, function (data, chan) {
+    channel.on('message', function (topic, data, chan) {
         log('4. Message received');
 
         // check event data
-        assert.deepEqual(data, dataToSend, 'Data in topic event');
-        assert.equal(chan, channel, 'Channel in topic event');
+        assert.strictEqual(topic, 'chat', 'Topic in message event');
+        assert.deepEqual(data, dataToSend, 'Data in message event');
+        assert.strictEqual(chan, channel, 'Channel in message event');
 
         // disconnect
         channel.disconnect();
@@ -58,7 +59,7 @@ test('channel', function (assert) {
         log('5. Disconnected');
 
         // check event data
-        assert.equal(chan, channel, 'Channel in disconnected event');
+        assert.strictEqual(chan, channel, 'Channel in disconnected event');
     });
 
     channel.connect();
