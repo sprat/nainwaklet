@@ -12,6 +12,10 @@
   box-sizing: inherit;
 }
 
+.nany ul {
+    list-style: disc inside;
+}
+
 .nany a {
     color: #BB6600;
     text-decoration: none;
