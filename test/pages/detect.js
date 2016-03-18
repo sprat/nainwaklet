@@ -11,15 +11,15 @@ var test = require('tape-catch'),
 test('detect.analyze: localisation', function (assert) {
     var info = page.analyze(doc);
 
-    assert.deepEqual(info.position, [13, 5], 'Position');
-    assert.strictEqual(info.monde, 'Monde des sadiques', 'Monde');
+    assert.deepEqual(info.detection.position, [13, 5], 'Position');
+    assert.strictEqual(info.detection.monde, 'Monde des sadiques', 'Monde');
 
     assert.end();
 });
 
 test('detect.analyze: nains', function (assert) {
     var info = page.analyze(doc),
-        nains = info.nains;
+        nains = info.detection.nains;
 
     assert.strictEqual(nains.length, 3, 'Nombre de nains');
 
@@ -85,7 +85,7 @@ test('detect.analyze: nains', function (assert) {
 
 test('detect.analyze: objets', function (assert) {
     var info = page.analyze(doc),
-        objets = info.objets;
+        objets = info.detection.objets;
 
     assert.strictEqual(objets.length, 3, "Nombre d'objets");
 

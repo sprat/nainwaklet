@@ -10,7 +10,7 @@ var test = require('tape-catch'),
 test('invent.analyze: objets', function (assert) {
     var info = page.analyze(doc);
 
-    assert.deepEqual(info.objets[0], {
+    assert.deepEqual(info.inventaire[0], {
         id: 25186146,
         nom: 'Arquebuse naine',
         image: '/images/objets/arquebuse.gif',
@@ -34,7 +34,7 @@ test('invent.analyze: objets', function (assert) {
         poussiere: 2412535
     });
 
-    assert.deepEqual(info.objets[8], {
+    assert.deepEqual(info.inventaire[8], {
         id: 25183959,
         nom: 'Visée à poisson',
         image: '/images/objets/faux_thon.gif',
@@ -58,7 +58,7 @@ test('invent.analyze: objets', function (assert) {
         poussiere: 2229326
     });
 
-    assert.deepEqual(info.objets[10], {
+    assert.deepEqual(info.inventaire[10], {
         id: 25183960,
         nom: 'Pigeon voyageur',
         image: '/images/objets/pigeon.gif',
@@ -82,7 +82,7 @@ test('invent.analyze: objets', function (assert) {
         poussiere: 2229334
     });
 
-    assert.deepEqual(info.objets[18], {
+    assert.deepEqual(info.inventaire[18], {
         id: 25134600,
         nom: 'Fée Cabossée',
         image: '/images/objets/fee.png',
@@ -106,7 +106,7 @@ test('invent.analyze: objets', function (assert) {
         poussiere: -1
     });
 
-    assert.deepEqual(info.objets[19], {
+    assert.deepEqual(info.inventaire[19], {
         id: 25159237,
         nom: "Kine d'Heure",
         image: '/images/objets/kinder.gif',

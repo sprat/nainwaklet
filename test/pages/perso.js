@@ -9,9 +9,10 @@ var test = require('tape-catch'),
 
 
 test('perso.analyze', function (assert) {
-    var info = page.analyze(doc);
+    var info = page.analyze(doc),
+        perso = info.perso;
 
-    assert.deepEqual(info, {
+    assert.deepEqual(perso, {
         nom: 'Palme',
         image: '/images/avatar_guilde/fade976ec961a21e13af618e54476d1a5c285d7a.png',
         rang: 'Ami(e) des nains-béciles (des bêtes)',
