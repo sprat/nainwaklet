@@ -13,6 +13,7 @@
 }
 
 .nany ul {
+    padding: 0;
     list-style: disc inside;
 }
 
@@ -23,12 +24,6 @@
 
 .nany a:hover {
     text-decoration: underline;
-}
-
-.nany .title {
-    font-size: 1.25em;
-    font-weight: bold;
-    color: #FFF;
 }
 
 .nany input,
@@ -42,43 +37,73 @@
     border: 0;
 }
 
-.nany-info {
+.nany .title {
+    font-size: 1.25em;
+    font-weight: bold;
+}
+
+.nany.dashboard .title {
+    color: #FFF;
+ }
+
+.nany.popin {
     position: relative;
     display: inline-block;
     margin-left: 10px;
     font-weight: normal;
 }
 
-.nany-info-trigger {
+.nany.popin .popin-button {
     color: #FFF;
     background: #333;
     padding: 2px 5px;
     border: 1px solid #222;
+    font-weight: bold;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.nany.popin:hover .popin-button,
+.nany.popin .popin-button:focus {
+    background: #606;
+    outline: 0;
+}
+
+.nany.popin .popin-button,
+.nany.popin .popin-box {
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
-    font-weight: bold;
-    line-height: 1;
 }
 
-.nany-info-content {
+.nany.popin .popin-box {
     display: none;
     position: absolute;
     z-index: 1;
-    top: 100%;
-    left: 0;
+    top: calc(100% + 10px);
+    left: -15px;
     padding: 10px;
-    border: 1px solid #666;
+    background: #333;
+    color: #FFF;
     -moz-box-shadow: 2px 2px 5px 0px #333;
     -webkit-box-shadow: 2px 2px 5px 0px #333;
     -o-box-shadow: 2px 2px 5px 0px #333;
     box-shadow: 2px 2px 5px 0px #333;
-    background: #EEE;
-    color: #000;
     white-space: nowrap;
 }
 
-.nany-info:hover .nany-info-content,
-.nany-info-trigger:focus + .nany-info-content {
+.nany.popin .popin-box:before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 15px;
+    width: 0;
+    border: 10px solid transparent;
+    border-top: 0;
+    border-bottom-color: #333;
+}
+
+.nany.popin:hover .popin-box,
+.nany.popin .popin-button:focus + .popin-box {
     display: inherit;
 }
