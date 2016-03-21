@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="/css/main.css" type="text/css">
+<link rel="stylesheet" href="/css/cadre6.css" type="text/css">
+<!--[if IE]>
+<link rel="stylesheet" href="/css/ie.css" type="text/css" />
+<![endif]-->
+<script language="Javascript" src="/js/base.js" type=
+"text/javascript">
+</script>
+<script language="Javascript" type="text/javascript">
+var ab=0;
+function gifler(id) {
+  if (ab==0) {
+    window.location.href="gifler.php?IDS=ffe4b3cbb54fbb388beba96acde1fb7c&id="+id;
+    ab=1;
+    return true;
+  } else {
+    return false;
+  }
+}
+function choisir(ar) {
+  if (ab==0) {
+    document.attaque.idinv.value=ar;
+    document.attaque.submit();
+    ab=1;
+    return true;
+  } else return false;
+}
+function gavat(id, photo, nom, tag, barbe, classe, cote, distance, x, y, description, gifler, estCible) {
+  var gifl=(gifler=='a')? '| <a href="JavaScript:gifler('+id+');">Accrocher un poisson !</a>' : (gifler=='c')? '| <a href="offrir.php?IDS=ffe4b3cbb54fbb388beba96acde1fb7c&id='+id+'">Offrir un cadeau !<\/a>' : (gifler=='o')? '| <a href="JavaScript:gifler('+id+');">Gifler !<\/a>' : '';
+  if (tag!='') tag=tag+' ';
+  switch(classe) {
+    case 0 : cote="<font class=\"naindeci\">"+cote+"<\/font>"; break;
+    case 1 : cote="<font class=\"gentil\">"+cote+"<\/font>"; break;
+    case 2 : cote="<font class=\"mechant\">"+cote+"<\/font>"; break;
+    case 3 : cote="<font class=\"rampant\">"+cote+"<\/font>"; break;
+  }
+  document.write('<img align="middle" src="/images/'+photo+'" border="1" onclick="gtc('+x+','+y+')" style="cursor: hand; cursor: pointer;">'+' <b>'+tag+((estCible=='1')? '<font class="cible">' : '')+nom+((estCible=='1')? '<\/font>' : '')+'<\/b> (Longueur barbe : '+(barbe/100).toLocaleString()+'cm - '+cote+' - distance : '+distance+' - position : '+x+','+y+') : <i>'+((description=='')? '(pas de description)' : description)+'<\/i> '+gifl+' | <a href="newchat.php?IDS=ffe4b3cbb54fbb388beba96acde1fb7c&idto='+id+'">Ecrire<\/a> | <br>');
+}
+function gtc(x, y) {
+  document.location="deplac.php?IDS=ffe4b3cbb54fbb388beba96acde1fb7c&destx="+x+"&desty="+y;
+}
+</script>
+<title></title>
+
+<script type="text/javascript" language="JavaScript">
+ var classeinterface=6;
+</script>
+</head>
+<body>
+<p class="titre">[ Choisis ton arme ! ]</p>
+<p><i>Tu disposes de 6 PA pour ton attaque sur :</i></p>
+<div class="VTV case-encyclo">
+<script type="text/javascript">
+gavat(5341, "avatar/perso/925ff71d0650df854ba4b964297a2df10cbc9054.gif", "Naintroid", '[Queen]', 12770, 2,"Exhibitionniste (nain-visible)", 4, 17, 1, "Krrschhhhh", "", "0");
+</script>
+</div>
+<p><b></b></p>
+<span class="erreur"><b></b></span></p>
+<script language="Javascript" type="text/javascript">
+mep_debut('border="0" cellspacing="0" cellpadding="0" width="100%"');
+mep(0);
+mep(11,'Armes disponibles');
+mep(1);
+mep(16,'Tu as le choix entre 1 armes.');
+mep(7);
+mep(16,'<img align="middle" src="/images/objets/revolver.gif" border="1">&nbsp;&nbsp;<b>Revolver 6 coups<\/b>'+
+    '(portée : '+((0>0)? '0 à ' : '')+'4 case(s), dommages : 15, rechargement : 2 j.)'+
+    ' | <a href="JavaScript:choisir(\'25183955\');">Utiliser !<\/a> [6 PA] |<br />'+
+    '<b>Etat :<\/b> 4/6 (réparation : 13 PA)<br />'+
+    '<i>Idéal pour ceux qui veulent jouer aux cowboys et aux nain-diens...<\/i>');
+
+mep(6);
+mep_fin();
+</script>
+<script language="Javascript" type="text/javascript">
+mep_debut('border="0" cellspacing="0" cellpadding="0" width="100%"');
+mep(0);
+mep(11,'Armes indisponibles');
+mep(1);
+mep(16,'Tu possèdes 4 armes temporairement indisponibles.');
+mep(7);
+mep(16,'<div class="erreur"><b>(portée insuffisante)<\/b></div>');
+mep(16,'<img align="middle" src="/images/objets/poing.gif" border="1">&nbsp;&nbsp;<b>Tuba [perso]<\/b>'+
+    ' [5 PA] (portée : '+((0>0)? '0 à ' : '')+'0 case(s), dommages : 5, rechargement : 0 j.)<br />'+
+    '<b>Etat :<\/b> 100/100 (réparation : 0 PA)<br />'+
+    '<i>Vos petites mains !<\/i><br />');
+mep(7);
+mep(16,'<div class="erreur"><b>(pas assez de PA)<\/b><\/div>');
+mep(16,'<img align="middle" src="/images/objets/boomrang_feu.gif" border="1" />&nbsp;&nbsp;<b>Boomrang feu<\/b>'+
+    ' [8 PA] (portée : '+((0>0)? '0 à ' : '')+'4 case(s), dommages : 30, rechargement : 5 j.)<br />'+
+    '<b>Etat :<\/b> 100/100 (réparation : 8 PA)<br />'+
+    '<i>Chaud devant !<\/i><br />');
+mep(7);
+mep(16,'<div class="erreur"><b>(pas assez de PA)<\/b><\/div>');
+mep(16,'<img align="middle" src="/images/objets/arquebuse.gif" border="1" />&nbsp;&nbsp;<b>Arquebuse naine<\/b>'+
+    ' [10 PA] (portée : '+((0>0)? '0 à ' : '')+'2 case(s), dommages : 20, rechargement : 1 j.)<br />'+
+    '<b>Etat :<\/b> 100/100 (réparation : 7 PA)<br />'+
+    '<i>A la différence d&#039;un arc classique, cette arme utilise un projectile vivant : un oiseau. D&#8217;où son nom arc-buse. Ce modèle miniaturisé peut tenir dans une armoire portable ... de nain<\/i><br />');
+mep(7);
+mep(16,'<div class="erreur"><b>(pas assez de PA)<\/b><\/div>');
+mep(16,'<img align="middle" src="/images/objets/telecommande.gif" border="1" />&nbsp;&nbsp;<b>Télécommande infrarouge<\/b>'+
+    ' [8 PA] (portée : '+((0>0)? '0 à ' : '')+'2 case(s), dommages : 12, rechargement : 0 j.)<br />'+
+    '<b>Etat :<\/b> 44/100 (réparation : 6 PA)<br />'+
+    '<i>Un nain vous agace, utilisez la touche eject. Un nain fait trop de bruit, utilisez la touche mute. Avec la télécommande vous avez de quoi mettre les nains en veille.<\/i><br />');
+
+mep(6);
+mep_fin();
+</script>
+<form action="utiliser.php" method="post" name="attaque" id="attaque">
+<input type="hidden" name="IDS" value="ffe4b3cbb54fbb388beba96acde1fb7c">
+<input type="hidden" name="idennemi" value="5341">
+<input type="hidden" name="idinv" value="0">
+</form>
+<script language="Javascript" type="text/javascript">
+
+miseajourpager('6', '167', '167', 'evenpagerlu', '?', 'chatpagerlu', '0', '15', '4', 'ffe4b3cbb54fbb388beba96acde1fb7c', 'NainXpress');
+</script>
+</body>
+</html>
+
