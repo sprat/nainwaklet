@@ -7,7 +7,7 @@ var test = require('tape-catch'),
     html = fs.readFileSync(path.join(__dirname, '..', 'fixtures', 'invent.html'), 'utf8'),
     doc = helpers.parseHTMLDocument(html);
 
-test('invent.analyze: objets', function (assert) {
+test('invent.analyze: inventaire', function (assert) {
     var info = page.analyze(doc);
 
     assert.deepEqual(info.inventaire[0], {
