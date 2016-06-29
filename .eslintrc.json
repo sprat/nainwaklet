@@ -19,6 +19,9 @@
     ],
     "no-trailing-spaces": [
       2
+    ],
+    "no-console": [
+      1
     ]
   },
   "env": {
