@@ -45,3 +45,7 @@ a:hover {
 a.nanylet {
     margin-right: 5px;
 }
+
+a.nanylet.hidden {
+    display: none;
+}
