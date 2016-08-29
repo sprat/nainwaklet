@@ -20,6 +20,7 @@
   "dependencies": {
     "array-find": "^1.0.0",
     "component-emitter": "^1.2.0",
+    "get-dataset": "0.0.4",
     "htmldec": "0.0.1",
     "md5": "^2.0.0",
     "print-html": "0.0.2",
