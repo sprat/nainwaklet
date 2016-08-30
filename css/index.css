@@ -42,10 +42,10 @@ a:hover {
     margin-top: 2em;
 }
 
-a.nanylet {
+a.nany-bookmarklet {
     margin-right: 5px;
 }
 
-a.nanylet.hidden {
+a.nany-bookmarklet.hidden {
     display: none;
 }

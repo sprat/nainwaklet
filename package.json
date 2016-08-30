@@ -53,7 +53,7 @@
     "pretest": "browserify -t brfs -d test > dist/nany.tests.js",
     "test": "tap-closer < dist/nany.tests.js | smokestack | faucet",
     "prebuild:js": "npm run lint -s && npm run test -s",
-    "build:js": "browserify lib/index.js -dv -s nany | exorcist dist/nany.js.map > dist/nany.js",
+    "build:js": "browserify lib/index.js -dv -s Nany | exorcist dist/nany.js.map > dist/nany.js",
     "postbuild:js": "uglifyjs dist/nany.js -mc warnings=false -o dist/nany.min.js --in-source-map dist/nany.js.map --source-map dist/nany.min.js.map --source-map-url nany.min.js.map && rimraf dist/nany.js*",
     "build:css": "cleancss --source-map --source-map-inline-sources --output dist/nany.min.css css/nany.css",
     "build": "npm run build:js -s && npm run build:css -s",
