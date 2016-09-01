@@ -1,3 +1,9 @@
+require('./detect-page');
+require('./perso-page');
+require('./invent-page');
+require('./transfert-page');
+require('./even-page');
+
 var test = require('tape-catch'),
     pages = require('../../lib/pages');
 
