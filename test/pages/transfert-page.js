@@ -11,12 +11,11 @@ test('transfert.analyze: inventaire', function (assert) {
     var info = page.analyze(doc);
 
     // mip(3819679, "Bouteille vide", "objets/vinvide.gif", '' , "ramasser", "INUTILE", 0, 0, "0", 0, 100, 100, 0, 0, 0, 0, 0, 0, "N", "O", "1295996");
-    assert.deepEqual(info.inventaire[0], {
+    assert.deepEqual(info.sol[0], {
         id: 3819679,
         nom: 'Bouteille vide',
         image: '/images/objets/vinvide.gif',
         description: '',
-        model: 'ramasser',
         type: 'inutile',
         PAutiliser: 0,
         portee: 0,
@@ -36,12 +35,11 @@ test('transfert.analyze: inventaire', function (assert) {
     });
 
     // mip(25186146, "Arquebuse naine", "objets/arquebuse.gif", '' , "poser", "ARME", 10, 2, "20", 1, 100, 100, 7, -14264, 0, 0, 0, 0, "N", "O", "2404936");
-    assert.deepEqual(info.inventaire[1], {
+    assert.deepEqual(info.inventaire[0], {
         id: 25186146,
         nom: 'Arquebuse naine',
         image: '/images/objets/arquebuse.gif',
         description: '',
-        model: 'poser',
         type: 'arme',
         PAutiliser: 10,
         portee: 2,
