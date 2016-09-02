@@ -33,3 +33,31 @@ test('calcul.degats', function (assert) {
 
     assert.end();
 });
+
+test('calcul.portee', function (assert) {
+    assert.deepEqual(calcul.portee([12, 4], [12, 4]), 0, '0 case');
+    assert.deepEqual(calcul.portee([12, 4], [12, 3]), 1, '1 case au-dessus');
+    assert.deepEqual(calcul.portee([12, 4], [12, 5]), 1, '1 case au-dessous');
+    assert.deepEqual(calcul.portee([12, 4], [11, 4]), 1, '1 case à gauche');
+    assert.deepEqual(calcul.portee([12, 4], [13, 4]), 1, '1 case à droite');
+    assert.deepEqual(calcul.portee([12, 4], [11, 5]), 1, '1 case en diagonale');
+
+    assert.deepEqual(calcul.portee([12, 4], [14, 6]), 3, '2 cases diago = 3 cases');
+    assert.deepEqual(calcul.portee([12, 4], [13, 7]), 3, '3 cases');
+
+    assert.end();
+});
+
+test('calcul.deplacement', function (assert) {
+    assert.deepEqual(calcul.deplacement([12, 4], [12, 4]), 0, '0 case');
+    assert.deepEqual(calcul.deplacement([12, 4], [12, 3]), 1, '1 case au-dessus');
+    assert.deepEqual(calcul.deplacement([12, 4], [12, 5]), 1, '1 case au-dessous');
+    assert.deepEqual(calcul.deplacement([12, 4], [11, 4]), 1, '1 case à gauche');
+    assert.deepEqual(calcul.deplacement([12, 4], [13, 4]), 1, '1 case à droite');
+    assert.deepEqual(calcul.deplacement([12, 4], [11, 5]), 1, '1 case en diagonale');
+
+    assert.deepEqual(calcul.deplacement([12, 4], [14, 6]), 2, '2 cases diago');
+    assert.deepEqual(calcul.deplacement([12, 4], [13, 7]), 3, '3 cases');
+
+    assert.end();
+});
