@@ -1,5 +1,5 @@
 /*!
- * Nainy Application & Library
+ * Nany Application & Library
  * https://github.com/sprat/nany
  *
  * Copyright 2015 by Sylvain Prat
@@ -7,6 +7,6 @@
  */
 
 /* Development CSS files */
-@import url("nany/bookmarklet.css");
-@import url("nany/contours.css");
-@import url("nany/application.css");
+@import url("bookmarklet.css");
+@import url("contours.css");
+@import url("application.css");

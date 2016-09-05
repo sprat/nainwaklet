@@ -42,10 +42,41 @@ a:hover {
     margin: 2em 0;
 }
 
+/* Bookmarklet */
 a.nany-bookmarklet {
     margin-right: 5px;
 }
 
 a.nany-bookmarklet.hidden {
     display: none;
+}
+
+/* Formules */
+.formules {
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+.formules th {
+    font-weight: bold;
+}
+
+.formules td,
+.formules th {
+    border: 1px solid #DDD;
+    padding: 5px;
+    vertical-align: middle;
+}
+
+.formules .objet {
+    min-width: 60px;
+}
+
+.formules .objet .quantite {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.formules .objet .image {
+    vertical-align: middle;
 }
