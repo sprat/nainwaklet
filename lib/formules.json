@@ -1,0 +1,1705 @@
+[
+  {
+    "id": 1,
+    "nom": "Pack de bières",
+    "ingredients": [
+      {
+        "id": 322,
+        "nom": "Bière",
+        "image": "biere.gif",
+        "quantite": 6
+      }
+    ],
+    "resultats": [
+      {
+        "id": 332,
+        "nom": "Pack de bières",
+        "image": "pack.gif",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "nom": "Pigeon voyageur",
+    "ingredients": [
+      {
+        "id": 168,
+        "nom": "Super - anabolysants !",
+        "image": "anabolysants.gif",
+        "quantite": 1
+      },
+      {
+        "id": 316,
+        "nom": "Papillon",
+        "image": "papillon.gif",
+        "quantite": 1
+      }
+    ],
+    "resultats": [
+      {
+        "id": 212,
+        "nom": "Pigeon voyageur",
+        "image": "pigeon.gif",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "nom": "Donut géant radio-actif",
+    "ingredients": [
+      {
+        "id": 42,
+        "nom": "Perceuse",
+        "image": "perceuse.gif",
+        "quantite": 1
+      },
+      {
+        "id": 320,
+        "nom": "Tartine",
+        "image": "tartine.gif",
+        "quantite": 1
+      },
+      {
+        "id": 344,
+        "nom": "bocal de nutella",
+        "image": "naintella.gif",
+        "quantite": 1
+      }
+    ],
+    "resultats": [
+      {
+        "id": 51,
+        "nom": "Donut géant radioactif",
+        "image": "donut.gif",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "nom": "Choli japeau rigolo",
+    "ingredients": [
+      {
+        "id": 94,
+        "nom": "Chapeau de magicien",
+        "image": "chapeau_de_magicien.gif",
+        "quantite": 1
+      },
+      {
+        "id": 365,
+        "nom": "bloup",
+        "image": "bocal_bloup.gif",
+        "quantite": 1
+      }
+    ],
+    "resultats": [
+      {
+        "id": 151,
+        "nom": "Choli Japeau Rigolo",
+        "image": "Carlson.gif",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "nom": "Quête d'Actarus",
+    "ingredients": [
+      {
+        "id": 367,
+        "nom": "Autographe d'Actarus",
+        "image": "recompense_goldoV2.png",
+        "quantite": 40
+      }
+    ],
+    "resultats": [
+      {
+        "id": 431,
+        "nom": "UFO Robot Grendizer",
+        "image": "goldomini.png",
+        "quantite": 1
+      },
+      {
+        "id": 432,
+        "nom": "Casque de Héros",
+        "image": "kusk.png",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "nom": "Canon",
+    "ingredients": [
+      {
+        "id": 366,
+        "nom": "Lance-Chapin",
+        "image": "lancechapin.png",
+        "quantite": 1
+      },
+      {
+        "id": 369,
+        "nom": "Boulet",
+        "image": "boulet.gif",
+        "quantite": 1
+      }
+    ],
+    "resultats": [
+      {
+        "id": 46,
+        "nom": "Canon",
+        "image": "canon.gif",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "nom": "Télécommande infra-rouge",
+    "ingredients": [
+      {
+        "id": 58,
+        "nom": "Calculette rétro-éclairée",
+        "image": "calculette.gif",
+        "quantite": 1
+      },
+      {
+        "id": 97,
+        "nom": "Boîte à Outils",
+        "image": "boite_a_outils.gif",
+        "quantite": 1
+      }
+    ],
+    "resultats": [
+      {
+        "id": 59,
+        "nom": "Télécommande infrarouge",
+        "image": "telecommande.gif",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "nom": "Tripes de poulet",
+    "ingredients": [
+      {
+        "id": 328,
+        "nom": "Boud'nain bleu",
+        "image": "boudin_bleu.gif",
+        "quantite": 1
+      },
+      {
+        "id": 329,
+        "nom": "Boud'nain rouge",
+        "image": "boudin_rouge.gif",
+        "quantite": 1
+      },
+      {
+        "id": 330,
+        "nom": "Boud'nain vert",
+        "image": "boudin_vert.gif",
+        "quantite": 1
+      }
+    ],
+    "resultats": [
+      {
+        "id": 204,
+        "nom": "Tripes de poulet",
+        "image": "poulet.gif",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "nom": "Disque laser de Dorothée",
+    "ingredients": [
+      {
+        "id": 124,
+        "nom": "Guitare électrique",
+        "image": "guitare.gif",
+        "quantite": 1
+      },
+      {
+        "id": 134,
+        "nom": "Guitare Acoustique",
+        "image": "Acoustic.gif",
+        "quantite": 1
+      },
+      {
+        "id": 135,
+        "nom": "Guitare électrique Ibanez",
+        "image": "guit01.gif",
+        "quantite": 1
+      },
+      {
+        "id": 136,
+        "nom": "Guitare électrique Strato",
+        "image": "guit02.gif",
+        "quantite": 1
+      }
+    ],
+    "resultats": [
+      {
+        "id": 109,
+        "nom": "Disque laser de Dorothée",
+        "image": "dorothee.gif",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "nom": "Naincyclopédie",
+    "ingredients": [
+      {
+        "id": 98,
+        "nom": "Cube à lettres (ABX)",
+        "image": "cube_type1.gif",
+        "quantite": 1
+      },
+      {
+        "id": 99,
+        "nom": "Cube à lettres (CFE)",
+        "image": "cube_type2.gif",
+        "quantite": 1
+      }
+    ],
+    "resultats": [
+      {
+        "id": 105,
+        "nom": "Nain-cyclope est dit",
+        "image": "livre_marron.gif",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "nom": "Bonzaï",
+    "ingredients": [
+      {
+        "id": 138,
+        "nom": "minus",
+        "image": "minus.gif",
+        "quantite": 1,
+        "note": "-50"
+      },
+      {
+        "id": 359,
+        "nom": "Le bocal d'arbre",
+        "image": "bocal_arbre.gif",
+        "quantite": 1
+      }
+    ],
+    "resultats": [
+      {
+        "id": 119,
+        "nom": "Bonzaï",
+        "image": "bonzai.gif",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "nom": "F1 rouge",
+    "ingredients": [
+      {
+        "id": 97,
+        "nom": "Boîte à Outils",
+        "image": "boite_a_outils.gif",
+        "quantite": 1
+      },
+      {
+        "id": 164,
+        "nom": "Voiture de course",
+        "image": "voiture_de_course.gif",
+        "quantite": 1
+      },
+      {
+        "id": 329,
+        "nom": "Boud'nain rouge",
+        "image": "boudin_rouge.gif",
+        "quantite": 1
+      }
+    ],
+    "resultats": [
+      {
+        "id": 161,
+        "nom": "Formule 1 rouge",
+        "image": "F1_rouge.gif",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "ingredients": [
+      {
+        "id": 113,
+        "nom": "Combinainson de Force bleu",
+        "image": "force_bleu.gif",
+        "quantite": 1
+      },
+      {
+        "id": 114,
+        "nom": "Combinainson de Force noir",
+        "image": "force_noir.gif",
+        "quantite": 1
+      },
+      {
+        "id": 111,
+        "nom": "Combinainson de Force rose",
+        "image": "force_rose.gif",
+        "quantite": 1
+      },
+      {
+        "id": 110,
+        "nom": "Combinainson de Force rouge",
+        "image": "force_rouge.gif",
+        "quantite": 1
+      },
+      {
+        "id": 112,
+        "nom": "Combinainson de Force vert",
+        "image": "force_vert.gif",
+        "quantite": 1
+      },
+      {
+        "id": 243,
+        "nom": "Rejoignez les Bionain !",
+        "image": "bionain.gif",
+        "quantite": 1
+      }
+    ],
+    "resultats": [
+      {
+        "id": 121,
+        "nom": "Combinaison de Bionain",
+        "image": "combinaison_bionain.gif",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "nom": "Le Kama Sutra en 3 leçons",
+    "ingredients": [
+      {
+        "id": 106,
+        "nom": "L'ABC d'aire",
+        "image": "livre_vert.gif",
+        "quantite": 1
+      },
+      {
+        "id": 143,
+        "nom": "Un peu d'amour en bocal",
+        "image": "amour_en_bocal.gif",
+        "quantite": 1
+      }
+    ],
+    "resultats": [
+      {
+        "id": 89,
+        "nom": "Le Kamasutra en 3 leçons",
+        "image": "livre_rose.gif",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "nom": "Les bottes de convocations d'Herr Moroïd",
+    "ingredients": [
+      {
+        "id": 35,
+        "nom": "Coup de pied au cul",
+        "image": "coup_de_pied.gif",
+        "quantite": 1
+      },
+      {
+        "id": 115,
+        "nom": "Chaussure de tennis",
+        "image": "chaussure_tennis.gif",
+        "quantite": 1
+      }
+    ],
+    "resultats": [
+      {
+        "id": 79,
+        "nom": "Les bottes de convocations d'Herr Moroïd",
+        "image": "bottes.gif",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "nom": "Boomrang de glaçe",
+    "ingredients": [
+      {
+        "id": 4,
+        "nom": "Boomrang classique",
+        "image": "boomrang.gif",
+        "quantite": 1
+      },
+      {
+        "id": 152,
+        "nom": "Glaçon",
+        "image": "glacon.gif",
+        "quantite": 1
+      }
+    ],
+    "resultats": [
+      {
+        "id": 23,
+        "nom": "Boomrang de glace",
+        "image": "boomrang_glace.gif",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "nom": "Gant de boxe",
+    "ingredients": [
+      {
+        "id": 126,
+        "nom": "Haltères",
+        "image": "halteres.gif",
+        "quantite": 1
+      },
+      {
+        "id": 153,
+        "nom": "boite d'épinard",
+        "image": "nezpinard.png",
+        "quantite": 1
+      }
+    ],
+    "resultats": [
+      {
+        "id": 44,
+        "nom": "Gant de boxe",
+        "image": "boxe.gif",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "nom": "Glaive en or",
+    "ingredients": [
+      {
+        "id": 47,
+        "nom": "Epée à 2 balles",
+        "image": "epee_arwall.gif",
+        "quantite": 1
+      },
+      {
+        "id": 192,
+        "nom": "Enclume ACME",
+        "image": "enclume.gif",
+        "quantite": 1
+      }
+    ],
+    "resultats": [
+      {
+        "id": 9,
+        "nom": "Glaive en or",
+        "image": "glaive_rouge.gif",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "nom": "Formule 1 verte",
+    "ingredients": [
+      {
+        "id": 24,
+        "nom": "Clef anglaise",
+        "image": "clef_a_molette.gif",
+        "quantite": 1
+      },
+      {
+        "id": 158,
+        "nom": "Formule 1 jaune",
+        "image": "F1_jaune.gif",
+        "quantite": 1
+      },
+      {
+        "id": 328,
+        "nom": "Boud'nain bleu",
+        "image": "boudin_bleu.gif",
+        "quantite": 1
+      }
+    ],
+    "resultats": [
+      {
+        "id": 162,
+        "nom": "Formule 1 verte",
+        "image": "F1_verte.gif",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "nom": "Super Chapin",
+    "ingredients": [
+      {
+        "id": 252,
+        "nom": "Super Carotte",
+        "image": "supercarrot.gif",
+        "quantite": 1
+      },
+      {
+        "id": 441,
+        "nom": "Guide de Chapinologie",
+        "image": "livre_rose.png",
+        "quantite": 1,
+        "donneRecettes": true
+      }
+    ],
+    "resultats": [
+      {
+        "id": 326,
+        "nom": "Super chapin",
+        "image": "super_chapin.gif",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 21,
+    "nom": "Sur les traces de Willy Le Borgne",
+    "ingredients": [
+      {
+        "id": 71,
+        "nom": "Pelle",
+        "image": "pelle.gif",
+        "quantite": 1
+      },
+      {
+        "id": 218,
+        "nom": "Bandeau Noir",
+        "image": "bandeau.gif",
+        "quantite": 1
+      },
+      {
+        "id": 311,
+        "nom": "Carte au trésor",
+        "image": "carte.png",
+        "quantite": 1,
+        "donneRecettes": true
+      }
+    ],
+    "resultats": [
+      {
+        "id": 197,
+        "nom": "Coffre au trésor",
+        "image": "tresor.png",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "nom": "Capturer un chapin",
+    "ingredients": [
+      {
+        "id": 223,
+        "nom": "Carotte",
+        "image": "carotte.gif",
+        "quantite": 1
+      },
+      {
+        "id": 247,
+        "nom": "Cage à Chapin",
+        "image": "cage.gif",
+        "quantite": 1
+      },
+      {
+        "id": 441,
+        "nom": "Guide de Chapinologie",
+        "image": "livre_rose.png",
+        "quantite": 1,
+        "donneRecettes": true
+      }
+    ],
+    "resultats": [
+      {
+        "id": 324,
+        "nom": "Chapin",
+        "image": "chapin.gif",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 23,
+    "nom": "Une peluche c'est plus mignon, non ?",
+    "ingredients": [
+      {
+        "id": 30,
+        "nom": "Machette de Jack l'éventreur",
+        "image": "machette_rouge.gif",
+        "quantite": 1
+      },
+      {
+        "id": 108,
+        "nom": "Ours en peluche",
+        "image": "nounou.gif",
+        "quantite": 1
+      },
+      {
+        "id": 324,
+        "nom": "Chapin",
+        "image": "chapin.gif",
+        "quantite": 1
+      },
+      {
+        "id": 441,
+        "nom": "Guide de Chapinologie",
+        "image": "livre_rose.png",
+        "quantite": 1,
+        "donneRecettes": true
+      }
+    ],
+    "resultats": [
+      {
+        "id": 147,
+        "nom": "Chapin en peluche",
+        "image": "peluche_chapin.gif",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 24,
+    "nom": "Capturer un super chapin",
+    "ingredients": [
+      {
+        "id": 247,
+        "nom": "Cage à Chapin",
+        "image": "cage.gif",
+        "quantite": 1
+      },
+      {
+        "id": 252,
+        "nom": "Super Carotte",
+        "image": "supercarrot.gif",
+        "quantite": 1
+      },
+      {
+        "id": 441,
+        "nom": "Guide de Chapinologie",
+        "image": "livre_rose.png",
+        "quantite": 1,
+        "donneRecettes": true
+      }
+    ],
+    "resultats": [
+      {
+        "id": 326,
+        "nom": "Super chapin",
+        "image": "super_chapin.gif",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 25,
+    "nom": "Lance-chapin",
+    "ingredients": [
+      {
+        "id": 46,
+        "nom": "Canon",
+        "image": "canon.gif",
+        "quantite": 1
+      },
+      {
+        "id": 324,
+        "nom": "Chapin",
+        "image": "chapin.gif",
+        "quantite": 1
+      },
+      {
+        "id": 441,
+        "nom": "Guide de Chapinologie",
+        "image": "livre_rose.png",
+        "quantite": 1,
+        "donneRecettes": true
+      }
+    ],
+    "resultats": [
+      {
+        "id": 366,
+        "nom": "Lance-Chapin",
+        "image": "lancechapin.png",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 26,
+    "nom": "Allumer le feu",
+    "ingredients": [
+      {
+        "id": 4,
+        "nom": "Boomrang classique",
+        "image": "boomrang.gif",
+        "quantite": 1
+      },
+      {
+        "id": 412,
+        "nom": "Bougie d'anniversaire",
+        "image": "bougie.gif",
+        "quantite": 1
+      }
+    ],
+    "resultats": [
+      {
+        "id": 6,
+        "nom": "Boomrang feu",
+        "image": "boomrang_feu.gif",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 27,
+    "nom": "Massage à la griffe",
+    "ingredients": [
+      {
+        "id": 342,
+        "nom": "Citrouille d'Halloween",
+        "image": "citrouille_5.gif",
+        "quantite": 1
+      },
+      {
+        "id": 423,
+        "nom": "Griffes de la nuit",
+        "image": "griffe.gif",
+        "quantite": 1
+      }
+    ],
+    "resultats": [
+      {
+        "id": 337,
+        "nom": "Citrouille d'Halloween",
+        "image": "citrouille_0.gif",
+        "quantite": 1
+      },
+      {
+        "id": 444,
+        "nom": "Cortex",
+        "image": "brain.png",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 28,
+    "nom": "Coupe de Jack l'éventreur",
+    "ingredients": [
+      {
+        "id": 30,
+        "nom": "Machette de Jack l'éventreur",
+        "image": "machette_rouge.gif",
+        "quantite": 1
+      },
+      {
+        "id": 342,
+        "nom": "Citrouille d'Halloween",
+        "image": "citrouille_5.gif",
+        "quantite": 1
+      }
+    ],
+    "resultats": [
+      {
+        "id": 338,
+        "nom": "Citrouille d'Halloween",
+        "image": "citrouille_1.gif",
+        "quantite": 1
+      },
+      {
+        "id": 444,
+        "nom": "Cortex",
+        "image": "brain.png",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 29,
+    "nom": "Grattouille à la Machette classique",
+    "ingredients": [
+      {
+        "id": 33,
+        "nom": "Machette classique",
+        "image": "machette_mauve.gif",
+        "quantite": 1
+      },
+      {
+        "id": 342,
+        "nom": "Citrouille d'Halloween",
+        "image": "citrouille_5.gif",
+        "quantite": 1
+      }
+    ],
+    "resultats": [
+      {
+        "id": 339,
+        "nom": "Citrouille d'Halloween",
+        "image": "citrouille_2.gif",
+        "quantite": 1
+      },
+      {
+        "id": 444,
+        "nom": "Cortex",
+        "image": "brain.png",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 30,
+    "nom": "Taillage façon Darth Vador",
+    "ingredients": [
+      {
+        "id": 32,
+        "nom": "Machette de Darth Vador",
+        "image": "machette_verte.gif",
+        "quantite": 1
+      },
+      {
+        "id": 342,
+        "nom": "Citrouille d'Halloween",
+        "image": "citrouille_5.gif",
+        "quantite": 1
+      }
+    ],
+    "resultats": [
+      {
+        "id": 340,
+        "nom": "Citrouille d'Halloween",
+        "image": "citrouille_3.gif",
+        "quantite": 1
+      },
+      {
+        "id": 444,
+        "nom": "Cortex",
+        "image": "brain.png",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 31,
+    "nom": "Rasage à la Machette des gentils",
+    "ingredients": [
+      {
+        "id": 31,
+        "nom": "Machette des gentils",
+        "image": "machette_bleue.gif",
+        "quantite": 1
+      },
+      {
+        "id": 342,
+        "nom": "Citrouille d'Halloween",
+        "image": "citrouille_5.gif",
+        "quantite": 1
+      }
+    ],
+    "resultats": [
+      {
+        "id": 341,
+        "nom": "Citrouille d'Halloween",
+        "image": "citrouille_4.gif",
+        "quantite": 1
+      },
+      {
+        "id": 444,
+        "nom": "Cortex",
+        "image": "brain.png",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 32,
+    "nom": "Vaudou",
+    "ingredients": [
+      {
+        "id": 149,
+        "nom": "Marmitte",
+        "image": "marmitte2.gif",
+        "quantite": 1
+      },
+      {
+        "id": 324,
+        "nom": "Chapin",
+        "image": "chapin.gif",
+        "quantite": 1
+      },
+      {
+        "id": 328,
+        "nom": "Boud'nain bleu",
+        "image": "boudin_bleu.gif",
+        "quantite": 1
+      },
+      {
+        "id": 329,
+        "nom": "Boud'nain rouge",
+        "image": "boudin_rouge.gif",
+        "quantite": 1
+      },
+      {
+        "id": 330,
+        "nom": "Boud'nain vert",
+        "image": "boudin_vert.gif",
+        "quantite": 1
+      },
+      {
+        "id": 357,
+        "nom": "potion potiron de la mort qui tue !",
+        "image": "potion.gif",
+        "quantite": 1
+      }
+    ],
+    "resultats": [
+      {
+        "id": 443,
+        "nom": "Zombin",
+        "image": "zombin.png",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 33,
+    "nom": "Reconversion",
+    "ingredients": [
+      {
+        "id": 441,
+        "nom": "Guide de Chapinologie",
+        "image": "livre_rose.png",
+        "quantite": 1,
+        "donneRecettes": true
+      },
+      {
+        "id": 443,
+        "nom": "Zombin",
+        "image": "zombin.png",
+        "quantite": 1
+      },
+      {
+        "id": 444,
+        "nom": "Cortex",
+        "image": "brain.png",
+        "quantite": 1
+      }
+    ],
+    "resultats": [
+      {
+        "id": 324,
+        "nom": "Chapin",
+        "image": "chapin.gif",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 34,
+    "nom": "Tenter de conquerir le Monde 0",
+    "ingredients": [
+      {
+        "id": 137,
+        "nom": "minus",
+        "image": "minus.gif",
+        "quantite": 1,
+        "note": "0"
+      },
+      {
+        "id": 444,
+        "nom": "Cortex",
+        "image": "brain.png",
+        "quantite": 1
+      }
+    ],
+    "resultats": [
+      {
+        "id": 310,
+        "nom": "Souris psychopathe",
+        "image": "bocalsouris.gif",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 35,
+    "nom": "Tenter de conquerir le Monde -50",
+    "ingredients": [
+      {
+        "id": 138,
+        "nom": "minus",
+        "image": "minus.gif",
+        "quantite": 1,
+        "note": "-50"
+      },
+      {
+        "id": 444,
+        "nom": "Cortex",
+        "image": "brain.png",
+        "quantite": 1
+      }
+    ],
+    "resultats": [
+      {
+        "id": 310,
+        "nom": "Souris psychopathe",
+        "image": "bocalsouris.gif",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 36,
+    "nom": "Tenter de conquerir le Monde -100",
+    "ingredients": [
+      {
+        "id": 139,
+        "nom": "minus",
+        "image": "minus.gif",
+        "quantite": 1,
+        "note": "-100"
+      },
+      {
+        "id": 444,
+        "nom": "Cortex",
+        "image": "brain.png",
+        "quantite": 1
+      }
+    ],
+    "resultats": [
+      {
+        "id": 310,
+        "nom": "Souris psychopathe",
+        "image": "bocalsouris.gif",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 37,
+    "nom": "Tenter de conquerir le Monde -150",
+    "ingredients": [
+      {
+        "id": 140,
+        "nom": "minus",
+        "image": "minus.gif",
+        "quantite": 1,
+        "note": "-150"
+      },
+      {
+        "id": 444,
+        "nom": "Cortex",
+        "image": "brain.png",
+        "quantite": 1
+      }
+    ],
+    "resultats": [
+      {
+        "id": 310,
+        "nom": "Souris psychopathe",
+        "image": "bocalsouris.gif",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 38,
+    "nom": "Tenter de conquerir le Monde -200",
+    "ingredients": [
+      {
+        "id": 141,
+        "nom": "minus",
+        "image": "minus.gif",
+        "quantite": 1,
+        "note": "-200"
+      },
+      {
+        "id": 444,
+        "nom": "Cortex",
+        "image": "brain.png",
+        "quantite": 1
+      }
+    ],
+    "resultats": [
+      {
+        "id": 310,
+        "nom": "Souris psychopathe",
+        "image": "bocalsouris.gif",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 39,
+    "nom": "Permission de minuit",
+    "ingredients": [
+      {
+        "id": 90,
+        "nom": "Grimoire magique",
+        "image": "grimoire.gif",
+        "quantite": 1,
+        "donneFormules": true
+      },
+      {
+        "id": 93,
+        "nom": "Prince charmant",
+        "image": "grenouille.gif",
+        "quantite": 1
+      },
+      {
+        "id": 310,
+        "nom": "Souris psychopathe",
+        "image": "bocalsouris.gif",
+        "quantite": 1
+      },
+      {
+        "id": 315,
+        "nom": "Citrouille",
+        "image": "citrouille.gif",
+        "quantite": 1
+      },
+      {
+        "id": 445,
+        "nom": "Limier",
+        "image": "limier.png",
+        "quantite": 1
+      }
+    ],
+    "resultats": [
+      {
+        "id": 183,
+        "nom": "Carrosse de cendri-nain",
+        "image": "citrouilluge.gif",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 40,
+    "nom": "Goban",
+    "ingredients": [
+      {
+        "id": 446,
+        "nom": "Kuro",
+        "image": "Kuro.png",
+        "quantite": 1
+      },
+      {
+        "id": 447,
+        "nom": "Shiro",
+        "image": "Shiro.png",
+        "quantite": 1
+      }
+    ],
+    "resultats": [
+      {
+        "id": 448,
+        "nom": "Goban",
+        "image": "Goban.png",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 41,
+    "nom": "Un qui soit joli et pas trop cher",
+    "ingredients": [
+      {
+        "id": 71,
+        "nom": "Pelle",
+        "image": "pelle.gif",
+        "quantite": 1
+      },
+      {
+        "id": 73,
+        "nom": "Jet de pot de fleur",
+        "image": "pot_fleur.gif",
+        "quantite": 1
+      },
+      {
+        "id": 88,
+        "nom": "Plante qui fait rigoler",
+        "image": "plante_qui_fait_rigoler.gif",
+        "quantite": 1
+      },
+      {
+        "id": 90,
+        "nom": "Grimoire magique",
+        "image": "grimoire.gif",
+        "quantite": 1,
+        "donneFormules": true
+      },
+      {
+        "id": 117,
+        "nom": "Carpette de loup des bouais",
+        "image": "carpette.gif",
+        "quantite": 1
+      },
+      {
+        "id": 119,
+        "nom": "Bonzaï",
+        "image": "bonzai.gif",
+        "quantite": 1
+      },
+      {
+        "nom": "Brouette à impulsion temporelle",
+        "image": "brouette.gif",
+        "quantite": 1
+      },
+      {
+        "id": 359,
+        "nom": "Le bocal d'arbre",
+        "image": "bocal_arbre.gif",
+        "quantite": 1
+      },
+      {
+        "id": 362,
+        "nom": "Le bocal d'herbe",
+        "image": "bocal_herbe.gif",
+        "quantite": 1
+      }
+    ],
+    "resultats": [
+      {
+        "id": 368,
+        "nom": "Jardinet",
+        "image": "jardinet.gif",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 42,
+    "nom": "Ainsi la Dame du Lac forgeât l’Épée",
+    "ingredients": [
+      {
+        "id": 47,
+        "nom": "Epée à 2 balles",
+        "image": "epee_arwall.gif",
+        "quantite": 1
+      },
+      {
+        "id": 69,
+        "nom": "Eclair Divin de Schlavbeuk",
+        "image": "zap.gif",
+        "quantite": 1
+      },
+      {
+        "id": 87,
+        "nom": "Pierre magique",
+        "image": "gem.gif",
+        "quantite": 1
+      },
+      {
+        "id": 90,
+        "nom": "Grimoire magique",
+        "image": "grimoire.gif",
+        "quantite": 1,
+        "donneFormules": true
+      },
+      {
+        "id": 192,
+        "nom": "Enclume ACME",
+        "image": "enclume.gif",
+        "quantite": 1
+      },
+      {
+        "id": 361,
+        "nom": "Le bocal d'eau",
+        "image": "bocal_eau.gif",
+        "quantite": 1
+      }
+    ],
+    "resultats": [
+      {
+        "id": 380,
+        "nom": "Excalibur",
+        "image": "excalibur.png",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 43,
+    "nom": "Abattre un arbre avec un hareng ?",
+    "ingredients": [
+      {
+        "id": 90,
+        "nom": "Grimoire magique",
+        "image": "grimoire.gif",
+        "quantite": 1,
+        "donneFormules": true
+      },
+      {
+        "id": 324,
+        "nom": "Chapin",
+        "image": "chapin.gif",
+        "quantite": 1
+      },
+      {
+        "id": 368,
+        "nom": "Jardinet",
+        "image": "jardinet.gif",
+        "quantite": 1
+      },
+      {
+        "id": 380,
+        "nom": "Excalibur",
+        "image": "excalibur.png",
+        "quantite": 1
+      },
+      {
+        "id": 452,
+        "nom": "Ni tranches, Ni rondelles !",
+        "image": "Hirondelle.png",
+        "quantite": 1
+      },
+      {
+        "id": 453,
+        "nom": "Deux demies noix de coco",
+        "image": "Noix_coco.png",
+        "quantite": 1
+      }
+    ],
+    "resultats": [
+      {
+        "id": 356,
+        "nom": "Sainte grenade d'Antioche",
+        "image": "Grenade.png",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 44
+  },
+  {
+    "id": 45,
+    "nom": "Anabo",
+    "ingredients": [
+      {
+        "id": 88,
+        "nom": "Plante qui fait rigoler",
+        "image": "plante_qui_fait_rigoler.gif",
+        "quantite": 1
+      },
+      {
+        "id": 91,
+        "nom": "Laboratoire du petit chimiste",
+        "image": "chimie.gif",
+        "quantite": 1,
+        "donneRecettes": true
+      },
+      {
+        "id": 96,
+        "nom": "Cafetière à injection directe",
+        "image": "cafetiere.gif",
+        "quantite": 1
+      },
+      {
+        "id": 156,
+        "nom": "Seringue à l'EPO",
+        "image": "seringue.gif",
+        "quantite": 1
+      }
+    ],
+    "resultats": [
+      {
+        "id": 167,
+        "nom": "Anabolysants",
+        "image": "anabolysants.gif",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 46,
+    "nom": "Superanabo",
+    "ingredients": [
+      {
+        "id": 21,
+        "nom": "Cocktail \"mal aux touffes\"",
+        "image": "coktail.gif",
+        "quantite": 1
+      },
+      {
+        "id": 88,
+        "nom": "Plante qui fait rigoler",
+        "image": "plante_qui_fait_rigoler.gif",
+        "quantite": 1
+      },
+      {
+        "id": 91,
+        "nom": "Laboratoire du petit chimiste",
+        "image": "chimie.gif",
+        "quantite": 1,
+        "donneRecettes": true
+      },
+      {
+        "id": 96,
+        "nom": "Cafetière à injection directe",
+        "image": "cafetiere.gif",
+        "quantite": 1
+      },
+      {
+        "id": 156,
+        "nom": "Seringue à l'EPO",
+        "image": "seringue.gif",
+        "quantite": 1
+      }
+    ],
+    "resultats": [
+      {
+        "id": 168,
+        "nom": "Super - anabolysants !",
+        "image": "anabolysants.gif",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 47,
+    "nom": "Pistolet de L'espace",
+    "ingredients": [
+      {
+        "id": 29,
+        "nom": "Revolver 6 coups",
+        "image": "revolver.gif",
+        "quantite": 1
+      },
+      {
+        "id": 92,
+        "nom": "OVNI",
+        "image": "ovni.gif",
+        "quantite": 1
+      },
+      {
+        "id": 160,
+        "nom": "Fusée de la NASA",
+        "image": "fusee.gif",
+        "quantite": 1
+      },
+      {
+        "id": 213,
+        "nom": "Sonde Spatial",
+        "image": "sonde.gif",
+        "quantite": 1
+      },
+      {
+        "id": 259,
+        "nom": "Manuel d'électricinain",
+        "image": "manuelelectricnain.gif",
+        "quantite": 1,
+        "donneRecettes": true
+      }
+    ],
+    "resultats": [
+      {
+        "id": 352,
+        "nom": "Pistolet de L'espace",
+        "image": "pistolet_espace.gif",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 48,
+    "nom": "Créature de Franck'n'spin",
+    "ingredients": [
+      {
+        "id": 69,
+        "nom": "Eclair Divin de Schlavbeuk",
+        "image": "zap.gif",
+        "quantite": 1
+      },
+      {
+        "id": 91,
+        "nom": "Laboratoire du petit chimiste",
+        "image": "chimie.gif",
+        "quantite": 1
+      },
+      {
+        "id": 147,
+        "nom": "Chapin en peluche",
+        "image": "peluche_chapin.gif",
+        "quantite": 1
+      },
+      {
+        "id": 444,
+        "nom": "Cortex",
+        "image": "brain.png",
+        "quantite": 1
+      }
+    ],
+    "resultats": [
+      {
+        "id": 458,
+        "nom": "Créature de Franck'n'spin",
+        "image": "frankenchpin.png",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 49,
+    "nom": "Super potion sonore",
+    "ingredients": [
+      {
+        "id": 357,
+        "nom": "potion potiron de la mort qui tue !",
+        "image": "potion.gif",
+        "quantite": 1
+      },
+      {
+        "id": 460,
+        "nom": "Potion sonore",
+        "image": "potion_sonore.png",
+        "quantite": 1
+      }
+    ],
+    "resultats": [
+      {
+        "id": 461,
+        "nom": "Super potion sonore",
+        "image": "super_potion_sonore.png",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 50,
+    "nom": "Chanson de bataille rouge",
+    "ingredients": [
+      {
+        "id": 329,
+        "nom": "Boud'nain rouge",
+        "image": "boudin_rouge.gif",
+        "quantite": 1
+      },
+      {
+        "id": 460,
+        "nom": "Potion sonore",
+        "image": "potion_sonore.png",
+        "quantite": 1
+      }
+    ],
+    "resultats": [
+      {
+        "id": 418,
+        "nom": "Raisin",
+        "image": "raisin5.png",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 51,
+    "nom": "Chanson de bataille verte",
+    "ingredients": [
+      {
+        "id": 330,
+        "nom": "Boud'nain vert",
+        "image": "boudin_vert.gif",
+        "quantite": 1
+      },
+      {
+        "id": 460,
+        "nom": "Potion sonore",
+        "image": "potion_sonore.png",
+        "quantite": 1
+      }
+    ],
+    "resultats": [
+      {
+        "id": 417,
+        "nom": "Raisin",
+        "image": "raisin4.png",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 52,
+    "nom": "Chanson de bataille bleue",
+    "ingredients": [
+      {
+        "id": 328,
+        "nom": "Boud'nain bleu",
+        "image": "boudin_bleu.gif",
+        "quantite": 1
+      },
+      {
+        "id": 460,
+        "nom": "Potion sonore",
+        "image": "potion_sonore.png",
+        "quantite": 1
+      }
+    ],
+    "resultats": [
+      {
+        "id": 414,
+        "nom": "Raisin",
+        "image": "raisin1.png",
+        "quantite": 1
+      }
+    ]
+  },
+  {
+    "id": 53,
+    "nom": "Chanson de bataille épique",
+    "ingredients": [
+      {
+        "id": 328,
+        "nom": "Boud'nain bleu",
+        "image": "boudin_bleu.gif",
+        "quantite": 1
+      },
+      {
+        "id": 329,
+        "nom": "Boud'nain rouge",
+        "image": "boudin_rouge.gif",
+        "quantite": 1
+      },
+      {
+        "id": 330,
+        "nom": "Boud'nain vert",
+        "image": "boudin_vert.gif",
+        "quantite": 1
+      },
+      {
+        "id": 461,
+        "nom": "Super potion sonore",
+        "image": "super_potion_sonore.png",
+        "quantite": 1
+      }
+    ],
+    "resultats": [
+      {
+        "id": 327,
+        "nom": "Champomy !",
+        "image": "champagne.gif",
+        "quantite": 1
+      }
+    ]
+  }
+]
