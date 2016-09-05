@@ -1,6 +1,6 @@
 var test = require('tape-catch'),
-    Channel = require('../lib/channel'),
-    log = require('../lib/log');
+    Channel = require('../channel'),
+    log = require('../log');
 
 
 test('channel', function (assert) {

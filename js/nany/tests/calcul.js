@@ -1,5 +1,5 @@
 var test = require('tape-catch'),
-    calcul = require('../lib/calcul');
+    calcul = require('../calcul');
 
 
 test('calcul.degats', function (assert) {
