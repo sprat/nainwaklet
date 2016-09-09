@@ -7,7 +7,6 @@ var loadCSS = require('./load-css'),
     Ring = require('./ring'),
     pages = require('./pages'),
     analyzer = require('./pages/analyzer'),
-    extend = require('xtend/mutable'),
     log = require('./log');
 
 /* Get the Nainwak User info from the menu frame */
@@ -95,8 +94,7 @@ function Application(config) {
     function processPageDocument(url, doc) {
         var date = new Date(),
             page = pages.byUrl(url),
-            analysis,
-            pager;
+            analysis;
 
         if (!page) {
             return;
@@ -104,16 +102,8 @@ function Application(config) {
 
         // analyze the page
         if (page.analyze) {
-            analysis = page.analyze(doc, date);
+            analysis = page.analyze(doc, date, infos);
             log(analysis);
-
-            // store the analysis in the infos object
-            pager = analysis.pager;
-            delete analysis.pager;
-            extend(infos, analysis);
-            if (pager && infos.perso) {
-                extend(infos.perso, pager);
-            }
         }
 
         // send an update to the Ring

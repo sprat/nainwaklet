@@ -5,13 +5,14 @@ var test = require('tape-catch'),
     pages = require('../../pages'),
     page = pages.byType('transfert'),
     html = fs.readFileSync(path.join(__dirname, '..', 'fixtures', 'transfert.html'), 'utf8'),
-    doc = helpers.parseHTMLDocument(html);
+    doc = helpers.parseHTMLDocument(html),
+    now = new Date(1457780950000);
 
 test('transfert.analyze: inventaire', function (assert) {
-    var info = page.analyze(doc);
+    var info = page.analyze(doc, now, {});
 
     // mip(3819679, "Bouteille vide", "objets/vinvide.gif", '' , "ramasser", "INUTILE", 0, 0, "0", 0, 100, 100, 0, 0, 0, 0, 0, 0, "N", "O", "1295996");
-    assert.deepEqual(info.sol[0], {
+    assert.deepEqual(info.objets.sol[0], {
         id: 3819679,
         nom: 'Bouteille vide',
         image: '/images/objets/vinvide.gif',
@@ -35,7 +36,7 @@ test('transfert.analyze: inventaire', function (assert) {
     });
 
     // mip(25186146, "Arquebuse naine", "objets/arquebuse.gif", '' , "poser", "ARME", 10, 2, "20", 1, 100, 100, 7, -14264, 0, 0, 0, 0, "N", "O", "2404936");
-    assert.deepEqual(info.inventaire[0], {
+    assert.deepEqual(info.objets.inventaire[0], {
         id: 25186146,
         nom: 'Arquebuse naine',
         image: '/images/objets/arquebuse.gif',
@@ -62,7 +63,7 @@ test('transfert.analyze: inventaire', function (assert) {
 });
 
 test('transfert.analyze: pager', function (assert) {
-    var info = page.analyze(doc);
+    var info = page.analyze(doc, now, {});
 
     // miseajourpager('5', '167', '167', 'evenpagerlu', '?', 'chatpagerlu', '0', '15', '4', 'ffe4b3cbb54fbb388beba96acde1fb7c', 'NainXpress');
     assert.deepEqual(info.pager, {

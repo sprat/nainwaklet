@@ -29,7 +29,7 @@ function getBlocsDroits(doc) {
     return data;
 }
 
-function analyze(doc) {
+function analyze(doc, date, infos) {
     var js = analyzer.getJS(doc),
         classes = getClasses(js),
         characts = getCharacteristics(js),
@@ -37,7 +37,7 @@ function analyze(doc) {
         cible = analyzer.find(doc, '.bloc-perso .cible'),
         perso;
 
-    perso = {
+    perso = infos.perso = {
         nom: analyzer.getAttr(doc, 'input[name="nvNain"]', 'value'),
         image: analyzer.getAttr(doc, '.news-titre img', 'src'),
         rang: analyzer.getText(doc, '#sRang'),
@@ -78,6 +78,7 @@ function analyze(doc) {
     };
 
     // compute the totals
+    // TODO: create computed properties instead
     perso.vieTotal = perso.vieBase + perso.vieBonus;
     perso.force = perso.forceBase + perso.forceBonus;
     perso.precision = perso.precisionBase + perso.precisionBonus;
@@ -85,7 +86,7 @@ function analyze(doc) {
     perso.honneur = perso.honneurBase + perso.honneurBonus;
 
     return {
-        perso: perso
+        perso: infos.perso
     };
 }
 

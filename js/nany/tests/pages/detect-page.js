@@ -5,11 +5,12 @@ var test = require('tape-catch'),
     pages = require('../../pages'),
     page = pages.byType('detect'),
     html = fs.readFileSync(path.join(__dirname, '..', 'fixtures', 'detect.html'), 'utf8'),
-    doc = helpers.parseHTMLDocument(html);
+    doc = helpers.parseHTMLDocument(html),
+    now = new Date(1457780950000);
 
 
 test('detect.analyze: localisation', function (assert) {
-    var info = page.analyze(doc);
+    var info = page.analyze(doc, now, {});
 
     assert.deepEqual(info.detection.position, [13, 5], 'Position');
     assert.strictEqual(info.detection.monde, 'Monde des sadiques', 'Monde');
@@ -18,7 +19,7 @@ test('detect.analyze: localisation', function (assert) {
 });
 
 test('detect.analyze: nains', function (assert) {
-    var info = page.analyze(doc),
+    var info = page.analyze(doc, now, {}),
         nains = info.detection.nains;
 
     assert.strictEqual(nains.length, 3, 'Nombre de nains');
@@ -84,7 +85,7 @@ test('detect.analyze: nains', function (assert) {
 });
 
 test('detect.analyze: objets', function (assert) {
-    var info = page.analyze(doc),
+    var info = page.analyze(doc, now, {}),
         objets = info.detection.objets;
 
     assert.strictEqual(objets.length, 3, "Nombre d'objets");
@@ -123,7 +124,7 @@ test('detect.analyze: objets', function (assert) {
 });
 
 test('detect.analyze: pager', function (assert) {
-    var info = page.analyze(doc);
+    var info = page.analyze(doc, now, {});
 
     assert.notStrictEqual(info.pager, undefined);
 

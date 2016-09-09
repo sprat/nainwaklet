@@ -71,20 +71,22 @@ function getObjets(js) {
     });
 }
 
-function analyze(doc) {
+function analyze(doc, date, infos) {
     var js = analyzer.getJS(doc),
         localisation = getLocalisation(doc),
         nains = getNains(js),
         objets = getObjets(js);
 
+    infos.detection = {
+        monde: localisation.monde,
+        position: localisation.position,
+        nains: nains,
+        objets: objets
+    };
+
     return {
-        detection: {
-            monde: localisation.monde,
-            position: localisation.position,
-            nains: nains,
-            objets: objets
-        },
-        pager: pager.analyze(js)
+        detection: infos.detection,
+        pager: pager.analyze(js, infos)
     };
 }
 

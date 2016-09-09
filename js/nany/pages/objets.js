@@ -1,5 +1,7 @@
 var analyzer = require('./analyzer'),
-    urls = require('../urls');
+    int = analyzer.int,
+    urls = require('../urls'),
+    extend = require('xtend/mutable');
 
 /* model:
  * - 'bonnet' : objet sous le bonnet
@@ -16,19 +18,18 @@ var listNames = {
     'fee': 'fee'
 };
 
-function analyze(js) {
+function analyze(js, infos) {
     var regex = /mip\((.*)\);/ig,
         keys = 'idtable,nomobjet,photoobjet,descriptionobjet,model,typeobjet,PAutiliser,portee,effet,recharg,PV,PVmax,PAreparer,dispo,PFobj,PPobj,PVobj,PIobj,collant,reparable,poussiere'.split(','),
         objects = analyzer.buildObjectsFromJSSequences(js, regex, keys),
-        int = analyzer.int,
-        result = {};
+        lists = {};
 
     function getList(object) {
         var listName = listNames[object.model],
-            list = result[listName];
+            list = lists[listName];
 
         if (list === undefined) {
-            list = result[listName] = [];
+            list = lists[listName] = [];
         }
 
         return list;
@@ -60,7 +61,10 @@ function analyze(js) {
         });
     });
 
-    return result;
+    infos.objets = infos.objets || {};
+    extend(infos.objets, lists);
+
+    return lists;
 }
 
 module.exports = {

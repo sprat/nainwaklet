@@ -5,12 +5,13 @@ var test = require('tape-catch'),
     pages = require('../../pages'),
     page = pages.byType('invent'),
     html = fs.readFileSync(path.join(__dirname, '..', 'fixtures', 'invent.html'), 'utf8'),
-    doc = helpers.parseHTMLDocument(html);
+    doc = helpers.parseHTMLDocument(html),
+    now = new Date(1457780950000);
 
 test('invent.analyze: inventaire', function (assert) {
-    var info = page.analyze(doc);
+    var info = page.analyze(doc, now, {});
 
-    assert.deepEqual(info.inventaire[0], {
+    assert.deepEqual(info.objets.inventaire[0], {
         id: 25186146,
         nom: 'Arquebuse naine',
         image: '/images/objets/arquebuse.gif',
@@ -33,7 +34,7 @@ test('invent.analyze: inventaire', function (assert) {
         poussiere: 2412535
     });
 
-    assert.deepEqual(info.inventaire[8], {
+    assert.deepEqual(info.objets.inventaire[8], {
         id: 25183959,
         nom: 'Visée à poisson',
         image: '/images/objets/faux_thon.gif',
@@ -56,7 +57,7 @@ test('invent.analyze: inventaire', function (assert) {
         poussiere: 2229326
     });
 
-    assert.deepEqual(info.inventaire[10], {
+    assert.deepEqual(info.objets.inventaire[10], {
         id: 25183960,
         nom: 'Pigeon voyageur',
         image: '/images/objets/pigeon.gif',
@@ -79,7 +80,7 @@ test('invent.analyze: inventaire', function (assert) {
         poussiere: 2229334
     });
 
-    assert.deepEqual(info.inventaire[18], {
+    assert.deepEqual(info.objets.inventaire[18], {
         id: 25134600,
         nom: 'Fée Cabossée',
         image: '/images/objets/fee.png',
@@ -102,7 +103,7 @@ test('invent.analyze: inventaire', function (assert) {
         poussiere: -1
     });
 
-    assert.deepEqual(info.inventaire[19], {
+    assert.deepEqual(info.objets.inventaire[19], {
         id: 25159237,
         nom: "Kine d'Heure",
         image: '/images/objets/kinder.gif',
@@ -129,7 +130,7 @@ test('invent.analyze: inventaire', function (assert) {
 });
 
 test('invent.analyze: pager', function (assert) {
-    var info = page.analyze(doc);
+    var info = page.analyze(doc, now, {});
 
     // miseajourpager('2', '149', '159', 'evenpagerlu', '?', 'chatpagerlu', '0', '14', '7', '305033d8ab52e3547c32fe17046b09d7', 'NainXpress');
     assert.deepEqual(info.pager, {

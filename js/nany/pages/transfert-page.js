@@ -3,14 +3,12 @@ var Page = require('./page'),
     pager = require('./pager'),
     objets = require('./objets');
 
-function analyze(doc) {
-    var js = analyzer.getJS(doc),
-        objetsData = objets.analyze(js);
+function analyze(doc, date, infos) {
+    var js = analyzer.getJS(doc);
 
     return {
-        inventaire: objetsData.inventaire,
-        sol: objetsData.sol,
-        pager: pager.analyze(js)
+        objets: objets.analyze(js, infos),
+        pager: pager.analyze(js, infos)
     };
 }
 

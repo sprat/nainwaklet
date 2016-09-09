@@ -6,14 +6,12 @@ var Page = require('./page'),
     loadCSS = require('../load-css'),
     calcul = require('../calcul');
 
-function analyze(doc) {
-    var js = analyzer.getJS(doc),
-        objetsData = objets.analyze(js);
+function analyze(doc, date, infos) {
+    var js = analyzer.getJS(doc);
 
     return {
-        bonnet: objetsData.bonnet,
-        inventaire: objetsData.inventaire,
-        pager: pager.analyze(js)
+        objets: objets.analyze(js, infos),
+        pager: pager.analyze(js, infos)
     };
 }
 
@@ -25,7 +23,7 @@ function renderPopin(h, content) {
 }
 
 function createInfoPopin(h, infos, index) {
-    var objets = infos.bonnet.concat(infos.inventaire),
+    var objets = infos.objets.bonnet.concat(infos.objets.inventaire),
         objet = objets[index],
         perso = infos.perso,
         isArme = objet.type === 'arme',
