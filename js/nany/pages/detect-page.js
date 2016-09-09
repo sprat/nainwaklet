@@ -2,6 +2,7 @@
 var Page = require('./page'),
     analyzer = require('./analyzer'),
     tag = require('./tag'),
+    classe = require('./classe'),
     pager = require('./pager'),
     int = analyzer.int,
     urls = require('../urls');
@@ -38,7 +39,7 @@ function getNains(js) {
                 image: urls.getImageUrl(spec.photo),
                 description: spec.description,
                 position: [int(spec.x), int(spec.y)],
-                classe: analyzer.getClasse(int(spec.classe)),
+                classe: classe.fromInt(int(spec.classe)),
                 rang: spec.cote,
                 barbe: int(spec.barbe) / 100,
                 attaquable: spec.attaquer === 'o',

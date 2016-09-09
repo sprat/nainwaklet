@@ -1,5 +1,6 @@
 var Page = require('./page'),
     analyzer = require('./analyzer'),
+    classe = require('./classe'),
     tag = require('./tag'),
     int = analyzer.int;
 
@@ -41,7 +42,7 @@ function analyze(doc, date, context) {
         nom: analyzer.getAttr(doc, 'input[name="nvNain"]', 'value'),
         image: analyzer.getAttr(doc, '.news-titre img', 'src'),
         rang: analyzer.getText(doc, '#sRang'),
-        classe: analyzer.getClasse(classes['sRang']),
+        classe: classe.fromInt(classes['sRang']),
         barbe: characts.sBarbe[0] / characts.sBarbe[1],
         description: analyzer.getAttr(doc, 'input[name="description"]', 'value'),
         arme: analyzer.getAttr(doc, 'input[name="nomArme"]', 'value'),
@@ -82,7 +83,7 @@ function analyze(doc, date, context) {
         giflesRecues: blocsDroits['Nombre de gifles reçues'],
         cible: {
             nom: cible.firstChild.textContent,
-            classe: analyzer.getClasse(classes['sRangCible']),
+            classe: classe.fromInt(classes['sRangCible']),
             rang: analyzer.getText(cible, '#sRangCible'),
             barbe: characts.sBarbeCible[0] / characts.sBarbeCible[1]
         },
