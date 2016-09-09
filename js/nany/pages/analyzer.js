@@ -153,20 +153,6 @@ function getClasse(classe) {
     }
 }
 
-function getPager(js) {
-    var regex = /miseajourpager\((.*)\);/ig,
-        keys = 'pa,pv,pvbase,classeeven,evnonlu,classechat,mesgnonlu,posx,posy,IDS,newmonochat'.split(','),
-        object = buildObjectsFromJSSequences(js, regex, keys)[0];
-
-    return {
-        PA: int(object.pa),
-        vie: int(object.pv),
-        vieTotal: int(object.pvbase),
-        position: [int(object.posx), int(object.posy)],
-        messagesNonLus: int(object.mesgnonlu),
-        nainxpressNonLu: object.newmonochat.indexOf('<b>') === 0
-    };
-}
 
 module.exports = {
     int: int,
@@ -180,6 +166,5 @@ module.exports = {
     getHtml: getHtml,
     getAttr: getAttr,
     parseTag: parseTag,
-    getClasse: getClasse,
-    getPager: getPager
+    getClasse: getClasse
 };

@@ -1,5 +1,6 @@
 var Page = require('./page'),
     analyzer = require('./analyzer'),
+    pager = require('./pager'),
     int = analyzer.int,
     evenInfo = require('./even-info'),
     urls = require('../urls'),
@@ -84,12 +85,11 @@ function getEvenements(js, nowDate) {
 
 function analyze(doc, date) {
     var js = analyzer.getJS(doc),
-        evenements = getEvenements(js, date),
-        pager = analyzer.getPager(js);
+        evenements = getEvenements(js, date);
 
     return {
         evenements: evenements,
-        pager: pager
+        pager: pager.analyze(js)
     };
 }
 

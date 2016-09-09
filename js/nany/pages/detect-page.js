@@ -1,6 +1,7 @@
 /* detect page */
 var Page = require('./page'),
     analyzer = require('./analyzer'),
+    pager = require('./pager'),
     int = analyzer.int,
     urls = require('../urls');
 
@@ -83,7 +84,7 @@ function analyze(doc) {
             nains: nains,
             objets: objets
         },
-        pager: analyzer.getPager(js)
+        pager: pager.analyze(js)
     };
 }
 

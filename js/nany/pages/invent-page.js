@@ -1,5 +1,6 @@
 var Page = require('./page'),
     analyzer = require('./analyzer'),
+    pager = require('./pager'),
     objets = require('./objets'),
     Renderer = require('../renderer'),
     loadCSS = require('../load-css'),
@@ -7,13 +8,12 @@ var Page = require('./page'),
 
 function analyze(doc) {
     var js = analyzer.getJS(doc),
-        obj = objets.analyze(js),
-        pager = analyzer.getPager(js);
+        objetsData = objets.analyze(js);
 
     return {
-        bonnet: obj.bonnet,
-        inventaire: obj.inventaire,
-        pager: pager
+        bonnet: objetsData.bonnet,
+        inventaire: objetsData.inventaire,
+        pager: pager.analyze(js)
     };
 }
 

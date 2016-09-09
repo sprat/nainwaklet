@@ -1,16 +1,16 @@
 var Page = require('./page'),
     analyzer = require('./analyzer'),
+    pager = require('./pager'),
     objets = require('./objets');
 
 function analyze(doc) {
     var js = analyzer.getJS(doc),
-        obj = objets.analyze(js),
-        pager = analyzer.getPager(js);
+        objetsData = objets.analyze(js);
 
     return {
-        inventaire: obj.inventaire,
-        sol: obj.sol,
-        pager: pager
+        inventaire: objetsData.inventaire,
+        sol: objetsData.sol,
+        pager: pager.analyze(js)
     };
 }
 
