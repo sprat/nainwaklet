@@ -12,11 +12,11 @@ var analyzer = require('./analyzer'),
  * - 'fee' : quand on fait une recette ?
  */
 var listNames = {
-    'bonnet': 'bonnet',
-    'poser': 'inventaire',
-    'ramasser': 'sol',
-    'encyclo': 'encyclo',
-    'fee': 'fee'
+    bonnet: 'bonnet',
+    poser: 'inventaire',
+    ramasser: 'sol',
+    encyclo: 'encyclo',
+    fee: 'fee'
 };
 
 function analyze(js, context) {
