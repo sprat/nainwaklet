@@ -6,12 +6,12 @@ var Page = require('./page'),
     loadCSS = require('../load-css'),
     calcul = require('../calcul');
 
-function analyze(doc, date, infos) {
+function analyze(doc, date, context) {
     var js = analyzer.getJS(doc);
 
     return {
-        objets: objets.analyze(js, infos),
-        pager: pager.analyze(js, infos)
+        objets: objets.analyze(js, context),
+        pager: pager.analyze(js, context)
     };
 }
 
@@ -22,10 +22,10 @@ function renderPopin(h, content) {
     ]);
 }
 
-function createInfoPopin(h, infos, index) {
-    var objets = infos.objets.bonnet.concat(infos.objets.inventaire),
+function createInfoPopin(h, context, index) {
+    var objets = context.objets.bonnet.concat(context.objets.inventaire),
         objet = objets[index],
-        perso = infos.perso,
+        perso = context.perso,
         isArme = objet.type === 'arme',
         degats = (isArme && perso) ? calcul.degats(perso, objet) : undefined,
         content;
@@ -36,7 +36,7 @@ function createInfoPopin(h, infos, index) {
     }
 }
 
-function enhance(doc, infos) {
+function enhance(doc, context) {
     var renderer = Renderer(doc),
         titles = analyzer.findAll(doc, 'td.news-titre');
 
@@ -45,7 +45,7 @@ function enhance(doc, infos) {
 
     // add an advisor box on each title
     titles.forEach(function (title, index) {
-        var popin = createInfoPopin(renderer, infos, index);
+        var popin = createInfoPopin(renderer, context, index);
 
         if (popin) {
             title.appendChild(popin);

@@ -29,14 +29,14 @@ function getBlocsDroits(doc) {
     return data;
 }
 
-function analyze(doc, date, infos) {
+function analyze(doc, date, context) {
     var js = analyzer.getJS(doc),
         classes = getClasses(js),
         characts = getCharacteristics(js),
         blocsDroits = getBlocsDroits(doc),
         cible = analyzer.find(doc, '.bloc-perso .cible');
 
-    infos.perso = {
+    context.perso = {
         nom: analyzer.getAttr(doc, 'input[name="nvNain"]', 'value'),
         image: analyzer.getAttr(doc, '.news-titre img', 'src'),
         rang: analyzer.getText(doc, '#sRang'),
@@ -92,7 +92,7 @@ function analyze(doc, date, infos) {
     };
 
     return {
-        perso: infos.perso
+        perso: context.perso
     };
 }
 

@@ -3,12 +3,12 @@ var Page = require('./page'),
     pager = require('./pager'),
     objets = require('./objets');
 
-function analyze(doc, date, infos) {
+function analyze(doc, date, context) {
     var js = analyzer.getJS(doc);
 
     return {
-        objets: objets.analyze(js, infos),
-        pager: pager.analyze(js, infos)
+        objets: objets.analyze(js, context),
+        pager: pager.analyze(js, context)
     };
 }
 

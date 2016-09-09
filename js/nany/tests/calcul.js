@@ -61,3 +61,44 @@ test('calcul.deplacement', function (assert) {
 
     assert.end();
 });
+
+test('calcul.bonusObjets', function (assert) {
+    var visee = {
+        nom: 'Visée à poisson',
+        forceBonus: -6,
+        precisionBonus: 15,
+        vieBonus: 0,
+        intelligenceBonus: 0
+    };
+
+    var guitare = {
+        nom: 'Guitare électrique Strato',
+        forceBonus: 0,
+        precisionBonus: 9,
+        vieBonus: 5,
+        intelligenceBonus: -10
+    };
+
+    assert.deepEqual(calcul.bonusObjets([]), {
+        forceBonus: 0,
+        precisionBonus: 0,
+        vieBonus: 0,
+        intelligenceBonus: 0
+    }, 'empty list');
+
+    assert.deepEqual(calcul.bonusObjets([visee]), {
+        forceBonus: -6,
+        precisionBonus: 15,
+        vieBonus: 0,
+        intelligenceBonus: 0
+    }, '1 object');
+
+    assert.deepEqual(calcul.bonusObjets([visee, guitare]), {
+        forceBonus: -6,
+        precisionBonus: 24,
+        vieBonus: 5,
+        intelligenceBonus: -10
+    }, '2 objects');
+
+    assert.end();
+});

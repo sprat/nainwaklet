@@ -30,7 +30,7 @@ function Application(config) {
         channelName = config.channel || 'default',
         ringUpdateUrl = config.ringUpdateUrl,
         ringUpdatePages = ['detect', 'invent', 'perso', 'even'],
-        infos = {},
+        context = {},
         containerContent,  // backup of the initial content of the container
         dashboard,
         //channel,
@@ -102,7 +102,7 @@ function Application(config) {
 
         // analyze the page
         if (page.analyze) {
-            analysis = page.analyze(doc, date, infos);
+            analysis = page.analyze(doc, date, context);
             log(analysis);
         }
 
@@ -113,7 +113,7 @@ function Application(config) {
 
         // enhance the page
         if (page.enhance) {
-            page.enhance(doc, infos);
+            page.enhance(doc, context);
         }
     }
 

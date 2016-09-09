@@ -83,14 +83,14 @@ function getEvenements(js, nowDate) {
     });
 }
 
-function analyze(doc, date, infos) {
+function analyze(doc, date, context) {
     var js = analyzer.getJS(doc),
-        pagerData = pager.analyze(js, infos);
+        pagerData = pager.analyze(js, context);
 
-    infos.evenements = getEvenements(js, date);
+    context.evenements = getEvenements(js, date);
 
     return {
-        evenements: infos.evenements,
+        evenements: context.evenements,
         pager: pagerData
     };
 }

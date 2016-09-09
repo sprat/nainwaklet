@@ -8,7 +8,7 @@ var test = require('tape-catch'),
     doc = helpers.parseHTMLDocument(html),
     now = new Date(1457780950000);
 
-test('invent.analyze: inventaire', function (assert) {
+test('invent.analyze: objets', function (assert) {
     var info = page.analyze(doc, now, {});
 
     assert.deepEqual(info.objets.inventaire[0], {
@@ -140,6 +140,38 @@ test('invent.analyze: pager', function (assert) {
         position: [14, 7],
         messagesNonLus: 0,
         nainxpressNonLu: false
+    });
+
+    assert.end();
+});
+
+test('invent.analyze: context updates', function (assert) {
+    var context = {
+        perso: {
+            PA: 0,
+            vie: 50,
+            vieTotal: 100,
+            forceBonus: 0,
+            precisionBonus: 0,
+            vieBonus: 0,
+            intelligenceBonus: 0
+        }
+    };
+
+    page.analyze(doc, now, context);
+
+    // CD-ROM + OVNI + Un peu d'amour en bocal + Un peu d'amour en bocal + Visée à poisson
+    assert.deepEqual(context.perso, {
+        PA: 2,
+        vie: 149,
+        vieTotal: 159,
+        position: [14, 7],
+        messagesNonLus: 0,
+        nainxpressNonLu: false,
+        forceBonus: -10,
+        precisionBonus: 30,
+        intelligenceBonus: 10,
+        vieBonus: 49
     });
 
     assert.end();

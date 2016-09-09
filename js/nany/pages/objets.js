@@ -1,6 +1,7 @@
 var analyzer = require('./analyzer'),
     int = analyzer.int,
     urls = require('../urls'),
+    calcul = require('../calcul'),
     extend = require('xtend/mutable');
 
 /* model:
@@ -18,7 +19,7 @@ var listNames = {
     'fee': 'fee'
 };
 
-function analyze(js, infos) {
+function analyze(js, context) {
     var regex = /mip\((.*)\);/ig,
         keys = 'idtable,nomobjet,photoobjet,descriptionobjet,model,typeobjet,PAutiliser,portee,effet,recharg,PV,PVmax,PAreparer,dispo,PFobj,PPobj,PVobj,PIobj,collant,reparable,poussiere'.split(','),
         objects = analyzer.buildObjectsFromJSSequences(js, regex, keys),
@@ -53,16 +54,22 @@ function analyze(js, infos) {
             dispo: int(object.dispo),
             forceBonus: int(object.PFobj),
             precisionBonus: int(object.PPobj),
-            vieBonus: int(object.PVobj),
             intelligenceBonus: int(object.PIobj),
+            vieBonus: int(object.PVobj),
             collant: object.collant === 'O',
             reparable: object.reparable === 'O',
             poussiere: int(object.poussiere)
         });
     });
 
-    infos.objets = infos.objets || {};
-    extend(infos.objets, lists);
+    context.objets = context.objets || {};
+    extend(context.objets, lists);
+
+    // update the 'perso' bonus data according to the objects in 'inventaire'
+    if (context.perso) {
+        var bonuses = calcul.bonusObjets(context.objets.inventaire);
+        extend(context.perso, bonuses);
+    }
 
     return lists;
 }

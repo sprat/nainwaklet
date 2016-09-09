@@ -71,13 +71,13 @@ function getObjets(js) {
     });
 }
 
-function analyze(doc, date, infos) {
+function analyze(doc, date, context) {
     var js = analyzer.getJS(doc),
         localisation = getLocalisation(doc),
         nains = getNains(js),
         objets = getObjets(js);
 
-    infos.detection = {
+    context.detection = {
         monde: localisation.monde,
         position: localisation.position,
         nains: nains,
@@ -85,8 +85,8 @@ function analyze(doc, date, infos) {
     };
 
     return {
-        detection: infos.detection,
-        pager: pager.analyze(js, infos)
+        detection: context.detection,
+        pager: pager.analyze(js, context)
     };
 }
 
