@@ -34,10 +34,9 @@ function analyze(doc, date, infos) {
         classes = getClasses(js),
         characts = getCharacteristics(js),
         blocsDroits = getBlocsDroits(doc),
-        cible = analyzer.find(doc, '.bloc-perso .cible'),
-        perso;
+        cible = analyzer.find(doc, '.bloc-perso .cible');
 
-    perso = infos.perso = {
+    infos.perso = {
         nom: analyzer.getAttr(doc, 'input[name="nvNain"]', 'value'),
         image: analyzer.getAttr(doc, '.news-titre img', 'src'),
         rang: analyzer.getText(doc, '#sRang'),
@@ -49,14 +48,29 @@ function analyze(doc, date, infos) {
         vie: characts.sPV[0] + characts.sPV[1],
         vieBase: characts.sPVBase[0],
         vieBonus: characts.sPVBase[1],
+        get vieTotal() {
+            return this.vieBase + this.vieBonus;
+        },
         forceBase: characts.sForce[0],
         forceBonus: characts.sForce[1],
+        get force() {
+            return this.forceBase + this.forceBonus;
+        },
         precisionBase: characts.sPrecis[0],
         precisionBonus: characts.sPrecis[1],
+        get precision() {
+            return this.precisionBase + this.precisionBonus;
+        },
         intelligenceBase: characts.sIntell[0],
         intelligenceBonus: characts.sIntell[1],
+        get intelligence() {
+            return this.intelligenceBase + this.intelligenceBonus;
+        },
         honneurBase: characts.sPG[0],
         honneurBonus: characts.sPG[1],
+        get honneur() {
+            return this.honneurBase + this.honneurBonus;
+        },
         cote: blocsDroits['Points de Côté'],
         ridicule: blocsDroits['Points de Ridicule'],
         honte: blocsDroits['Points de Honte'],
@@ -76,14 +90,6 @@ function analyze(doc, date, infos) {
             barbe: characts.sBarbeChass[0] / characts.sBarbeChass[1]
         }
     };
-
-    // compute the totals
-    // TODO: create computed properties instead
-    perso.vieTotal = perso.vieBase + perso.vieBonus;
-    perso.force = perso.forceBase + perso.forceBonus;
-    perso.precision = perso.precisionBase + perso.precisionBonus;
-    perso.intelligence = perso.intelligenceBase + perso.intelligenceBonus;
-    perso.honneur = perso.honneurBase + perso.honneurBonus;
 
     return {
         perso: infos.perso
