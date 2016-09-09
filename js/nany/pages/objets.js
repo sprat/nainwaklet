@@ -1,8 +1,9 @@
-var analyzer = require('./analyzer'),
+var extend = require('xtend/mutable'),
+    analyzer = require('./analyzer'),
     int = analyzer.int,
     urls = require('../urls'),
-    calcul = require('../calcul'),
-    extend = require('xtend/mutable');
+    Renderer = require('../renderer'),
+    calcul = require('../calcul');
 
 /* model:
  * - 'bonnet' : objet sous le bonnet
@@ -74,6 +75,40 @@ function analyze(js, context) {
     return lists;
 }
 
+function renderPopin(h, content) {
+    return h('.nany.popin', [
+        h('button.popin-button', '?'),
+        h('.popin-box', content)
+    ]);
+}
+
+function createInfoPopin(h, objet, perso) {
+    var isArme = objet.type === 'arme',
+        degats = (isArme && perso) ? calcul.degats(perso, objet) : undefined,
+        content;
+
+    if (degats) {
+        content = h('.degats', 'Dégâts : entre ' + degats.minimum + ' et ' + degats.maximum);
+        return renderPopin(h, content);
+    }
+}
+
+function enhance(doc, objets, perso) {
+    var h = Renderer(doc),
+        titles = analyzer.findAll(doc, 'td.news-titre');
+
+    // add an advisor box on each title
+    titles.forEach(function (title, index) {
+        var objet = objets[index];
+        var popin = createInfoPopin(h, objet, perso);
+
+        if (popin) {
+            title.appendChild(popin);
+        }
+    });
+}
+
 module.exports = {
-    analyze: analyze
+    analyze: analyze,
+    enhance: enhance
 };

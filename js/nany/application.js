@@ -113,6 +113,10 @@ function Application(config) {
 
         // enhance the page
         if (page.enhance) {
+            // load the Nany CSS in the new document
+            loadCSS(doc);
+
+            // enhance
             page.enhance(doc, context);
         }
     }

@@ -12,8 +12,12 @@ function analyze(doc, date, context) {
     };
 }
 
-// TODO: enhance
+function enhance(doc, context) {
+    var objetsList = context.objets.sol.concat(context.objets.inventaire);
+    objets.enhance(doc, objetsList, context.perso);
+}
+
 module.exports = Page('transfert', {
-    analyze: analyze
-    //enhance: enhance
+    analyze: analyze,
+    enhance: enhance
 });
