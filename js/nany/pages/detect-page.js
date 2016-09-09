@@ -1,6 +1,7 @@
 /* detect page */
 var Page = require('./page'),
     analyzer = require('./analyzer'),
+    tag = require('./tag'),
     pager = require('./pager'),
     int = analyzer.int,
     urls = require('../urls');
@@ -44,10 +45,10 @@ function getNains(js) {
                 autreAction: autresActions[spec.gifler],
                 estCible: spec.estCible == 1
             },
-            tag = analyzer.parseTag(spec.tag);
+            tagObject = tag.parse(spec.tag);
 
-        if (tag) {
-            nain.tag = tag;
+        if (tagObject) {
+            nain.tag = tagObject;
         }
 
         return nain;

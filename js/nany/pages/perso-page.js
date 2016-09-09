@@ -1,5 +1,6 @@
 var Page = require('./page'),
     analyzer = require('./analyzer'),
+    tag = require('./tag'),
     int = analyzer.int;
 
 function getClasses(js) {
@@ -44,7 +45,7 @@ function analyze(doc, date, context) {
         barbe: characts.sBarbe[0] / characts.sBarbe[1],
         description: analyzer.getAttr(doc, 'input[name="description"]', 'value'),
         arme: analyzer.getAttr(doc, 'input[name="nomArme"]', 'value'),
-        tag: analyzer.parseTag(analyzer.getHtml(doc, '#s_Tag')),
+        tag: tag.parse(analyzer.getHtml(doc, '#s_Tag')),
         vie: characts.sPV[0] + characts.sPV[1],
         vieBase: characts.sPVBase[0],
         vieBonus: characts.sPVBase[1],
