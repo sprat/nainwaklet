@@ -95,20 +95,22 @@ function createInfoPopin(h, objet, perso) {
 
 function enhance(doc, objets, perso) {
     var h = Renderer(doc),
-        titles = analyzer.findAll(doc, 'td.news-titre');
+        images = analyzer.findAll(doc, 'td.news-text img');
 
     // add an advisor box on each title
-    titles.forEach(function (title, index) {
+    images.forEach(function (image, index) {
         var objet = objets[index];
         var popin = createInfoPopin(h, objet, perso);
+        var parent = image.parentNode;
 
         if (popin) {
-            title.appendChild(popin);
+            parent.insertBefore(popin, parent.firstChild);
         }
     });
 }
 
 module.exports = {
     analyze: analyze,
-    enhance: enhance
+    enhance: enhance,
+    createInfoPopin: createInfoPopin
 };

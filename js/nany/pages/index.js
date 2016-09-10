@@ -3,6 +3,7 @@ var detectPage = require('./detect-page'),
     inventPage = require('./invent-page'),
     transfertPage = require('./transfert-page'),
     evenPage = require('./even-page'),
+    attaquerPage = require('./attaquer-page'),
     find = require('array-find');
 
 function Pages(pages) {
@@ -30,7 +31,8 @@ var pages = Pages([
     inventPage,
     transfertPage,
     persoPage,
-    evenPage
+    evenPage,
+    attaquerPage
 ]);
 
 module.exports = pages;
