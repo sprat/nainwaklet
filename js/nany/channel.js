@@ -6,23 +6,36 @@ var config = require('./config'),
 
 function Channel(name) {
     // TODO: authentication?
-    var channelId = md5(name),
-        pubnub = PubNub({
-            publish_key: channelConfig.publishKey,
-            subscribe_key: channelConfig.subscribeKey
-        });
+    /* Invalid chars in channel names:
+     * comma ,
+     * colon :
+     * period .
+     * astrick *
+     * slash /
+     * backslash: \
+     * non-printable ASCII control characters
+     * Unicode zero
+     */
+    var channelId = md5(name);
+    var pubnub = new PubNub({
+        publishKey: channelConfig.publishKey,
+        subscribeKey: channelConfig.subscribeKey,
+        ssl: true
+    });
 
     // publish a message to the channel
     function publish(topic, data) {
         var self = this;
-
-        pubnub.publish({
+        var content = {
             channel: channelId,
             message: {
                 topic: topic,
                 data: data
-            },
-            callback: function() {
+            }
+        };
+
+        pubnub.publish(content, function(status/*, response*/) {
+            if (!status.error) {
                 self.emit('published', topic, data, self);
             }
         });
@@ -30,49 +43,67 @@ function Channel(name) {
 
     // connect to channel
     function connect() {
-        var self = this;
-
-        self.emit('connecting', self);
-
         pubnub.subscribe({
-            channel: channelId,
-            message: function (message) {
-                self.emit('message:' + message.topic, message.data, self);
-                self.emit('message', message.topic, message.data, self);
-            },
-            connect: function () {
-                self.emit('connected', self);
-            },
-            disconnect: function () {
-                self.emit('disconnected', self);
-            },
-            reconnect: function () {
-                self.emit('reconnected', self);
-            },
-            error: function (error) {
-                self.emit('error', error, self);
-            }
+            channels: [channelId],
+            withPresence: true
         });
     }
 
     // disconnect from channel
     function disconnect() {
-        var self = this;
-
         pubnub.unsubscribe({
-            channel: channelId,
-            callback: function () {
-                self.emit('disconnected', self);
-            }
+            channels: [channelId]
         });
     }
 
-    return Emitter({
+    var self = Emitter({
         name: name,
         connect: connect,
         disconnect: disconnect,
         publish: publish
     });
+
+    pubnub.addListener({
+        status: function (event) {
+            console.log(event);
+
+            switch (event.operation) {
+            case 'PNSubscribeOperation':
+                self.emit('connected', self);
+                return;
+            case 'PNUnsubscribeOperation':
+                self.emit('disconnected', self);
+                return;
+            }
+
+            //self.emit('error', error, self);
+//            switch (event.category) {
+//            case 'PNReconnectedCategory':
+//                self.emit('reconnected', self);
+//                break;
+//            case 'PNNetworkIssuesCategory':
+//                self.emit('networkIssues', self);
+//                break;
+//            case 'PNAccessDeniedCategory':
+//                self.emit('accessDenied', self);
+//                break;
+//            case 'PNNetworkDownCategory':
+//            case 'PNNetworkUpCategory':
+//                break;
+//            }
+        },
+        message: function (event) {
+            var message = event.message;
+            self.emit('message:' + message.topic, message.data, self);
+            self.emit('message', message.topic, message.data, self);
+        },
+        presence: function (event) {
+            console.log(event);
+            // event.action / event.uuid
+        }
+    });
+
+    return self;
 }
 
 module.exports = Channel;

@@ -10,19 +10,11 @@ test('channel', function (assert) {
             message: 'Hello world!'
         };
 
-    assert.plan(10);
-
-    // subscribe to the "connecting" event
-    channel.on('connecting', function (chan) {
-        log('1. Connecting');
-
-        // check event data
-        assert.strictEqual(chan, channel, 'Channel in connecting event');
-    });
+    assert.timeoutAfter(5000);
 
     // subscribe to the "connected" event
     channel.on('connected', function (chan) {
-        log('2. Connected');
+        log('1. Connected');
 
         // check event data
         assert.strictEqual(chan, channel, 'Channel in connected event');
@@ -33,7 +25,7 @@ test('channel', function (assert) {
 
     // subscribe to the "published" event
     channel.on('published', function (topic, data, chan) {
-        log('3. Message published');
+        log('2. Message published');
 
         // check event data
         assert.strictEqual(topic, 'chat', 'Topic in published event');
@@ -43,7 +35,7 @@ test('channel', function (assert) {
 
     // subscribe to the topic
     channel.on('message:chat', function (data, chan) {
-        log('4. Message received on topic');
+        log('3. Message received on topic');
 
         // check event data
         assert.deepEqual(data, dataToSend, 'Data in message event');
@@ -52,7 +44,7 @@ test('channel', function (assert) {
 
     // subscribe to all messages
     channel.on('message', function (topic, data, chan) {
-        log('5. Message received');
+        log('4. Message received');
 
         // check event data
         assert.strictEqual(topic, 'chat', 'Topic in message event');
@@ -65,10 +57,13 @@ test('channel', function (assert) {
 
     // subscribe to the "disconnected" event
     channel.on('disconnected', function (chan) {
-        log('6. Disconnected');
+        log('5. Disconnected');
 
         // check event data
         assert.strictEqual(chan, channel, 'Channel in disconnected event');
+
+        // test finished
+        assert.end();
     });
 
     channel.connect();
