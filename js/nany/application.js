@@ -1,7 +1,7 @@
 var loadCSS = require('./load-css'),
     Spy = require('./spy'),
     Renderer = require('./renderer'),
-    querystring = require('querystring'),
+    qs = require('qs'),
     User = require('./user'),
     //Channel = require('./channel'),
     Ring = require('./ring'),
@@ -16,8 +16,8 @@ function getUser(menuDoc) {
 }
 
 function getIDS(doc) {
-    var qs = doc.location.search.substring(1);
-    return querystring.parse(qs).IDS;
+    var querystring = doc.location.search.substring(1);
+    return qs.parse(querystring).IDS;
 }
 
 /* Application class */

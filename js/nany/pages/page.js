@@ -1,12 +1,12 @@
 var urls = require('../urls'),
-    querystring = require('querystring'),
+    qs = require('qs'),
     xhr = require('xhr'),
     extend = require('xtend/mutable');
 
 function getFullUrl(url, IDS, params) {
     params = extend({}, params);  // copy
     params.IDS = IDS;
-    return window.location.origin + url + '?' + querystring.stringify(params);
+    return window.location.origin + url + '?' + qs.stringify(params);
 }
 
 /* Page class */
