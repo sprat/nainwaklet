@@ -28,8 +28,6 @@ function enhance(doc, context) {
 
         if (match) {
             objet = objetsById[match[1]];
-            console.log(match[1]);
-            console.log(objet);
             if (objet) {
                 popin = objets.createInfoPopin(h, objet, perso);
                 parent.insertBefore(popin, parent.firstChild);
