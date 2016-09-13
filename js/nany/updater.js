@@ -3,9 +3,9 @@ var serializeHTML = require('print-html');
 var log = require('./log');
 
 /* Updater class */
-function Updater(url, user, pages, throttleDelay) {
-    if (!url || !user) {
-        throw new Error('url and user parameters are mandatory');
+function Updater(url, throttleDelay) {
+    if (!url) {
+        throw new Error('url is mandatory');
     }
 
     throttleDelay = throttleDelay || 60;
@@ -14,7 +14,7 @@ function Updater(url, user, pages, throttleDelay) {
 
     function send(page, doc, date, analysis) {
         var pageId = page.url;
-        var isAuthenticated = !!user.password;
+        var isAuthenticated = true;  // TODO: authenticate
         var lastUpdate = lastUpdates[pageId] || 0;
         var elapsed = (date - lastUpdate) / 1000;
 
@@ -23,8 +23,6 @@ function Updater(url, user, pages, throttleDelay) {
         }
 
         var data = {
-            user: user.name,
-            pass: user.password,
             url: page.url,
             type: page.type,
             raw: serializeHTML(doc),

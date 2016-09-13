@@ -3,13 +3,15 @@ var loadCSS = require('./load-css');
 var Spy = require('./spy');
 var Renderer = require('./renderer');
 var qs = require('qs');
-var User = require('./user');
 //var Channel = require('./channel');
 var Updater = require('./updater');
 var pages = require('./pages');
-var analyzer = require('./pages/analyzer');
 var log = require('./log');
 
+function getIDS(doc) {
+    var querystring = doc.location.search.substring(1);
+    return qs.parse(querystring).IDS;
+}
 
 var defaultConfiguration = {
     /* Channel name */
@@ -26,28 +28,15 @@ var defaultConfiguration = {
     //authenticationUrl: null
 };
 
-
-/* Get the Nainwak User info from the menu frame */
-function getUser(menuDoc) {
-    var name = analyzer.getText(menuDoc, '.news-titre td:last-child');
-    return User(name);
-}
-
-function getIDS(doc) {
-    var querystupdater = doc.location.search.substupdater(1);
-    return qs.parse(querystupdater).IDS;
-}
-
 /* Application class */
 function Application(configuration) {
     var config = extend({}, defaultConfiguration, configuration);
     var frames = window.frames;
     var infoFrame = frames.info;
     var container = frames.pub.document.body;
-    var user = getUser(frames.menu.document);
     var IDS = getIDS(document);
     var updatePages = ['detect', 'invent', 'perso', 'even'];
-    var context = {};
+    var context = {};  // game information fetched by the current player
     var containerContent;  // backup of the initial content of the container
     var dashboard;
     var channelName = config.channel;
@@ -56,17 +45,6 @@ function Application(configuration) {
     var updater;
 
     function init() {
-        /*
-        // create the (communication) channel
-        channel = Channel(channelName, config.publishKey, config.subscribeKey);
-        channel.connect();
-        */
-
-        // create the updater updater
-        if (config.updateUrl && user) {
-            updater = Updater(config.updateUrl, user);
-        }
-
         // create the spy if the info frame is available
         if (infoFrame) {
             spy = Spy(infoFrame);
@@ -75,6 +53,17 @@ function Application(configuration) {
 
         // load perso page
         loadPersoPage();
+
+        /*
+        // create the (communication) channel
+        channel = Channel(channelName, config.publishKey, config.subscribeKey);
+        channel.connect();
+        */
+
+        // create the updater
+        if (config.updateUrl) {
+            updater = Updater(config.updateUrl);
+        }
 
         // create a renderer for the Dashboard
         var h = Renderer(container.ownerDocument);
@@ -174,47 +163,7 @@ function Application(configuration) {
 
     function renderContent(h) {
         var content = [];
-
-        // replace by components' views
-        if (!user.password) {
-            content.push(renderLoginForm(h));
-        } else {
-            content.push(h.text('MAJ automatique activée'));
-            content.push(renderDeconnectionButton(h));
-        }
-
         return h('div.TV.content', content);
-    }
-
-    function renderDeconnectionButton(h) {
-        return h('button.disconnect', 'Déconnexion', {
-            onclick: function (/*event*/) {
-                user.removePassword();
-                h.update();
-            }
-        });
-    }
-
-    function renderLoginForm(h) {
-        var passwordField = h('label.password-field', [
-            'Mot de passe du Ring',
-            h('input', [], {
-                name: 'password',
-                type: 'password'
-            })
-        ]);
-
-        return h('form.login-form', [passwordField], {
-            onsubmit: function (event) {
-                var form = event.target;
-                var inputs = form.elements;
-                var password = inputs.password.value;
-
-                user.updatePassword(password);
-                h.update();
-                return false;
-            }
-        });
     }
 
     init();
