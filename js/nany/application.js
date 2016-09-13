@@ -1,4 +1,5 @@
-var loadCSS = require('./load-css'),
+var extend = require('xtend/mutable'),
+    loadCSS = require('./load-css'),
     Spy = require('./spy'),
     Renderer = require('./renderer'),
     qs = require('qs'),
@@ -8,6 +9,23 @@ var loadCSS = require('./load-css'),
     pages = require('./pages'),
     analyzer = require('./pages/analyzer'),
     log = require('./log');
+
+
+var defaultConfiguration = {
+    /* Channel name */
+    channel: 'default',
+    /* PubNub account's publish key */
+    publishKey: 'pub-c-8be41a11-cbc5-4427-a5ad-e18cf5a466e4',
+    /* PubNub accounts's subscribe key */
+    subscribeKey: 'sub-c-38ae8020-6d33-11e5-bf4b-0619f8945a4f',
+    /* URL of the update page: the Nany application will post updates
+     * when the user navigate between Nainwak pages */
+    updateUrl: null,
+    /* URL of the login page: it will be put in an iframe and should return an
+     * access token via postMessage */
+    //authenticationUrl: null
+};
+
 
 /* Get the Nainwak User info from the menu frame */
 function getUser(menuDoc) {
@@ -21,32 +39,32 @@ function getIDS(doc) {
 }
 
 /* Application class */
-function Application(config) {
-    var frames = window.frames,
-        infoFrame = frames.info,
-        container = frames.pub.document.body,
-        user = getUser(frames.menu.document),
-        IDS = getIDS(document),
-        channelName = config.channel || 'default',
-        ringUpdateUrl = config.ringUpdateUrl,
-        ringUpdatePages = ['detect', 'invent', 'perso', 'even'],
-        context = {},
-        containerContent,  // backup of the initial content of the container
-        dashboard,
-        //channel,
-        spy,
-        ring;
+function Application(configuration) {
+    var config = extend({}, defaultConfiguration, configuration);
+    var frames = window.frames;
+    var infoFrame = frames.info;
+    var container = frames.pub.document.body;
+    var user = getUser(frames.menu.document);
+    var IDS = getIDS(document);
+    var updatePages = ['detect', 'invent', 'perso', 'even'];
+    var context = {};
+    var containerContent;  // backup of the initial content of the container
+    var dashboard;
+    var channelName = config.channel;
+    //var channel;
+    var spy;
+    var ring;  // rename to updater...
 
     function init() {
         /*
         // create the (communication) channel
-        channel = Channel(channelName);
+        channel = Channel(channelName, config.publishKey, config.subscribeKey);
         channel.connect();
         */
 
         // create the ring updater
-        if (ringUpdateUrl && user) {
-            ring = Ring(ringUpdateUrl, user);
+        if (config.updateUrl && user) {
+            ring = Ring(config.updateUrl, user);
         }
 
         // create the spy if the info frame is available
@@ -106,8 +124,8 @@ function Application(config) {
             log(analysis);
         }
 
-        // send an update to the Ring
-        if (ring && ringUpdatePages.indexOf(page.type) > -1) {
+        // send an update to the server
+        if (ring && updatePages.indexOf(page.type) > -1) {
             ring.sendUpdate(page, doc, date, analysis);
         }
 

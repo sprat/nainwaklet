@@ -1,11 +1,10 @@
-var config = require('./config'),
-    channelConfig = config.channel,
-    PubNub = require('pubnub'),
+var PubNub = require('pubnub'),
     Emitter = require('component-emitter'),
     md5 = require('md5');
 
-function Channel(name) {
+function Channel(name, publishKey, subscribeKey) {
     // TODO: authentication?
+    // TODO: don't use md5 here
     /* Invalid chars in channel names:
      * comma ,
      * colon :
@@ -18,8 +17,8 @@ function Channel(name) {
      */
     var channelId = md5(name);
     var pubnub = new PubNub({
-        publishKey: channelConfig.publishKey,
-        subscribeKey: channelConfig.subscribeKey,
+        publishKey: publishKey,
+        subscribeKey: subscribeKey,
         ssl: true
     });
 

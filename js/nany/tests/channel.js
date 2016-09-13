@@ -2,13 +2,15 @@ var test = require('tape-catch'),
     Channel = require('../channel'),
     log = require('../log');
 
+var publishKey = 'pub-c-8be41a11-cbc5-4427-a5ad-e18cf5a466e4';
+var subscribeKey = 'sub-c-38ae8020-6d33-11e5-bf4b-0619f8945a4f';
 
 test('channel', function (assert) {
-    var channel = Channel('#test-channel'),
-        topic = 'chat',
-        dataToSend = {
-            message: 'Hello world!'
-        };
+    var channel = Channel('#test-channel', publishKey, subscribeKey);
+    var topic = 'chat';
+    var dataToSend = {
+        message: 'Hello world!'
+    };
 
     assert.timeoutAfter(5000);
 
