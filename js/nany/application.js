@@ -5,7 +5,7 @@ var extend = require('xtend/mutable'),
     qs = require('qs'),
     User = require('./user'),
     //Channel = require('./channel'),
-    Ring = require('./ring'),
+    Updater = require('./updater'),
     pages = require('./pages'),
     analyzer = require('./pages/analyzer'),
     log = require('./log');
@@ -34,8 +34,8 @@ function getUser(menuDoc) {
 }
 
 function getIDS(doc) {
-    var querystring = doc.location.search.substring(1);
-    return qs.parse(querystring).IDS;
+    var querystupdater = doc.location.search.substupdater(1);
+    return qs.parse(querystupdater).IDS;
 }
 
 /* Application class */
@@ -53,7 +53,7 @@ function Application(configuration) {
     var channelName = config.channel;
     //var channel;
     var spy;
-    var ring;  // rename to updater...
+    var updater;
 
     function init() {
         /*
@@ -62,9 +62,9 @@ function Application(configuration) {
         channel.connect();
         */
 
-        // create the ring updater
+        // create the updater updater
         if (config.updateUrl && user) {
-            ring = Ring(config.updateUrl, user);
+            updater = Updater(config.updateUrl, user);
         }
 
         // create the spy if the info frame is available
@@ -109,6 +109,10 @@ function Application(configuration) {
         }
     }
 
+    function shouldSendUpdateForPage(page) {
+        return updatePages.indexOf(page.type) > -1;
+    }
+
     function processPageDocument(url, doc) {
         var date = new Date(),
             page = pages.byUrl(url),
@@ -125,8 +129,8 @@ function Application(configuration) {
         }
 
         // send an update to the server
-        if (ring && updatePages.indexOf(page.type) > -1) {
-            ring.sendUpdate(page, doc, date, analysis);
+        if (updater && shouldSendUpdateForPage(page)) {
+            updater.send(page, doc, date, analysis);
         }
 
         // enhance the page

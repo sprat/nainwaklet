@@ -2,8 +2,8 @@ var xhr = require('xhr'),
     serializeHTML = require('print-html'),
     log = require('./log');
 
-/* Ring class */
-function Ring(url, user, pages, throttleDelay) {
+/* Updater class */
+function Updater(url, user, pages, throttleDelay) {
     if (!url || !user) {
         throw new Error('url and user parameters are mandatory');
     }
@@ -12,7 +12,7 @@ function Ring(url, user, pages, throttleDelay) {
 
     var lastUpdates = {};
 
-    function sendUpdate(page, doc, date, analysis) {
+    function send(page, doc, date, analysis) {
         var pageId = page.url,
             isAuthenticated = !!user.password,
             lastUpdate = lastUpdates[pageId] || 0,
@@ -51,8 +51,8 @@ function Ring(url, user, pages, throttleDelay) {
     }
 
     return {
-        sendUpdate: sendUpdate
+        send: send
     };
 }
 
-module.exports = Ring;
+module.exports = Updater;

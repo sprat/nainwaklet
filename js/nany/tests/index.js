@@ -1,4 +1,4 @@
 require('./urls');
-require('./channel');
+//require('./channel');
 require('./calcul');
 require('./pages');
