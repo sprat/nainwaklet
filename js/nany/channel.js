@@ -1,21 +1,17 @@
 var PubNub = require('pubnub');
 var Emitter = require('component-emitter');
-var md5 = require('md5');
+
+function safeName(name) {
+    // see https://www.pubnub.com/knowledge-base/discussion/427/what-are-valid-channel-names
+    // eslint-disable-next-line no-control-regex
+    return name.replace(/[\x00-\x1F,:.*/\\]/gi, '_');
+}
 
 function Channel(name, publishKey, subscribeKey) {
     // TODO: authentication?
-    // TODO: don't use md5 here
-    /* Invalid chars in channel names:
-     * comma ,
-     * colon :
-     * period .
-     * astrick *
-     * slash /
-     * backslash: \
-     * non-printable ASCII control characters
-     * Unicode zero
-     */
-    var channelId = md5(name);
+    // make sure we have a valid channel name
+    name = safeName(name);
+
     var pubnub = new PubNub({
         publishKey: publishKey,
         subscribeKey: subscribeKey,
@@ -26,7 +22,7 @@ function Channel(name, publishKey, subscribeKey) {
     function publish(topic, data) {
         var self = this;
         var content = {
-            channel: channelId,
+            channel: name,
             message: {
                 topic: topic,
                 data: data
@@ -43,7 +39,7 @@ function Channel(name, publishKey, subscribeKey) {
     // connect to channel
     function connect() {
         pubnub.subscribe({
-            channels: [channelId],
+            channels: [name],
             withPresence: true
         });
     }
@@ -51,7 +47,7 @@ function Channel(name, publishKey, subscribeKey) {
     // disconnect from channel
     function disconnect() {
         pubnub.unsubscribe({
-            channels: [channelId]
+            channels: [name]
         });
     }
 

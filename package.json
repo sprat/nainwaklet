@@ -23,7 +23,6 @@
     "component-emitter": "^1.2.1",
     "get-dataset": "^0.0.4",
     "htmldec": "^0.0.1",
-    "md5": "^2.2.1",
     "print-html": "^0.0.2",
     "pubnub": "^4.0.9",
     "qs": "^6.2.1",
