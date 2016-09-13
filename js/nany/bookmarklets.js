@@ -1,6 +1,6 @@
-var urls = require('./urls'),
-    currentScript = require('./current-script'),
-    getDataset = require('get-dataset');
+var urls = require('./urls');
+var currentScript = require('./current-script');
+var getDataset = require('get-dataset');
 
 function setHref(link, scriptUrl, config) {
     // TODO: maybe we can use a template and the text plugin here?

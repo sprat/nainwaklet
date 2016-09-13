@@ -1,16 +1,16 @@
-var test = require('tape-catch'),
-    path = require('path'),
-    fs = require('fs'),
-    helpers = require('../helpers'),
-    pages = require('../../pages'),
-    page = pages.byType('perso'),
-    html = fs.readFileSync(path.join(__dirname, '..', 'fixtures', 'perso.html'), 'utf8'),
-    doc = helpers.parseHTMLDocument(html),
-    now = new Date(1457780950000);
+var test = require('tape-catch');
+var path = require('path');
+var fs = require('fs');
+var helpers = require('../helpers');
+var pages = require('../../pages');
+var page = pages.byType('perso');
+var html = fs.readFileSync(path.join(__dirname, '..', 'fixtures', 'perso.html'), 'utf8');
+var doc = helpers.parseHTMLDocument(html);
+var now = new Date(1457780950000);
 
 test('perso.analyze', function (assert) {
-    var info = page.analyze(doc, now, {}),
-        perso = info.perso;
+    var info = page.analyze(doc, now, {});
+    var perso = info.perso;
 
     assert.deepEqual(perso, {
         nom: 'Palme',

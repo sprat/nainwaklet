@@ -2,8 +2,8 @@ var Emitter = require('component-emitter');
 
 /* Spy class */
 function Spy(frameWindow) {
-    var frame = frameWindow.frameElement,
-        self;
+    var frame = frameWindow.frameElement;
+    var self;
 
     function onLoad() {
         var doc = frameWindow.document;

@@ -1,7 +1,7 @@
-var urls = require('../urls'),
-    qs = require('qs'),
-    xhr = require('xhr'),
-    extend = require('xtend/mutable');
+var urls = require('../urls');
+var qs = require('qs');
+var xhr = require('xhr');
+var extend = require('xtend/mutable');
 
 function getFullUrl(url, IDS, params) {
     params = extend({}, params);  // copy
@@ -11,14 +11,14 @@ function getFullUrl(url, IDS, params) {
 
 /* Page class */
 function Page(type, options) {
-    var url = urls.getPageUrl(type),
-        fetchParameters = options.fetchParameters || {};
+    var url = urls.getPageUrl(type);
+    var fetchParameters = options.fetchParameters || {};
 
     function fetch(IDS, processResponse) {
-        var fullUrl = getFullUrl(url, IDS, fetchParameters),
-            options = {
-                responseType: 'document'
-            };
+        var fullUrl = getFullUrl(url, IDS, fetchParameters);
+        var options = {
+            responseType: 'document'
+        };
 
         xhr.get(fullUrl, options, function (error, response) {
             processResponse(response);

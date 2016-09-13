@@ -1,5 +1,5 @@
-var md5 = require('md5'),
-    store = require('./store');
+var md5 = require('md5');
+var store = require('./store');
 
 function encodePassword(name, password) {
     return md5(name + md5(password));

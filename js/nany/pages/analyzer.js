@@ -1,5 +1,5 @@
-var decodeEntities = require('htmldec'),
-    zipObject = require('zip-object');
+var decodeEntities = require('htmldec');
+var zipObject = require('zip-object');
 
 function int(value) {
     return parseInt(value, 10);
@@ -50,8 +50,8 @@ function buildObjectsFromJSSequences(js, regex, keys) {
 
     // process all matches
     js.replace(regex, function (match, sequence) {
-        var values = evaluateJS('[' + sequence + ']'),
-            object = zipObject(keys, values);
+        var values = evaluateJS('[' + sequence + ']');
+        var object = zipObject(keys, values);
         objects.push(object);
     });
 

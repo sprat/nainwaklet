@@ -1,9 +1,9 @@
-var extend = require('xtend/mutable'),
-    analyzer = require('./analyzer'),
-    int = analyzer.int,
-    urls = require('../urls'),
-    Renderer = require('../renderer'),
-    calcul = require('../calcul');
+var extend = require('xtend/mutable');
+var analyzer = require('./analyzer');
+var int = analyzer.int;
+var urls = require('../urls');
+var Renderer = require('../renderer');
+var calcul = require('../calcul');
 
 /* model:
  * - 'bonnet' : objet sous le bonnet
@@ -21,14 +21,14 @@ var listNames = {
 };
 
 function analyze(js, context) {
-    var regex = /mip\((.*)\);/ig,
-        keys = 'idtable,nomobjet,photoobjet,descriptionobjet,model,typeobjet,PAutiliser,portee,effet,recharg,PV,PVmax,PAreparer,dispo,PFobj,PPobj,PVobj,PIobj,collant,reparable,poussiere'.split(','),
-        objects = analyzer.buildObjectsFromJSSequences(js, regex, keys),
-        lists = {};
+    var regex = /mip\((.*)\);/ig;
+    var keys = 'idtable,nomobjet,photoobjet,descriptionobjet,model,typeobjet,PAutiliser,portee,effet,recharg,PV,PVmax,PAreparer,dispo,PFobj,PPobj,PVobj,PIobj,collant,reparable,poussiere'.split(',');
+    var objects = analyzer.buildObjectsFromJSSequences(js, regex, keys);
+    var lists = {};
 
     function getList(object) {
-        var listName = listNames[object.model],
-            list = lists[listName];
+        var listName = listNames[object.model];
+        var list = lists[listName];
 
         if (list === undefined) {
             list = lists[listName] = [];
@@ -83,9 +83,9 @@ function renderPopin(h, content) {
 }
 
 function createInfoPopin(h, objet, perso) {
-    var isArme = objet.type === 'arme',
-        degats = (isArme && perso) ? calcul.degats(perso, objet) : undefined,
-        content;
+    var isArme = objet.type === 'arme';
+    var degats = (isArme && perso) ? calcul.degats(perso, objet) : undefined;
+    var content;
 
     if (degats) {
         content = h('.degats', 'Dégâts : entre ' + degats.minimum + ' et ' + degats.maximum);
@@ -94,8 +94,8 @@ function createInfoPopin(h, objet, perso) {
 }
 
 function enhance(doc, objets, perso) {
-    var h = Renderer(doc),
-        images = analyzer.findAll(doc, 'td.news-text img');
+    var h = Renderer(doc);
+    var images = analyzer.findAll(doc, 'td.news-text img');
 
     // add an advisor box on each title
     images.forEach(function (image, index) {

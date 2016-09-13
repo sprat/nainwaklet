@@ -1,18 +1,18 @@
 /* detect page */
-var Page = require('./page'),
-    analyzer = require('./analyzer'),
-    tag = require('./tag'),
-    classe = require('./classe'),
-    pager = require('./pager'),
-    int = analyzer.int,
-    urls = require('../urls');
+var Page = require('./page');
+var analyzer = require('./analyzer');
+var tag = require('./tag');
+var classe = require('./classe');
+var pager = require('./pager');
+var int = analyzer.int;
+var urls = require('../urls');
 
 function getLocalisation(doc) {
     // example:
     // <span class="c1">Position (13,5) sur "Ronain Graou" |b95eb2f716c500db6|</span>
-    var text = analyzer.getText(doc, '.c1'),
-        regex = /Position\s\((\d+),(\d+)\)\ssur\s"([^"]*)"/i,
-        match = regex.exec(text);
+    var text = analyzer.getText(doc, '.c1');
+    var regex = /Position\s\((\d+),(\d+)\)\ssur\s"([^"]*)"/i;
+    var match = regex.exec(text);
 
     if (match) {
         return {
@@ -23,14 +23,14 @@ function getLocalisation(doc) {
 }
 
 function getNains(js) {
-    var regex = /tabavat\[\d+\]\s=\s\[(.*)\];/ig,
-        keys = 'id,photo,nom,tag,barbe,classe,cote,distance,x,y,description,attaquer,gifler,estCible'.split(','),
-        objects = analyzer.buildObjectsFromJSSequences(js, regex, keys),
-        autresActions = {
-            'a': 'accrocherPoisson', // Accrocher un poisson !,
-            'c': 'offrirCadeau',  // Offrir un cadeau !,
-            'o': 'gifler'  // Gifler
-        };
+    var regex = /tabavat\[\d+\]\s=\s\[(.*)\];/ig;
+    var keys = 'id,photo,nom,tag,barbe,classe,cote,distance,x,y,description,attaquer,gifler,estCible'.split(',');
+    var objects = analyzer.buildObjectsFromJSSequences(js, regex, keys);
+    var autresActions = {
+        'a': 'accrocherPoisson', // Accrocher un poisson !,
+        'c': 'offrirCadeau',  // Offrir un cadeau !,
+        'o': 'gifler'  // Gifler
+    };
 
     return objects.map(function (spec) {
         var nain = {
@@ -57,9 +57,9 @@ function getNains(js) {
 }
 
 function getObjets(js) {
-    var regex = /tabobjet\[\d+\]\s=\s\[(.*)\];/ig,
-        keys = 'id,photo,nom,distance,x,y,categorie,poussiere'.split(','),
-        objects = analyzer.buildObjectsFromJSSequences(js, regex, keys);
+    var regex = /tabobjet\[\d+\]\s=\s\[(.*)\];/ig;
+    var keys = 'id,photo,nom,distance,x,y,categorie,poussiere'.split(',');
+    var objects = analyzer.buildObjectsFromJSSequences(js, regex, keys);
 
     return objects.map(function (spec) {
         return {
@@ -74,10 +74,10 @@ function getObjets(js) {
 }
 
 function analyze(doc, date, context) {
-    var js = analyzer.getJS(doc),
-        localisation = getLocalisation(doc),
-        nains = getNains(js),
-        objets = getObjets(js);
+    var js = analyzer.getJS(doc);
+    var localisation = getLocalisation(doc);
+    var nains = getNains(js);
+    var objets = getObjets(js);
 
     context.detection = {
         monde: localisation.monde,

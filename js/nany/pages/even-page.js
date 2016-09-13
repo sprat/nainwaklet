@@ -1,19 +1,19 @@
-var Page = require('./page'),
-    analyzer = require('./analyzer'),
-    pager = require('./pager'),
-    int = analyzer.int,
-    evenInfo = require('./even-info'),
-    urls = require('../urls'),
-    dateRegex = /(\d\d)h(\d\d) \(\w+\. (\d\d)\/(\d\d)\)/;
+var Page = require('./page');
+var analyzer = require('./analyzer');
+var pager = require('./pager');
+var int = analyzer.int;
+var evenInfo = require('./even-info');
+var urls = require('../urls');
+var dateRegex = /(\d\d)h(\d\d) \(\w+\. (\d\d)\/(\d\d)\)/;
 
 // return the unix timestamp for a date specified as '12h09 (sam. 12/03)' in GMT+1
 function convertToUnixTimestamp(date, nowDate) {
-    var match = dateRegex.exec(date),
-        year = nowDate.getFullYear(),
-        month = int(match[4]),
-        day = int(match[3]),
-        hours = int(match[1]),
-        minutes = int(match[2]);
+    var match = dateRegex.exec(date);
+    var year = nowDate.getFullYear();
+    var month = int(match[4]);
+    var day = int(match[3]);
+    var hours = int(match[1]);
+    var minutes = int(match[2]);
 
     // Note: we apply the GMT+1 offset to the date
     date = new Date(Date.UTC(year, month - 1, day, hours - 1, minutes));
@@ -56,20 +56,20 @@ function getImage(type) {
 }
 
 function getEvenements(js, nowDate) {
-    var regex = /ev\((.*)\);/ig,
-        keys = 'neweven,time,num,s1,s2,s3,n1,n2,n3,appel'.split(','),
-        objects = analyzer.buildObjectsFromJSSequences(js, regex, keys);
+    var regex = /ev\((.*)\);/ig;
+    var keys = 'neweven,time,num,s1,s2,s3,n1,n2,n3,appel'.split(',');
+    var objects = analyzer.buildObjectsFromJSSequences(js, regex, keys);
 
     return objects.map(function (object) {
-        var type = object.num,
-            params = {
-                s1: object.s1,
-                s2: object.s2,
-                s3: object.s3,
-                n1: object.n1,
-                n2: object.n2,
-                n3: object.n3
-            };
+        var type = object.num;
+        var params = {
+            s1: object.s1,
+            s2: object.s2,
+            s3: object.s3,
+            n1: object.n1,
+            n2: object.n2,
+            n3: object.n3
+        };
 
         return {
             isNew: object.neweven == 1,
@@ -84,8 +84,8 @@ function getEvenements(js, nowDate) {
 }
 
 function analyze(doc, date, context) {
-    var js = analyzer.getJS(doc),
-        pagerData = pager.analyze(js, context);
+    var js = analyzer.getJS(doc);
+    var pagerData = pager.analyze(js, context);
 
     context.evenements = getEvenements(js, date);
 

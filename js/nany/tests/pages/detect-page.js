@@ -1,13 +1,12 @@
-var test = require('tape-catch'),
-    path = require('path'),
-    fs = require('fs'),
-    helpers = require('../helpers'),
-    pages = require('../../pages'),
-    page = pages.byType('detect'),
-    html = fs.readFileSync(path.join(__dirname, '..', 'fixtures', 'detect.html'), 'utf8'),
-    doc = helpers.parseHTMLDocument(html),
-    now = new Date(1457780950000);
-
+var test = require('tape-catch');
+var path = require('path');
+var fs = require('fs');
+var helpers = require('../helpers');
+var pages = require('../../pages');
+var page = pages.byType('detect');
+var html = fs.readFileSync(path.join(__dirname, '..', 'fixtures', 'detect.html'), 'utf8');
+var doc = helpers.parseHTMLDocument(html);
+var now = new Date(1457780950000);
 
 test('detect.analyze: localisation', function (assert) {
     var info = page.analyze(doc, now, {});
@@ -19,8 +18,8 @@ test('detect.analyze: localisation', function (assert) {
 });
 
 test('detect.analyze: nains', function (assert) {
-    var info = page.analyze(doc, now, {}),
-        nains = info.detection.nains;
+    var info = page.analyze(doc, now, {});
+    var nains = info.detection.nains;
 
     assert.strictEqual(nains.length, 3, 'Nombre de nains');
 
@@ -85,8 +84,8 @@ test('detect.analyze: nains', function (assert) {
 });
 
 test('detect.analyze: objets', function (assert) {
-    var info = page.analyze(doc, now, {}),
-        objets = info.detection.objets;
+    var info = page.analyze(doc, now, {});
+    var objets = info.detection.objets;
 
     assert.strictEqual(objets.length, 3, "Nombre d'objets");
 

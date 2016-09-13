@@ -1,6 +1,6 @@
-var xhr = require('xhr'),
-    serializeHTML = require('print-html'),
-    log = require('./log');
+var xhr = require('xhr');
+var serializeHTML = require('print-html');
+var log = require('./log');
 
 /* Updater class */
 function Updater(url, user, pages, throttleDelay) {
@@ -13,29 +13,30 @@ function Updater(url, user, pages, throttleDelay) {
     var lastUpdates = {};
 
     function send(page, doc, date, analysis) {
-        var pageId = page.url,
-            isAuthenticated = !!user.password,
-            lastUpdate = lastUpdates[pageId] || 0,
-            elapsed = (date - lastUpdate) / 1000;
+        var pageId = page.url;
+        var isAuthenticated = !!user.password;
+        var lastUpdate = lastUpdates[pageId] || 0;
+        var elapsed = (date - lastUpdate) / 1000;
 
         if (!isAuthenticated || elapsed < throttleDelay) {
             return;  // don't do anything
         }
 
         var data = {
-                user: user.name,
-                pass: user.password,
-                url: page.url,
-                type: page.type,
-                raw: serializeHTML(doc),
-                content: analysis,
-                date: date
-            },
-            options = {
-                url: url,
-                method: 'POST',
-                json: data
-            };
+            user: user.name,
+            pass: user.password,
+            url: page.url,
+            type: page.type,
+            raw: serializeHTML(doc),
+            content: analysis,
+            date: date
+        };
+
+        var options = {
+            url: url,
+            method: 'POST',
+            json: data
+        };
 
         log('Sending a ring update to ' + url);
 

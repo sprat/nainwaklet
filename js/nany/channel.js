@@ -1,6 +1,6 @@
-var PubNub = require('pubnub'),
-    Emitter = require('component-emitter'),
-    md5 = require('md5');
+var PubNub = require('pubnub');
+var Emitter = require('component-emitter');
+var md5 = require('md5');
 
 function Channel(name, publishKey, subscribeKey) {
     // TODO: authentication?

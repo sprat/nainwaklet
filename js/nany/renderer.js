@@ -29,11 +29,11 @@ function Renderer(document) {
         tag = parseTag(tag);
         options = options || {};
 
-        var el = document.createElement(tag.name),
-            id = options.id || tag.id,
-            classes = (options.classes || []).concat(tag.classes || []),
-            className = classes.join(' '),
-            elOptions;
+        var el = document.createElement(tag.name);
+        var id = options.id || tag.id;
+        var classes = (options.classes || []).concat(tag.classes || []);
+        var className = classes.join(' ');
+        var elOptions;
 
         // add the options
         elOptions = extend({}, options);

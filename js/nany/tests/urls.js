@@ -1,5 +1,5 @@
-var test = require('tape-catch'),
-    urls = require('../urls');
+var test = require('tape-catch');
+var urls = require('../urls');
 
 
 test('urls.getPageUrl', function (assert) {

@@ -1,14 +1,14 @@
-var extend = require('xtend/mutable'),
-    loadCSS = require('./load-css'),
-    Spy = require('./spy'),
-    Renderer = require('./renderer'),
-    qs = require('qs'),
-    User = require('./user'),
-    //Channel = require('./channel'),
-    Updater = require('./updater'),
-    pages = require('./pages'),
-    analyzer = require('./pages/analyzer'),
-    log = require('./log');
+var extend = require('xtend/mutable');
+var loadCSS = require('./load-css');
+var Spy = require('./spy');
+var Renderer = require('./renderer');
+var qs = require('qs');
+var User = require('./user');
+//var Channel = require('./channel');
+var Updater = require('./updater');
+var pages = require('./pages');
+var analyzer = require('./pages/analyzer');
+var log = require('./log');
 
 
 var defaultConfiguration = {
@@ -79,8 +79,8 @@ function Application(configuration) {
         // create a renderer for the Dashboard
         var h = Renderer(container.ownerDocument);
         h.update = function update() {
-            var oldDashboard = dashboard,
-                parent = oldDashboard.parentNode;
+            var oldDashboard = dashboard;
+            var parent = oldDashboard.parentNode;
             dashboard = renderDashboard(h);
             parent.replaceChild(dashboard, oldDashboard);
         };
@@ -114,9 +114,9 @@ function Application(configuration) {
     }
 
     function processPageDocument(url, doc) {
-        var date = new Date(),
-            page = pages.byUrl(url),
-            analysis;
+        var date = new Date();
+        var page = pages.byUrl(url);
+        var analysis;
 
         if (!page) {
             return;

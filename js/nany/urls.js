@@ -1,6 +1,6 @@
 /* Nainwak URLs */
-var nainwakUrl = 'http://www.nainwak.com/',
-    gameUrlRegex = /^https?:\/\/(www\.)?nainwak\.com\/jeu\/index\.php/;
+var nainwakUrl = 'http://www.nainwak.com/';
+var gameUrlRegex = /^https?:\/\/(www\.)?nainwak\.com\/jeu\/index\.php/;
 
 function getPageUrl(page) {
     return '/jeu/' + page + '.php';

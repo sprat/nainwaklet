@@ -1,8 +1,8 @@
-var Page = require('./page'),
-    analyzer = require('./analyzer'),
-    classe = require('./classe'),
-    tag = require('./tag'),
-    int = analyzer.int;
+var Page = require('./page');
+var analyzer = require('./analyzer');
+var classe = require('./classe');
+var tag = require('./tag');
+var int = analyzer.int;
 
 function getClasses(js) {
     var regex = /\$\('(\w+)'\).addClassName\(cotes\[(\d)+\]\);/g;
@@ -16,12 +16,12 @@ function getCharacteristics(js) {
 }
 
 function getBlocsDroits(doc) {
-    var rows = analyzer.findAll(doc, '.bloc-perso tr'),
-        data = {};
+    var rows = analyzer.findAll(doc, '.bloc-perso tr');
+    var data = {};
 
     rows.forEach(function (row) {
-        var name = analyzer.getText(row, '.bloc_droit'),
-            value = analyzer.getText(row, 'td b');
+        var name = analyzer.getText(row, '.bloc_droit');
+        var value = analyzer.getText(row, 'td b');
 
         if (name && value) {
             data[name] = int(value);
@@ -32,11 +32,11 @@ function getBlocsDroits(doc) {
 }
 
 function analyze(doc, date, context) {
-    var js = analyzer.getJS(doc),
-        classes = getClasses(js),
-        characts = getCharacteristics(js),
-        blocsDroits = getBlocsDroits(doc),
-        cible = analyzer.find(doc, '.bloc-perso .cible');
+    var js = analyzer.getJS(doc);
+    var classes = getClasses(js);
+    var characts = getCharacteristics(js);
+    var blocsDroits = getBlocsDroits(doc);
+    var cible = analyzer.find(doc, '.bloc-perso .cible');
 
     context.perso = {
         nom: analyzer.getAttr(doc, 'input[name="nvNain"]', 'value'),

@@ -1,7 +1,7 @@
-var Page = require('./page'),
-    analyzer = require('./analyzer'),
-    pager = require('./pager'),
-    objets = require('./objets');
+var Page = require('./page');
+var analyzer = require('./analyzer');
+var pager = require('./pager');
+var objets = require('./objets');
 
 function analyze(doc, date, context) {
     var js = analyzer.getJS(doc);

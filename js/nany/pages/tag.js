@@ -1,8 +1,8 @@
 function parse(tag) {
-    var noBracketsTag = tag.replace(/\] \[|\[|\]/g, ''),
-        guildeRegex = /<span\s+style=\"color:(#[0-9A-F]{6});\">([^<]*)<\/span>/i,
-        guilde = '',
-        result = {};
+    var noBracketsTag = tag.replace(/\] \[|\[|\]/g, '');
+    var guildeRegex = /<span\s+style=\"color:(#[0-9A-F]{6});\">([^<]*)<\/span>/i;
+    var guilde = '';
+    var result = {};
 
     // find the guilde and perso elements
     var perso = noBracketsTag.replace(guildeRegex, function(match, couleur, nom) {

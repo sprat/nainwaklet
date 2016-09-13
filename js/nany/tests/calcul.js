@@ -1,6 +1,5 @@
-var test = require('tape-catch'),
-    calcul = require('../calcul');
-
+var test = require('tape-catch');
+var calcul = require('../calcul');
 
 test('calcul.degats', function (assert) {
     var armeBourrin = {
