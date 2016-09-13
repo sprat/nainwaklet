@@ -2,9 +2,7 @@ var urls = require('./urls'),
     currentScript = require('./current-script'),
     getDataset = require('get-dataset');
 
-function setHref(link, scriptUrl) {
-    var config = getDataset(link);
-
+function setHref(link, scriptUrl, config) {
     // TODO: maybe we can use a template and the text plugin here?
     var lines = [
         'javascript:(function(src, conf) {',
@@ -31,11 +29,14 @@ function setHref(link, scriptUrl) {
 }
 
 // initialize the bookmarklets links
-function initialize(selector, scriptUrl) {
-    var links = document.querySelectorAll(selector || '.nany-bookmarklet');
+function initialize(selector, config, scriptUrl) {
+    selector = selector || '.nany-bookmarklet';
+    scriptUrl = scriptUrl || currentScript.src;
 
+    var links = document.querySelectorAll(selector);
     Array.prototype.forEach.call(links, function (link) {
-        setHref(link, scriptUrl || currentScript.src);
+        var conf = config || getDataset(link);
+        setHref(link, scriptUrl, conf);
     });
 }
 
