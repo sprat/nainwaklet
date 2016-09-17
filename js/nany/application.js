@@ -4,6 +4,7 @@ var ids = require('./ids');
 var Spy = require('./spy');
 var Renderer = require('./renderer');
 //var Channel = require('./channel');
+var Dashboard = require('./dashboard');
 var Updater = require('./updater');
 var pages = require('./pages');
 var log = require('./log');
@@ -33,8 +34,9 @@ function Application(configuration) {
     var updatePages = ['detect', 'invent', 'perso', 'even'];
     var context = {};  // game information fetched by the current player
     var containerContent;  // backup of the initial content of the container
-    var dashboard;
     var channelName = config.channel;
+    var dashboard;
+    var dashboardEl;
     //var channel;
     var spy;
     var updater;
@@ -60,22 +62,27 @@ function Application(configuration) {
             updater = Updater(config.updateUrl);
         }
 
+        // Note: we never remove the CSS, maybe that's something we should do...
+        loadCSS(container.ownerDocument);
+
+        // create the dashboard object
+        dashboard = Dashboard(channelName);
+
         // create a renderer for the Dashboard
         var h = Renderer(container.ownerDocument);
         h.update = function update() {
-            var oldDashboard = dashboard;
-            var parent = oldDashboard.parentNode;
-            dashboard = renderDashboard(h);
-            parent.replaceChild(dashboard, oldDashboard);
+            var parent = dashboardEl.parentNode;
+            var oldDashboardEl = dashboardEl;
+            dashboardEl = dashboard.render(h);
+            parent.replaceChild(dashboardEl, oldDashboardEl);
         };
 
         // backup the initial content and install our UI
-        // Note: we never remove the CSS, maybe that's something we should do...
-        loadCSS(container.ownerDocument);
+        // TODO: keep the elements somewhere to avoid problems with registered callbacks
         containerContent = container.innerHTML;
         container.innerHTML = '';
-        dashboard = renderDashboard(h);
-        container.appendChild(dashboard);
+        dashboardEl = dashboard.render(h);
+        container.appendChild(dashboardEl);
     }
 
     function destroy() {
@@ -147,18 +154,6 @@ function Application(configuration) {
 
         log('Navigation to ' + url);
         processPageDocument(url, doc);
-    }
-
-    function renderDashboard(h) {
-        return h('div.nany.dashboard', [
-            h('div.VNT.title', channelName),
-            renderContent(h)
-        ]);
-    }
-
-    function renderContent(h) {
-        var content = [];
-        return h('div.TV.content', content);
     }
 
     init();
