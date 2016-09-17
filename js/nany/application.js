@@ -1,17 +1,12 @@
 var extend = require('xtend/mutable');
 var loadCSS = require('./load-css');
+var ids = require('./ids');
 var Spy = require('./spy');
 var Renderer = require('./renderer');
-var qs = require('qs');
 //var Channel = require('./channel');
 var Updater = require('./updater');
 var pages = require('./pages');
 var log = require('./log');
-
-function getIDS(doc) {
-    var querystring = doc.location.search.substring(1);
-    return qs.parse(querystring).IDS;
-}
 
 var defaultConfiguration = {
     /* Channel name */
@@ -34,7 +29,7 @@ function Application(configuration) {
     var frames = window.frames;
     var infoFrame = frames.info;
     var container = frames.pub.document.body;
-    var IDS = getIDS(document);
+    var IDS = ids.get(document);
     var updatePages = ['detect', 'invent', 'perso', 'even'];
     var context = {};  // game information fetched by the current player
     var containerContent;  // backup of the initial content of the container
