@@ -1,11 +1,11 @@
 var extend = require('xtend/mutable');
 var loadCSS = require('./load-css');
-var ids = require('./ids');
+var IDS = require('./ids');
 var Spy = require('./spy');
-var Renderer = require('./renderer');
-//var Channel = require('./channel');
-var Dashboard = require('./dashboard');
 var Updater = require('./updater');
+//var Channel = require('./channel');
+var Renderer = require('./renderer');
+var UI = require('./ui');
 var pages = require('./pages');
 var log = require('./log');
 
@@ -30,7 +30,7 @@ function Application(configuration) {
     var frames = window.frames;
     var infoFrame = frames.info;
     var container = frames.pub.document.body;
-    var IDS = ids.get(document);
+    var ids = IDS.get(document);
     var updatePages = ['detect', 'invent', 'perso', 'even'];
     var context = {};  // game information fetched by the current player
     var containerChildNodes;  // backup of the initial content of the container
@@ -66,7 +66,7 @@ function Application(configuration) {
         loadCSS(container.ownerDocument);
 
         // create the dashboard object
-        dashboard = Dashboard(channelName);
+        dashboard = UI.Dashboard(channelName);
 
         // create a renderer for the Dashboard
         var h = Renderer(container.ownerDocument);
@@ -140,7 +140,7 @@ function Application(configuration) {
         var persoPage = pages.byType('perso');
 
         log('Loading perso page');
-        persoPage.fetch(IDS, function (response) {
+        persoPage.fetch(ids, function (response) {
             if (response.statusCode === 200) {
                 log('OK');
                 processPageDocument(persoPage.url, response.body);
