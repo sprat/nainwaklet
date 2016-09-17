@@ -33,7 +33,7 @@ function Application(configuration) {
     var IDS = ids.get(document);
     var updatePages = ['detect', 'invent', 'perso', 'even'];
     var context = {};  // game information fetched by the current player
-    var containerContent;  // backup of the initial content of the container
+    var containerChildNodes;  // backup of the initial content of the container
     var channelName = config.channel;
     var dashboard;
     var dashboardEl;
@@ -78,10 +78,9 @@ function Application(configuration) {
         };
 
         // backup the initial content and install our UI
-        // TODO: keep the elements somewhere to avoid problems with registered callbacks
-        containerContent = container.innerHTML;
-        container.innerHTML = '';
+        containerChildNodes = Array.prototype.slice.call(container.childNodes);
         dashboardEl = dashboard.render(h);
+        container.innerHTML = '';
         container.appendChild(dashboardEl);
     }
 
@@ -92,7 +91,10 @@ function Application(configuration) {
         */
 
         // restore the initial content
-        container.innerHTML = containerContent;
+        container.innerHTML = '';
+        containerChildNodes.forEach(function (child) {
+            container.appendChild(child);
+        });
 
         // destroy the spy
         if (spy) {
