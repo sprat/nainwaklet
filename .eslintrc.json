@@ -1,27 +1,31 @@
 {
   "rules": {
     "indent": [
-      2,
+      "error",
       4
     ],
     "quotes": [
-      2,
+      "error",
       "single",
       "avoid-escape"
     ],
     "linebreak-style": [
-      2,
+      "error",
       "unix"
     ],
     "semi": [
-      2,
+      "error",
       "always"
     ],
+    "one-var": [
+      "error",
+      "never"
+    ],
     "no-trailing-spaces": [
-      2
+      "error"
     ],
     "no-console": [
-      1
+      "warn"
     ]
   },
   "env": {
