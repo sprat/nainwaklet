@@ -11,7 +11,7 @@ test('channel', function (assert) {
         message: 'Hello world!'
     };
 
-    assert.timeoutAfter(5000);
+    assert.timeoutAfter(8000);
 
     // subscribe to the "connected" signal
     channel.connected.add(function () {
