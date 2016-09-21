@@ -22,6 +22,7 @@
     "array-find": "^1.0.0",
     "get-dataset": "^0.0.4",
     "htmldec": "^0.0.1",
+    "maquette": "^2.3.5",
     "mini-signals": "^1.1.1",
     "print-html": "^0.0.2",
     "pubnub": "^4.0.9",

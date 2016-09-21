@@ -1,10 +1,10 @@
 var extend = require('xtend/mutable');
 var loadCSS = require('./load-css');
+var DOMMounter = require('./dom-mounter');
 var IDS = require('./ids');
 var Spy = require('./spy');
 var Updater = require('./updater');
 //var Channel = require('./channel');
-var Renderer = require('./renderer');
 var Dashboard = require('./dashboard');
 var pages = require('./pages');
 var log = require('./log');
@@ -33,56 +33,45 @@ function Application(configuration) {
     var ids = IDS.get(document);
     var updatePages = ['detect', 'invent', 'perso', 'even'];
     var context = {};  // game information fetched by the current player
-    var containerChildNodes;  // backup of the initial content of the container
     var channelName = config.channel;
-    var dashboard;
-    var dashboardEl;
-    //var channel;
+
+    // create the spy if the info frame is available
     var spy;
-    var updater;
-
-    function init() {
-        // create the spy if the info frame is available
-        if (infoFrame) {
-            spy = Spy(infoFrame);
-            spy.documentChanged.add(onInfoChange);
-        }
-
-        // load perso page
-        loadPersoPage();
-
-        /*
-        // create the (communication) channel
-        channel = Channel(channelName, config.publishKey, config.subscribeKey);
-        channel.connect();
-        */
-
-        // create the updater
-        if (config.updateUrl) {
-            updater = Updater(config.updateUrl);
-        }
-
-        // Note: we never remove the CSS, maybe that's something we should do...
-        loadCSS(container.ownerDocument);
-
-        // create the dashboard object
-        dashboard = Dashboard(channelName);
-
-        // create a renderer for the Dashboard
-        var h = Renderer(container.ownerDocument);
-        h.update = function update() {
-            var parent = dashboardEl.parentNode;
-            var oldDashboardEl = dashboardEl;
-            dashboardEl = dashboard.render(h);
-            parent.replaceChild(dashboardEl, oldDashboardEl);
-        };
-
-        // backup the initial content and install our UI
-        containerChildNodes = Array.prototype.slice.call(container.childNodes);
-        dashboardEl = dashboard.render(h);
-        container.innerHTML = '';
-        container.appendChild(dashboardEl);
+    if (infoFrame) {
+        spy = Spy(infoFrame);
+        spy.documentChanged.add(onInfoChange);
     }
+
+    // create the updater if an update URL is available
+    var updater;
+    if (config.updateUrl) {
+        updater = Updater(config.updateUrl);
+    }
+
+    /*
+    // create the (communication) channel
+    var channel = Channel(channelName, config.publishKey, config.subscribeKey);
+    channel.connect();
+    */
+
+    // load the Nany CSS into the container document...
+    loadCSS(container.ownerDocument);
+
+    // create a DOMMounter to render our components into the DOM
+    var domMounter = DOMMounter();
+
+    // create the dashboard object
+    var dashboard = Dashboard(channelName, domMounter.refresh);
+
+    // backup the content of the container and clear it before installing our UI
+    var containerChildren = Array.prototype.slice.call(container.childNodes);
+    container.innerHTML = '';
+
+    // install our UI
+    var unmountDashboard = domMounter.mountInto(container, dashboard);
+
+    // finally, load the perso page
+    loadPersoPage();
 
     function destroy() {
         /*
@@ -90,9 +79,10 @@ function Application(configuration) {
         channel.disconnect();
         */
 
-        // restore the initial content
+        // restore the container's initial content
+        unmountDashboard();
         container.innerHTML = '';
-        containerChildNodes.forEach(function (child) {
+        containerChildren.forEach(function (child) {
             container.appendChild(child);
         });
 
@@ -158,7 +148,7 @@ function Application(configuration) {
         processPageDocument(url, doc);
     }
 
-    init();
+
 
     return Object.freeze({
         destroy: destroy
