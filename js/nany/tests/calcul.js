@@ -3,22 +3,22 @@ var calcul = require('../calcul');
 
 test('calcul.degats', function (assert) {
     var armeBourrin = {
-            nom: 'Excalibur',
-            portee: 0,
-            dommages: 12
-        },
-        armeSniper = {
-            nom: 'Arquebuse naine',
-            portee: 2,
-            dommages: 20
-        },
-        nain = {
-            nom: 'NainNain',
-            vie: 100,
-            force: 80,
-            precision: 300,
-            intelligence: 100
-        };
+        nom: 'Excalibur',
+        portee: 0,
+        dommages: 12
+    };
+    var armeSniper = {
+        nom: 'Arquebuse naine',
+        portee: 2,
+        dommages: 20
+    };
+    var nain = {
+        nom: 'NainNain',
+        vie: 100,
+        force: 80,
+        precision: 300,
+        intelligence: 100
+    };
 
     assert.deepEqual(calcul.degats(nain, armeSniper), {
         minimum: 72,

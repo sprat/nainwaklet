@@ -34,19 +34,19 @@ function getNains(js) {
 
     return objects.map(function (spec) {
         var nain = {
-                id: int(spec.id),
-                nom: spec.nom,
-                image: urls.getImageUrl(spec.photo),
-                description: spec.description,
-                position: [int(spec.x), int(spec.y)],
-                classe: classe.fromInt(int(spec.classe)),
-                rang: spec.cote,
-                barbe: int(spec.barbe) / 100,
-                attaquable: spec.attaquer === 'o',
-                autreAction: autresActions[spec.gifler],
-                estCible: spec.estCible == 1
-            },
-            tagObject = tag.parse(spec.tag);
+            id: int(spec.id),
+            nom: spec.nom,
+            image: urls.getImageUrl(spec.photo),
+            description: spec.description,
+            position: [int(spec.x), int(spec.y)],
+            classe: classe.fromInt(int(spec.classe)),
+            rang: spec.cote,
+            barbe: int(spec.barbe) / 100,
+            attaquable: spec.attaquer === 'o',
+            autreAction: autresActions[spec.gifler],
+            estCible: spec.estCible == 1
+        };
+        var tagObject = tag.parse(spec.tag);
 
         if (tagObject) {
             nain.tag = tagObject;
