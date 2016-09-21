@@ -45,7 +45,7 @@ function Application(configuration) {
         // create the spy if the info frame is available
         if (infoFrame) {
             spy = Spy(infoFrame);
-            spy.on('change', onInfoChange);
+            spy.documentChanged.add(onInfoChange);
         }
 
         // load perso page

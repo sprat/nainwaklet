@@ -1,25 +1,26 @@
-var Emitter = require('component-emitter');
+var Signal = require('mini-signals');
 
 /* Spy class */
 function Spy(frameWindow) {
     var frame = frameWindow.frameElement;
-    var self;
+    var documentChanged = new Signal();
 
     function onLoad() {
         var doc = frameWindow.document;
-        self.emit('change', doc);
+        documentChanged.dispatch(doc);
     }
 
-    self = Emitter({
-        destroy: function() {
-            frame.removeEventListener('load', onLoad, false);
-        }
-    });
+    function destroy() {
+        frame.removeEventListener('load', onLoad, false);
+    }
 
     // add event listener
     frame.addEventListener('load', onLoad, false);
 
-    return self;
+    return {
+        documentChanged: documentChanged,
+        destroy: destroy
+    };
 }
 
 module.exports = Spy;

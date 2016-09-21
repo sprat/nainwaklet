@@ -13,60 +13,44 @@ test('channel', function (assert) {
 
     assert.timeoutAfter(5000);
 
-    // subscribe to the "connected" event
-    channel.on('connected', function (chan) {
+    // subscribe to the "connected" signal
+    channel.connected.add(function () {
         log('1. Connected');
-
-        // check event data
-        assert.strictEqual(chan, channel, 'Channel in connected event');
 
         // publish to a topic
         channel.publish(topic, dataToSend);
     });
 
-    // subscribe to the "published" event
-    channel.on('published', function (topic, data, chan) {
+    // subscribe to the "messagePublished" signal
+    channel.messagePublished.add(function (topic, data) {
         log('2. Message published');
 
         // check event data
-        assert.strictEqual(topic, 'chat', 'Topic in published event');
-        assert.deepEqual(data, dataToSend, 'Data in published event');
-        assert.strictEqual(chan, channel, 'Channel in published event');
+        assert.strictEqual(topic, 'chat', 'Topic in messagePublished event');
+        assert.deepEqual(data, dataToSend, 'Data in messagePublished event');
     });
 
-    // subscribe to the topic
-    channel.on('message:chat', function (data, chan) {
-        log('3. Message received on topic');
+    // subscribe to the "messageReceived" signal
+    channel.messageReceived.add(function (topic, data) {
+        log('3. Message received');
 
         // check event data
-        assert.deepEqual(data, dataToSend, 'Data in message event');
-        assert.strictEqual(chan, channel, 'Channel in message event');
-    });
-
-    // subscribe to all messages
-    channel.on('message', function (topic, data, chan) {
-        log('4. Message received');
-
-        // check event data
-        assert.strictEqual(topic, 'chat', 'Topic in message event');
-        assert.deepEqual(data, dataToSend, 'Data in message event');
-        assert.strictEqual(chan, channel, 'Channel in message event');
+        assert.strictEqual(topic, 'chat', 'Topic in messageReceived event');
+        assert.deepEqual(data, dataToSend, 'Data in messageReceived event');
 
         // disconnect
         channel.disconnect();
     });
 
-    // subscribe to the "disconnected" event
-    channel.on('disconnected', function (chan) {
-        log('5. Disconnected');
-
-        // check event data
-        assert.strictEqual(chan, channel, 'Channel in disconnected event');
+    // subscribe to the "disconnected" signal
+    channel.disconnected.add(function () {
+        log('4. Disconnected');
 
         // test finished
         assert.end();
     });
 
+    // start the test
     channel.connect();
 });
 

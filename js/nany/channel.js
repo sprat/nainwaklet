@@ -1,5 +1,5 @@
 var PubNub = require('pubnub');
-var Emitter = require('component-emitter');
+var Signal = require('mini-signals');
 
 function safeName(name) {
     // see https://www.pubnub.com/knowledge-base/discussion/427/what-are-valid-channel-names
@@ -12,6 +12,11 @@ function Channel(name, publishKey, subscribeKey) {
     // make sure we have a valid channel name
     name = safeName(name);
 
+    var connected = new Signal();  // signal when a connection is opened
+    var disconnected = new Signal();  // signal when a connection is closed
+    var messagePublished = new Signal();  // signal when a message is published
+    var messageReceived = new Signal();  // signal when a message is received
+
     var pubnub = new PubNub({
         publishKey: publishKey,
         subscribeKey: subscribeKey,
@@ -19,19 +24,18 @@ function Channel(name, publishKey, subscribeKey) {
     });
 
     // publish a message to the channel
-    function publish(topic, data) {
-        var self = this;
+    function publish(topic, message) {
         var content = {
             channel: name,
             message: {
                 topic: topic,
-                data: data
+                data: message
             }
         };
 
         pubnub.publish(content, function(status/*, response*/) {
             if (!status.error) {
-                self.emit('published', topic, data, self);
+                messagePublished.dispatch(topic, message);
             }
         });
     }
@@ -51,26 +55,20 @@ function Channel(name, publishKey, subscribeKey) {
         });
     }
 
-    var self = Emitter({
-        name: name,
-        connect: connect,
-        disconnect: disconnect,
-        publish: publish
-    });
-
     pubnub.addListener({
         status: function (event) {
-            console.log(event);
+            //console.log(event);
 
             switch (event.operation) {
             case 'PNSubscribeOperation':
-                self.emit('connected', self);
+                connected.dispatch();
                 return;
             case 'PNUnsubscribeOperation':
-                self.emit('disconnected', self);
+                disconnected.dispatch();
                 return;
             }
 
+            // errorOccured signal?
             //self.emit('error', error, self);
 //            switch (event.category) {
 //            case 'PNReconnectedCategory':
@@ -89,8 +87,7 @@ function Channel(name, publishKey, subscribeKey) {
         },
         message: function (event) {
             var message = event.message;
-            self.emit('message:' + message.topic, message.data, self);
-            self.emit('message', message.topic, message.data, self);
+            messageReceived.dispatch(message.topic, message.data);
         },
         presence: function (event) {
             console.log(event);
@@ -98,7 +95,16 @@ function Channel(name, publishKey, subscribeKey) {
         }
     });
 
-    return self;
+    return {
+        get name() { return name; },
+        connect: connect,
+        disconnect: disconnect,
+        publish: publish,
+        connected: connected,
+        disconnected: disconnected,
+        messagePublished: messagePublished,
+        messageReceived: messageReceived
+    };
 }
 
 module.exports = Channel;
