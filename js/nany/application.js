@@ -5,7 +5,7 @@ var Spy = require('./spy');
 var Updater = require('./updater');
 //var Channel = require('./channel');
 var Renderer = require('./renderer');
-var UI = require('./ui');
+var Dashboard = require('./dashboard');
 var pages = require('./pages');
 var log = require('./log');
 
@@ -66,7 +66,7 @@ function Application(configuration) {
         loadCSS(container.ownerDocument);
 
         // create the dashboard object
-        dashboard = UI.Dashboard(channelName);
+        dashboard = Dashboard(channelName);
 
         // create a renderer for the Dashboard
         var h = Renderer(container.ownerDocument);
