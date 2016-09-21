@@ -1,12 +1,6 @@
 var PubNub = require('pubnub');
 var Signal = require('mini-signals');
 
-function safeName(name) {
-    // see https://www.pubnub.com/knowledge-base/discussion/427/what-are-valid-channel-names
-    // eslint-disable-next-line no-control-regex
-    return name.replace(/[\x00-\x1F,:.*/\\]/gi, '_');
-}
-
 function Channel(name, publishKey, subscribeKey) {
     // TODO: authentication?
     // make sure we have a valid channel name
@@ -22,6 +16,12 @@ function Channel(name, publishKey, subscribeKey) {
         subscribeKey: subscribeKey,
         ssl: true
     });
+
+    function safeName(name) {
+        // see https://www.pubnub.com/knowledge-base/discussion/427/what-are-valid-channel-names
+        // eslint-disable-next-line no-control-regex
+        return name.replace(/[\x00-\x1F,:.*/\\]/gi, '_');
+    }
 
     // publish a message to the channel
     function publish(topic, message) {
