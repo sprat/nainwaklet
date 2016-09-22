@@ -36,15 +36,15 @@ function Updater(url, throttleDelay) {
             json: data
         };
 
-        log('Sending a ring update to ' + url);
+        log('Sending an update to ' + url);
 
         xhr(options, function (error, response) {
-            if (response.statusCode === 200) {
-                log('OK');
-            } else {
-                log('FAIL (' + response.statusCode + ')');
-            }
-            // TODO: check response status: auth errors
+            var status = response.statusCode;
+            var isOk = (status >= 200 && status < 300);
+            var label = isOk ? 'OK' : 'FAIL';
+            log(label + ' (' + status + ')');
+
+            // TODO: check response status: auth errors, rate-limit, etc.
             lastUpdates[pageId] = date;
         });
     }
