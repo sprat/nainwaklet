@@ -1,10 +1,10 @@
 var Page = require('./page');
-var analyzer = require('./analyzer');
-var pager = require('./pager');
-var int = analyzer.int;
-var evenInfo = require('./even-info');
-var urls = require('../urls');
+var Analyzer = require('./analyzer');
+var Pager = require('./pager');
+var EventInfo = require('./event-info');
+var Urls = require('../urls');
 var dateRegex = /(\d\d)h(\d\d) \(\w+\. (\d\d)\/(\d\d)\)/;
+var int = Analyzer.int;
 
 // return the unix timestamp for a date specified as '12h09 (sam. 12/03)' in GMT+1
 function convertToUnixTimestamp(date, nowDate) {
@@ -26,7 +26,7 @@ function convertToUnixTimestamp(date, nowDate) {
 }
 
 function getDescription(type, params) {
-    var desc = evenInfo.descriptions[type - 1];
+    var desc = EventInfo.descriptions[type - 1];
 
     if (!desc) {
         return;
@@ -42,7 +42,7 @@ function getDescription(type, params) {
 }
 
 function getImage(type) {
-    var img = evenInfo.images[type - 1];
+    var img = EventInfo.images[type - 1];
 
     if (!img) {
         return;
@@ -52,13 +52,13 @@ function getImage(type) {
         img += '.gif';
     }
 
-    return urls.getImageUrl('interface/evens/' + img);
+    return Urls.getImageUrl('interface/evens/' + img);
 }
 
 function getEvenements(js, nowDate) {
     var regex = /ev\((.*)\);/ig;
     var keys = 'neweven,time,num,s1,s2,s3,n1,n2,n3,appel'.split(',');
-    var objects = analyzer.buildObjectsFromJSSequences(js, regex, keys);
+    var objects = Analyzer.buildObjectsFromJSSequences(js, regex, keys);
 
     return objects.map(function (object) {
         var type = object.num;
@@ -84,14 +84,14 @@ function getEvenements(js, nowDate) {
 }
 
 function analyze(doc, date, context) {
-    var js = analyzer.getJS(doc);
-    var pagerData = pager.analyze(js, context);
+    var js = Analyzer.getJS(doc);
+    var pager = Pager.analyze(js, context);
 
     context.evenements = getEvenements(js, date);
 
     return {
         evenements: context.evenements,
-        pager: pagerData
+        pager: pager
     };
 }
 

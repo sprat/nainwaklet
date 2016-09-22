@@ -1,27 +1,27 @@
 var Page = require('./page');
-var analyzer = require('./analyzer');
-var classe = require('./classe');
-var tag = require('./tag');
-var int = analyzer.int;
+var Analyzer = require('./analyzer');
+var Classe = require('./classe');
+var Tag = require('./tag');
+var int = Analyzer.int;
 
 function getClasses(js) {
     var regex = /\$\('(\w+)'\).addClassName\(cotes\[(\d)+\]\);/g;
-    return analyzer.buildObjectFromJS(js, regex);
+    return Analyzer.buildObjectFromJS(js, regex);
 }
 
 function getCharacteristics(js) {
     // find all lines looking like: $('sPVBase').innerHTML = (109+39);
     var regex = /\$\('(\w+)'\)\.innerHTML = \((-?\d+)[\+\/](-?\d+)\)/g;
-    return analyzer.buildObjectFromJS(js, regex);
+    return Analyzer.buildObjectFromJS(js, regex);
 }
 
 function getBlocsDroits(doc) {
-    var rows = analyzer.findAll(doc, '.bloc-perso tr');
+    var rows = Analyzer.findAll(doc, '.bloc-perso tr');
     var data = {};
 
     rows.forEach(function (row) {
-        var name = analyzer.getText(row, '.bloc_droit');
-        var value = analyzer.getText(row, 'td b');
+        var name = Analyzer.getText(row, '.bloc_droit');
+        var value = Analyzer.getText(row, 'td b');
 
         if (name && value) {
             data[name] = int(value);
@@ -32,21 +32,21 @@ function getBlocsDroits(doc) {
 }
 
 function analyze(doc, date, context) {
-    var js = analyzer.getJS(doc);
+    var js = Analyzer.getJS(doc);
     var classes = getClasses(js);
     var characts = getCharacteristics(js);
     var blocsDroits = getBlocsDroits(doc);
-    var cible = analyzer.find(doc, '.bloc-perso .cible');
+    var cible = Analyzer.find(doc, '.bloc-perso .cible');
 
     context.perso = {
-        nom: analyzer.getAttr(doc, 'input[name="nvNain"]', 'value'),
-        image: analyzer.getAttr(doc, '.news-titre img', 'src'),
-        rang: analyzer.getText(doc, '#sRang'),
-        classe: classe.fromInt(classes['sRang']),
+        nom: Analyzer.getAttr(doc, 'input[name="nvNain"]', 'value'),
+        image: Analyzer.getAttr(doc, '.news-titre img', 'src'),
+        rang: Analyzer.getText(doc, '#sRang'),
+        classe: Classe.fromInt(classes['sRang']),
         barbe: characts.sBarbe[0] / characts.sBarbe[1],
-        description: analyzer.getAttr(doc, 'input[name="description"]', 'value'),
-        arme: analyzer.getAttr(doc, 'input[name="nomArme"]', 'value'),
-        tag: tag.parse(analyzer.getHtml(doc, '#s_Tag')),
+        description: Analyzer.getAttr(doc, 'input[name="description"]', 'value'),
+        arme: Analyzer.getAttr(doc, 'input[name="nomArme"]', 'value'),
+        tag: Tag.parse(Analyzer.getHtml(doc, '#s_Tag')),
         vie: characts.sPV[0] + characts.sPV[1],
         vieBase: characts.sPVBase[0],
         vieBonus: characts.sPVBase[1],
@@ -83,8 +83,8 @@ function analyze(doc, date, context) {
         giflesRecues: blocsDroits['Nombre de gifles reçues'],
         cible: {
             nom: cible.firstChild.textContent,
-            classe: classe.fromInt(classes['sRangCible']),
-            rang: analyzer.getText(cible, '#sRangCible'),
+            classe: Classe.fromInt(classes['sRangCible']),
+            rang: Analyzer.getText(cible, '#sRangCible'),
             barbe: characts.sBarbeCible[0] / characts.sBarbeCible[1]
         },
         chasseurs: {

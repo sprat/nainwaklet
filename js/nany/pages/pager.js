@@ -1,11 +1,11 @@
-var analyzer = require('./analyzer');
-var int = analyzer.int;
+var Analyzer = require('./analyzer');
 var extend = require('xtend/mutable');
+var int = Analyzer.int;
 
 function analyze(js, context) {
     var regex = /miseajourpager\((.*)\);/ig;
     var keys = 'pa,pv,pvbase,classeeven,evnonlu,classechat,mesgnonlu,posx,posy,IDS,newmonochat'.split(',');
-    var object = analyzer.buildObjectsFromJSSequences(js, regex, keys)[0];
+    var object = Analyzer.buildObjectsFromJSSequences(js, regex, keys)[0];
     var pager = {
         PA: int(object.pa),
         vie: int(object.pv),

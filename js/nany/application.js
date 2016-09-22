@@ -6,7 +6,7 @@ var Spy = require('./spy');
 var Updater = require('./updater');
 //var Channel = require('./channel');
 var Dashboard = require('./dashboard');
-var pages = require('./pages');
+var Pages = require('./pages');
 var log = require('./log');
 
 var defaultConfiguration = {
@@ -98,7 +98,7 @@ function Application(configuration) {
 
     function processPageDocument(url, doc) {
         var date = new Date();
-        var page = pages.byUrl(url);
+        var page = Pages.byUrl(url);
         var analysis;
 
         if (!page) {
@@ -127,7 +127,7 @@ function Application(configuration) {
     }
 
     function loadPersoPage() {
-        var persoPage = pages.byType('perso');
+        var persoPage = Pages.byType('perso');
 
         log('Loading perso page');
         persoPage.fetch(ids, function (response) {

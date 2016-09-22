@@ -1,10 +1,10 @@
 var extend = require('xtend/mutable');
-var analyzer = require('./analyzer');
-var int = analyzer.int;
-var urls = require('../urls');
+var Analyzer = require('./analyzer');
+var Urls = require('../urls');
 var Popin = require('./popin');
 var Renderer = require('../renderer');
-var calcul = require('../calcul');
+var Calcul = require('../calcul');
+var int = Analyzer.int;
 
 var listNames = {
     bonnet: 'bonnet',  // objet sous le bonnet
@@ -17,7 +17,7 @@ var listNames = {
 function analyze(js, context) {
     var regex = /mip\((.*)\);/ig;
     var keys = 'idtable,nomobjet,photoobjet,descriptionobjet,model,typeobjet,PAutiliser,portee,effet,recharg,PV,PVmax,PAreparer,dispo,PFobj,PPobj,PVobj,PIobj,collant,reparable,poussiere'.split(',');
-    var objects = analyzer.buildObjectsFromJSSequences(js, regex, keys);
+    var objects = Analyzer.buildObjectsFromJSSequences(js, regex, keys);
     var lists = {};
 
     function getList(object) {
@@ -36,7 +36,7 @@ function analyze(js, context) {
         list.push({
             id: object.idtable,
             nom: object.nomobjet,
-            image: urls.getImageUrl(object.photoobjet),
+            image: Urls.getImageUrl(object.photoobjet),
             description: object.descriptionobjet,
             type: object.typeobjet.toLowerCase(),
             PAutiliser: int(object.PAutiliser),
@@ -62,7 +62,7 @@ function analyze(js, context) {
 
     // update the 'perso' bonus data according to the objects in 'inventaire'
     if (context.perso) {
-        var bonuses = calcul.bonusObjets(context.objets.inventaire);
+        var bonuses = Calcul.bonusObjets(context.objets.inventaire);
         extend(context.perso, bonuses);
     }
 
@@ -71,7 +71,7 @@ function analyze(js, context) {
 
 function ObjetInfo(objet, perso) {
     var isArme = objet.type === 'arme';
-    var degats = (isArme && perso) ? calcul.degats(perso, objet) : undefined;
+    var degats = (isArme && perso) ? Calcul.degats(perso, objet) : undefined;
 
     function render(h) {
         if (degats) {
@@ -86,7 +86,7 @@ function ObjetInfo(objet, perso) {
 
 function enhance(doc, objets, perso) {
     var h = Renderer(doc);
-    var images = analyzer.findAll(doc, 'td.news-text img');
+    var images = Analyzer.findAll(doc, 'td.news-text img');
 
     // add an advisor box on each title
     images.forEach(function (image, index) {

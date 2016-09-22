@@ -1,5 +1,5 @@
 var Application = require('./application');
-var bookmarklets = require('./bookmarklets');
+var Bookmarklets = require('./bookmarklets');
 var formules = require('./formules.json');
 
 //start/stop the Application on the Nainwak game page
@@ -18,7 +18,7 @@ function run(config) {
 }
 
 module.exports = Object.freeze({
-    initializeBookmarklets: bookmarklets.initialize,
+    initializeBookmarklets: Bookmarklets.initialize,
     run: run,
     formules: formules
 });
