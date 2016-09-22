@@ -2,22 +2,16 @@ var extend = require('xtend/mutable');
 var analyzer = require('./analyzer');
 var int = analyzer.int;
 var urls = require('../urls');
+var Popin = require('./popin');
 var Renderer = require('../renderer');
 var calcul = require('../calcul');
 
-/* model:
- * - 'bonnet' : objet sous le bonnet
- * - 'poser' : objet dans l'inventaire, on peut le poser
- * - 'ramasser' : objet au sol, on peut le ramasser
- * - 'encyclo' : objet dans l'encyclo
- * - 'fee' : quand on fait une recette ?
- */
 var listNames = {
-    bonnet: 'bonnet',
-    poser: 'inventaire',
-    ramasser: 'sol',
-    encyclo: 'encyclo',
-    fee: 'fee'
+    bonnet: 'bonnet',  // objet sous le bonnet
+    poser: 'inventaire',  // objet dans l'inventaire, on peut le poser
+    ramasser: 'sol',  // objet au sol, on peut le ramasser
+    encyclo: 'encyclo',  // objet dans l'encyclo
+    fee: 'fee'  // quand on fait une recette ?
 };
 
 function analyze(js, context) {
@@ -75,22 +69,19 @@ function analyze(js, context) {
     return lists;
 }
 
-function renderPopin(h, content) {
-    return h('.nany.popin', [
-        h('button.popin-button', '?'),
-        h('.popin-box', content)
-    ]);
-}
-
-function createInfoPopin(h, objet, perso) {
+function ObjetInfo(objet, perso) {
     var isArme = objet.type === 'arme';
     var degats = (isArme && perso) ? calcul.degats(perso, objet) : undefined;
-    var content;
 
-    if (degats) {
-        content = h('.degats', 'Dégâts : entre ' + degats.minimum + ' et ' + degats.maximum);
-        return renderPopin(h, content);
+    function render(h) {
+        if (degats) {
+            return h('.degats', 'Dégâts : entre ' + degats.minimum + ' et ' + degats.maximum);
+        }
     }
+
+    return {
+        render: render
+    };
 }
 
 function enhance(doc, objets, perso) {
@@ -100,7 +91,8 @@ function enhance(doc, objets, perso) {
     // add an advisor box on each title
     images.forEach(function (image, index) {
         var objet = objets[index];
-        var popin = createInfoPopin(h, objet, perso);
+        var objetInfo = ObjetInfo(objet, perso);
+        var popin = Popin(objetInfo).render(h);
         var parent = image.parentNode;
 
         if (popin) {
@@ -112,5 +104,5 @@ function enhance(doc, objets, perso) {
 module.exports = {
     analyze: analyze,
     enhance: enhance,
-    createInfoPopin: createInfoPopin
+    ObjetInfo: ObjetInfo
 };

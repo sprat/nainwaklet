@@ -1,20 +1,22 @@
 var Page = require('./page');
-var analyzer = require('./analyzer');
-var pager = require('./pager');
-var objets = require('./objets');
+var Analyzer = require('./analyzer');
+var Pager = require('./pager');
+var Objets = require('./objets');
 
 function analyze(doc, date, context) {
-    var js = analyzer.getJS(doc);
+    var js = Analyzer.getJS(doc);
 
     return {
-        objets: objets.analyze(js, context),
-        pager: pager.analyze(js, context)
+        objets: Objets.analyze(js, context),
+        pager: Pager.analyze(js, context)
     };
 }
 
 function enhance(doc, context) {
-    var objetsList = context.objets.bonnet.concat(context.objets.inventaire);
-    objets.enhance(doc, objetsList, context.perso);
+    var bonnet = context.objets.bonnet;
+    var inventaire = context.objets.inventaire;
+    var objets = bonnet.concat(inventaire);
+    Objets.enhance(doc, objets, context.perso);
 }
 
 module.exports = Page('invent', {
