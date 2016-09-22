@@ -558,6 +558,12 @@
         "quantite": 1
       },
       {
+        "id": 324,
+        "nom": "Chapin",
+        "image": "chapin.gif",
+        "quantite": 1
+      },
+      {
         "id": 441,
         "nom": "Guide de Chapinologie",
         "image": "livre_rose.png",
