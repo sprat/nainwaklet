@@ -26,11 +26,6 @@
     text-decoration: underline;
 }
 
-.nany input,
-.nany button {
-    width: 100%;
-}
-
 .nany button::-moz-focus-inner,
 .nany input::-moz-focus-inner {
     padding: 0;
@@ -41,10 +36,6 @@
     font-size: 1.25em;
     font-weight: bold;
 }
-
-.nany.dashboard .title {
-    color: #FFF;
- }
 
 .nany.popin {
     position: relative;
