@@ -1,15 +1,20 @@
 var qs = require('qs');
+var Dom = require('./dom');
 
-function get(menuDocument) {
-    var querystring = menuDocument.location.search.substring(1);
-    var ids = qs.parse(querystring).IDS;
+function fromDocument(doc) {
+    var search = doc.location && doc.location.search;
+    var ids = search ? qs.parse(search.substring(1)).IDS : undefined;
+    var tdElements = Dom.findAll('.news-titre td', doc);
+    var nom = tdElements[1].text();
+    var avatar = tdElements[0].find('img').attr('src');
 
-    // TODO: nom, avatar
     return {
+        nom: nom,
+        avatar: avatar,
         ids: ids
     };
 }
 
 module.exports = {
-    get: get
+    fromDocument: fromDocument
 };
