@@ -30,7 +30,7 @@ function Application(configuration) {
     var frames = window.frames;
     var infoFrame = frames.info;
     var container = frames.pub.document.body;
-    var nain = Nain.fromMenuDocument(frames.menu.document);
+    var nain = Nain.fromDocument(frames.menu.document);
     var updatePages = ['detect', 'invent', 'perso', 'even'];
     var context = {};  // game information fetched by the current player
     var channelName = config.channel;
