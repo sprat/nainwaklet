@@ -1,7 +1,7 @@
 var extend = require('xtend/mutable');
 var loadCSS = require('./load-css');
 var DOMMounter = require('./dom-mounter');
-var IDS = require('./ids');
+var Nain = require('./nain');
 var Spy = require('./spy');
 var Updater = require('./updater');
 //var Channel = require('./channel');
@@ -30,7 +30,7 @@ function Application(configuration) {
     var frames = window.frames;
     var infoFrame = frames.info;
     var container = frames.pub.document.body;
-    var ids = IDS.get(document);
+    var nain = Nain.get(frames.menu.document);
     var updatePages = ['detect', 'invent', 'perso', 'even'];
     var context = {};  // game information fetched by the current player
     var channelName = config.channel;
@@ -130,7 +130,7 @@ function Application(configuration) {
         var persoPage = Pages.byType('perso');
 
         log('Loading perso page');
-        persoPage.fetch(ids, function (response) {
+        persoPage.fetch(nain.ids, function (response) {
             if (response.statusCode === 200) {
                 log('OK');
                 processPageDocument(persoPage.url, response.body);
