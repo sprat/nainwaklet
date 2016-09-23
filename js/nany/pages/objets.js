@@ -2,7 +2,6 @@ var extend = require('xtend/mutable');
 var Dom = require('../dom');
 var Analyzer = require('./analyzer');
 var Popin = require('./popin');
-var Renderer = require('../renderer');
 var Calcul = require('../calcul');
 var int = Analyzer.int;
 
@@ -75,7 +74,7 @@ function ObjetInfo(objet, perso) {
 
     function render(h) {
         if (degats) {
-            return h('.degats', 'Dégâts : entre ' + degats.minimum + ' et ' + degats.maximum);
+            return h('div.degats', 'Dégâts : entre ' + degats.minimum + ' et ' + degats.maximum);
         }
     }
 
@@ -85,19 +84,15 @@ function ObjetInfo(objet, perso) {
 }
 
 function enhance(doc, objets, perso) {
-    var h = Renderer(doc);
+    var mounter = Dom.Mounter();
     var imageElements = Dom.findAll('td.news-text img', doc);
 
     // add an advisor box on each title
     imageElements.forEach(function (image, index) {
         var objet = objets[index];
         var objetInfo = ObjetInfo(objet, perso);
-        var popin = Popin(objetInfo).render(h);
-        var parent = image.parent();
-
-        if (popin) {
-            parent.prepend(popin);
-        }
+        var popin = Popin(objetInfo);
+        mounter.prepend(image.parent(), popin);
     });
 }
 

@@ -1,11 +1,10 @@
 var Page = require('./page');
 var Dom = require('../dom');
-var Renderer = require('../renderer');
 var Popin = require('./popin');
 var Objets = require('./objets');
 
 function enhance(doc, context) {
-    var h = Renderer(doc);
+    var mounter = Dom.Mounter();
     var perso = context.perso;
     var inventaire = context.objets && context.objets.inventaire;
     var idRegex = /javascript:choisir\('(\d+)'\)/i;
@@ -22,7 +21,6 @@ function enhance(doc, context) {
 
     linkElements.forEach(function (link) {
         var href = link.attr('href');
-        var parent = link.parent();
         var match = idRegex.exec(href);
         var objet;
         var objetInfo;
@@ -32,8 +30,8 @@ function enhance(doc, context) {
             objet = objetsById[match[1]];
             if (objet) {
                 objetInfo = Objets.ObjetInfo(objet, perso);
-                popin = Popin(objetInfo).render(h);
-                parent.prepend(popin);
+                popin = Popin(objetInfo);
+                mounter.prepend(link.parent(), popin);
             }
         }
     });

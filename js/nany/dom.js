@@ -116,7 +116,7 @@ function Mounter() {
 
         // render the virtual DOM tree
         function renderTree() {
-            return render(h, refresh);
+            return render(h, refresh) || h('div.nany-empty');
         }
 
         // unmount the component (does not restore the original node)
