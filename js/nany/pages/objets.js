@@ -1,4 +1,5 @@
 var extend = require('xtend/mutable');
+var Dom = require('../dom');
 var Analyzer = require('./analyzer');
 var Urls = require('../urls');
 var Popin = require('./popin');
@@ -86,17 +87,17 @@ function ObjetInfo(objet, perso) {
 
 function enhance(doc, objets, perso) {
     var h = Renderer(doc);
-    var images = Analyzer.findAll(doc, 'td.news-text img');
+    var imageElements = Dom.findAll('td.news-text img', doc);
 
     // add an advisor box on each title
-    images.forEach(function (image, index) {
+    imageElements.forEach(function (image, index) {
         var objet = objets[index];
         var objetInfo = ObjetInfo(objet, perso);
         var popin = Popin(objetInfo).render(h);
-        var parent = image.parentNode;
+        var parent = image.parent();
 
         if (popin) {
-            parent.insertBefore(popin, parent.firstChild);
+            parent.prepend(popin);
         }
     });
 }

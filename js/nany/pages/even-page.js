@@ -1,4 +1,5 @@
 var Page = require('./page');
+var Dom = require('../dom');
 var Analyzer = require('./analyzer');
 var Pager = require('./pager');
 var EventInfo = require('./event-info');
@@ -84,7 +85,7 @@ function getEvenements(js, nowDate) {
 }
 
 function analyze(doc, date, context) {
-    var js = Analyzer.getJS(doc);
+    var js = Dom.inlineJS(doc);
     var pager = Pager.analyze(js, context);
 
     context.evenements = getEvenements(js, date);

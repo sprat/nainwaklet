@@ -1,5 +1,6 @@
 /* detect page */
 var Page = require('./page');
+var Dom = require('../dom');
 var Analyzer = require('./analyzer');
 var Tag = require('./tag');
 var Classe = require('./classe');
@@ -10,7 +11,7 @@ var int = Analyzer.int;
 function getLocalisation(doc) {
     // example:
     // <span class="c1">Position (13,5) sur "Ronain Graou" |b95eb2f716c500db6|</span>
-    var text = Analyzer.getText(doc, '.c1');
+    var text = Dom.find('.c1', doc).text();
     var regex = /Position\s\((\d+),(\d+)\)\ssur\s"([^"]*)"/i;
     var match = regex.exec(text);
 
@@ -74,7 +75,7 @@ function getObjets(js) {
 }
 
 function analyze(doc, date, context) {
-    var js = Analyzer.getJS(doc);
+    var js = Dom.inlineJS(doc);
     var localisation = getLocalisation(doc);
     var nains = getNains(js);
     var objets = getObjets(js);

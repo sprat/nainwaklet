@@ -1,10 +1,10 @@
 var Page = require('./page');
-var Analyzer = require('./analyzer');
+var Dom = require('../dom');
 var Pager = require('./pager');
 var Objets = require('./objets');
 
 function analyze(doc, date, context) {
-    var js = Analyzer.getJS(doc);
+    var js = Dom.inlineJS(doc);
 
     return {
         objets: Objets.analyze(js, context),

@@ -1,6 +1,6 @@
 var Page = require('./page');
+var Dom = require('../dom');
 var Renderer = require('../renderer');
-var Analyzer = require('./analyzer');
 var Popin = require('./popin');
 var Objets = require('./objets');
 
@@ -9,7 +9,7 @@ function enhance(doc, context) {
     var perso = context.perso;
     var inventaire = context.objets && context.objets.inventaire;
     var idRegex = /javascript:choisir\('(\d+)'\)/i;
-    var links = Analyzer.findAll(doc, 'a');
+    var linkElements = Dom.findAll('a', doc);
     var objetsById = {};
 
     if (!inventaire) {
@@ -20,9 +20,9 @@ function enhance(doc, context) {
         objetsById[objet.id] = objet;
     });
 
-    links.forEach(function (link) {
-        var href = link.href;
-        var parent = link.parentNode;
+    linkElements.forEach(function (link) {
+        var href = link.attr('href');
+        var parent = link.parent();
         var match = idRegex.exec(href);
         var objet;
         var objetInfo;
@@ -33,7 +33,7 @@ function enhance(doc, context) {
             if (objet) {
                 objetInfo = Objets.ObjetInfo(objet, perso);
                 popin = Popin(objetInfo).render(h);
-                parent.insertBefore(popin, parent.firstChild);
+                parent.prepend(popin);
             }
         }
     });

@@ -5,13 +5,6 @@ function int(value) {
     return parseInt(value, 10);
 }
 
-function getJS(doc) {
-    var sources = Array.prototype.map.call(doc.scripts, function (script) {
-        return script.src ? '' : script.innerHTML;
-    });
-    return sources.join('\n');
-}
-
 function decodeEnt(value) {
     if (typeof value === 'string') {
         value = decodeEntities(value);
@@ -58,44 +51,9 @@ function buildObjectsFromJSSequences(js, regex, keys) {
     return objects;
 }
 
-function find(context, selector) {
-    return context.querySelector(selector);
-}
-
-function findAll(context, selector) {
-    return Array.prototype.slice.call(context.querySelectorAll(selector));
-}
-
-function getText(context, selector) {
-    var el = find(context, selector);
-    if (el) {
-        return el.textContent;
-    }
-}
-
-function getHtml(context, selector) {
-    var el = find(context, selector);
-    if (el) {
-        return el.innerHTML;
-    }
-}
-
-function getAttr(context, selector, attr) {
-    var el = find(context, selector);
-    if (el) {
-        return el.getAttribute(attr);
-    }
-}
-
 module.exports = {
     int: int,
-    getJS: getJS,
     evaluateJS: evaluateJS,
     buildObjectFromJS: buildObjectFromJS,
-    buildObjectsFromJSSequences: buildObjectsFromJSSequences,
-    find: find,
-    findAll: findAll,
-    getText: getText,
-    getHtml: getHtml,
-    getAttr: getAttr
+    buildObjectsFromJSSequences: buildObjectsFromJSSequences
 };
