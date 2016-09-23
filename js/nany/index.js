@@ -1,6 +1,8 @@
 var Application = require('./application');
 var Bookmarklets = require('./bookmarklets');
-var formules = require('./formules.json');
+var Dom = require('./dom');
+var Formules = require('./formules');
+
 
 //start/stop the Application on the Nainwak game page
 function run(config) {
@@ -17,8 +19,15 @@ function run(config) {
     window.nanyApplication = Application(config);
 }
 
+function replaceNodeByComponent(component) {
+    var mounter = Dom.Mounter();
+    return function (node) {
+        mounter.replace(node, component);
+    };
+}
+
 module.exports = Object.freeze({
-    initializeBookmarklets: Bookmarklets.initialize,
     run: run,
-    formules: formules
+    initializeBookmarklets: Bookmarklets.initialize,
+    afficheFormules: replaceNodeByComponent(Formules)
 });

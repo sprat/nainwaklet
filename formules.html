@@ -5,27 +5,14 @@
     <title>Formules de la fée</title>
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <link rel="stylesheet" href="dist/nany.min.css">
-    <link rel="stylesheet" href="css/site.css">
+    <style>
+    h1 { text-align: center; }
+    </style>
 </head>
 <body>
-    <table class="formules">
-        <thead>
-            <tr>
-                <th class="titre-global" colspan="4">Formules de la fée</th>
-            </tr>
-            <tr>
-                <th class="titre-id">N°</th>
-                <th class="titre-nom">Nom</th>
-                <th class="titre-resultats">Résultats</th>
-                <th class="titre-ingredients">Ingrédients</th>
-            </tr>
-        </thead>
-        <tbody>
-        </tbody>
-    </table>
-
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <h1>Formules de la fée</h1>
+    <div id='formules'></div>
     <script src="dist/nany.min.js"></script>
-    <script src="js/formules.js"></script>
+    <script>Nany.afficheFormules(document.getElementById('formules'));</script>
 </body>
 </html>

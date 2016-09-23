@@ -1,0 +1,28 @@
+.nany-formules {
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+.nany-formules th {
+    font-weight: bold;
+}
+
+.nany-formules td,
+.nany-formules th {
+    border: 1px solid #DDD;
+    padding: 5px;
+    vertical-align: middle;
+}
+
+.nany-formules .objet {
+    min-width: 60px;
+}
+
+.nany-formules .objet .quantite {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.nany-formules .objet .image {
+    vertical-align: middle;
+}

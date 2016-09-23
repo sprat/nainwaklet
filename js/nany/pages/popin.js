@@ -4,9 +4,9 @@ function Popin(content) {
         var rendered = content.render(h);
         // check if there's something to display, otherwise don't render anything
         if (rendered) {
-            var button = h('button.popin-button', '?');
-            var box = h('.popin-box', rendered);
-            return h('.nany.popin', [button, box]);
+            var button = h('button.nany-popin-button', '?');
+            var box = h('.nany-popin-box', rendered);
+            return h('.nany.nany-popin', [button, box]);
         }
     }
 

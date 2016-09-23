@@ -1,8 +1,8 @@
 function Dashboard(channelName) {
     function render(h) {
-        return h('div.nany.dashboard', [
-            h('div.VNT.title', channelName),
-            h('div.TV.content', 'En cours de développement...')
+        return h('div.nany.nany-dashboard', [
+            h('div.nany-dashboard-title.VNT', channelName),
+            h('div.nany-dashboard-content.TV', 'En cours de développement...')
         ]);
     }
 

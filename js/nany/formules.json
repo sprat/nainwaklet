@@ -6,7 +6,7 @@
       {
         "id": 322,
         "nom": "Bière",
-        "image": "biere.gif",
+        "image": "/images/objets/biere.gif",
         "quantite": 6
       }
     ],
@@ -14,7 +14,7 @@
       {
         "id": 332,
         "nom": "Pack de bières",
-        "image": "pack.gif",
+        "image": "/images/objets/pack.gif",
         "quantite": 1
       }
     ]
@@ -26,13 +26,13 @@
       {
         "id": 168,
         "nom": "Super - anabolysants !",
-        "image": "anabolysants.gif",
+        "image": "/images/objets/anabolysants.gif",
         "quantite": 1
       },
       {
         "id": 316,
         "nom": "Papillon",
-        "image": "papillon.gif",
+        "image": "/images/objets/papillon.gif",
         "quantite": 1
       }
     ],
@@ -40,7 +40,7 @@
       {
         "id": 212,
         "nom": "Pigeon voyageur",
-        "image": "pigeon.gif",
+        "image": "/images/objets/pigeon.gif",
         "quantite": 1
       }
     ]
@@ -52,19 +52,19 @@
       {
         "id": 42,
         "nom": "Perceuse",
-        "image": "perceuse.gif",
+        "image": "/images/objets/perceuse.gif",
         "quantite": 1
       },
       {
         "id": 320,
         "nom": "Tartine",
-        "image": "tartine.gif",
+        "image": "/images/objets/tartine.gif",
         "quantite": 1
       },
       {
         "id": 344,
         "nom": "bocal de nutella",
-        "image": "naintella.gif",
+        "image": "/images/objets/naintella.gif",
         "quantite": 1
       }
     ],
@@ -72,7 +72,7 @@
       {
         "id": 51,
         "nom": "Donut géant radioactif",
-        "image": "donut.gif",
+        "image": "/images/objets/donut.gif",
         "quantite": 1
       }
     ]
@@ -84,13 +84,13 @@
       {
         "id": 94,
         "nom": "Chapeau de magicien",
-        "image": "chapeau_de_magicien.gif",
+        "image": "/images/objets/chapeau_de_magicien.gif",
         "quantite": 1
       },
       {
         "id": 365,
         "nom": "bloup",
-        "image": "bocal_bloup.gif",
+        "image": "/images/objets/bocal_bloup.gif",
         "quantite": 1
       }
     ],
@@ -98,7 +98,7 @@
       {
         "id": 151,
         "nom": "Choli Japeau Rigolo",
-        "image": "Carlson.gif",
+        "image": "/images/objets/Carlson.gif",
         "quantite": 1
       }
     ]
@@ -110,7 +110,7 @@
       {
         "id": 367,
         "nom": "Autographe d'Actarus",
-        "image": "recompense_goldoV2.png",
+        "image": "/images/objets/recompense_goldoV2.png",
         "quantite": 40
       }
     ],
@@ -118,13 +118,13 @@
       {
         "id": 431,
         "nom": "UFO Robot Grendizer",
-        "image": "goldomini.png",
+        "image": "/images/objets/goldomini.png",
         "quantite": 1
       },
       {
         "id": 432,
         "nom": "Casque de Héros",
-        "image": "kusk.png",
+        "image": "/images/objets/kusk.png",
         "quantite": 1
       }
     ]
@@ -136,13 +136,13 @@
       {
         "id": 366,
         "nom": "Lance-Chapin",
-        "image": "lancechapin.png",
+        "image": "/images/objets/lancechapin.png",
         "quantite": 1
       },
       {
         "id": 369,
         "nom": "Boulet",
-        "image": "boulet.gif",
+        "image": "/images/objets/boulet.gif",
         "quantite": 1
       }
     ],
@@ -150,7 +150,7 @@
       {
         "id": 46,
         "nom": "Canon",
-        "image": "canon.gif",
+        "image": "/images/objets/canon.gif",
         "quantite": 1
       }
     ]
@@ -162,13 +162,13 @@
       {
         "id": 58,
         "nom": "Calculette rétro-éclairée",
-        "image": "calculette.gif",
+        "image": "/images/objets/calculette.gif",
         "quantite": 1
       },
       {
         "id": 97,
         "nom": "Boîte à Outils",
-        "image": "boite_a_outils.gif",
+        "image": "/images/objets/boite_a_outils.gif",
         "quantite": 1
       }
     ],
@@ -176,7 +176,7 @@
       {
         "id": 59,
         "nom": "Télécommande infrarouge",
-        "image": "telecommande.gif",
+        "image": "/images/objets/telecommande.gif",
         "quantite": 1
       }
     ]
@@ -188,19 +188,19 @@
       {
         "id": 328,
         "nom": "Boud'nain bleu",
-        "image": "boudin_bleu.gif",
+        "image": "/images/objets/boudin_bleu.gif",
         "quantite": 1
       },
       {
         "id": 329,
         "nom": "Boud'nain rouge",
-        "image": "boudin_rouge.gif",
+        "image": "/images/objets/boudin_rouge.gif",
         "quantite": 1
       },
       {
         "id": 330,
         "nom": "Boud'nain vert",
-        "image": "boudin_vert.gif",
+        "image": "/images/objets/boudin_vert.gif",
         "quantite": 1
       }
     ],
@@ -208,7 +208,7 @@
       {
         "id": 204,
         "nom": "Tripes de poulet",
-        "image": "poulet.gif",
+        "image": "/images/objets/poulet.gif",
         "quantite": 1
       }
     ]
@@ -220,25 +220,25 @@
       {
         "id": 124,
         "nom": "Guitare électrique",
-        "image": "guitare.gif",
+        "image": "/images/objets/guitare.gif",
         "quantite": 1
       },
       {
         "id": 134,
         "nom": "Guitare Acoustique",
-        "image": "Acoustic.gif",
+        "image": "/images/objets/Acoustic.gif",
         "quantite": 1
       },
       {
         "id": 135,
         "nom": "Guitare électrique Ibanez",
-        "image": "guit01.gif",
+        "image": "/images/objets/guit01.gif",
         "quantite": 1
       },
       {
         "id": 136,
         "nom": "Guitare électrique Strato",
-        "image": "guit02.gif",
+        "image": "/images/objets/guit02.gif",
         "quantite": 1
       }
     ],
@@ -246,7 +246,7 @@
       {
         "id": 109,
         "nom": "Disque laser de Dorothée",
-        "image": "dorothee.gif",
+        "image": "/images/objets/dorothee.gif",
         "quantite": 1
       }
     ]
@@ -258,13 +258,13 @@
       {
         "id": 98,
         "nom": "Cube à lettres (ABX)",
-        "image": "cube_type1.gif",
+        "image": "/images/objets/cube_type1.gif",
         "quantite": 1
       },
       {
         "id": 99,
         "nom": "Cube à lettres (CFE)",
-        "image": "cube_type2.gif",
+        "image": "/images/objets/cube_type2.gif",
         "quantite": 1
       }
     ],
@@ -272,7 +272,7 @@
       {
         "id": 105,
         "nom": "Nain-cyclope est dit",
-        "image": "livre_marron.gif",
+        "image": "/images/objets/livre_marron.gif",
         "quantite": 1
       }
     ]
@@ -284,14 +284,14 @@
       {
         "id": 138,
         "nom": "minus",
-        "image": "minus.gif",
+        "image": "/images/objets/minus.gif",
         "quantite": 1,
         "note": "-50"
       },
       {
         "id": 359,
         "nom": "Le bocal d'arbre",
-        "image": "bocal_arbre.gif",
+        "image": "/images/objets/bocal_arbre.gif",
         "quantite": 1
       }
     ],
@@ -299,7 +299,7 @@
       {
         "id": 119,
         "nom": "Bonzaï",
-        "image": "bonzai.gif",
+        "image": "/images/objets/bonzai.gif",
         "quantite": 1
       }
     ]
@@ -311,19 +311,19 @@
       {
         "id": 97,
         "nom": "Boîte à Outils",
-        "image": "boite_a_outils.gif",
+        "image": "/images/objets/boite_a_outils.gif",
         "quantite": 1
       },
       {
         "id": 164,
         "nom": "Voiture de course",
-        "image": "voiture_de_course.gif",
+        "image": "/images/objets/voiture_de_course.gif",
         "quantite": 1
       },
       {
         "id": 329,
         "nom": "Boud'nain rouge",
-        "image": "boudin_rouge.gif",
+        "image": "/images/objets/boudin_rouge.gif",
         "quantite": 1
       }
     ],
@@ -331,7 +331,7 @@
       {
         "id": 161,
         "nom": "Formule 1 rouge",
-        "image": "F1_rouge.gif",
+        "image": "/images/objets/F1_rouge.gif",
         "quantite": 1
       }
     ]
@@ -342,37 +342,37 @@
       {
         "id": 113,
         "nom": "Combinainson de Force bleu",
-        "image": "force_bleu.gif",
+        "image": "/images/objets/force_bleu.gif",
         "quantite": 1
       },
       {
         "id": 114,
         "nom": "Combinainson de Force noir",
-        "image": "force_noir.gif",
+        "image": "/images/objets/force_noir.gif",
         "quantite": 1
       },
       {
         "id": 111,
         "nom": "Combinainson de Force rose",
-        "image": "force_rose.gif",
+        "image": "/images/objets/force_rose.gif",
         "quantite": 1
       },
       {
         "id": 110,
         "nom": "Combinainson de Force rouge",
-        "image": "force_rouge.gif",
+        "image": "/images/objets/force_rouge.gif",
         "quantite": 1
       },
       {
         "id": 112,
         "nom": "Combinainson de Force vert",
-        "image": "force_vert.gif",
+        "image": "/images/objets/force_vert.gif",
         "quantite": 1
       },
       {
         "id": 243,
         "nom": "Rejoignez les Bionain !",
-        "image": "bionain.gif",
+        "image": "/images/objets/bionain.gif",
         "quantite": 1
       }
     ],
@@ -380,7 +380,7 @@
       {
         "id": 121,
         "nom": "Combinaison de Bionain",
-        "image": "combinaison_bionain.gif",
+        "image": "/images/objets/combinaison_bionain.gif",
         "quantite": 1
       }
     ]
@@ -392,13 +392,13 @@
       {
         "id": 106,
         "nom": "L'ABC d'aire",
-        "image": "livre_vert.gif",
+        "image": "/images/objets/livre_vert.gif",
         "quantite": 1
       },
       {
         "id": 143,
         "nom": "Un peu d'amour en bocal",
-        "image": "amour_en_bocal.gif",
+        "image": "/images/objets/amour_en_bocal.gif",
         "quantite": 1
       }
     ],
@@ -406,7 +406,7 @@
       {
         "id": 89,
         "nom": "Le Kamasutra en 3 leçons",
-        "image": "livre_rose.gif",
+        "image": "/images/objets/livre_rose.gif",
         "quantite": 1
       }
     ]
@@ -418,13 +418,13 @@
       {
         "id": 35,
         "nom": "Coup de pied au cul",
-        "image": "coup_de_pied.gif",
+        "image": "/images/objets/coup_de_pied.gif",
         "quantite": 1
       },
       {
         "id": 115,
         "nom": "Chaussure de tennis",
-        "image": "chaussure_tennis.gif",
+        "image": "/images/objets/chaussure_tennis.gif",
         "quantite": 1
       }
     ],
@@ -432,7 +432,7 @@
       {
         "id": 79,
         "nom": "Les bottes de convocations d'Herr Moroïd",
-        "image": "bottes.gif",
+        "image": "/images/objets/bottes.gif",
         "quantite": 1
       }
     ]
@@ -444,13 +444,13 @@
       {
         "id": 4,
         "nom": "Boomrang classique",
-        "image": "boomrang.gif",
+        "image": "/images/objets/boomrang.gif",
         "quantite": 1
       },
       {
         "id": 152,
         "nom": "Glaçon",
-        "image": "glacon.gif",
+        "image": "/images/objets/glacon.gif",
         "quantite": 1
       }
     ],
@@ -458,7 +458,7 @@
       {
         "id": 23,
         "nom": "Boomrang de glace",
-        "image": "boomrang_glace.gif",
+        "image": "/images/objets/boomrang_glace.gif",
         "quantite": 1
       }
     ]
@@ -470,13 +470,13 @@
       {
         "id": 126,
         "nom": "Haltères",
-        "image": "halteres.gif",
+        "image": "/images/objets/halteres.gif",
         "quantite": 1
       },
       {
         "id": 153,
         "nom": "boite d'épinard",
-        "image": "nezpinard.png",
+        "image": "/images/objets/nezpinard.png",
         "quantite": 1
       }
     ],
@@ -484,7 +484,7 @@
       {
         "id": 44,
         "nom": "Gant de boxe",
-        "image": "boxe.gif",
+        "image": "/images/objets/boxe.gif",
         "quantite": 1
       }
     ]
@@ -496,13 +496,13 @@
       {
         "id": 47,
         "nom": "Epée à 2 balles",
-        "image": "epee_arwall.gif",
+        "image": "/images/objets/epee_arwall.gif",
         "quantite": 1
       },
       {
         "id": 192,
         "nom": "Enclume ACME",
-        "image": "enclume.gif",
+        "image": "/images/objets/enclume.gif",
         "quantite": 1
       }
     ],
@@ -510,7 +510,7 @@
       {
         "id": 9,
         "nom": "Glaive en or",
-        "image": "glaive_rouge.gif",
+        "image": "/images/objets/glaive_rouge.gif",
         "quantite": 1
       }
     ]
@@ -522,19 +522,19 @@
       {
         "id": 24,
         "nom": "Clef anglaise",
-        "image": "clef_a_molette.gif",
+        "image": "/images/objets/clef_a_molette.gif",
         "quantite": 1
       },
       {
         "id": 158,
         "nom": "Formule 1 jaune",
-        "image": "F1_jaune.gif",
+        "image": "/images/objets/F1_jaune.gif",
         "quantite": 1
       },
       {
         "id": 328,
         "nom": "Boud'nain bleu",
-        "image": "boudin_bleu.gif",
+        "image": "/images/objets/boudin_bleu.gif",
         "quantite": 1
       }
     ],
@@ -542,7 +542,7 @@
       {
         "id": 162,
         "nom": "Formule 1 verte",
-        "image": "F1_verte.gif",
+        "image": "/images/objets/F1_verte.gif",
         "quantite": 1
       }
     ]
@@ -554,19 +554,19 @@
       {
         "id": 252,
         "nom": "Super Carotte",
-        "image": "supercarrot.gif",
+        "image": "/images/objets/supercarrot.gif",
         "quantite": 1
       },
       {
         "id": 324,
         "nom": "Chapin",
-        "image": "chapin.gif",
+        "image": "/images/objets/chapin.gif",
         "quantite": 1
       },
       {
         "id": 441,
         "nom": "Guide de Chapinologie",
-        "image": "livre_rose.png",
+        "image": "/images/objets/livre_rose.png",
         "quantite": 1,
         "donneRecettes": true
       }
@@ -575,7 +575,7 @@
       {
         "id": 326,
         "nom": "Super chapin",
-        "image": "super_chapin.gif",
+        "image": "/images/objets/super_chapin.gif",
         "quantite": 1
       }
     ]
@@ -587,19 +587,19 @@
       {
         "id": 71,
         "nom": "Pelle",
-        "image": "pelle.gif",
+        "image": "/images/objets/pelle.gif",
         "quantite": 1
       },
       {
         "id": 218,
         "nom": "Bandeau Noir",
-        "image": "bandeau.gif",
+        "image": "/images/objets/bandeau.gif",
         "quantite": 1
       },
       {
         "id": 311,
         "nom": "Carte au trésor",
-        "image": "carte.png",
+        "image": "/images/objets/carte.png",
         "quantite": 1,
         "donneRecettes": true
       }
@@ -608,7 +608,7 @@
       {
         "id": 197,
         "nom": "Coffre au trésor",
-        "image": "tresor.png",
+        "image": "/images/objets/tresor.png",
         "quantite": 1
       }
     ]
@@ -620,19 +620,19 @@
       {
         "id": 223,
         "nom": "Carotte",
-        "image": "carotte.gif",
+        "image": "/images/objets/carotte.gif",
         "quantite": 1
       },
       {
         "id": 247,
         "nom": "Cage à Chapin",
-        "image": "cage.gif",
+        "image": "/images/objets/cage.gif",
         "quantite": 1
       },
       {
         "id": 441,
         "nom": "Guide de Chapinologie",
-        "image": "livre_rose.png",
+        "image": "/images/objets/livre_rose.png",
         "quantite": 1,
         "donneRecettes": true
       }
@@ -641,7 +641,7 @@
       {
         "id": 324,
         "nom": "Chapin",
-        "image": "chapin.gif",
+        "image": "/images/objets/chapin.gif",
         "quantite": 1
       }
     ]
@@ -653,25 +653,25 @@
       {
         "id": 30,
         "nom": "Machette de Jack l'éventreur",
-        "image": "machette_rouge.gif",
+        "image": "/images/objets/machette_rouge.gif",
         "quantite": 1
       },
       {
         "id": 108,
         "nom": "Ours en peluche",
-        "image": "nounou.gif",
+        "image": "/images/objets/nounou.gif",
         "quantite": 1
       },
       {
         "id": 324,
         "nom": "Chapin",
-        "image": "chapin.gif",
+        "image": "/images/objets/chapin.gif",
         "quantite": 1
       },
       {
         "id": 441,
         "nom": "Guide de Chapinologie",
-        "image": "livre_rose.png",
+        "image": "/images/objets/livre_rose.png",
         "quantite": 1,
         "donneRecettes": true
       }
@@ -680,7 +680,7 @@
       {
         "id": 147,
         "nom": "Chapin en peluche",
-        "image": "peluche_chapin.gif",
+        "image": "/images/objets/peluche_chapin.gif",
         "quantite": 1
       }
     ]
@@ -692,19 +692,19 @@
       {
         "id": 247,
         "nom": "Cage à Chapin",
-        "image": "cage.gif",
+        "image": "/images/objets/cage.gif",
         "quantite": 1
       },
       {
         "id": 252,
         "nom": "Super Carotte",
-        "image": "supercarrot.gif",
+        "image": "/images/objets/supercarrot.gif",
         "quantite": 1
       },
       {
         "id": 441,
         "nom": "Guide de Chapinologie",
-        "image": "livre_rose.png",
+        "image": "/images/objets/livre_rose.png",
         "quantite": 1,
         "donneRecettes": true
       }
@@ -713,7 +713,7 @@
       {
         "id": 326,
         "nom": "Super chapin",
-        "image": "super_chapin.gif",
+        "image": "/images/objets/super_chapin.gif",
         "quantite": 1
       }
     ]
@@ -725,19 +725,19 @@
       {
         "id": 46,
         "nom": "Canon",
-        "image": "canon.gif",
+        "image": "/images/objets/canon.gif",
         "quantite": 1
       },
       {
         "id": 324,
         "nom": "Chapin",
-        "image": "chapin.gif",
+        "image": "/images/objets/chapin.gif",
         "quantite": 1
       },
       {
         "id": 441,
         "nom": "Guide de Chapinologie",
-        "image": "livre_rose.png",
+        "image": "/images/objets/livre_rose.png",
         "quantite": 1,
         "donneRecettes": true
       }
@@ -746,7 +746,7 @@
       {
         "id": 366,
         "nom": "Lance-Chapin",
-        "image": "lancechapin.png",
+        "image": "/images/objets/lancechapin.png",
         "quantite": 1
       }
     ]
@@ -758,13 +758,13 @@
       {
         "id": 4,
         "nom": "Boomrang classique",
-        "image": "boomrang.gif",
+        "image": "/images/objets/boomrang.gif",
         "quantite": 1
       },
       {
         "id": 412,
         "nom": "Bougie d'anniversaire",
-        "image": "bougie.gif",
+        "image": "/images/objets/bougie.gif",
         "quantite": 1
       }
     ],
@@ -772,7 +772,7 @@
       {
         "id": 6,
         "nom": "Boomrang feu",
-        "image": "boomrang_feu.gif",
+        "image": "/images/objets/boomrang_feu.gif",
         "quantite": 1
       }
     ]
@@ -784,13 +784,13 @@
       {
         "id": 342,
         "nom": "Citrouille d'Halloween",
-        "image": "citrouille_5.gif",
+        "image": "/images/objets/citrouille_5.gif",
         "quantite": 1
       },
       {
         "id": 423,
         "nom": "Griffes de la nuit",
-        "image": "griffe.gif",
+        "image": "/images/objets/griffe.gif",
         "quantite": 1
       }
     ],
@@ -798,13 +798,13 @@
       {
         "id": 337,
         "nom": "Citrouille d'Halloween",
-        "image": "citrouille_0.gif",
+        "image": "/images/objets/citrouille_0.gif",
         "quantite": 1
       },
       {
         "id": 444,
         "nom": "Cortex",
-        "image": "brain.png",
+        "image": "/images/objets/brain.png",
         "quantite": 1
       }
     ]
@@ -816,13 +816,13 @@
       {
         "id": 30,
         "nom": "Machette de Jack l'éventreur",
-        "image": "machette_rouge.gif",
+        "image": "/images/objets/machette_rouge.gif",
         "quantite": 1
       },
       {
         "id": 342,
         "nom": "Citrouille d'Halloween",
-        "image": "citrouille_5.gif",
+        "image": "/images/objets/citrouille_5.gif",
         "quantite": 1
       }
     ],
@@ -830,13 +830,13 @@
       {
         "id": 338,
         "nom": "Citrouille d'Halloween",
-        "image": "citrouille_1.gif",
+        "image": "/images/objets/citrouille_1.gif",
         "quantite": 1
       },
       {
         "id": 444,
         "nom": "Cortex",
-        "image": "brain.png",
+        "image": "/images/objets/brain.png",
         "quantite": 1
       }
     ]
@@ -848,13 +848,13 @@
       {
         "id": 33,
         "nom": "Machette classique",
-        "image": "machette_mauve.gif",
+        "image": "/images/objets/machette_mauve.gif",
         "quantite": 1
       },
       {
         "id": 342,
         "nom": "Citrouille d'Halloween",
-        "image": "citrouille_5.gif",
+        "image": "/images/objets/citrouille_5.gif",
         "quantite": 1
       }
     ],
@@ -862,13 +862,13 @@
       {
         "id": 339,
         "nom": "Citrouille d'Halloween",
-        "image": "citrouille_2.gif",
+        "image": "/images/objets/citrouille_2.gif",
         "quantite": 1
       },
       {
         "id": 444,
         "nom": "Cortex",
-        "image": "brain.png",
+        "image": "/images/objets/brain.png",
         "quantite": 1
       }
     ]
@@ -880,13 +880,13 @@
       {
         "id": 32,
         "nom": "Machette de Darth Vador",
-        "image": "machette_verte.gif",
+        "image": "/images/objets/machette_verte.gif",
         "quantite": 1
       },
       {
         "id": 342,
         "nom": "Citrouille d'Halloween",
-        "image": "citrouille_5.gif",
+        "image": "/images/objets/citrouille_5.gif",
         "quantite": 1
       }
     ],
@@ -894,13 +894,13 @@
       {
         "id": 340,
         "nom": "Citrouille d'Halloween",
-        "image": "citrouille_3.gif",
+        "image": "/images/objets/citrouille_3.gif",
         "quantite": 1
       },
       {
         "id": 444,
         "nom": "Cortex",
-        "image": "brain.png",
+        "image": "/images/objets/brain.png",
         "quantite": 1
       }
     ]
@@ -912,13 +912,13 @@
       {
         "id": 31,
         "nom": "Machette des gentils",
-        "image": "machette_bleue.gif",
+        "image": "/images/objets/machette_bleue.gif",
         "quantite": 1
       },
       {
         "id": 342,
         "nom": "Citrouille d'Halloween",
-        "image": "citrouille_5.gif",
+        "image": "/images/objets/citrouille_5.gif",
         "quantite": 1
       }
     ],
@@ -926,13 +926,13 @@
       {
         "id": 341,
         "nom": "Citrouille d'Halloween",
-        "image": "citrouille_4.gif",
+        "image": "/images/objets/citrouille_4.gif",
         "quantite": 1
       },
       {
         "id": 444,
         "nom": "Cortex",
-        "image": "brain.png",
+        "image": "/images/objets/brain.png",
         "quantite": 1
       }
     ]
@@ -944,37 +944,37 @@
       {
         "id": 149,
         "nom": "Marmitte",
-        "image": "marmitte2.gif",
+        "image": "/images/objets/marmitte2.gif",
         "quantite": 1
       },
       {
         "id": 324,
         "nom": "Chapin",
-        "image": "chapin.gif",
+        "image": "/images/objets/chapin.gif",
         "quantite": 1
       },
       {
         "id": 328,
         "nom": "Boud'nain bleu",
-        "image": "boudin_bleu.gif",
+        "image": "/images/objets/boudin_bleu.gif",
         "quantite": 1
       },
       {
         "id": 329,
         "nom": "Boud'nain rouge",
-        "image": "boudin_rouge.gif",
+        "image": "/images/objets/boudin_rouge.gif",
         "quantite": 1
       },
       {
         "id": 330,
         "nom": "Boud'nain vert",
-        "image": "boudin_vert.gif",
+        "image": "/images/objets/boudin_vert.gif",
         "quantite": 1
       },
       {
         "id": 357,
         "nom": "potion potiron de la mort qui tue !",
-        "image": "potion.gif",
+        "image": "/images/objets/potion.gif",
         "quantite": 1
       }
     ],
@@ -982,7 +982,7 @@
       {
         "id": 443,
         "nom": "Zombin",
-        "image": "zombin.png",
+        "image": "/images/objets/zombin.png",
         "quantite": 1
       }
     ]
@@ -994,20 +994,20 @@
       {
         "id": 441,
         "nom": "Guide de Chapinologie",
-        "image": "livre_rose.png",
+        "image": "/images/objets/livre_rose.png",
         "quantite": 1,
         "donneRecettes": true
       },
       {
         "id": 443,
         "nom": "Zombin",
-        "image": "zombin.png",
+        "image": "/images/objets/zombin.png",
         "quantite": 1
       },
       {
         "id": 444,
         "nom": "Cortex",
-        "image": "brain.png",
+        "image": "/images/objets/brain.png",
         "quantite": 1
       }
     ],
@@ -1015,7 +1015,7 @@
       {
         "id": 324,
         "nom": "Chapin",
-        "image": "chapin.gif",
+        "image": "/images/objets/chapin.gif",
         "quantite": 1
       }
     ]
@@ -1027,14 +1027,14 @@
       {
         "id": 137,
         "nom": "minus",
-        "image": "minus.gif",
+        "image": "/images/objets/minus.gif",
         "quantite": 1,
         "note": "0"
       },
       {
         "id": 444,
         "nom": "Cortex",
-        "image": "brain.png",
+        "image": "/images/objets/brain.png",
         "quantite": 1
       }
     ],
@@ -1042,7 +1042,7 @@
       {
         "id": 310,
         "nom": "Souris psychopathe",
-        "image": "bocalsouris.gif",
+        "image": "/images/objets/bocalsouris.gif",
         "quantite": 1
       }
     ]
@@ -1054,14 +1054,14 @@
       {
         "id": 138,
         "nom": "minus",
-        "image": "minus.gif",
+        "image": "/images/objets/minus.gif",
         "quantite": 1,
         "note": "-50"
       },
       {
         "id": 444,
         "nom": "Cortex",
-        "image": "brain.png",
+        "image": "/images/objets/brain.png",
         "quantite": 1
       }
     ],
@@ -1069,7 +1069,7 @@
       {
         "id": 310,
         "nom": "Souris psychopathe",
-        "image": "bocalsouris.gif",
+        "image": "/images/objets/bocalsouris.gif",
         "quantite": 1
       }
     ]
@@ -1081,14 +1081,14 @@
       {
         "id": 139,
         "nom": "minus",
-        "image": "minus.gif",
+        "image": "/images/objets/minus.gif",
         "quantite": 1,
         "note": "-100"
       },
       {
         "id": 444,
         "nom": "Cortex",
-        "image": "brain.png",
+        "image": "/images/objets/brain.png",
         "quantite": 1
       }
     ],
@@ -1096,7 +1096,7 @@
       {
         "id": 310,
         "nom": "Souris psychopathe",
-        "image": "bocalsouris.gif",
+        "image": "/images/objets/bocalsouris.gif",
         "quantite": 1
       }
     ]
@@ -1108,14 +1108,14 @@
       {
         "id": 140,
         "nom": "minus",
-        "image": "minus.gif",
+        "image": "/images/objets/minus.gif",
         "quantite": 1,
         "note": "-150"
       },
       {
         "id": 444,
         "nom": "Cortex",
-        "image": "brain.png",
+        "image": "/images/objets/brain.png",
         "quantite": 1
       }
     ],
@@ -1123,7 +1123,7 @@
       {
         "id": 310,
         "nom": "Souris psychopathe",
-        "image": "bocalsouris.gif",
+        "image": "/images/objets/bocalsouris.gif",
         "quantite": 1
       }
     ]
@@ -1135,14 +1135,14 @@
       {
         "id": 141,
         "nom": "minus",
-        "image": "minus.gif",
+        "image": "/images/objets/minus.gif",
         "quantite": 1,
         "note": "-200"
       },
       {
         "id": 444,
         "nom": "Cortex",
-        "image": "brain.png",
+        "image": "/images/objets/brain.png",
         "quantite": 1
       }
     ],
@@ -1150,7 +1150,7 @@
       {
         "id": 310,
         "nom": "Souris psychopathe",
-        "image": "bocalsouris.gif",
+        "image": "/images/objets/bocalsouris.gif",
         "quantite": 1
       }
     ]
@@ -1162,32 +1162,32 @@
       {
         "id": 90,
         "nom": "Grimoire magique",
-        "image": "grimoire.gif",
+        "image": "/images/objets/grimoire.gif",
         "quantite": 1,
         "donneFormules": true
       },
       {
         "id": 93,
         "nom": "Prince charmant",
-        "image": "grenouille.gif",
+        "image": "/images/objets/grenouille.gif",
         "quantite": 1
       },
       {
         "id": 310,
         "nom": "Souris psychopathe",
-        "image": "bocalsouris.gif",
+        "image": "/images/objets/bocalsouris.gif",
         "quantite": 1
       },
       {
         "id": 315,
         "nom": "Citrouille",
-        "image": "citrouille.gif",
+        "image": "/images/objets/citrouille.gif",
         "quantite": 1
       },
       {
         "id": 445,
         "nom": "Limier",
-        "image": "limier.png",
+        "image": "/images/objets/limier.png",
         "quantite": 1
       }
     ],
@@ -1195,7 +1195,7 @@
       {
         "id": 183,
         "nom": "Carrosse de cendri-nain",
-        "image": "citrouilluge.gif",
+        "image": "/images/objets/citrouilluge.gif",
         "quantite": 1
       }
     ]
@@ -1207,13 +1207,13 @@
       {
         "id": 446,
         "nom": "Kuro",
-        "image": "Kuro.png",
+        "image": "/images/objets/Kuro.png",
         "quantite": 1
       },
       {
         "id": 447,
         "nom": "Shiro",
-        "image": "Shiro.png",
+        "image": "/images/objets/Shiro.png",
         "quantite": 1
       }
     ],
@@ -1221,7 +1221,7 @@
       {
         "id": 448,
         "nom": "Goban",
-        "image": "Goban.png",
+        "image": "/images/objets/Goban.png",
         "quantite": 1
       }
     ]
@@ -1233,55 +1233,55 @@
       {
         "id": 71,
         "nom": "Pelle",
-        "image": "pelle.gif",
+        "image": "/images/objets/pelle.gif",
         "quantite": 1
       },
       {
         "id": 73,
         "nom": "Jet de pot de fleur",
-        "image": "pot_fleur.gif",
+        "image": "/images/objets/pot_fleur.gif",
         "quantite": 1
       },
       {
         "id": 88,
         "nom": "Plante qui fait rigoler",
-        "image": "plante_qui_fait_rigoler.gif",
+        "image": "/images/objets/plante_qui_fait_rigoler.gif",
         "quantite": 1
       },
       {
         "id": 90,
         "nom": "Grimoire magique",
-        "image": "grimoire.gif",
+        "image": "/images/objets/grimoire.gif",
         "quantite": 1,
         "donneFormules": true
       },
       {
         "id": 117,
         "nom": "Carpette de loup des bouais",
-        "image": "carpette.gif",
+        "image": "/images/objets/carpette.gif",
         "quantite": 1
       },
       {
         "id": 119,
         "nom": "Bonzaï",
-        "image": "bonzai.gif",
+        "image": "/images/objets/bonzai.gif",
         "quantite": 1
       },
       {
         "nom": "Brouette à impulsion temporelle",
-        "image": "brouette.gif",
+        "image": "/images/objets/brouette.gif",
         "quantite": 1
       },
       {
         "id": 359,
         "nom": "Le bocal d'arbre",
-        "image": "bocal_arbre.gif",
+        "image": "/images/objets/bocal_arbre.gif",
         "quantite": 1
       },
       {
         "id": 362,
         "nom": "Le bocal d'herbe",
-        "image": "bocal_herbe.gif",
+        "image": "/images/objets/bocal_herbe.gif",
         "quantite": 1
       }
     ],
@@ -1289,7 +1289,7 @@
       {
         "id": 368,
         "nom": "Jardinet",
-        "image": "jardinet.gif",
+        "image": "/images/objets/jardinet.gif",
         "quantite": 1
       }
     ]
@@ -1301,38 +1301,38 @@
       {
         "id": 47,
         "nom": "Epée à 2 balles",
-        "image": "epee_arwall.gif",
+        "image": "/images/objets/epee_arwall.gif",
         "quantite": 1
       },
       {
         "id": 69,
         "nom": "Eclair Divin de Schlavbeuk",
-        "image": "zap.gif",
+        "image": "/images/objets/zap.gif",
         "quantite": 1
       },
       {
         "id": 87,
         "nom": "Pierre magique",
-        "image": "gem.gif",
+        "image": "/images/objets/gem.gif",
         "quantite": 1
       },
       {
         "id": 90,
         "nom": "Grimoire magique",
-        "image": "grimoire.gif",
+        "image": "/images/objets/grimoire.gif",
         "quantite": 1,
         "donneFormules": true
       },
       {
         "id": 192,
         "nom": "Enclume ACME",
-        "image": "enclume.gif",
+        "image": "/images/objets/enclume.gif",
         "quantite": 1
       },
       {
         "id": 361,
         "nom": "Le bocal d'eau",
-        "image": "bocal_eau.gif",
+        "image": "/images/objets/bocal_eau.gif",
         "quantite": 1
       }
     ],
@@ -1340,7 +1340,7 @@
       {
         "id": 380,
         "nom": "Excalibur",
-        "image": "excalibur.png",
+        "image": "/images/objets/excalibur.png",
         "quantite": 1
       }
     ]
@@ -1352,38 +1352,38 @@
       {
         "id": 90,
         "nom": "Grimoire magique",
-        "image": "grimoire.gif",
+        "image": "/images/objets/grimoire.gif",
         "quantite": 1,
         "donneFormules": true
       },
       {
         "id": 324,
         "nom": "Chapin",
-        "image": "chapin.gif",
+        "image": "/images/objets/chapin.gif",
         "quantite": 1
       },
       {
         "id": 368,
         "nom": "Jardinet",
-        "image": "jardinet.gif",
+        "image": "/images/objets/jardinet.gif",
         "quantite": 1
       },
       {
         "id": 380,
         "nom": "Excalibur",
-        "image": "excalibur.png",
+        "image": "/images/objets/excalibur.png",
         "quantite": 1
       },
       {
         "id": 452,
         "nom": "Ni tranches, Ni rondelles !",
-        "image": "Hirondelle.png",
+        "image": "/images/objets/Hirondelle.png",
         "quantite": 1
       },
       {
         "id": 453,
         "nom": "Deux demies noix de coco",
-        "image": "Noix_coco.png",
+        "image": "/images/objets/Noix_coco.png",
         "quantite": 1
       }
     ],
@@ -1391,7 +1391,7 @@
       {
         "id": 356,
         "nom": "Sainte grenade d'Antioche",
-        "image": "Grenade.png",
+        "image": "/images/objets/Grenade.png",
         "quantite": 1
       }
     ]
@@ -1406,26 +1406,26 @@
       {
         "id": 88,
         "nom": "Plante qui fait rigoler",
-        "image": "plante_qui_fait_rigoler.gif",
+        "image": "/images/objets/plante_qui_fait_rigoler.gif",
         "quantite": 1
       },
       {
         "id": 91,
         "nom": "Laboratoire du petit chimiste",
-        "image": "chimie.gif",
+        "image": "/images/objets/chimie.gif",
         "quantite": 1,
         "donneRecettes": true
       },
       {
         "id": 96,
         "nom": "Cafetière à injection directe",
-        "image": "cafetiere.gif",
+        "image": "/images/objets/cafetiere.gif",
         "quantite": 1
       },
       {
         "id": 156,
         "nom": "Seringue à l'EPO",
-        "image": "seringue.gif",
+        "image": "/images/objets/seringue.gif",
         "quantite": 1
       }
     ],
@@ -1433,7 +1433,7 @@
       {
         "id": 167,
         "nom": "Anabolysants",
-        "image": "anabolysants.gif",
+        "image": "/images/objets/anabolysants.gif",
         "quantite": 1
       }
     ]
@@ -1445,32 +1445,32 @@
       {
         "id": 21,
         "nom": "Cocktail \"mal aux touffes\"",
-        "image": "coktail.gif",
+        "image": "/images/objets/coktail.gif",
         "quantite": 1
       },
       {
         "id": 88,
         "nom": "Plante qui fait rigoler",
-        "image": "plante_qui_fait_rigoler.gif",
+        "image": "/images/objets/plante_qui_fait_rigoler.gif",
         "quantite": 1
       },
       {
         "id": 91,
         "nom": "Laboratoire du petit chimiste",
-        "image": "chimie.gif",
+        "image": "/images/objets/chimie.gif",
         "quantite": 1,
         "donneRecettes": true
       },
       {
         "id": 96,
         "nom": "Cafetière à injection directe",
-        "image": "cafetiere.gif",
+        "image": "/images/objets/cafetiere.gif",
         "quantite": 1
       },
       {
         "id": 156,
         "nom": "Seringue à l'EPO",
-        "image": "seringue.gif",
+        "image": "/images/objets/seringue.gif",
         "quantite": 1
       }
     ],
@@ -1478,7 +1478,7 @@
       {
         "id": 168,
         "nom": "Super - anabolysants !",
-        "image": "anabolysants.gif",
+        "image": "/images/objets/anabolysants.gif",
         "quantite": 1
       }
     ]
@@ -1490,31 +1490,31 @@
       {
         "id": 29,
         "nom": "Revolver 6 coups",
-        "image": "revolver.gif",
+        "image": "/images/objets/revolver.gif",
         "quantite": 1
       },
       {
         "id": 92,
         "nom": "OVNI",
-        "image": "ovni.gif",
+        "image": "/images/objets/ovni.gif",
         "quantite": 1
       },
       {
         "id": 160,
         "nom": "Fusée de la NASA",
-        "image": "fusee.gif",
+        "image": "/images/objets/fusee.gif",
         "quantite": 1
       },
       {
         "id": 213,
         "nom": "Sonde Spatial",
-        "image": "sonde.gif",
+        "image": "/images/objets/sonde.gif",
         "quantite": 1
       },
       {
         "id": 259,
         "nom": "Manuel d'électricinain",
-        "image": "manuelelectricnain.gif",
+        "image": "/images/objets/manuelelectricnain.gif",
         "quantite": 1,
         "donneRecettes": true
       }
@@ -1523,7 +1523,7 @@
       {
         "id": 352,
         "nom": "Pistolet de L'espace",
-        "image": "pistolet_espace.gif",
+        "image": "/images/objets/pistolet_espace.gif",
         "quantite": 1
       }
     ]
@@ -1535,25 +1535,25 @@
       {
         "id": 69,
         "nom": "Eclair Divin de Schlavbeuk",
-        "image": "zap.gif",
+        "image": "/images/objets/zap.gif",
         "quantite": 1
       },
       {
         "id": 91,
         "nom": "Laboratoire du petit chimiste",
-        "image": "chimie.gif",
+        "image": "/images/objets/chimie.gif",
         "quantite": 1
       },
       {
         "id": 147,
         "nom": "Chapin en peluche",
-        "image": "peluche_chapin.gif",
+        "image": "/images/objets/peluche_chapin.gif",
         "quantite": 1
       },
       {
         "id": 444,
         "nom": "Cortex",
-        "image": "brain.png",
+        "image": "/images/objets/brain.png",
         "quantite": 1
       }
     ],
@@ -1561,7 +1561,7 @@
       {
         "id": 458,
         "nom": "Créature de Franck'n'spin",
-        "image": "frankenchpin.png",
+        "image": "/images/objets/frankenchpin.png",
         "quantite": 1
       }
     ]
@@ -1573,13 +1573,13 @@
       {
         "id": 357,
         "nom": "potion potiron de la mort qui tue !",
-        "image": "potion.gif",
+        "image": "/images/objets/potion.gif",
         "quantite": 1
       },
       {
         "id": 460,
         "nom": "Potion sonore",
-        "image": "potion_sonore.png",
+        "image": "/images/objets/potion_sonore.png",
         "quantite": 1
       }
     ],
@@ -1587,7 +1587,7 @@
       {
         "id": 461,
         "nom": "Super potion sonore",
-        "image": "super_potion_sonore.png",
+        "image": "/images/objets/super_potion_sonore.png",
         "quantite": 1
       }
     ]
@@ -1599,13 +1599,13 @@
       {
         "id": 329,
         "nom": "Boud'nain rouge",
-        "image": "boudin_rouge.gif",
+        "image": "/images/objets/boudin_rouge.gif",
         "quantite": 1
       },
       {
         "id": 460,
         "nom": "Potion sonore",
-        "image": "potion_sonore.png",
+        "image": "/images/objets/potion_sonore.png",
         "quantite": 1
       }
     ],
@@ -1613,7 +1613,7 @@
       {
         "id": 418,
         "nom": "Raisin",
-        "image": "raisin5.png",
+        "image": "/images/objets/raisin5.png",
         "quantite": 1
       }
     ]
@@ -1625,13 +1625,13 @@
       {
         "id": 330,
         "nom": "Boud'nain vert",
-        "image": "boudin_vert.gif",
+        "image": "/images/objets/boudin_vert.gif",
         "quantite": 1
       },
       {
         "id": 460,
         "nom": "Potion sonore",
-        "image": "potion_sonore.png",
+        "image": "/images/objets/potion_sonore.png",
         "quantite": 1
       }
     ],
@@ -1639,7 +1639,7 @@
       {
         "id": 417,
         "nom": "Raisin",
-        "image": "raisin4.png",
+        "image": "/images/objets/raisin4.png",
         "quantite": 1
       }
     ]
@@ -1651,13 +1651,13 @@
       {
         "id": 328,
         "nom": "Boud'nain bleu",
-        "image": "boudin_bleu.gif",
+        "image": "/images/objets/boudin_bleu.gif",
         "quantite": 1
       },
       {
         "id": 460,
         "nom": "Potion sonore",
-        "image": "potion_sonore.png",
+        "image": "/images/objets/potion_sonore.png",
         "quantite": 1
       }
     ],
@@ -1665,7 +1665,7 @@
       {
         "id": 414,
         "nom": "Raisin",
-        "image": "raisin1.png",
+        "image": "/images/objets/raisin1.png",
         "quantite": 1
       }
     ]
@@ -1677,25 +1677,25 @@
       {
         "id": 328,
         "nom": "Boud'nain bleu",
-        "image": "boudin_bleu.gif",
+        "image": "/images/objets/boudin_bleu.gif",
         "quantite": 1
       },
       {
         "id": 329,
         "nom": "Boud'nain rouge",
-        "image": "boudin_rouge.gif",
+        "image": "/images/objets/boudin_rouge.gif",
         "quantite": 1
       },
       {
         "id": 330,
         "nom": "Boud'nain vert",
-        "image": "boudin_vert.gif",
+        "image": "/images/objets/boudin_vert.gif",
         "quantite": 1
       },
       {
         "id": 461,
         "nom": "Super potion sonore",
-        "image": "super_potion_sonore.png",
+        "image": "/images/objets/super_potion_sonore.png",
         "quantite": 1
       }
     ],
@@ -1703,7 +1703,7 @@
       {
         "id": 327,
         "nom": "Champomy !",
-        "image": "champagne.gif",
+        "image": "/images/objets/champagne.gif",
         "quantite": 1
       }
     ]

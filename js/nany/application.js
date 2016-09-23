@@ -1,6 +1,6 @@
 var extend = require('xtend/mutable');
 var loadCSS = require('./load-css');
-var DOMMounter = require('./dom-mounter');
+var Dom = require('./dom');
 var Nain = require('./nain');
 var Spy = require('./spy');
 var Updater = require('./updater');
@@ -57,18 +57,18 @@ function Application(configuration) {
     // load the Nany CSS into the container document...
     loadCSS(container.ownerDocument);
 
-    // create a DOMMounter to render our components into the DOM
-    var domMounter = DOMMounter();
+    // create a Mounter to render our components into the DOM
+    var mounter = Dom.Mounter();
 
     // create the dashboard object
-    var dashboard = Dashboard(channelName, domMounter.refresh);
+    var dashboard = Dashboard(channelName, mounter.refresh);
 
     // backup the content of the container and clear it before installing our UI
     var containerChildren = Array.prototype.slice.call(container.childNodes);
     container.innerHTML = '';
 
     // install our UI
-    var unmountDashboard = domMounter.mountInto(container, dashboard);
+    var unmountDashboard = mounter.append(container, dashboard);
 
     // finally, load the perso page
     loadPersoPage();

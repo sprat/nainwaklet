@@ -1,0 +1,33 @@
+/* General styles */
+.nany {
+    font-size: 11px;
+    font-family: Verdana, Arial;
+    text-align: left;
+    box-sizing: border-box;
+}
+
+.nany *,
+.nany *:before,
+.nany *:after {
+  box-sizing: inherit;
+}
+
+.nany ul {
+    padding: 0;
+    list-style: disc inside;
+}
+
+.nany a {
+    color: #BB6600;
+    text-decoration: none;
+}
+
+.nany a:hover {
+    text-decoration: underline;
+}
+
+.nany button::-moz-focus-inner,
+.nany input::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+}
