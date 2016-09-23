@@ -3,7 +3,6 @@ var Dom = require('../dom');
 var Analyzer = require('./analyzer');
 var Pager = require('./pager');
 var EventInfo = require('./event-info');
-var Urls = require('../urls');
 var dateRegex = /(\d\d)h(\d\d) \(\w+\. (\d\d)\/(\d\d)\)/;
 var int = Analyzer.int;
 
@@ -53,7 +52,7 @@ function getImage(type) {
         img += '.gif';
     }
 
-    return Urls.getImageUrl('interface/evens/' + img);
+    return '/images/interface/evens/' + img;
 }
 
 function getEvenements(js, nowDate) {

@@ -1,4 +1,3 @@
-var Urls = require('../urls');
 var qs = require('qs');
 var xhr = require('xhr');
 var extend = require('xtend/mutable');
@@ -11,7 +10,7 @@ function getFullUrl(url, IDS, params) {
 
 /* Page class */
 function Page(type, options) {
-    var url = Urls.getPageUrl(type);
+    var url = '/jeu/' + type + '.php';
     var fetchParameters = options.fetchParameters || {};
 
     function fetch(IDS, processResponse) {

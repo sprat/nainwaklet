@@ -5,7 +5,6 @@ var Analyzer = require('./analyzer');
 var Tag = require('./tag');
 var Classe = require('./classe');
 var Pager = require('./pager');
-var Urls = require('../urls');
 var int = Analyzer.int;
 
 function getLocalisation(doc) {
@@ -37,7 +36,7 @@ function getNains(js) {
         var nain = {
             id: int(spec.id),
             nom: spec.nom,
-            image: Urls.getImageUrl(spec.photo),
+            image: '/images/' + spec.photo,
             description: spec.description,
             position: [int(spec.x), int(spec.y)],
             classe: Classe.fromInt(int(spec.classe)),
@@ -66,7 +65,7 @@ function getObjets(js) {
         return {
             id: int(spec.id),
             nom: spec.nom,
-            image: Urls.getImageUrl(spec.photo),
+            image: '/images/' + spec.photo,
             categorie: spec.categorie.toLowerCase(),
             position: [int(spec.x), int(spec.y)],
             poussiere: int(spec.poussiere)  // expressed in seconds

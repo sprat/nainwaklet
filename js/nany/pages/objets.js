@@ -1,7 +1,6 @@
 var extend = require('xtend/mutable');
 var Dom = require('../dom');
 var Analyzer = require('./analyzer');
-var Urls = require('../urls');
 var Popin = require('./popin');
 var Renderer = require('../renderer');
 var Calcul = require('../calcul');
@@ -37,7 +36,7 @@ function analyze(js, context) {
         list.push({
             id: object.idtable,
             nom: object.nomobjet,
-            image: Urls.getImageUrl(object.photoobjet),
+            image: '/images/' + object.photoobjet,
             description: object.descriptionobjet,
             type: object.typeobjet.toLowerCase(),
             PAutiliser: int(object.PAutiliser),
