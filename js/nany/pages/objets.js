@@ -1,8 +1,9 @@
 var extend = require('xtend/mutable');
 var Dom = require('../dom');
 var Analyzer = require('./analyzer');
-var Popin = require('./popin');
 var Calcul = require('../calcul');
+var Widgets = require('../widgets');
+var Popin = Widgets.Popin;
 var int = Analyzer.int;
 
 var listNames = {
@@ -91,7 +92,7 @@ function enhance(doc, objets, perso) {
     imageElements.forEach(function (image, index) {
         var objet = objets[index];
         var objetInfo = ObjetInfo(objet, perso);
-        var popin = Popin(objetInfo);
+        var popin = Popin('?', objetInfo);
         mounter.prepend(image.parent(), popin);
     });
 }

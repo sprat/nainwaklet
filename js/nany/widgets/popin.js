@@ -1,5 +1,5 @@
 /* Popin */
-function Popin(content) {
+function Popin(label, content) {
     function render(h) {
         var rendered = content.render(h);
 
@@ -8,7 +8,7 @@ function Popin(content) {
             return;
         }
 
-        var button = h('button.nany-popin-button', '?');
+        var button = h('button.nany-popin-button', label);
         var box = h('div.nany-popin-box', rendered);
         return h('div.nany.nany-popin', [button, box]);
     }
