@@ -2,37 +2,31 @@ var formulesJSON = require('./formules.json');
 var Urls = require('./urls');
 
 function Formules(formules) {
+    // TODO: add a search feature in another component/render function maybe? / we need a function filterByText(text) => Formules
+    // TODO: show the available formules for an objet in the inventaire/detection pages? / we need a function filterByIngredient(objet) => Formules
+    var maxIngredients = getMaxCount('nbIngredients');
+    var maxResultats = getMaxCount('nbResultats');
+
     function getMaxCount(property) {
         return formules.reduce(function (current, formule) {
             return Math.max(current, formule[property]);
         }, 0);
     }
 
-    function renderTableHead(h, maxIngredients, maxResultats) {
-        return h('thead', [
-            h('tr', [
-                h('th', 'N°'),
-                h('th', 'Nom'),
-                h('th', { colspan: String(maxResultats) }, 'Résultats'),
-                h('th', { colspan: String(maxIngredients) }, 'Ingrédients')
-            ])
-        ]);
-    }
-
-    function renderTableBody(h, maxIngredients, maxResultats) {
-        var rows = formules.map(function (formule) {
-            return formule.render(h, maxIngredients, maxResultats);
-        });
-
-        return h('tbody', rows);
-    }
-
     function render(h) {
-        var maxIngredients = getMaxCount('nbIngredients');
-        var maxResultats = getMaxCount('nbResultats');
-        var thead = renderTableHead(h, maxIngredients, maxResultats);
-        var tbody = renderTableBody(h, maxIngredients, maxResultats);
-        return h('table.nany.nany-formules', [thead, tbody]);
+        return h('table.nany.nany-formules', [
+            h('thead', [
+                h('tr', [
+                    h('th', 'N°'),
+                    h('th', 'Nom'),
+                    h('th', { colspan: String(maxResultats) }, 'Résultats'),
+                    h('th', { colspan: String(maxIngredients) }, 'Ingrédients')
+                ])
+            ]),
+            h('tbody', formules.map(function (formule) {
+                return formule.render(h, maxIngredients, maxResultats);
+            }))
+        ]);
     }
 
     return {
