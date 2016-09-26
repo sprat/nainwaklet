@@ -6,6 +6,15 @@
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
 </head>
 <body>
+    <pre id="output"></pre>
+    <script>
+    var log = console.log;
+    var output = document.getElementById('output');
+    window.console.log = function(message) {
+        output.appendChild(document.createTextNode(message + '\n'));
+        log.apply(console, arguments);
+    };
+    </script>
     <script src="dist/nany.tests.js"></script>
     <script src="dist/nany.integration-tests.js"></script>
 </body>
