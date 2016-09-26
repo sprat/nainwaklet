@@ -8,7 +8,7 @@ var html = fs.readFileSync(path.join(__dirname, '..', 'fixtures', 'even.html'), 
 var doc = helpers.parseHTMLDocument(html);
 var now = new Date(1457780950000);
 
-test('even.analyze: evenements', function (assert) {
+test('EvenPage.analyze: evenements', function (assert) {
     var info = page.analyze(doc, now, {});
 
     //12h09 (sam. 12/03) xØu a pris un(e) Hache sur le sol.
@@ -44,7 +44,7 @@ test('even.analyze: evenements', function (assert) {
     assert.end();
 });
 
-test('even.analyze: pager', function (assert) {
+test('EvenPage.analyze: pager', function (assert) {
     var info = page.analyze(doc, now, {});
 
     // miseajourpager('17', '159', '159', 'evenpagerlu', '?', 'chatpagernonlu', '2', '14', '7', 'e48d22f62e941a14eb927c8f9d36c6b2', '<b>NainXpress</b>');

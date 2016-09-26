@@ -8,19 +8,19 @@ var test = require('tape-catch');
 var pages = require('../../pages');
 
 
-test('pages.list', function (assert) {
+test('Pages.list', function (assert) {
     assert.ok(pages.list.length > 0, 'Non-empty list');
     assert.strictEqual(pages.list[0].type, 'detect', 'First element is the detect page');
     assert.end();
 });
 
-test('pages.byType', function (assert) {
+test('Pages.byType', function (assert) {
     assert.strictEqual(pages.byType('detect').type, 'detect', 'Detect page by name');
     assert.strictEqual(pages.byType('blabla'), undefined, 'Invalid name');
     assert.end();
 });
 
-test('pages.byUrl', function (assert) {
+test('Pages.byUrl', function (assert) {
     var detectPage = pages.byUrl('/jeu/detect.php');
     assert.strictEqual(detectPage, pages.byType('detect'), 'Detect page');
 

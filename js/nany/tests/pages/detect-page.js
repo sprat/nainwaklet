@@ -8,7 +8,7 @@ var html = fs.readFileSync(path.join(__dirname, '..', 'fixtures', 'detect.html')
 var doc = helpers.parseHTMLDocument(html);
 var now = new Date(1457780950000);
 
-test('detect.analyze: localisation', function (assert) {
+test('DetectPage.analyze: localisation', function (assert) {
     var info = page.analyze(doc, now, {});
 
     assert.deepEqual(info.detection.position, [13, 5], 'Position');
@@ -17,7 +17,7 @@ test('detect.analyze: localisation', function (assert) {
     assert.end();
 });
 
-test('detect.analyze: nains', function (assert) {
+test('DetectPage.analyze: nains', function (assert) {
     var info = page.analyze(doc, now, {});
     var nains = info.detection.nains;
 
@@ -83,7 +83,7 @@ test('detect.analyze: nains', function (assert) {
     assert.end();
 });
 
-test('detect.analyze: objets', function (assert) {
+test('DetectPage.analyze: objets', function (assert) {
     var info = page.analyze(doc, now, {});
     var objets = info.detection.objets;
 
@@ -122,7 +122,7 @@ test('detect.analyze: objets', function (assert) {
     assert.end();
 });
 
-test('detect.analyze: pager', function (assert) {
+test('DetectPage.analyze: pager', function (assert) {
     var info = page.analyze(doc, now, {});
 
     assert.notStrictEqual(info.pager, undefined);

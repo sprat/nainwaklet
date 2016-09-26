@@ -6,7 +6,7 @@ var helpers = require('./helpers');
 var html = fs.readFileSync(path.join(__dirname, 'fixtures', 'menu.html'), 'utf8');
 var doc = helpers.parseHTMLDocument(html);
 
-test('Nain: fromDocument', function (assert) {
+test('Nain.fromDocument', function (assert) {
     var nain = Nain.fromDocument(doc);
 
     assert.strictEqual(nain.nom, 'Savate');

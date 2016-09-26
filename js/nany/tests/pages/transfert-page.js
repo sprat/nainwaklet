@@ -8,7 +8,7 @@ var html = fs.readFileSync(path.join(__dirname, '..', 'fixtures', 'transfert.htm
 var doc = helpers.parseHTMLDocument(html);
 var now = new Date(1457780950000);
 
-test('transfert.analyze: inventaire', function (assert) {
+test('TransfertPage.analyze: inventaire', function (assert) {
     var info = page.analyze(doc, now, {});
 
     // mip(3819679, "Bouteille vide", "objets/vinvide.gif", '' , "ramasser", "INUTILE", 0, 0, "0", 0, 100, 100, 0, 0, 0, 0, 0, 0, "N", "O", "1295996");
@@ -62,7 +62,7 @@ test('transfert.analyze: inventaire', function (assert) {
     assert.end();
 });
 
-test('transfert.analyze: pager', function (assert) {
+test('TransfertPage.analyze: pager', function (assert) {
     var info = page.analyze(doc, now, {});
 
     // miseajourpager('5', '167', '167', 'evenpagerlu', '?', 'chatpagerlu', '0', '15', '4', 'ffe4b3cbb54fbb388beba96acde1fb7c', 'NainXpress');

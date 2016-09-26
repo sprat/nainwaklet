@@ -8,7 +8,7 @@ var html = fs.readFileSync(path.join(__dirname, '..', 'fixtures', 'perso.html'),
 var doc = helpers.parseHTMLDocument(html);
 var now = new Date(1457780950000);
 
-test('perso.analyze', function (assert) {
+test('PersoPage.analyze', function (assert) {
     var info = page.analyze(doc, now, {});
     var perso = info.perso;
 
