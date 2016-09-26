@@ -53,6 +53,8 @@
     "lint": "eslint . --cache",
     "pretest": "browserify js/nany/tests -t brfs -d > dist/nany.tests.js",
     "test": "tap-closer < dist/nany.tests.js | smokestack | faucet",
+    "preintegration_test": "browserify js/nany/integration-tests -t brfs -d > dist/nany.integration-tests.js",
+    "integration_test": "tap-closer < dist/nany.integration-tests.js | smokestack | faucet",
     "prebuild:js": "npm run lint -s && npm run test -s",
     "build:js": "browserify js/nany/index.js -dv -s Nany | exorcist dist/nany.js.map > dist/nany.js",
     "postbuild:js": "uglifyjs dist/nany.js -mc warnings=false -o dist/nany.min.js --in-source-map dist/nany.js.map --source-map dist/nany.min.js.map --source-map-url nany.min.js.map && rimraf dist/nany.js*",
