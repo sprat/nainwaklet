@@ -1,6 +1,5 @@
 var test = require('tape-catch');
 var Channel = require('../../channel');
-var log = require('../../log');
 var publishKey = 'pub-c-8be41a11-cbc5-4427-a5ad-e18cf5a466e4';
 var subscribeKey = 'sub-c-38ae8020-6d33-11e5-bf4b-0619f8945a4f';
 
@@ -15,7 +14,7 @@ test('Channel: signals', function (assert) {
 
     // subscribe to the "connected" signal
     channel.connected.add(function () {
-        log('1. Connected');
+        assert.comment('1. Connected');
 
         // publish to a topic
         channel.publish(topic, dataToSend);
@@ -23,7 +22,7 @@ test('Channel: signals', function (assert) {
 
     // subscribe to the "messagePublished" signal
     channel.messagePublished.add(function (topic, data) {
-        log('2. Message published');
+        assert.comment('2. Message published');
 
         // check event data
         assert.strictEqual(topic, 'chat', 'Topic in messagePublished event');
@@ -32,7 +31,7 @@ test('Channel: signals', function (assert) {
 
     // subscribe to the "messageReceived" signal
     channel.messageReceived.add(function (topic, data) {
-        log('3. Message received');
+        assert.comment('3. Message received');
 
         // check event data
         assert.strictEqual(topic, 'chat', 'Topic in messageReceived event');
@@ -44,7 +43,7 @@ test('Channel: signals', function (assert) {
 
     // subscribe to the "disconnected" signal
     channel.disconnected.add(function () {
-        log('4. Disconnected');
+        assert.comment('4. Disconnected');
 
         // test finished
         assert.end();
