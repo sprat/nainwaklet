@@ -68,31 +68,35 @@ function Channel(name, publishKey, subscribeKey) {
                 return;
             }
 
+            /*
             // errorOccured signal?
             //self.emit('error', error, self);
-//            switch (event.category) {
-//            case 'PNReconnectedCategory':
-//                self.emit('reconnected', self);
-//                break;
-//            case 'PNNetworkIssuesCategory':
-//                self.emit('networkIssues', self);
-//                break;
-//            case 'PNAccessDeniedCategory':
-//                self.emit('accessDenied', self);
-//                break;
-//            case 'PNNetworkDownCategory':
-//            case 'PNNetworkUpCategory':
-//                break;
-//            }
+            switch (event.category) {
+            case 'PNReconnectedCategory':
+                self.emit('reconnected', self);
+                break;
+            case 'PNNetworkIssuesCategory':
+                self.emit('networkIssues', self);
+                break;
+            case 'PNAccessDeniedCategory':
+                self.emit('accessDenied', self);
+                break;
+            case 'PNNetworkDownCategory':
+            case 'PNNetworkUpCategory':
+                break;
+            }
+            */
         },
         message: function (event) {
             var message = event.message;
             messageReceived.dispatch(message.topic, message.data);
-        },
+        }
+        /*
         presence: function (event) {
             console.log(event);
             // event.action / event.uuid
         }
+        */
     });
 
     return {
