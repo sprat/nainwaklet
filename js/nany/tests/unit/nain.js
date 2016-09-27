@@ -1,7 +1,7 @@
 var test = require('tape-catch');
 var path = require('path');
 var fs = require('fs');
-var Nain = require('../nain');
+var Nain = require('../../nain');
 var helpers = require('./helpers');
 var html = fs.readFileSync(path.join(__dirname, 'fixtures', 'menu.html'), 'utf8');
 var doc = helpers.parseHTMLDocument(html);

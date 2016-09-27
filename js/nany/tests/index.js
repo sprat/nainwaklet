@@ -1,3 +1,2 @@
-require('./nain');
-require('./calcul');
-require('./pages');
+require('./unit');
+require('./integration');

@@ -5,7 +5,7 @@ require('./transfert-page');
 require('./even-page');
 
 var test = require('tape-catch');
-var pages = require('../../pages');
+var pages = require('../../../pages');
 
 
 test('Pages.list', function (assert) {
