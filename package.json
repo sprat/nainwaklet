@@ -9,7 +9,7 @@
   ],
   "license": "MIT",
   "private": true,
-  "main": "js/nany/index.js",
+  "main": "src/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/sprat/nany.git"
@@ -52,15 +52,15 @@
     "start": "live-server --no-browser",
     "lint": "eslint . --cache",
     "prebuild": "npm run lint -s",
-    "build:app": "browserify js/nany/index.js -dv -s Nany | exorcist dist/nany.js.map > dist/nany.js",
+    "build:app": "browserify src/index.js -dv -s Nany | exorcist dist/nany.js.map > dist/nany.js",
     "postbuild:app": "uglifyjs dist/nany.js -mc warnings=false -o dist/nany.min.js --in-source-map dist/nany.js.map --source-map dist/nany.min.js.map --source-map-url nany.min.js.map && rimraf dist/nany.js*",
-    "build:tests": "browserify js/nany/tests -t brfs -d > dist/nany.tests.js",
-    "build:unittests": "browserify js/nany/tests/unit -t brfs -d > dist/nany.unittests.js",
-    "build:css": "cleancss --source-map --source-map-inline-sources --output dist/nany.min.css css/nany/index.css",
+    "build:tests": "browserify src/tests -t brfs -d > dist/nany.tests.js",
+    "build:unittests": "browserify src/tests/unit -t brfs -d > dist/nany.unittests.js",
+    "build:css": "cleancss --source-map --source-map-inline-sources --output dist/nany.min.css src/index.css",
     "build": "npm-run-all --parallel build:*",
     "test": "tap-closer < dist/nany.tests.js | smokestack | faucet",
     "unittest": "tap-closer < dist/nany.unittests.js | smokestack | faucet",
     "watch": "nodemon -e js,json,css --ignore dist --exec \"npm run build -s && npm run unittest -s\"",
-    "dev": "npm run watch -s && npm run start -s"
+    "dev": "npm-run-all --parallel start watch"
   }
 }

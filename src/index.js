@@ -1,5 +1,5 @@
 var Application = require('./application');
-var Bookmarklets = require('./bookmarklets');
+var Bookmarklet = require('./bookmarklet');
 var Dom = require('./dom');
 var Formules = require('./formules');
 
@@ -28,6 +28,6 @@ function replaceNodeByComponent(component) {
 
 module.exports = Object.freeze({
     run: run,
-    initializeBookmarklets: Bookmarklets.initialize,
+    initializeBookmarklets: Bookmarklet.initialize,
     afficheFormules: replaceNodeByComponent(Formules)
 });

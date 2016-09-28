@@ -7,7 +7,7 @@
  */
 
 /* Development CSS files */
-@import url("base.css");
+@import url("application.css");
 @import url("bookmarklet.css");
 @import url("contours.css");
 @import url("popin.css");
