@@ -1,5 +1,5 @@
 var extend = require('xtend/mutable');
-var loadCSS = require('./load-css');
+var includeCSS = require('./include-css');
 var Dom = require('./dom');
 var Nain = require('./nain');
 var Spy = require('./spy');
@@ -54,8 +54,8 @@ function Application(configuration) {
     channel.connect();
     */
 
-    // load the Nany CSS into the container document...
-    loadCSS(container.ownerDocument);
+    // include the Nany CSS into the container document...
+    includeCSS(container.ownerDocument);
 
     // create a Mounter to render our components into the DOM
     var mounter = Dom.Mounter();
@@ -118,8 +118,8 @@ function Application(configuration) {
 
         // enhance the page
         if (page.enhance) {
-            // load the Nany CSS in the new document
-            loadCSS(doc);
+            // include the Nany CSS in the new document
+            includeCSS(doc);
 
             // enhance
             page.enhance(doc, context);
