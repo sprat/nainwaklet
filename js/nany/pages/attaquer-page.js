@@ -1,8 +1,7 @@
 var Page = require('./page');
 var Dom = require('../dom');
 var Objets = require('./objets');
-var Widgets = require('../widgets');
-var Popin = Widgets.Popin;
+var Popin = require('../popin');
 
 function enhance(doc, context) {
     var mounter = Dom.Mounter();

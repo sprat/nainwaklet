@@ -2,8 +2,7 @@ var extend = require('xtend/mutable');
 var Dom = require('../dom');
 var Analyzer = require('./analyzer');
 var Calcul = require('../calcul');
-var Widgets = require('../widgets');
-var Popin = Widgets.Popin;
+var Popin = require('../popin');
 var int = Analyzer.int;
 
 var listNames = {
