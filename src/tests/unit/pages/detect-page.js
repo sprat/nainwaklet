@@ -1,10 +1,8 @@
 var test = require('tape-catch');
-var path = require('path');
-var fs = require('fs');
 var helpers = require('../helpers');
 var pages = require('../../../pages');
 var page = pages.byType('detect');
-var html = fs.readFileSync(path.join(__dirname, '..', 'fixtures', 'detect.html'), 'utf8');
+var html = require('../fixtures/detect.html');
 var doc = helpers.parseHTMLDocument(html);
 var now = new Date(1457780950000);
 
