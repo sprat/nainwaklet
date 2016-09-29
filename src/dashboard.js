@@ -1,3 +1,5 @@
+require('./dashboard.css');
+
 function Dashboard(channelName) {
     function render(h) {
         return h('div.nany.nany-dashboard', [

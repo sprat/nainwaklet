@@ -1,6 +1,23 @@
-var webpack = require('webpack');
 var srcDir = __dirname + '/src/';
 var distDir = __dirname + '/dist/';
+
+var webpack = require('webpack');
+
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+var extractCSS = new ExtractTextPlugin('[name].css');
+
+var dedupe = new webpack.optimize.DedupePlugin();
+
+var uglify = new webpack.optimize.UglifyJsPlugin({
+    //sourceMap: true,
+    //mangle: true,
+    output: {
+        comments: false
+    },
+    compress: {
+        warnings: false
+    }
+});
 
 /* Build configuration for the application */
 var applicationConfig = {
@@ -13,26 +30,19 @@ var applicationConfig = {
         path: distDir,
         filename: '[name].js',
         library: 'Nany',
-        libraryTarget: 'umd'
-        //devtoolModuleFilenameTemplate: '[resource-path]'  // remove webpack:/// prefix
+        libraryTarget: 'umd',
+        devtoolModuleFilenameTemplate: '[resource-path]'  // remove webpack:/// prefix
     },
     module: {
         loaders: [
-            { test: /\.json$/, loader: 'json' }
+            { test: /\.json$/, loader: 'json' },
+            { test: /\.css$/, loader: extractCSS.extract('css-loader?sourceMap') }
         ]
     },
     plugins: [
-        new webpack.optimize.DedupePlugin(),
-        new webpack.optimize.UglifyJsPlugin({
-            //sourceMap: true,
-            //mangle: true,
-            output: {
-                comments: false
-            },
-            compress: {
-                warnings: false
-            }
-        })
+        extractCSS,
+        dedupe,
+        uglify
     ]
 };
 
@@ -46,8 +56,8 @@ var testsConfig = {
     devtool: 'source-map',
     output: {
         path: distDir,
-        filename: '[name].js'
-        //devtoolModuleFilenameTemplate: '[resource-path]'  // remove webpack:/// prefix
+        filename: '[name].js',
+        devtoolModuleFilenameTemplate: '[resource-path]'  // remove webpack:/// prefix
     },
     node: {
         fs: 'empty'  // needed to support tape
@@ -55,7 +65,8 @@ var testsConfig = {
     module: {
         loaders: [
             { test: /\.json$/, loader: 'json-loader' },
-            { test: /\.html$/, loader: 'html-loader' }
+            { test: /\.html$/, loader: 'html-loader' },
+            { test: /\.css$/, loader: 'css-loader' }  // we don't need CSS in tests / or use style-loader?
         ]
     }
 };

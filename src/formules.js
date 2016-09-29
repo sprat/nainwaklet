@@ -1,5 +1,6 @@
 var formulesJSON = require('./formules.json');
 var Urls = require('./urls');
+require('./formules.css');
 
 function Formules(formules) {
     // TODO: add a search feature in another component/render function maybe? / we need a function filterByText(text) => Formules

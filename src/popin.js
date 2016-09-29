@@ -1,3 +1,5 @@
+require('./popin.css');
+
 /* Popin */
 function Popin(label, content) {
     function render(h) {

@@ -32,8 +32,9 @@
     "zip-object": "^0.1.0"
   },
   "devDependencies": {
-    "clean-css": "^3.4.19",
+    "css-loader": "^0.25.0",
     "eslint": "^3.5.0",
+    "extract-text-webpack-plugin": "^1.0.1",
     "faucet": "^0.0.1",
     "html-loader": "^0.4.4",
     "json-loader": "^0.5.4",
@@ -51,9 +52,7 @@
     "start": "live-server --no-browser",
     "lint": "eslint . --cache",
     "prebuild": "npm run lint -s",
-    "build:app": "webpack",
-    "build:css": "cleancss --source-map --source-map-inline-sources --output dist/nany.css src/index.css",
-    "build": "npm-run-all --parallel build:*",
+    "build": "webpack --bail",
     "test": "tap-closer < dist/nany.tests.js | smokestack | faucet",
     "unittest": "tap-closer < dist/nany.unittests.js | smokestack | faucet",
     "watch": "nodemon -e js,json,css --ignore dist --exec \"npm run build -s && npm run unittest -s\"",
