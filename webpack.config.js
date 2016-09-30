@@ -23,7 +23,7 @@ var uglify = new webpack.optimize.UglifyJsPlugin({
 var applicationConfig = {
     context: srcDir,
     entry: {
-        'nany': './index.js',
+        'nany': './index.js'
     },
     devtool: 'source-map',
     output: {

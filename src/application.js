@@ -20,7 +20,7 @@ var defaultConfiguration = {
     subscribeKey: 'sub-c-38ae8020-6d33-11e5-bf4b-0619f8945a4f',
     /* URL of the update page: the Nany application will post updates
      * when the user navigate between Nainwak pages */
-    updateUrl: null,
+    updateUrl: null
     /* URL of the login page: it will be put in an iframe and should return an
      * access token via postMessage */
     //authenticationUrl: null
