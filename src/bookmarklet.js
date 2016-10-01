@@ -1,4 +1,4 @@
-var Urls = require('./urls');
+var urls = require('./urls');
 var currentScript = require('./current-script');
 var getDataset = require('get-dataset');
 require('./bookmarklet.css');
@@ -8,9 +8,9 @@ function setHref(link, scriptUrl, config) {
     var lines = [
         'javascript:(function(src, conf) {',
         'var w=window, l=w.location, d=w.document, b=d.body, s;',
-        'if (!' + Urls.gameUrlRegex + '.test(l.href)) {',
+        'if (!' + urls.gameUrlRegex + '.test(l.href)) {',
         '  alert("Connectez-vous sur Nainwak puis cliquez sur « Jouer ! » avant d\'utiliser le Nany");',
-        '  l.assign("' + Urls.nainwakUrl + '");',
+        '  l.assign("' + urls.nainwakUrl + '");',
         '  return;',
         '}',
         's=d.createElement("script");',

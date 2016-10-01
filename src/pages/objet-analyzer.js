@@ -1,7 +1,7 @@
 var extend = require('xtend/mutable');
-var Dom = require('../dom');
-var JsAnalyzer = require('./js-analyzer');
-var Calcul = require('../calcul');
+var dom = require('../dom');
+var jsAnalyzer = require('./js-analyzer');
+var calcul = require('../calcul');
 var Popin = require('../popin');
 
 function int(v) {
@@ -19,7 +19,7 @@ var listNames = {
 function analyze(js, context) {
     var regex = /mip\((.*)\);/ig;
     var keys = 'idtable,nomobjet,photoobjet,descriptionobjet,model,typeobjet,PAutiliser,portee,effet,recharg,PV,PVmax,PAreparer,dispo,PFobj,PPobj,PVobj,PIobj,collant,reparable,poussiere'.split(',');
-    var objects = JsAnalyzer.buildObjectsFromJSSequences(js, regex, keys);
+    var objects = jsAnalyzer.buildObjectsFromJSSequences(js, regex, keys);
     var lists = {};
 
     function getList(object) {
@@ -64,7 +64,7 @@ function analyze(js, context) {
 
     // update the 'perso' bonus data according to the objects in 'inventaire'
     if (context.perso) {
-        var bonuses = Calcul.bonusObjets(context.objets.inventaire);
+        var bonuses = calcul.bonusObjets(context.objets.inventaire);
         extend(context.perso, bonuses);
     }
 
@@ -73,7 +73,7 @@ function analyze(js, context) {
 
 function ObjetInfo(objet, perso) {
     var isArme = objet.type === 'arme';
-    var degats = (isArme && perso) ? Calcul.degats(perso, objet) : undefined;
+    var degats = (isArme && perso) ? calcul.degats(perso, objet) : undefined;
 
     function render(h) {
         if (degats) {
@@ -87,8 +87,8 @@ function ObjetInfo(objet, perso) {
 }
 
 function enhance(doc, objets, context) {
-    var mounter = Dom.Mounter();
-    var imageElements = Dom.findAll('td.news-text img', doc);
+    var mounter = dom.Mounter();
+    var imageElements = dom.findAll('td.news-text img', doc);
 
     // add an advisor box on each title
     imageElements.forEach(function (image, index) {

@@ -1,6 +1,6 @@
 var Application = require('./application');
-var Bookmarklet = require('./bookmarklet');
-var Dom = require('./dom');
+var bookmarklet = require('./bookmarklet');
+var dom = require('./dom');
 var Formules = require('./formules');
 
 
@@ -20,7 +20,7 @@ function run(config) {
 }
 
 function replaceNodeByComponent(component) {
-    var mounter = Dom.Mounter();
+    var mounter = dom.Mounter();
     return function (node) {
         mounter.replace(node, component);
     };
@@ -28,6 +28,6 @@ function replaceNodeByComponent(component) {
 
 module.exports = Object.freeze({
     run: run,
-    initializeBookmarklets: Bookmarklet.initialize,
+    initializeBookmarklets: bookmarklet.initialize,
     afficheFormules: replaceNodeByComponent(Formules)
 });

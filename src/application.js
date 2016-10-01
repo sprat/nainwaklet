@@ -1,12 +1,12 @@
 var extend = require('xtend/mutable');
 var includeCSS = require('./include-css');
-var Dom = require('./dom');
+var dom = require('./dom');
 var Nain = require('./nain');
 var Spy = require('./spy');
 var Updater = require('./updater');
 //var Channel = require('./channel');
 var Dashboard = require('./dashboard');
-var Pages = require('./pages');
+var pages = require('./pages');
 var log = require('./log');
 require('./application.css');
 require('./contours.css');
@@ -60,7 +60,7 @@ function Application(configuration) {
     includeCSS(container.ownerDocument);
 
     // create a Mounter to render our components into the DOM
-    var mounter = Dom.Mounter();
+    var mounter = dom.Mounter();
 
     // create the dashboard object
     var dashboard = Dashboard(channelName, mounter.refresh);
@@ -100,7 +100,7 @@ function Application(configuration) {
 
     function processPageDocument(url, doc) {
         var date = new Date();
-        var page = Pages.byUrl(url);
+        var page = pages.byUrl(url);
         var analysis;
 
         if (!page) {
@@ -129,7 +129,7 @@ function Application(configuration) {
     }
 
     function loadPersoPage() {
-        var persoPage = Pages.byType('perso');
+        var persoPage = pages.byType('perso');
 
         log('Loading perso page');
         persoPage.fetch(nain.ids, function (response) {

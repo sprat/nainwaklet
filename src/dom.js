@@ -17,7 +17,7 @@ function findAll(selector, context) {
     return map.call(nodes, Element);
 }
 
-function inlineJS(doc) {
+function getInlineJavascript(doc) {
     var sources = Array.prototype.map.call(doc.scripts, function (script) {
         return script.src ? '' : script.innerHTML;
     });
@@ -157,6 +157,6 @@ function Mounter() {
 module.exports = {
     find: find,
     findAll: findAll,
-    inlineJS: inlineJS,
+    getInlineJavascript: getInlineJavascript,
     Mounter: Mounter
 };

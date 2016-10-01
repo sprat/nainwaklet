@@ -1,14 +1,14 @@
 var Page = require('./page');
-var Dom = require('../dom');
+var dom = require('../dom');
 var Popin = require('../popin');
-var ObjetAnalyzer = require('./objet-analyzer');
+var objetAnalyzer = require('./objet-analyzer');
 
 function enhance(doc, context) {
-    var mounter = Dom.Mounter();
+    var mounter = dom.Mounter();
     var perso = context.perso;
     var inventaire = context.objets && context.objets.inventaire;
     var idRegex = /javascript:choisir\('(\d+)'\)/i;
-    var linkElements = Dom.findAll('a', doc);
+    var linkElements = dom.findAll('a', doc);
     var objetsById = {};
 
     if (!inventaire) {
@@ -29,7 +29,7 @@ function enhance(doc, context) {
         if (match) {
             objet = objetsById[match[1]];
             if (objet) {
-                objetInfo = ObjetAnalyzer.ObjetInfo(objet, perso);
+                objetInfo = objetAnalyzer.ObjetInfo(objet, perso);
                 popin = Popin('?', objetInfo);
                 mounter.prepend(link.parent(), popin);
             }

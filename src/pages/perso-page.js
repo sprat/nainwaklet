@@ -1,8 +1,8 @@
 var Page = require('./page');
-var Dom = require('../dom');
-var JsAnalyzer = require('./js-analyzer');
-var TagAnalyzer = require('./tag-analyzer');
-var Classe = require('../classe');
+var dom = require('../dom');
+var jsAnalyzer = require('./js-analyzer');
+var tagAnalyzer = require('./tag-analyzer');
+var classesLabels = require('./classes-labels');
 
 function int(v) {
     return parseInt(v, 10);
@@ -10,17 +10,17 @@ function int(v) {
 
 function getClasses(js) {
     var regex = /\$\('(\w+)'\).addClassName\(cotes\[(\d)+\]\);/g;
-    return JsAnalyzer.buildObjectFromJS(js, regex);
+    return jsAnalyzer.buildObjectFromJS(js, regex);
 }
 
 function getCharacteristics(js) {
     // find all lines looking like: $('sPVBase').innerHTML = (109+39);
     var regex = /\$\('(\w+)'\)\.innerHTML = \((-?\d+)[\+\/](-?\d+)\)/g;
-    return JsAnalyzer.buildObjectFromJS(js, regex);
+    return jsAnalyzer.buildObjectFromJS(js, regex);
 }
 
 function getBlocsDroits(doc) {
-    var rows = Dom.findAll('.bloc-perso tr', doc);
+    var rows = dom.findAll('.bloc-perso tr', doc);
     var data = {};
 
     rows.forEach(function (row) {
@@ -36,21 +36,21 @@ function getBlocsDroits(doc) {
 }
 
 function analyze(doc, date, context) {
-    var js = Dom.inlineJS(doc);
+    var js = dom.getInlineJavascript(doc);
     var classes = getClasses(js);
     var characts = getCharacteristics(js);
     var blocsDroits = getBlocsDroits(doc);
-    var cibleElement = Dom.find('.bloc-perso .cible', doc);
+    var cibleElement = dom.find('.bloc-perso .cible', doc);
 
     var perso = context.perso = {
-        nom: Dom.find('input[name="nvNain"]', doc).attr('value'),
-        image: Dom.find('.news-titre img', doc).attr('src'),
-        rang: Dom.find('#sRang', doc).text(),
-        classe: Classe.fromInt(classes['sRang']),
+        nom: dom.find('input[name="nvNain"]', doc).attr('value'),
+        image: dom.find('.news-titre img', doc).attr('src'),
+        rang: dom.find('#sRang', doc).text(),
+        classe: classesLabels[classes['sRang']],
         barbe: characts.sBarbe[0] / characts.sBarbe[1],
-        description: Dom.find('input[name="description"]', doc).attr('value'),
-        arme: Dom.find('input[name="nomArme"]', doc).attr('value'),
-        tag: TagAnalyzer.analyze(Dom.find('#s_Tag', doc).html()),
+        description: dom.find('input[name="description"]', doc).attr('value'),
+        arme: dom.find('input[name="nomArme"]', doc).attr('value'),
+        tag: tagAnalyzer.analyze(dom.find('#s_Tag', doc).html()),
         vie: characts.sPV[0] + characts.sPV[1],
         vieBase: characts.sPVBase[0],
         vieBonus: characts.sPVBase[1],
@@ -94,7 +94,7 @@ function analyze(doc, date, context) {
     if (cibleElement) {
         perso.cible = {
             nom: cibleElement.firstChild().text(),
-            classe: Classe.fromInt(classes['sRangCible']),
+            classe: classesLabels[classes['sRangCible']],
             rang: cibleElement.find('#sRangCible').text(),
             barbe: characts.sBarbeCible[0] / characts.sBarbeCible[1]
         };

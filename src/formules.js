@@ -1,5 +1,5 @@
 var formulesJSON = require('./formules.json');
-var Urls = require('./urls');
+var urls = require('./urls');
 require('./formules.css');
 
 function Formules(formules) {
@@ -102,7 +102,7 @@ function Objet(nom, image, quantite, id, note) {
         }
 
         var img = h('img.image', {
-            src: Urls.nainwakUrl + image,
+            src: urls.nainwakUrl + image,
             title: title
         });
 

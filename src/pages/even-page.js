@@ -1,8 +1,8 @@
 var Page = require('./page');
-var Dom = require('../dom');
-var JsAnalyzer = require('./js-analyzer');
-var PagerAnalyzer = require('./pager-analyzer');
-var EventInfo = require('./event-info');
+var dom = require('../dom');
+var jsAnalyzer = require('./js-analyzer');
+var pagerAnalyzer = require('./pager-analyzer');
+var eventInfo = require('./event-info');
 var dateRegex = /(\d\d)h(\d\d) \(\w+\. (\d\d)\/(\d\d)\)/;
 
 function int(v) {
@@ -29,7 +29,7 @@ function convertToUnixTimestamp(date, nowDate) {
 }
 
 function getDescription(type, params) {
-    var desc = EventInfo.descriptions[type - 1];
+    var desc = eventInfo.descriptions[type - 1];
 
     if (!desc) {
         return;
@@ -45,7 +45,7 @@ function getDescription(type, params) {
 }
 
 function getImage(type) {
-    var img = EventInfo.images[type - 1];
+    var img = eventInfo.images[type - 1];
 
     if (!img) {
         return;
@@ -61,7 +61,7 @@ function getImage(type) {
 function getEvenements(js, nowDate) {
     var regex = /ev\((.*)\);/ig;
     var keys = 'neweven,time,num,s1,s2,s3,n1,n2,n3,appel'.split(',');
-    var objects = JsAnalyzer.buildObjectsFromJSSequences(js, regex, keys);
+    var objects = jsAnalyzer.buildObjectsFromJSSequences(js, regex, keys);
 
     return objects.map(function (object) {
         var type = object.num;
@@ -87,8 +87,8 @@ function getEvenements(js, nowDate) {
 }
 
 function analyze(doc, date, context) {
-    var js = Dom.inlineJS(doc);
-    var pager = PagerAnalyzer.analyze(js, context);
+    var js = dom.getInlineJavascript(doc);
+    var pager = pagerAnalyzer.analyze(js, context);
 
     context.evenements = getEvenements(js, date);
 
