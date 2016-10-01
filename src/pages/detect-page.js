@@ -1,11 +1,14 @@
 /* detect page */
 var Page = require('./page');
 var Dom = require('../dom');
-var Analyzer = require('./analyzer');
-var Tag = require('./tag');
-var Classe = require('./classe');
-var Pager = require('./pager');
-var int = Analyzer.int;
+var JsAnalyzer = require('./js-analyzer');
+var TagAnalyzer = require('./tag-analyzer');
+var PagerAnalyzer = require('./pager-analyzer');
+var Classe = require('../classe');
+
+function int(v) {
+    return parseInt(v, 10);
+}
 
 function getLocalisation(doc) {
     // example:
@@ -25,7 +28,7 @@ function getLocalisation(doc) {
 function getNains(js) {
     var regex = /tabavat\[\d+\]\s=\s\[(.*)\];/ig;
     var keys = 'id,photo,nom,tag,barbe,classe,cote,distance,x,y,description,attaquer,gifler,estCible'.split(',');
-    var objects = Analyzer.buildObjectsFromJSSequences(js, regex, keys);
+    var objects = JsAnalyzer.buildObjectsFromJSSequences(js, regex, keys);
     var autresActions = {
         'a': 'accrocherPoisson', // Accrocher un poisson !,
         'c': 'offrirCadeau',  // Offrir un cadeau !,
@@ -47,7 +50,7 @@ function getNains(js) {
             estCible: spec.estCible == 1
         };
 
-        var tag = Tag.parse(spec.tag);
+        var tag = TagAnalyzer.analyze(spec.tag);
         if (tag) {
             nain.tag = tag;
         }
@@ -59,7 +62,7 @@ function getNains(js) {
 function getObjets(js) {
     var regex = /tabobjet\[\d+\]\s=\s\[(.*)\];/ig;
     var keys = 'id,photo,nom,distance,x,y,categorie,poussiere'.split(',');
-    var objects = Analyzer.buildObjectsFromJSSequences(js, regex, keys);
+    var objects = JsAnalyzer.buildObjectsFromJSSequences(js, regex, keys);
 
     return objects.map(function (spec) {
         return {
@@ -88,7 +91,7 @@ function analyze(doc, date, context) {
 
     return {
         detection: context.detection,
-        pager: Pager.analyze(js, context)
+        pager: PagerAnalyzer.analyze(js, context)
     };
 }
 

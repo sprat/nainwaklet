@@ -1,10 +1,6 @@
 var decodeEntities = require('htmldec');
 var zipObject = require('zip-object');
 
-function int(value) {
-    return parseInt(value, 10);
-}
-
 function decodeEnt(value) {
     if (typeof value === 'string') {
         value = decodeEntities(value);
@@ -52,7 +48,6 @@ function buildObjectsFromJSSequences(js, regex, keys) {
 }
 
 module.exports = {
-    int: int,
     evaluateJS: evaluateJS,
     buildObjectFromJS: buildObjectFromJS,
     buildObjectsFromJSSequences: buildObjectsFromJSSequences

@@ -1,5 +1,5 @@
-function parse(tag) {
-    var noBracketsTag = tag.replace(/\] \[|\[|\]/g, '');
+function analyze(tagHtml) {
+    var noBracketsTag = tagHtml.replace(/\] \[|\[|\]/g, '');
     var guildeRegex = /<span\s+style=\"color:(#[0-9A-F]{6});\">([^<]*)<\/span>/i;
     var guilde = '';
     var result = {};
@@ -26,7 +26,7 @@ function parse(tag) {
      * 4: [Guilde][Perso]
      */
     if (perso && guilde) {
-        switch (tag) {
+        switch (tagHtml) {
         case '[' + perso + guilde + ']':
             result.type = 1;
             break;
@@ -48,5 +48,5 @@ function parse(tag) {
 }
 
 module.exports = {
-    parse: parse
+    analyze: analyze
 };

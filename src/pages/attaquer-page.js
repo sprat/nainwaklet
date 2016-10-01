@@ -1,7 +1,7 @@
 var Page = require('./page');
 var Dom = require('../dom');
-var Objets = require('./objets');
 var Popin = require('../popin');
+var ObjetAnalyzer = require('./objet-analyzer');
 
 function enhance(doc, context) {
     var mounter = Dom.Mounter();
@@ -29,7 +29,7 @@ function enhance(doc, context) {
         if (match) {
             objet = objetsById[match[1]];
             if (objet) {
-                objetInfo = Objets.ObjetInfo(objet, perso);
+                objetInfo = ObjetAnalyzer.ObjetInfo(objet, perso);
                 popin = Popin('?', objetInfo);
                 mounter.prepend(link.parent(), popin);
             }

@@ -1,19 +1,22 @@
 var Page = require('./page');
 var Dom = require('../dom');
-var Analyzer = require('./analyzer');
-var Classe = require('./classe');
-var Tag = require('./tag');
-var int = Analyzer.int;
+var JsAnalyzer = require('./js-analyzer');
+var TagAnalyzer = require('./tag-analyzer');
+var Classe = require('../classe');
+
+function int(v) {
+    return parseInt(v, 10);
+}
 
 function getClasses(js) {
     var regex = /\$\('(\w+)'\).addClassName\(cotes\[(\d)+\]\);/g;
-    return Analyzer.buildObjectFromJS(js, regex);
+    return JsAnalyzer.buildObjectFromJS(js, regex);
 }
 
 function getCharacteristics(js) {
     // find all lines looking like: $('sPVBase').innerHTML = (109+39);
     var regex = /\$\('(\w+)'\)\.innerHTML = \((-?\d+)[\+\/](-?\d+)\)/g;
-    return Analyzer.buildObjectFromJS(js, regex);
+    return JsAnalyzer.buildObjectFromJS(js, regex);
 }
 
 function getBlocsDroits(doc) {
@@ -47,7 +50,7 @@ function analyze(doc, date, context) {
         barbe: characts.sBarbe[0] / characts.sBarbe[1],
         description: Dom.find('input[name="description"]', doc).attr('value'),
         arme: Dom.find('input[name="nomArme"]', doc).attr('value'),
-        tag: Tag.parse(Dom.find('#s_Tag', doc).html()),
+        tag: TagAnalyzer.analyze(Dom.find('#s_Tag', doc).html()),
         vie: characts.sPV[0] + characts.sPV[1],
         vieBase: characts.sPVBase[0],
         vieBonus: characts.sPVBase[1],

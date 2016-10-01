@@ -1,9 +1,12 @@
 var extend = require('xtend/mutable');
 var Dom = require('../dom');
-var Analyzer = require('./analyzer');
+var JsAnalyzer = require('./js-analyzer');
 var Calcul = require('../calcul');
 var Popin = require('../popin');
-var int = Analyzer.int;
+
+function int(v) {
+    return parseInt(v, 10);
+}
 
 var listNames = {
     bonnet: 'bonnet',  // objet sous le bonnet
@@ -16,7 +19,7 @@ var listNames = {
 function analyze(js, context) {
     var regex = /mip\((.*)\);/ig;
     var keys = 'idtable,nomobjet,photoobjet,descriptionobjet,model,typeobjet,PAutiliser,portee,effet,recharg,PV,PVmax,PAreparer,dispo,PFobj,PPobj,PVobj,PIobj,collant,reparable,poussiere'.split(',');
-    var objects = Analyzer.buildObjectsFromJSSequences(js, regex, keys);
+    var objects = JsAnalyzer.buildObjectsFromJSSequences(js, regex, keys);
     var lists = {};
 
     function getList(object) {
@@ -83,14 +86,14 @@ function ObjetInfo(objet, perso) {
     };
 }
 
-function enhance(doc, objets, perso) {
+function enhance(doc, objets, context) {
     var mounter = Dom.Mounter();
     var imageElements = Dom.findAll('td.news-text img', doc);
 
     // add an advisor box on each title
     imageElements.forEach(function (image, index) {
         var objet = objets[index];
-        var objetInfo = ObjetInfo(objet, perso);
+        var objetInfo = ObjetInfo(objet, context.perso);
         var popin = Popin('?', objetInfo);
         mounter.prepend(image.parent(), popin);
     });

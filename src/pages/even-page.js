@@ -1,10 +1,13 @@
 var Page = require('./page');
 var Dom = require('../dom');
-var Analyzer = require('./analyzer');
-var Pager = require('./pager');
+var JsAnalyzer = require('./js-analyzer');
+var PagerAnalyzer = require('./pager-analyzer');
 var EventInfo = require('./event-info');
 var dateRegex = /(\d\d)h(\d\d) \(\w+\. (\d\d)\/(\d\d)\)/;
-var int = Analyzer.int;
+
+function int(v) {
+    return parseInt(v, 10);
+}
 
 // return the unix timestamp for a date specified as '12h09 (sam. 12/03)' in GMT+1
 function convertToUnixTimestamp(date, nowDate) {
@@ -58,7 +61,7 @@ function getImage(type) {
 function getEvenements(js, nowDate) {
     var regex = /ev\((.*)\);/ig;
     var keys = 'neweven,time,num,s1,s2,s3,n1,n2,n3,appel'.split(',');
-    var objects = Analyzer.buildObjectsFromJSSequences(js, regex, keys);
+    var objects = JsAnalyzer.buildObjectsFromJSSequences(js, regex, keys);
 
     return objects.map(function (object) {
         var type = object.num;
@@ -85,7 +88,7 @@ function getEvenements(js, nowDate) {
 
 function analyze(doc, date, context) {
     var js = Dom.inlineJS(doc);
-    var pager = Pager.analyze(js, context);
+    var pager = PagerAnalyzer.analyze(js, context);
 
     context.evenements = getEvenements(js, date);
 

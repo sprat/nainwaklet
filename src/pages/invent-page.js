@@ -1,14 +1,14 @@
 var Page = require('./page');
 var Dom = require('../dom');
-var Pager = require('./pager');
-var Objets = require('./objets');
+var PagerAnalyzer = require('./pager-analyzer');
+var ObjetAnalyzer = require('./objet-analyzer');
 
 function analyze(doc, date, context) {
     var js = Dom.inlineJS(doc);
 
     return {
-        objets: Objets.analyze(js, context),
-        pager: Pager.analyze(js, context)
+        objets: ObjetAnalyzer.analyze(js, context),
+        pager: PagerAnalyzer.analyze(js, context)
     };
 }
 
@@ -16,7 +16,7 @@ function enhance(doc, context) {
     var bonnet = context.objets.bonnet;
     var inventaire = context.objets.inventaire;
     var objets = bonnet.concat(inventaire);
-    Objets.enhance(doc, objets, context.perso);
+    ObjetAnalyzer.enhance(doc, objets, context);
 }
 
 module.exports = Page('invent', {
