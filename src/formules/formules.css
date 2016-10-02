@@ -13,16 +13,3 @@
     padding: 5px;
     vertical-align: middle;
 }
-
-.formules .objet {
-    min-width: 60px;
-}
-
-.formules .objet .quantite {
-    display: inline-block;
-    vertical-align: middle;
-}
-
-.formules .objet .image {
-    vertical-align: middle;
-}

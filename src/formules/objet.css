@@ -1,0 +1,9 @@
+.objet {
+    min-width: 60px;
+}
+
+.objet .quantite,
+.objet .image {
+    display: inline-block;
+    vertical-align: middle;
+}
