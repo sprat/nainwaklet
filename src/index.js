@@ -3,7 +3,6 @@ var bookmarklet = require('./bookmarklet');
 var Mounter = require('./mounter');
 var Formules = require('./formules');
 
-
 // start/stop the Application on the Nainwak game page
 function run(config) {
     var app = window.nanyApplication;
