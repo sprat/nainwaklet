@@ -1,13 +1,13 @@
 var test = require('tape-catch');
 var helpers = require('../helpers');
 var pages = require('../../../pages');
-var page = pages.byType('invent');
+var inventPage = pages.byType('invent');
 var html = require('../fixtures/invent.html');
 var doc = helpers.parseHTMLDocument(html);
 var now = new Date(1457780950000);
 
-test('InventPage.analyze: objets', function (assert) {
-    var info = page.analyze(doc, now, {});
+test('inventPage.analyze: objets', function (assert) {
+    var info = inventPage.analyze(doc, now, {});
 
     assert.deepEqual(info.objets.inventaire[0], {
         id: 25186146,
@@ -127,8 +127,8 @@ test('InventPage.analyze: objets', function (assert) {
     assert.end();
 });
 
-test('InventPage.analyze: pager', function (assert) {
-    var info = page.analyze(doc, now, {});
+test('inventPage.analyze: pager', function (assert) {
+    var info = inventPage.analyze(doc, now, {});
 
     // miseajourpager('2', '149', '159', 'evenpagerlu', '?', 'chatpagerlu', '0', '14', '7', '305033d8ab52e3547c32fe17046b09d7', 'NainXpress');
     assert.deepEqual(info.pager, {
@@ -143,7 +143,7 @@ test('InventPage.analyze: pager', function (assert) {
     assert.end();
 });
 
-test('InventPage.analyze: context updates', function (assert) {
+test('inventPage.analyze: context updates', function (assert) {
     var context = {
         perso: {
             PA: 0,
@@ -156,7 +156,7 @@ test('InventPage.analyze: context updates', function (assert) {
         }
     };
 
-    page.analyze(doc, now, context);
+    inventPage.analyze(doc, now, context);
 
     // CD-ROM + OVNI + Un peu d'amour en bocal + Un peu d'amour en bocal + Visée à poisson
     assert.deepEqual(context.perso, {

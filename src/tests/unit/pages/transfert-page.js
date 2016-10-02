@@ -1,13 +1,13 @@
 var test = require('tape-catch');
 var helpers = require('../helpers');
 var pages = require('../../../pages');
-var page = pages.byType('transfert');
+var transfertPage = pages.byType('transfert');
 var html = require('../fixtures/transfert.html');
 var doc = helpers.parseHTMLDocument(html);
 var now = new Date(1457780950000);
 
-test('TransfertPage.analyze: inventaire', function (assert) {
-    var info = page.analyze(doc, now, {});
+test('transfertPage.analyze: inventaire', function (assert) {
+    var info = transfertPage.analyze(doc, now, {});
 
     // mip(3819679, "Bouteille vide", "objets/vinvide.gif", '' , "ramasser", "INUTILE", 0, 0, "0", 0, 100, 100, 0, 0, 0, 0, 0, 0, "N", "O", "1295996");
     assert.deepEqual(info.objets.sol[0], {
@@ -60,8 +60,8 @@ test('TransfertPage.analyze: inventaire', function (assert) {
     assert.end();
 });
 
-test('TransfertPage.analyze: pager', function (assert) {
-    var info = page.analyze(doc, now, {});
+test('transfertPage.analyze: pager', function (assert) {
+    var info = transfertPage.analyze(doc, now, {});
 
     // miseajourpager('5', '167', '167', 'evenpagerlu', '?', 'chatpagerlu', '0', '15', '4', 'ffe4b3cbb54fbb388beba96acde1fb7c', 'NainXpress');
     assert.deepEqual(info.pager, {

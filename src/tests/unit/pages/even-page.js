@@ -1,13 +1,13 @@
 var test = require('tape-catch');
 var helpers = require('../helpers');
 var pages = require('../../../pages');
-var page = pages.byType('even');
+var evenPage = pages.byType('even');
 var html = require('../fixtures/even.html');
 var doc = helpers.parseHTMLDocument(html);
 var now = new Date(1457780950000);
 
-test('EvenPage.analyze: evenements', function (assert) {
-    var info = page.analyze(doc, now, {});
+test('evenPage.analyze: evenements', function (assert) {
+    var info = evenPage.analyze(doc, now, {});
 
     //12h09 (sam. 12/03) xØu a pris un(e) Hache sur le sol.
     assert.deepEqual(info.evenements[0], {
@@ -42,8 +42,8 @@ test('EvenPage.analyze: evenements', function (assert) {
     assert.end();
 });
 
-test('EvenPage.analyze: pager', function (assert) {
-    var info = page.analyze(doc, now, {});
+test('evenPage.analyze: pager', function (assert) {
+    var info = evenPage.analyze(doc, now, {});
 
     // miseajourpager('17', '159', '159', 'evenpagerlu', '?', 'chatpagernonlu', '2', '14', '7', 'e48d22f62e941a14eb927c8f9d36c6b2', '<b>NainXpress</b>');
     assert.deepEqual(info.pager, {

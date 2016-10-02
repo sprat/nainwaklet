@@ -1,10 +1,11 @@
 var Page = require('./page');
 var dom = require('../dom');
+var Mounter = require('../mounter');
 var Popin = require('../popin');
 var objetAnalyzer = require('./objet-analyzer');
 
 function enhance(doc, context) {
-    var mounter = dom.Mounter();
+    var mounter = Mounter();
     var perso = context.perso;
     var inventaire = context.objets && context.objets.inventaire;
     var idRegex = /javascript:choisir\('(\d+)'\)/i;

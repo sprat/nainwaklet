@@ -1,10 +1,10 @@
 var Application = require('./application');
 var bookmarklet = require('./bookmarklet');
-var dom = require('./dom');
+var Mounter = require('./mounter');
 var Formules = require('./formules');
 
 
-//start/stop the Application on the Nainwak game page
+// start/stop the Application on the Nainwak game page
 function run(config) {
     var app = window.nanyApplication;
 
@@ -20,7 +20,7 @@ function run(config) {
 }
 
 function replaceNodeByComponent(component) {
-    var mounter = dom.Mounter();
+    var mounter = Mounter();
     return function (node) {
         mounter.replace(node, component);
     };

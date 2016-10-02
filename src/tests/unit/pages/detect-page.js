@@ -1,13 +1,13 @@
 var test = require('tape-catch');
 var helpers = require('../helpers');
 var pages = require('../../../pages');
-var page = pages.byType('detect');
+var detectPage = pages.byType('detect');
 var html = require('../fixtures/detect.html');
 var doc = helpers.parseHTMLDocument(html);
 var now = new Date(1457780950000);
 
-test('DetectPage.analyze: localisation', function (assert) {
-    var info = page.analyze(doc, now, {});
+test('detectPage.analyze: localisation', function (assert) {
+    var info = detectPage.analyze(doc, now, {});
 
     assert.deepEqual(info.detection.position, [13, 5], 'Position');
     assert.strictEqual(info.detection.monde, 'Monde des sadiques', 'Monde');
@@ -15,8 +15,8 @@ test('DetectPage.analyze: localisation', function (assert) {
     assert.end();
 });
 
-test('DetectPage.analyze: nains', function (assert) {
-    var info = page.analyze(doc, now, {});
+test('detectPage.analyze: nains', function (assert) {
+    var info = detectPage.analyze(doc, now, {});
     var nains = info.detection.nains;
 
     assert.strictEqual(nains.length, 3, 'Nombre de nains');
@@ -81,8 +81,8 @@ test('DetectPage.analyze: nains', function (assert) {
     assert.end();
 });
 
-test('DetectPage.analyze: objets', function (assert) {
-    var info = page.analyze(doc, now, {});
+test('detectPage.analyze: objets', function (assert) {
+    var info = detectPage.analyze(doc, now, {});
     var objets = info.detection.objets;
 
     assert.strictEqual(objets.length, 3, "Nombre d'objets");
@@ -120,8 +120,8 @@ test('DetectPage.analyze: objets', function (assert) {
     assert.end();
 });
 
-test('DetectPage.analyze: pager', function (assert) {
-    var info = page.analyze(doc, now, {});
+test('detectPage.analyze: pager', function (assert) {
+    var info = detectPage.analyze(doc, now, {});
 
     assert.notStrictEqual(info.pager, undefined);
 

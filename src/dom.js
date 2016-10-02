@@ -1,7 +1,5 @@
-/* DOM helpers & mounter */
+/* DOM helpers */
 var map = Array.prototype.map;
-var maquette = require('maquette');
-var h = maquette.h;
 
 function find(selector, context) {
     context = context || document;
@@ -18,7 +16,7 @@ function findAll(selector, context) {
 }
 
 function getInlineJavascript(doc) {
-    var sources = Array.prototype.map.call(doc.scripts, function (script) {
+    var sources = map.call(doc.scripts, function (script) {
         return script.src ? '' : script.innerHTML;
     });
     return sources.join('\n');
@@ -101,62 +99,9 @@ function Element(node) {
     };
 }
 
-function Mounter() {
-    // create a maquette projector for the rendering
-    var projector = maquette.createProjector();
-
-    // refresh all the components mounted by this mounter
-    function refresh() {
-        projector.scheduleRender();
-    }
-
-    // method: append / insertBefore / replace / merge
-    function mount(method, element, componentOrRender) {
-        var render = componentOrRender.render || componentOrRender;
-
-        // render the virtual DOM tree
-        function renderTree() {
-            return render(h, refresh) || h('div.nany-empty');
-        }
-
-        // unmount the component (does not restore the original node)
-        function unmount() {
-            projector.detach(renderTree);
-        }
-
-        // add the component to the projector
-        projector[method](element.node, renderTree);
-
-        // return the unmount function
-        return unmount;
-    }
-
-    // append a component to a parent node
-    function append(node, component) {
-        return mount('append', Element(node), component);
-    }
-
-    // prepend a component to a parent node
-    function prepend(node, component) {
-        return mount('insertBefore', Element(node).firstChild(), component);
-    }
-
-    // replace a node by a component
-    function replace(node, component) {
-        return mount('replace', Element(node), component);
-    }
-
-    return {
-        append: append,
-        prepend: prepend,
-        replace: replace,
-        refresh: refresh
-    };
-}
-
 module.exports = {
     find: find,
     findAll: findAll,
     getInlineJavascript: getInlineJavascript,
-    Mounter: Mounter
+    Element: Element
 };

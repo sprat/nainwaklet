@@ -1,5 +1,6 @@
 var extend = require('xtend/mutable');
 var dom = require('../dom');
+var Mounter = require('../mounter');
 var jsAnalyzer = require('./js-analyzer');
 var calcul = require('../calcul');
 var Popin = require('../popin');
@@ -87,7 +88,7 @@ function ObjetInfo(objet, perso) {
 }
 
 function enhance(doc, objets, context) {
-    var mounter = dom.Mounter();
+    var mounter = Mounter();
     var imageElements = dom.findAll('td.news-text img', doc);
 
     // add an advisor box on each title

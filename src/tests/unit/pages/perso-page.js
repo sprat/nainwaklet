@@ -1,13 +1,13 @@
 var test = require('tape-catch');
 var helpers = require('../helpers');
 var pages = require('../../../pages');
-var page = pages.byType('perso');
+var persoPage = pages.byType('perso');
 var html = require('../fixtures/perso.html');
 var doc = helpers.parseHTMLDocument(html);
 var now = new Date(1457780950000);
 
-test('PersoPage.analyze', function (assert) {
-    var info = page.analyze(doc, now, {});
+test('persoPage.analyze', function (assert) {
+    var info = persoPage.analyze(doc, now, {});
     var perso = info.perso;
 
     assert.deepEqual(perso, {

@@ -1,7 +1,7 @@
 var test = require('tape-catch');
-var Calcul = require('../../calcul');
+var calcul = require('../../calcul');
 
-test('Calcul.degats', function (assert) {
+test('calcul.degats', function (assert) {
     var armeBourrin = {
         nom: 'Excalibur',
         portee: 0,
@@ -20,12 +20,12 @@ test('Calcul.degats', function (assert) {
         intelligence: 100
     };
 
-    assert.deepEqual(Calcul.degats(nain, armeSniper), {
+    assert.deepEqual(calcul.degats(nain, armeSniper), {
         minimum: 72,
         maximum: 80
     }, 'Dégâts sniper');
 
-    assert.deepEqual(Calcul.degats(nain, armeBourrin), {
+    assert.deepEqual(calcul.degats(nain, armeBourrin), {
         minimum: 18,
         maximum: 20
     }, 'Dégâts bourrin');
@@ -33,35 +33,35 @@ test('Calcul.degats', function (assert) {
     assert.end();
 });
 
-test('Calcul.portee', function (assert) {
-    assert.deepEqual(Calcul.portee([12, 4], [12, 4]), 0, '0 case');
-    assert.deepEqual(Calcul.portee([12, 4], [12, 3]), 1, '1 case au-dessus');
-    assert.deepEqual(Calcul.portee([12, 4], [12, 5]), 1, '1 case au-dessous');
-    assert.deepEqual(Calcul.portee([12, 4], [11, 4]), 1, '1 case à gauche');
-    assert.deepEqual(Calcul.portee([12, 4], [13, 4]), 1, '1 case à droite');
-    assert.deepEqual(Calcul.portee([12, 4], [11, 5]), 1, '1 case en diagonale');
+test('calcul.portee', function (assert) {
+    assert.deepEqual(calcul.portee([12, 4], [12, 4]), 0, '0 case');
+    assert.deepEqual(calcul.portee([12, 4], [12, 3]), 1, '1 case au-dessus');
+    assert.deepEqual(calcul.portee([12, 4], [12, 5]), 1, '1 case au-dessous');
+    assert.deepEqual(calcul.portee([12, 4], [11, 4]), 1, '1 case à gauche');
+    assert.deepEqual(calcul.portee([12, 4], [13, 4]), 1, '1 case à droite');
+    assert.deepEqual(calcul.portee([12, 4], [11, 5]), 1, '1 case en diagonale');
 
-    assert.deepEqual(Calcul.portee([12, 4], [14, 6]), 3, '2 cases diago = 3 cases');
-    assert.deepEqual(Calcul.portee([12, 4], [13, 7]), 3, '3 cases');
-
-    assert.end();
-});
-
-test('Calcul.deplacement', function (assert) {
-    assert.deepEqual(Calcul.deplacement([12, 4], [12, 4]), 0, '0 case');
-    assert.deepEqual(Calcul.deplacement([12, 4], [12, 3]), 1, '1 case au-dessus');
-    assert.deepEqual(Calcul.deplacement([12, 4], [12, 5]), 1, '1 case au-dessous');
-    assert.deepEqual(Calcul.deplacement([12, 4], [11, 4]), 1, '1 case à gauche');
-    assert.deepEqual(Calcul.deplacement([12, 4], [13, 4]), 1, '1 case à droite');
-    assert.deepEqual(Calcul.deplacement([12, 4], [11, 5]), 1, '1 case en diagonale');
-
-    assert.deepEqual(Calcul.deplacement([12, 4], [14, 6]), 2, '2 cases diago');
-    assert.deepEqual(Calcul.deplacement([12, 4], [13, 7]), 3, '3 cases');
+    assert.deepEqual(calcul.portee([12, 4], [14, 6]), 3, '2 cases diago = 3 cases');
+    assert.deepEqual(calcul.portee([12, 4], [13, 7]), 3, '3 cases');
 
     assert.end();
 });
 
-test('Calcul.bonusObjets', function (assert) {
+test('calcul.deplacement', function (assert) {
+    assert.deepEqual(calcul.deplacement([12, 4], [12, 4]), 0, '0 case');
+    assert.deepEqual(calcul.deplacement([12, 4], [12, 3]), 1, '1 case au-dessus');
+    assert.deepEqual(calcul.deplacement([12, 4], [12, 5]), 1, '1 case au-dessous');
+    assert.deepEqual(calcul.deplacement([12, 4], [11, 4]), 1, '1 case à gauche');
+    assert.deepEqual(calcul.deplacement([12, 4], [13, 4]), 1, '1 case à droite');
+    assert.deepEqual(calcul.deplacement([12, 4], [11, 5]), 1, '1 case en diagonale');
+
+    assert.deepEqual(calcul.deplacement([12, 4], [14, 6]), 2, '2 cases diago');
+    assert.deepEqual(calcul.deplacement([12, 4], [13, 7]), 3, '3 cases');
+
+    assert.end();
+});
+
+test('calcul.bonusObjets', function (assert) {
     var visee = {
         nom: 'Visée à poisson',
         forceBonus: -6,
@@ -78,21 +78,21 @@ test('Calcul.bonusObjets', function (assert) {
         intelligenceBonus: -10
     };
 
-    assert.deepEqual(Calcul.bonusObjets([]), {
+    assert.deepEqual(calcul.bonusObjets([]), {
         forceBonus: 0,
         precisionBonus: 0,
         vieBonus: 0,
         intelligenceBonus: 0
     }, 'empty list');
 
-    assert.deepEqual(Calcul.bonusObjets([visee]), {
+    assert.deepEqual(calcul.bonusObjets([visee]), {
         forceBonus: -6,
         precisionBonus: 15,
         vieBonus: 0,
         intelligenceBonus: 0
     }, '1 object');
 
-    assert.deepEqual(Calcul.bonusObjets([visee, guitare]), {
+    assert.deepEqual(calcul.bonusObjets([visee, guitare]), {
         forceBonus: -6,
         precisionBonus: 24,
         vieBonus: 5,

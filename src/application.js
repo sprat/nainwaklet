@@ -1,6 +1,6 @@
 var extend = require('xtend/mutable');
 var includeCSS = require('./include-css');
-var dom = require('./dom');
+var Mounter = require('./mounter');
 var Nain = require('./nain');
 var Spy = require('./spy');
 var Updater = require('./updater');
@@ -60,7 +60,7 @@ function Application(configuration) {
     includeCSS(container.ownerDocument);
 
     // create a Mounter to render our components into the DOM
-    var mounter = dom.Mounter();
+    var mounter = Mounter();
 
     // create the dashboard object
     var dashboard = Dashboard(channelName, mounter.refresh);

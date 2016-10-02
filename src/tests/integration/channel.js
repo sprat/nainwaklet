@@ -3,7 +3,7 @@ var Channel = require('../../channel');
 var publishKey = 'pub-c-8be41a11-cbc5-4427-a5ad-e18cf5a466e4';
 var subscribeKey = 'sub-c-38ae8020-6d33-11e5-bf4b-0619f8945a4f';
 
-test('Channel: signals', function (assert) {
+test('channel: signals', function (assert) {
     var channel = Channel('test-channel', publishKey, subscribeKey);
     var topic = 'chat';
     var dataToSend = {
@@ -53,7 +53,7 @@ test('Channel: signals', function (assert) {
     channel.connect();
 });
 
-test('Channel.name', function (assert) {
+test('channel.name', function (assert) {
     var channel = Channel('my.super:duper/channel007*name is\nnice', publishKey, subscribeKey);
     assert.strictEqual(channel.name, 'my_super_duper_channel007_name is_nice');
     assert.end();
