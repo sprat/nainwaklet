@@ -65,10 +65,10 @@ a:hover {
 }
 
 /* Bookmarklet */
-.nany-bookmarklet {
+.nanyBookmarklet {
     margin-right: 5px;
 }
 
-.nany-bookmarklet.hidden {
+.nanyBookmarklet.hidden {
     display: none;
 }

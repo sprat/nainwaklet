@@ -1,7 +1,7 @@
 var urls = require('./urls');
 var currentScript = require('./current-script');
 var getDataset = require('get-dataset');
-require('./bookmarklet.css');
+require('./bookmarklet.css');  // does not export styles as it contains only global rules
 
 function setHref(link, scriptUrl, config) {
     // TODO: maybe we can use a template and the text plugin here?
@@ -31,7 +31,7 @@ function setHref(link, scriptUrl, config) {
 
 // initialize the bookmarklets links
 function initialize(selector, config, scriptUrl) {
-    selector = selector || '.nany-bookmarklet';
+    selector = selector || '.nanyBookmarklet';
     scriptUrl = scriptUrl || currentScript.src;
 
     var links = document.querySelectorAll(selector);

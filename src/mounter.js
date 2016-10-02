@@ -1,5 +1,6 @@
 var maquette = require('maquette');
 var dom = require('./dom');
+var styles = require('./base.css');
 
 function Mounter() {
     // create a maquette projector for the rendering
@@ -18,7 +19,8 @@ function Mounter() {
 
         // render the virtual DOM tree
         function renderTree() {
-            return render(h, refresh) || h('div.nany-empty');
+            var content = render(h, refresh);
+            return h('div', { 'class': styles.nany }, content);
         }
 
         // unmount the component (does not restore the original node)

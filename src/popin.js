@@ -1,4 +1,4 @@
-require('./popin.css');
+var styles = require('./popin.css');
 
 /* Popin */
 function Popin(label, content) {
@@ -10,9 +10,9 @@ function Popin(label, content) {
             return;
         }
 
-        var button = h('button.nany-popin-button', label);
-        var box = h('div.nany-popin-box', rendered);
-        return h('div.nany.nany-popin', [button, box]);
+        var button = h('button', { 'class': styles.popinButton }, label);
+        var contentWrapper = h('div', { 'class': styles.popinContent }, rendered);
+        return h('div', { 'class': styles.popin }, [button, contentWrapper]);
     }
 
     return {

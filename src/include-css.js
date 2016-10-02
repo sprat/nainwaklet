@@ -1,7 +1,7 @@
 var currentScript = require('./current-script');
 var cssUrl = currentScript.src.replace(/\bjs\b/g, 'css');
 
-function loadCSS(doc) {
+function includeCSS(doc) {
     var linkId = 'nanyCSS';
     var link = doc.getElementById(linkId);
     var head = doc.getElementsByTagName('head')[0];
@@ -17,4 +17,4 @@ function loadCSS(doc) {
     }
 }
 
-module.exports = loadCSS;
+module.exports = includeCSS;

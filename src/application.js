@@ -8,8 +8,6 @@ var Updater = require('./updater');
 var Dashboard = require('./dashboard');
 var pages = require('./pages');
 var log = require('./log');
-require('./application.css');
-require('./contours.css');
 
 var defaultConfiguration = {
     /* Channel name */

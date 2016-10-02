@@ -36,7 +36,7 @@ var applicationConfig = {
     module: {
         loaders: [
             { test: /\.json$/, loader: 'json' },
-            { test: /\.css$/, loader: extractCSS.extract('css-loader?sourceMap') }
+            { test: /\.css$/, loader: extractCSS.extract('css-loader?sourceMap&modules&localIdentName=[local]---[hash:base64:5]') }
         ]
     },
     plugins: [

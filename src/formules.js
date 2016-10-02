@@ -1,6 +1,6 @@
 var formulesJSON = require('./formules.json');
 var urls = require('./urls');
-require('./formules.css');
+var styles = require('./formules.css');
 
 function Formules(formules) {
     // TODO: add a search feature in another component/render function maybe? / we need a function filterByText(text) => Formules
@@ -15,7 +15,7 @@ function Formules(formules) {
     }
 
     function render(h) {
-        return h('table.nany.nany-formules', [
+        return h('table', { 'class': styles.formules }, [
             h('thead', [
                 h('tr', [
                     h('th', 'N°'),
@@ -101,7 +101,8 @@ function Objet(nom, image, quantite, id, note) {
             title += ' (id: ' + id + ')';
         }
 
-        var img = h('img.image', {
+        var img = h('img', {
+            'class': styles.image,
             src: urls.nainwakUrl + image,
             title: title
         });
@@ -110,10 +111,10 @@ function Objet(nom, image, quantite, id, note) {
 
         if (quantite > 1) {
             content.push(' ');
-            content.push(h('span.quantite', 'x ' + quantite));
+            content.push(h('span', { 'class': styles.quantite }, 'x ' + quantite));
         }
 
-        return h('div.objet', content);
+        return h('div', { 'class': styles.objet }, content);
     }
 
     return {

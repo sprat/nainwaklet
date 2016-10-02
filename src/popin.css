@@ -1,11 +1,11 @@
-.nany-popin {
+.popin {
     position: relative;
     display: inline-block;
     float: right;
     font-weight: normal;
 }
 
-.nany-popin-button {
+.popinButton {
     color: #FFF;
     background: #333;
     padding: 0.25em 0.5em;
@@ -15,20 +15,20 @@
     cursor: pointer;
 }
 
-.nany-popin:hover .nany-popin-button,
-.nany-popin-button:focus {
+.popin:hover .popinButton,
+.popinButton:focus {
     background: #606;
     outline: 0;
 }
 
-.nany-popin-button,
-.nany-popin-box {
+.popinButton,
+.popinContent {
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
 }
 
-.nany-popin-box {
+.popinContent {
     display: none;
     position: absolute;
     z-index: 1;
@@ -44,7 +44,7 @@
     white-space: nowrap;
 }
 
-.nany-popin-box:before {
+.popinContent:before {
     content: "";
     position: absolute;
     top: 0.75em;
@@ -55,7 +55,7 @@
     border-left-color: #333;
 }
 
-.nany-popin:hover .nany-popin-box,
-.nany-popin-button:focus + .nany-popin-box {
+.popin:hover .popinContent,
+.popinButton:focus + .popinContent {
     display: inherit;
 }

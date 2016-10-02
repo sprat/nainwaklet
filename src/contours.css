@@ -1,4 +1,4 @@
-.nany div.VTV {
+.VTV {
     border-width: 8px 14px;
     border-style: solid;
     padding: 0px 3px;
@@ -9,7 +9,7 @@
     border-image: url("//www.nainwak.com/images/interface/contour/7/VTV.png") 8 14 fill stretch;
 }
 
-.nany div.VNT {
+.VNT {
     color: #FFF;
     border-width: 8px 14px;
     border-style: solid;
@@ -21,7 +21,7 @@
     border-image: url("//www.nainwak.com/images/interface/contour/7/VNT.png") 8 14 fill stretch;
 }
 
-.nany div.VTT {
+.VTT {
     border-width: 8px 14px;
     border-style: solid;
     padding: 0px 3px;
@@ -32,7 +32,7 @@
     border-image: url("//www.nainwak.com/images/interface/contour/7/VTT.png") 8 14 fill stretch;
 }
 
-.nany div.TNT {
+.TNT {
     color: #FFF;
     border-width: 8px 14px;
     border-style: solid;
@@ -44,7 +44,7 @@
     border-image: url("//www.nainwak.com/images/interface/contour/7/TNT.png") 8 14 fill stretch;
 }
 
-.nany div.TBNT {
+.TBNT {
     color: #FFF;
     border-width: 10px 14px 8px;
     border-style: solid;
@@ -56,7 +56,7 @@
     border-image: url("//www.nainwak.com/images/interface/contour/7/TBNT.png") 10 14 8 fill stretch;
 }
 
-.nany div.VT {
+.VT {
     border-width: 8px 14px 0px;
     border-style: solid;
     padding: 0px 3px;
@@ -67,7 +67,7 @@
     border-image: url("//www.nainwak.com/images/interface/contour/7/VT.png") 8 14 0 fill stretch;
 }
 
-.nany div.T {
+.T {
     border-width: 0px 14px;
     border-style: solid;
     padding: 0px 3px;
@@ -78,7 +78,7 @@
     border-image: url("//www.nainwak.com/images/interface/contour/7/T.png") 0 14 fill stretch;
 }
 
-.nany div.TV {
+.TV {
     border-width: 0px 14px 8px;
     border-style: solid;
     padding: 0px 3px;
@@ -89,7 +89,7 @@
     border-image: url("//www.nainwak.com/images/interface/contour/7/TV.png") 0 14 8 fill stretch;
 }
 
-.nany div.TTV {
+.TTV {
     border-width: 10px 14px 8px;
     border-style: solid;
     padding: 0px 3px;

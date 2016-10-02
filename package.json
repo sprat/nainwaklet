@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "array-find": "^1.0.0",
+    "classnames": "^2.2.5",
     "get-dataset": "^0.0.4",
     "htmldec": "^0.0.1",
     "maquette": "^2.3.5",
