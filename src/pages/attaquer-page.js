@@ -1,7 +1,7 @@
 var Page = require('./page');
 var dom = require('../dom');
 var Mounter = require('../mounter');
-var Popin = require('../popin');
+var TooltipButton = require('../tooltip-button');
 var objetAnalyzer = require('./objet-analyzer');
 
 function enhance(doc, context) {
@@ -25,14 +25,14 @@ function enhance(doc, context) {
         var match = idRegex.exec(href);
         var objet;
         var objetInfo;
-        var popin;
+        var tooltipButton;
 
         if (match) {
             objet = objetsById[match[1]];
             if (objet) {
                 objetInfo = objetAnalyzer.ObjetInfo(objet, perso);
-                popin = Popin('?', objetInfo);
-                mounter.prepend(link.parent(), popin);
+                tooltipButton = TooltipButton('?', objetInfo);
+                mounter.prepend(link.parent(), tooltipButton);
             }
         }
     });

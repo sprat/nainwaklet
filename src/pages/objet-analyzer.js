@@ -3,7 +3,7 @@ var dom = require('../dom');
 var Mounter = require('../mounter');
 var jsAnalyzer = require('./js-analyzer');
 var calcul = require('../calcul');
-var Popin = require('../popin');
+var TooltipButton = require('../tooltip-button');
 
 function int(v) {
     return parseInt(v, 10);
@@ -95,8 +95,8 @@ function enhance(doc, objets, context) {
     imageElements.forEach(function (image, index) {
         var objet = objets[index];
         var objetInfo = ObjetInfo(objet, context.perso);
-        var popin = Popin('?', objetInfo);
-        mounter.prepend(image.parent(), popin);
+        var tooltipButton = TooltipButton('?', objetInfo);
+        mounter.prepend(image.parent(), tooltipButton);
     });
 }
 
