@@ -1,7 +1,7 @@
 var currentScript = require('./current-script');
 var cssUrl = currentScript.src.replace(/\bjs\b/g, 'css');
 
-function includeCSS(doc) {
+function addCSS(doc) {
     var linkId = 'nanyCSS';
     var link = doc.getElementById(linkId);
     var head = doc.getElementsByTagName('head')[0];
@@ -15,6 +15,10 @@ function includeCSS(doc) {
         link.setAttribute('id', linkId);
         head.appendChild(link);
     }
+
+    return function removeCSS() {
+        head.removeChild(link);
+    };
 }
 
-module.exports = includeCSS;
+module.exports = addCSS;
