@@ -23,12 +23,7 @@
             <li>Cliquez sur le bouton du Nany !</li>
         </ol>
 
-        <!-- Branding: ɴᴀɴʏ or [ɴ] -->
-        <p class="buttons">
-            <a class="nanyBookmarklet" data-channel="#B" data-update-url="http://b.swinformatique.fr/nany_update.php" href="#">Nany #B</a>
-            <a class="nanyBookmarklet hidden" data-channel="#B" data-update-url="http://preb.swinformatique.fr/nany_update.php" href="#">Nany #B (préprod)</a>
-            <a class="nanyBookmarklet hidden" data-channel="#B" data-update-url="http://httpbin.org/post" href="#">Nany #B (httpbin)</a>
-        </p>
+        <p class="buttons"></p>
 
         <p>Liens utiles :</p>
         <ul>
@@ -39,6 +34,18 @@
     </section>
 
     <script src="dist/nany.js"></script>
-    <script type="text/javascript">Nany.initializeBookmarklets();</script>
+    <script type="text/javascript">
+    Nany.addBookmarklet('.buttons', {
+        label: 'Nany #B',
+        channel: '#B',
+        updateUrl: 'http://b.swinformatique.fr/nany_update.php'
+    });
+
+    Nany.addBookmarklet('.buttons', {
+        label: 'Nany #B (préprod)',
+        channel: '#B (préprod)',
+        updateUrl: 'http://preb.swinformatique.fr/nany_update.php'
+    });
+    </script>
 </body>
 </html>

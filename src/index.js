@@ -1,7 +1,9 @@
 var Application = require('./application');
-var bookmarklet = require('./bookmarklet');
+var Bookmarklet = require('./bookmarklet');
 var Mounter = require('./mounter');
-var Formules = require('./formules');
+var formules = require('./formules');
+var slice = Array.prototype.slice;
+var mounter = Mounter();
 
 // start/stop the Application on the Nainwak game page
 function run(config) {
@@ -18,15 +20,16 @@ function run(config) {
     window.nanyApplication = Application(config);
 }
 
-function replaceNodeByComponent(component) {
-    var mounter = Mounter();
-    return function (node) {
-        mounter.replace(node, component);
+function addComponent(createComponent) {
+    return function (selector/*, args*/) {
+        var node = document.querySelector(selector);
+        var args = slice.call(arguments, 1);
+        mounter.append(node, createComponent.apply(null, args));
     };
 }
 
 module.exports = Object.freeze({
     run: run,
-    initializeBookmarklets: bookmarklet.initialize,
-    afficheFormules: replaceNodeByComponent(Formules)
+    addBookmarklet: addComponent(Bookmarklet),
+    addFormules: addComponent(function() { return formules; })
 });

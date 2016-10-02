@@ -2,6 +2,17 @@ var maquette = require('maquette');
 var dom = require('./dom');
 var styles = require('./base.css');
 
+function addDefaultStyle(vnode) {
+    if (!vnode) {
+        return;
+    }
+
+    var properties = vnode.properties = vnode.properties || {};
+    var class_ = properties.class || '';
+    properties.class = [class_, styles.default].join(' ');
+    return vnode;
+}
+
 function Mounter() {
     // create a maquette projector for the rendering
     var projector = maquette.createProjector();
@@ -16,11 +27,11 @@ function Mounter() {
         var node = element.node;
         var h = maquette.h;
         var render = componentOrRender.render || componentOrRender;
+        var empty = h('div', { class: styles.hidden });
 
         // render the virtual DOM tree
         function renderTree() {
-            var content = render(h, refresh);
-            return h('div', { 'class': styles.nany }, content);
+            return addDefaultStyle(render(h, refresh)) || empty;
         }
 
         // unmount the component (does not restore the original node)

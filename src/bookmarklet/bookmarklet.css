@@ -1,5 +1,4 @@
-/* global export because we want the users to be able to customize it */
-:global(.nanyBookmarklet) {
+.bookmarklet {
     padding: 10px 20px;
     text-decoration: none;
     display: inline-block;
@@ -22,7 +21,7 @@
     box-shadow: #999 2px 2px 2px;
 }
 
-:global(.nanyBookmarklet:hover) {
+.bookmarklet:hover {
     color: #FFFFFF;
     text-decoration: none;
     background-color: #333333;

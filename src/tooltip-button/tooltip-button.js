@@ -10,9 +10,9 @@ function TooltipButton(label, content) {
             return;
         }
 
-        var button = h('button', { 'class': styles.tooltipButton }, label);
-        var contentWrapper = h('div', { 'class': styles.tooltipContent }, rendered);
-        return h('div', { 'class': styles.tooltip }, [button, contentWrapper]);
+        var button = h('button', { class: styles.tooltipButton }, label);
+        var contentWrapper = h('div', { class: styles.tooltipContent }, rendered);
+        return h('div', { class: styles.tooltip }, [button, contentWrapper]);
     }
 
     return {

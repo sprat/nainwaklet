@@ -1,0 +1,47 @@
+var urls = require('../urls');
+var currentScript = require('../current-script');
+var styles = require('./bookmarklet.css');
+
+function getHref(config) {
+    // TODO: maybe we can use a template and the text plugin here?
+    var lines = [
+        'javascript:(function(config) {',
+        'var w=window, l=w.location, d=w.document, b=d.body, s;',
+        'if (!' + urls.gameUrlRegex + '.test(l.href)) {',
+        '  alert("Connectez-vous sur Nainwak puis cliquez sur « Jouer ! » avant d\'utiliser le Nany");',
+        '  l.assign("' + urls.nainwakUrl + '");',
+        '  return;',
+        '}',
+        's=d.createElement("script");',
+        's.type="text/javascript";',
+        's.src=config.scriptUrl;',
+        's.charset="utf-8";',
+        's.onload=function() {',
+        '  Nany.run(config);',
+        '  b.removeChild(s);',
+        '};',
+        'b.appendChild(s);',
+        '}(' + JSON.stringify(config) + '))'
+    ];
+    return lines.join('\n').replace(/\s+/g, ' ');
+}
+
+function Bookmarklet(config) {
+    var label = config.label;
+    delete config.label;
+
+    config.scriptUrl = config.scriptUrl || currentScript.src;
+
+    function render(h) {
+        return h('a', {
+            class: styles.bookmarklet,
+            href: getHref(config)
+        }, label);
+    }
+
+    return {
+        render: render
+    };
+}
+
+module.exports = Bookmarklet;

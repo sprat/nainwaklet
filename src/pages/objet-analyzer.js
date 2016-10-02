@@ -78,7 +78,7 @@ function ObjetInfo(objet, perso) {
 
     function render(h) {
         if (degats) {
-            return h('div', 'Dégâts : entre ' + degats.minimum + ' et ' + degats.maximum);  // { 'class': styles.degats }
+            return h('div', 'Dégâts : entre ' + degats.minimum + ' et ' + degats.maximum);  // { class: styles.degats }
         }
     }
 

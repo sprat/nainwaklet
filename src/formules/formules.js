@@ -14,7 +14,7 @@ function Formules(formules) {
     }
 
     function render(h) {
-        return h('table', { 'class': styles.formules }, [
+        return h('table', { class: styles.formules }, [
             h('thead', [
                 h('tr', [
                     h('th', 'N°'),

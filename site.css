@@ -55,20 +55,10 @@ a:hover {
     color: #33C;
 }
 
-.logo {
-    display: inline-block;
-    vertical-align: bottom;
-}
-
 .buttons {
     margin: 2em 0;
 }
 
-/* Bookmarklet */
-.nanyBookmarklet {
+.buttons a {
     margin-right: 5px;
-}
-
-.nanyBookmarklet.hidden {
-    display: none;
 }

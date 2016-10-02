@@ -14,7 +14,7 @@ function Objet(nom, image, quantite, id, note) {
         }
 
         var img = h('img', {
-            'class': styles.image,
+            class: styles.image,
             src: urls.nainwakUrl + image,
             title: title
         });
@@ -23,10 +23,10 @@ function Objet(nom, image, quantite, id, note) {
 
         if (quantite > 1) {
             content.push(' ');
-            content.push(h('span', { 'class': styles.quantite }, 'x ' + quantite));
+            content.push(h('span', { class: styles.quantite }, 'x ' + quantite));
         }
 
-        return h('div', { 'class': styles.objet }, content);
+        return h('div', { class: styles.objet }, content);
     }
 
     return {
