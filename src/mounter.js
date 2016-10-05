@@ -2,14 +2,14 @@ var maquette = require('maquette');
 var dom = require('./dom');
 var styles = require('./base.css');
 
-function addDefaultStyle(vnode) {
+function addBaseStyle(vnode) {
     if (!vnode) {
         return;
     }
 
     var properties = vnode.properties = vnode.properties || {};
     var class_ = properties.class || '';
-    properties.class = [class_, styles.default].join(' ');
+    properties.class = class_ + ' ' + styles.nany;
     return vnode;
 }
 
@@ -31,7 +31,7 @@ function Mounter() {
 
         // render the virtual DOM tree
         function renderTree() {
-            return addDefaultStyle(render(h, refresh)) || empty;
+            return addBaseStyle(render(h, refresh)) || empty;
         }
 
         // unmount the component (does not restore the original node)

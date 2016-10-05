@@ -1,16 +1,16 @@
-/* Default style */
-.default {
+/* Base style */
+.nany {
     box-sizing: border-box;
 }
 
-.default *,
-.default *:before,
-.default *:after {
+.nany *,
+.nany *:before,
+.nany *:after {
     box-sizing: inherit;
 }
 
-.default button::-moz-focus-inner,
-.default input::-moz-focus-inner {
+.nany button::-moz-focus-inner,
+.nany input::-moz-focus-inner {
     padding: 0;
     border: 0;
 }
