@@ -10,18 +10,21 @@ var pages = require('./pages');
 var log = require('./log');
 
 var defaultConfiguration = {
-    /* Channel name */
-    channel: 'default',
-    /* PubNub account's publish key */
-    publishKey: 'pub-c-8be41a11-cbc5-4427-a5ad-e18cf5a466e4',
-    /* PubNub accounts's subscribe key */
-    subscribeKey: 'sub-c-38ae8020-6d33-11e5-bf4b-0619f8945a4f',
-    /* URL of the update page: the Nany application will post updates
-     * when the user navigate between Nainwak pages */
-    updateUrl: null
-    /* URL of the login page: it will be put in an iframe and should return an
+    /* Guild/group name shown in the dashboard */
+    name: '<inconnu>',
+
+    /* URL of the login page: a window will open with this URL when we
+     * need authentication credentials; once logged, the page should return an
      * access token via postMessage */
-    //authenticationUrl: null
+    loginUrl: undefined,
+
+    /* URL of the update page: the Nany application will post updates to this URL
+     * when the user navigate between Nainwak pages */
+    updateUrl: undefined
+
+    /* PubNub account's publish & subscribe keys */
+    //publishKey: 'pub-c-8be41a11-cbc5-4427-a5ad-e18cf5a466e4',
+    //subscribeKey: 'sub-c-38ae8020-6d33-11e5-bf4b-0619f8945a4f',
 };
 
 /* Application class */
@@ -33,13 +36,16 @@ function Application(configuration) {
     var nain = Nain.fromDocument(frames.menu.document);
     var updatePages = ['detect', 'invent', 'perso', 'even'];
     var context = {};  // game information fetched by the current player
-    var channelName = config.channel;
 
     // create the spy if the info frame is available
     var spy;
     if (infoFrame) {
         spy = Spy(infoFrame);
-        spy.documentChanged.add(onInfoChange);
+        spy.documentChanged.add(function (doc) {
+            var url = doc.location.pathname;
+            log('Navigation to ' + url);
+            processPageDocument(url, doc);
+        });
     }
 
     // create the updater if an update URL is available
@@ -50,7 +56,7 @@ function Application(configuration) {
 
     /*
     // create the (communication) channel
-    var channel = Channel(channelName, config.publishKey, config.subscribeKey);
+    var channel = Channel(config.name, config.publishKey, config.subscribeKey);
     channel.connect();
     */
 
@@ -61,7 +67,7 @@ function Application(configuration) {
     var mounter = Mounter();
 
     // create the dashboard object
-    var dashboard = Dashboard(channelName, mounter.refresh);
+    var dashboard = Dashboard(config.name, config.loginUrl, mounter.refresh);
 
     // backup the content of the container and clear it before installing our UI
     var containerChildren = Array.prototype.slice.call(container.childNodes);
@@ -142,16 +148,6 @@ function Application(configuration) {
             }
         });
     }
-
-    // called when the info frame change
-    function onInfoChange(doc) {
-        var url = doc.location.pathname;
-
-        log('Navigation to ' + url);
-        processPageDocument(url, doc);
-    }
-
-
 
     return Object.freeze({
         destroy: destroy

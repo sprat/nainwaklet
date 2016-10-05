@@ -1,11 +1,14 @@
+var Login = require('./login');
 var styles = require('./dashboard.css');
-var contoursStyles = require('../contours.css');
+var contours = require('../contours.css');
 
-function Dashboard(title) {
+function Dashboard(title, loginUrl) {
+    var content = Login(loginUrl);
+
     function render(h) {
         return h('div', { class: styles.dashboard }, [
-            h('div', { class: [styles.dashboardTitle, contoursStyles.VNT].join(' ') }, title),
-            h('div', { class: [styles.dashboardContent, contoursStyles.TV].join(' ') }, 'En cours de développement...')
+            h('div', { class: styles.dashboardTitle + ' ' + contours.VNT }, title),
+            h('div', { class: styles.dashboardContent + ' ' + contours.TV }, content.render(h))
         ]);
     }
 
