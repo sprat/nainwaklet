@@ -41,10 +41,10 @@
     "nodemon": "^1.10.2",
     "npm-run-all": "^3.1.0",
     "rimraf": "^2.5.4",
-    "smokestack": "^3.4.1",
     "tap-closer": "^1.0.0",
     "tape": "^4.6.0",
     "tape-catch": "^1.0.6",
+    "tape-run": "^2.1.4",
     "webpack": "^1.13.2"
   },
   "scripts": {
@@ -52,8 +52,8 @@
     "lint": "eslint . --cache",
     "prebuild": "npm run lint -s",
     "build": "webpack --bail",
-    "test": "tap-closer < dist/nany.tests.js | smokestack | faucet",
-    "unittest": "tap-closer < dist/nany.unittests.js | smokestack | faucet",
+    "test": "tap-closer < dist/nany.tests.js | tape-run | faucet",
+    "unittest": "tap-closer < dist/nany.unittests.js | tape-run | faucet",
     "watch": "nodemon -e js,json,css --ignore dist --exec \"npm run build -s && npm run unittest -s\"",
     "dev": "npm-run-all --parallel start watch"
   }
