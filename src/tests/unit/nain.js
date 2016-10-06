@@ -1,8 +1,8 @@
 var test = require('tape-catch');
 var Nain = require('../../nain');
-var helpers = require('./helpers');
+var parseHTMLDocument = require('./parse-html-document');
 var html = require('./fixtures/menu.html');
-var doc = helpers.parseHTMLDocument(html);
+var doc = parseHTMLDocument(html);
 
 test('Nain.fromDocument', function (assert) {
     var nain = Nain.fromDocument(doc);

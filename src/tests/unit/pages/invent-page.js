@@ -1,9 +1,9 @@
 var test = require('tape-catch');
-var helpers = require('../helpers');
+var parseHTMLDocument = require('../parse-html-document');
 var pages = require('../../../pages');
 var inventPage = pages.byType('invent');
 var html = require('../fixtures/invent.html');
-var doc = helpers.parseHTMLDocument(html);
+var doc = parseHTMLDocument(html);
 var now = new Date(1457780950000);
 
 test('inventPage.analyze: objets', function (assert) {

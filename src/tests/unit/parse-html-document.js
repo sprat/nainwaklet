@@ -7,7 +7,4 @@ function parseHTMLDocument(html) {
     //return parser.parseFromString(html, 'text/html');
 }
 
-
-module.exports = {
-    parseHTMLDocument: parseHTMLDocument
-};
+module.exports = parseHTMLDocument;

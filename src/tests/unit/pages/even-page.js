@@ -1,9 +1,9 @@
 var test = require('tape-catch');
-var helpers = require('../helpers');
+var parseHTMLDocument = require('../parse-html-document');
 var pages = require('../../../pages');
 var evenPage = pages.byType('even');
 var html = require('../fixtures/even.html');
-var doc = helpers.parseHTMLDocument(html);
+var doc = parseHTMLDocument(html);
 var now = new Date(1457780950000);
 
 test('evenPage.analyze: evenements', function (assert) {

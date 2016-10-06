@@ -1,9 +1,9 @@
 var test = require('tape-catch');
-var helpers = require('../helpers');
+var parseHTMLDocument = require('../parse-html-document');
 var pages = require('../../../pages');
 var detectPage = pages.byType('detect');
 var html = require('../fixtures/detect.html');
-var doc = helpers.parseHTMLDocument(html);
+var doc = parseHTMLDocument(html);
 var now = new Date(1457780950000);
 
 test('detectPage.analyze: localisation', function (assert) {
