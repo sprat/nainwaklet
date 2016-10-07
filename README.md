@@ -10,9 +10,9 @@ courant vers le serveur de la guilde.
 
 ## TODO
 
+- Remplacer zip-object, array-find, xtend et certains builtins par lodash
 - Fournir une interface de login (via popup iframe) et un mécanisme d'authentification
 - Retravailler la limitation des requêtes vers le serveur de guilde en utilisant
-  les mécanismes disponibles dans le standard HTTP (code HTTP 429, Retry-After,
-  X-RateLimit-Limit, X-RateLimit-Remaining...)
+  les mécanismes disponibles dans le standard HTTP (code HTTP 429 & Retry-After)
 - Ajouter une fonction de recherche textuelle dans la page des formules
 - Ajouter un détecteur de formule dans les pages "detect" et "inventaire"

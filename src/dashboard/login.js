@@ -1,6 +1,11 @@
+var Window = require('../window');
+
 function Login(loginUrl) {
+    var loginWindow = Window();
+
     function onclick() {
-        alert('TODO: handle click, open ' + loginUrl);
+        loginWindow.open(loginUrl);
+        return false;
     }
 
     function render(h) {

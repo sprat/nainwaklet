@@ -1,1 +1,2 @@
 require('./channel');
+require('./window');
