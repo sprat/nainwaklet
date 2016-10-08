@@ -38,12 +38,13 @@ function deplacement(point1, point2) {
     return Math.max(dep[0], dep[1]);
 }
 
+var bonusProperties = ['forceBonus', 'precisionBonus', 'intelligenceBonus', 'vieBonus'];
 /*
  * Calcule le total des bonus apportés par une liste d'objets
  */
 function bonusObjets(objects) {
     var totals = {};
-    ['forceBonus', 'precisionBonus', 'intelligenceBonus', 'vieBonus'].forEach(function (bonus) {
+    bonusProperties.forEach(function (bonus) {
         totals[bonus] = objects.reduce(function (total, object) { return object[bonus] + total; }, 0);
     });
     return totals;
