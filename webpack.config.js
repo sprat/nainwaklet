@@ -4,6 +4,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var root = __dirname;
 var srcDir = path.join(root, 'src');
+var testsDir = path.join(root, 'tests');
 var distDir = path.join(root, 'dist');
 
 var extractCSS = new ExtractTextPlugin('[name].css');
@@ -22,9 +23,6 @@ var uglify = new webpack.optimize.UglifyJsPlugin({
 /* Build configuration for the application */
 var applicationConfig = {
     context: srcDir,
-    resolveLoader: {
-        root: root
-    },
     entry: {
         'nany': './index.js'
     },
@@ -57,13 +55,15 @@ var applicationConfig = {
 
 /* Build configuration for the tests */
 var testsConfig = {
-    context: srcDir,
-    resolveLoader: {
-        root: root
+    context: testsDir,
+    resolve: {
+        alias: {
+            'src': srcDir
+        }
     },
     entry: {
-        'nany.tests': ['./tests/index.js'],
-        'nany.unittests': ['./tests/unit/index.js']
+        'nany.tests': ['./index.js'],
+        'nany.unittests': ['./unit/index.js']
     },
     devtool: 'source-map',
     output: {

@@ -1,5 +1,5 @@
 var test = require('tape-catch');
-var Nain = require('../../nain');
+var Nain = require('src/nain');
 var parseHTMLDocument = require('./parse-html-document');
 var html = require('./fixtures/menu.html');
 var doc = parseHTMLDocument(html);

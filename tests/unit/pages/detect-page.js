@@ -1,6 +1,6 @@
 var test = require('tape-catch');
 var parseHTMLDocument = require('../parse-html-document');
-var pages = require('../../../pages');
+var pages = require('src/pages');
 var detectPage = pages.byType('detect');
 var html = require('../fixtures/detect.html');
 var doc = parseHTMLDocument(html);

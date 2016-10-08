@@ -1,6 +1,6 @@
 var test = require('tape-catch');
 var parseHTMLDocument = require('../parse-html-document');
-var pages = require('../../../pages');
+var pages = require('src/pages');
 var inventPage = pages.byType('invent');
 var html = require('../fixtures/invent.html');
 var doc = parseHTMLDocument(html);

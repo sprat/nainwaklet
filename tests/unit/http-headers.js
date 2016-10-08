@@ -1,5 +1,5 @@
 var test = require('tape-catch');
-var httpHeaders = require('../../http-headers');
+var httpHeaders = require('src/http-headers');
 
 test('httpHeaders.getRetryAfter', function (assert) {
     assert.strictEqual(

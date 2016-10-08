@@ -1,5 +1,5 @@
 var test = require('tape-catch');
-var Window = require('../../window');
+var Window = require('src/window');
 
 test('Window', function (assert) {
     var childWindow = Window();
