@@ -1,9 +1,9 @@
 var qs = require('qs');
 var xhr = require('xhr');
-var extend = require('xtend/mutable');
+var assign = require('object-assign');
 
 function getFullUrl(url, IDS, params) {
-    params = extend({}, params);  // copy
+    params = assign({}, params);  // copy
     params.IDS = IDS;
     return window.location.origin + url + '?' + qs.stringify(params);
 }

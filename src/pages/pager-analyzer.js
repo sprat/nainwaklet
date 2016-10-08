@@ -1,5 +1,5 @@
 var jsAnalyzer = require('./js-analyzer');
-var extend = require('xtend/mutable');
+var assign = require('object-assign');
 
 function int(v) {
     return parseInt(v, 10);
@@ -18,7 +18,7 @@ function analyze(js, context) {
     };
 
     context.perso = context.perso || {};
-    extend(context.perso, pager);
+    assign(context.perso, pager);
 
     return pager;
 }
