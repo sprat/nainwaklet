@@ -4,17 +4,16 @@ var inventPage = require('./invent-page');
 var transfertPage = require('./transfert-page');
 var evenPage = require('./even-page');
 var attaquerPage = require('./attaquer-page');
-var find = require('array-find');
 
 function Pages(pages) {
     function byUrl(url) {
-        return find(pages, function (page) {
+        return pages.find(function (page) {
             return page.url === url;
         });
     }
 
     function byType(type) {
-        return find(pages, function (page) {
+        return pages.find(function (page) {
             return page.type === type;
         });
     }

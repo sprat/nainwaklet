@@ -1,8 +1,8 @@
+require('./polyfills');
 var Application = require('./application');
 var Bookmarklet = require('./bookmarklet');
 var Mounter = require('./mounter');
 var formules = require('./formules');
-var slice = Array.prototype.slice;
 var mounter = Mounter();
 
 // start/stop the Application on the Nainwak game page
@@ -21,9 +21,9 @@ function run(config) {
 }
 
 function addComponent(createComponent) {
-    return function (selector/*, args*/) {
+    return function (selector/*, ...args*/) {
+        var args = Array.from(arguments).slice(1);
         var node = document.querySelector(selector);
-        var args = slice.call(arguments, 1);
         mounter.append(node, createComponent.apply(null, args));
     };
 }

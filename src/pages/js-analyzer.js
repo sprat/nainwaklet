@@ -26,7 +26,7 @@ function buildObjectFromJS(js, regex) {
     var result = {};
 
     js.replace(regex, function (match, name) {
-        var values = Array.prototype.slice.call(arguments, 2, arguments.length - 2);
+        var values = Array.from(arguments).slice(2, arguments.length - 2);
         values = values.map(evaluateJS);
         result[name] = (values.length > 1) ? values : values[0];
     });

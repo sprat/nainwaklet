@@ -70,7 +70,7 @@ function Application(configuration) {
     var dashboard = Dashboard(config.name, config.loginUrl, mounter.refresh);
 
     // backup the content of the container and clear it before installing our UI
-    var containerChildren = Array.prototype.slice.call(container.childNodes);
+    var containerChildren = Array.from(container.childNodes);
     container.innerHTML = '';
 
     // install our UI

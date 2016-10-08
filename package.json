@@ -19,12 +19,10 @@
     "url": "https://github.com/sprat/nany/issues"
   },
   "dependencies": {
-    "array-find": "^1.0.0",
-    "array-findindex": "^0.1.0",
+    "core-js": "^2.4.1",
     "htmldec": "^0.0.1",
     "maquette": "^2.3.5",
     "mini-signals": "^1.1.1",
-    "object-assign": "^4.1.0",
     "print-html": "^0.0.2",
     "pubnub": "^4.0.9",
     "qs": "^6.2.1",

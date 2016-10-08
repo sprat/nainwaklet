@@ -1,7 +1,4 @@
 /* DOM helpers */
-var map = Array.prototype.map;
-var arrayFindIndex = require('array-findindex');
-
 function find(selector, context) {
     context = context || document;
     var node = context.querySelector(selector);
@@ -13,11 +10,11 @@ function find(selector, context) {
 function findAll(selector, context) {
     context = context || document;
     var nodes = context.querySelectorAll(selector);
-    return map.call(nodes, Element);
+    return Array.from(nodes, Element);
 }
 
 function getInlineJavascript(doc) {
-    var sources = map.call(doc.scripts, function (script) {
+    var sources = Array.from(doc.scripts, function (script) {
         return script.src ? '' : script.innerHTML;
     });
     return sources.join('\n');
@@ -45,7 +42,7 @@ function Element(node) {
     }
 
     function children() {
-        return map.call(node.childNodes, Element);
+        return Array.from(node.childNodes, Element);
     }
 
     function firstChild() {
@@ -124,7 +121,7 @@ function MessageDispatcher(parentWindow) {
     }
 
     function remove(source, callback) {
-        var index = arrayFindIndex(callbacks, function (element) {
+        var index = callbacks.findIndex(function (element) {
             return (element.source === source) && (element.callback === callback);
         });
 
