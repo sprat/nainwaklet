@@ -12,7 +12,6 @@ function analyze(js, context) {
     var pager = {
         PA: int(object.pa),
         vie: int(object.pv),
-        vieTotal: int(object.pvbase),
         position: [int(object.posx), int(object.posy)],
         messagesNonLus: int(object.mesgnonlu),
         nainxpressNonLu: object.newmonochat.indexOf('<b>') === 0

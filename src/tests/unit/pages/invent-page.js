@@ -134,7 +134,6 @@ test('inventPage.analyze: pager', function (assert) {
     assert.deepEqual(info.pager, {
         PA: 2,
         vie: 149,
-        vieTotal: 159,
         position: [14, 7],
         messagesNonLus: 0,
         nainxpressNonLu: false
@@ -148,7 +147,6 @@ test('inventPage.analyze: context updates', function (assert) {
         perso: {
             PA: 0,
             vie: 50,
-            vieTotal: 100,
             forceBonus: 0,
             precisionBonus: 0,
             vieBonus: 0,
@@ -162,7 +160,6 @@ test('inventPage.analyze: context updates', function (assert) {
     assert.deepEqual(context.perso, {
         PA: 2,
         vie: 149,
-        vieTotal: 159,
         position: [14, 7],
         messagesNonLus: 0,
         nainxpressNonLu: false,

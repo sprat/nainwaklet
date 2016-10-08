@@ -122,8 +122,6 @@ test('detectPage.analyze: objets', function (assert) {
 
 test('detectPage.analyze: pager', function (assert) {
     var info = detectPage.analyze(doc, now, {});
-
     assert.notStrictEqual(info.pager, undefined);
-
     assert.end();
 });
