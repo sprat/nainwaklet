@@ -1,13 +1,13 @@
-var srcDir = __dirname + '/src/';
-var distDir = __dirname + '/dist/';
-
+var path = require('path');
 var webpack = require('webpack');
-
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+var root = __dirname;
+var srcDir = path.join(root, 'src');
+var distDir = path.join(root, 'dist');
+
 var extractCSS = new ExtractTextPlugin('[name].css');
-
 var dedupe = new webpack.optimize.DedupePlugin();
-
 var uglify = new webpack.optimize.UglifyJsPlugin({
     //sourceMap: true,
     //mangle: true,
@@ -22,6 +22,9 @@ var uglify = new webpack.optimize.UglifyJsPlugin({
 /* Build configuration for the application */
 var applicationConfig = {
     context: srcDir,
+    resolveLoader: {
+        root: root
+    },
     entry: {
         'nany': './index.js'
     },
@@ -35,8 +38,14 @@ var applicationConfig = {
     },
     module: {
         loaders: [
-            { test: /\.json$/, loader: 'json' },
-            { test: /\.css$/, loader: extractCSS.extract('css-loader?sourceMap&modules&localIdentName=[local]---[hash:base64:5]') }
+            {
+                test: /\.json$/,
+                loader: 'json-loader'
+            },
+            {
+                test: /\.css$/,
+                loader: extractCSS.extract('css-loader?sourceMap&modules&localIdentName=[local]---[hash:base64:5]')
+            }
         ]
     },
     plugins: [
@@ -49,6 +58,9 @@ var applicationConfig = {
 /* Build configuration for the tests */
 var testsConfig = {
     context: srcDir,
+    resolveLoader: {
+        root: root
+    },
     entry: {
         'nany.tests': ['./tests/index.js'],
         'nany.unittests': ['./tests/unit/index.js']
@@ -64,9 +76,18 @@ var testsConfig = {
     },
     module: {
         loaders: [
-            { test: /\.json$/, loader: 'json-loader' },
-            { test: /\.html$/, loader: 'html-loader' },
-            { test: /\.css$/, loader: 'css-loader' }  // we don't need CSS in tests / or use style-loader?
+            {
+                test: /\.json$/,
+                loader: 'json-loader'
+            },
+            {
+                test: /\.html$/,
+                loader: 'html-loader'
+            },
+            {  // we don't need CSS in tests? or use style-loader?
+                test: /\.css$/,
+                loader: 'css-loader'
+            }
         ]
     }
 };
