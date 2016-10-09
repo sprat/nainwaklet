@@ -63,7 +63,7 @@ function getObjets(js) {
             id: int(object.id),
             nom: object.nom,
             image: '/images/' + object.photo,
-            categorie: object.categorie.toLowerCase(),
+            type: object.categorie.toLowerCase(),
             position: [int(object.x), int(object.y)],
             poussiere: int(object.poussiere)  // expressed in seconds
         };

@@ -92,7 +92,7 @@ test('detectPage.analyze: objets', function (assert) {
         id: 3613899,
         nom: "Surprise de Kine d'Heure",
         image: '/images/objets/jouetkinder2_2.gif',
-        categorie: 'inutile',
+        type: 'inutile',
         position: [13, 6],
         poussiere: 1271419
     }, 'Objet 1');
@@ -102,7 +102,7 @@ test('detectPage.analyze: objets', function (assert) {
         id: 3613897,
         nom: 'Banane sauteuse',
         image: '/images/objets/banane_sauteuse.gif',
-        categorie: 'vehicule',
+        type: 'vehicule',
         position: [13, 6],
         poussiere: 1271419
     }, 'Objet 2');
@@ -112,7 +112,7 @@ test('detectPage.analyze: objets', function (assert) {
         id: 3613896,
         nom: 'Panoplie de Naindiana Jones',
         image: '/images/objets/naindiana.gif',
-        categorie: 'rune',
+        type: 'rune',
         position: [13, 7],
         poussiere: 1271419
     }, 'Objet 3');
