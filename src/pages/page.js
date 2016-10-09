@@ -1,9 +1,8 @@
 var qs = require('qs');
 var xhr = require('xhr');
-var assign = require('object-assign');
 
 function getFullUrl(url, IDS, params) {
-    params = assign({}, params);  // copy
+    params = Object.assign({}, params);  // copy
     params.IDS = IDS;
     return window.location.origin + url + '?' + qs.stringify(params);
 }

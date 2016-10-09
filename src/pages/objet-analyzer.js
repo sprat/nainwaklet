@@ -1,4 +1,3 @@
-var assign = require('object-assign');
 var dom = require('../dom');
 var Mounter = require('../mounter');
 var jsAnalyzer = require('./js-analyzer');
@@ -61,12 +60,12 @@ function analyze(js, context) {
     });
 
     context.objets = context.objets || {};
-    assign(context.objets, lists);
+    Object.assign(context.objets, lists);
 
     // update the 'perso' bonus data according to the objects in 'inventaire'
     if (context.perso) {
         var bonuses = calcul.bonusObjets(context.objets.inventaire);
-        assign(context.perso, bonuses);
+        Object.assign(context.perso, bonuses);
     }
 
     return lists;

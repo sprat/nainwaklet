@@ -1,4 +1,3 @@
-var assign = require('object-assign');
 var addCSS = require('./add-css');
 var Mounter = require('./mounter');
 var Nain = require('./nain');
@@ -29,7 +28,7 @@ var defaultConfiguration = {
 
 /* Application class */
 function Application(configuration) {
-    var config = assign({}, defaultConfiguration, configuration);
+    var config = Object.assign({}, defaultConfiguration, configuration);
     var frames = window.frames;
     var infoFrame = frames.info;
     var container = frames.pub.document.body;

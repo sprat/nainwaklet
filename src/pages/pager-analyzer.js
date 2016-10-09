@@ -1,6 +1,4 @@
 var jsAnalyzer = require('./js-analyzer');
-var assign = require('object-assign');
-
 function int(v) {
     return parseInt(v, 10);
 }
@@ -18,7 +16,7 @@ function analyze(js, context) {
     };
 
     context.perso = context.perso || {};
-    assign(context.perso, pager);
+    Object.assign(context.perso, pager);
 
     return pager;
 }
