@@ -1,9 +1,9 @@
-var detectPage = require('./detect-page');
-var persoPage = require('./perso-page');
-var inventPage = require('./invent-page');
-var transfertPage = require('./transfert-page');
-var evenPage = require('./even-page');
-var attaquerPage = require('./attaquer-page');
+var detect = require('./detect');
+var even = require('./even');
+var perso = require('./perso');
+var invent = require('./invent');
+var transfert = require('./transfert');
+var attaquer = require('./attaquer');
 
 function Pages(pages) {
     function byUrl(url) {
@@ -26,12 +26,12 @@ function Pages(pages) {
 }
 
 var pages = Pages([
-    detectPage,
-    inventPage,
-    transfertPage,
-    persoPage,
-    evenPage,
-    attaquerPage
+    detect,
+    even,
+    perso,
+    invent,
+    transfert,
+    attaquer
 ]);
 
 module.exports = pages;

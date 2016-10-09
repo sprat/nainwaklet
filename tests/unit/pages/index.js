@@ -1,8 +1,8 @@
-require('./detect-page');
-require('./perso-page');
-require('./invent-page');
-require('./transfert-page');
-require('./even-page');
+require('./detect');
+require('./even');
+require('./perso');
+require('./invent');
+require('./transfert');
 
 var test = require('tape-catch');
 var pages = require('src/pages');

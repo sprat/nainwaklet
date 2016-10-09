@@ -1,14 +1,11 @@
 var Page = require('./page');
-var dom = require('../dom');
-var pagerAnalyzer = require('./pager-analyzer');
-var objetAnalyzer = require('./objet-analyzer');
+var analyzers = require('../analyzers');
+var objetEnhancement = require('./objet-enhancement');
 
 function analyze(doc, date, context) {
-    var js = dom.getInlineJavascript(doc);
-
     return {
-        objets: objetAnalyzer.analyze(js, context),
-        pager: pagerAnalyzer.analyze(js, context)
+        objets: analyzers.objets(doc, date, context),
+        pager: analyzers.pager(doc, date, context)
     };
 }
 
@@ -16,7 +13,7 @@ function enhance(doc, context) {
     var sol = context.objets.sol;
     var inventaire = context.objets.inventaire;
     var objets = sol.concat(inventaire);
-    objetAnalyzer.enhance(doc, objets, context);
+    objetEnhancement.enhance(doc, objets, context);
 }
 
 module.exports = Page('transfert', {

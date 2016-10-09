@@ -1,12 +1,7 @@
 var dom = require('../dom');
-var Mounter = require('../mounter');
-var jsAnalyzer = require('./js-analyzer');
+var code = require('./code');
 var calcul = require('../calcul');
-var TooltipButton = require('../tooltip-button');
-
-function int(v) {
-    return parseInt(v, 10);
-}
+var int = require('./int');
 
 var listNames = {
     bonnet: 'bonnet',  // objet sous le bonnet
@@ -16,10 +11,11 @@ var listNames = {
     fee: 'fee'  // quand on fait une recette ?
 };
 
-function analyze(js, context) {
+function analyze(doc, date, context) {
+    var js = dom.getInlineJavascript(doc);
     var regex = /mip\((.*)\);/ig;
     var keys = 'idtable,nomobjet,photoobjet,descriptionobjet,model,typeobjet,PAutiliser,portee,effet,recharg,PV,PVmax,PAreparer,dispo,PFobj,PPobj,PVobj,PIobj,collant,reparable,poussiere'.split(',');
-    var objects = jsAnalyzer.buildObjectsFromJSSequences(js, regex, keys);
+    var objects = code.buildObjectsFromJSSequences(js, regex, keys);
     var lists = {};
 
     function getList(object) {
@@ -71,36 +67,4 @@ function analyze(js, context) {
     return lists;
 }
 
-function ObjetInfo(objet, perso) {
-    var isArme = objet.type === 'arme';
-    var degats = (isArme && perso) ? calcul.degats(perso, objet) : undefined;
-
-    function render(h) {
-        if (degats) {
-            return h('div', 'Dégâts : entre ' + degats.minimum + ' et ' + degats.maximum);  // { class: styles.degats }
-        }
-    }
-
-    return {
-        render: render
-    };
-}
-
-function enhance(doc, objets, context) {
-    var mounter = Mounter();
-    var imageElements = dom.findAll('td.news-text img', doc);
-
-    // add an advisor box on each title
-    imageElements.forEach(function (image, index) {
-        var objet = objets[index];
-        var objetInfo = ObjetInfo(objet, context.perso);
-        var tooltipButton = TooltipButton('?', objetInfo);
-        mounter.prepend(image.parent(), tooltipButton);
-    });
-}
-
-module.exports = {
-    analyze: analyze,
-    enhance: enhance,
-    ObjetInfo: ObjetInfo
-};
+module.exports = analyze;

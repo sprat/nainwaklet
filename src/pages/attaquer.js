@@ -2,7 +2,7 @@ var Page = require('./page');
 var dom = require('../dom');
 var Mounter = require('../mounter');
 var TooltipButton = require('../tooltip-button');
-var objetAnalyzer = require('./objet-analyzer');
+var objetEnhancement = require('./objet-enhancement');
 
 function enhance(doc, context) {
     var mounter = Mounter();
@@ -30,7 +30,7 @@ function enhance(doc, context) {
         if (match) {
             objet = objetsById[match[1]];
             if (objet) {
-                objetInfo = objetAnalyzer.ObjetInfo(objet, perso);
+                objetInfo = objetEnhancement.ObjetInfo(objet, perso);
                 tooltipButton = TooltipButton('?', objetInfo);
                 mounter.prepend(link.parent(), tooltipButton);
             }

@@ -1,12 +1,12 @@
-var jsAnalyzer = require('./js-analyzer');
-function int(v) {
-    return parseInt(v, 10);
-}
+var dom = require('../dom');
+var code = require('./code');
+var int = require('./int');
 
-function analyze(js, context) {
+function analyze(doc, date, context) {
+    var js = dom.getInlineJavascript(doc);
     var regex = /miseajourpager\((.*)\);/ig;
     var keys = 'pa,pv,pvbase,classeeven,evnonlu,classechat,mesgnonlu,posx,posy,IDS,newmonochat'.split(',');
-    var object = jsAnalyzer.buildObjectsFromJSSequences(js, regex, keys)[0];
+    var object = code.buildObjectsFromJSSequences(js, regex, keys)[0];
     var pager = {
         PA: int(object.pa),
         vie: int(object.pv),
@@ -21,6 +21,4 @@ function analyze(js, context) {
     return pager;
 }
 
-module.exports = {
-    analyze: analyze
-};
+module.exports = analyze;

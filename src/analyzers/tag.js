@@ -47,6 +47,4 @@ function analyze(tagHtml) {
     return result;
 }
 
-module.exports = {
-    analyze: analyze
-};
+module.exports = analyze;

@@ -1,22 +1,18 @@
-var Page = require('./page');
 var dom = require('../dom');
-var jsAnalyzer = require('./js-analyzer');
-var tagAnalyzer = require('./tag-analyzer');
+var code = require('./code');
+var analyzeTag = require('./tag');
 var classesLabels = require('./classes-labels');
-
-function int(v) {
-    return parseInt(v, 10);
-}
+var int = require('./int');
 
 function getClasses(js) {
     var regex = /\$\('(\w+)'\).addClassName\(cotes\[(\d)+\]\);/g;
-    return jsAnalyzer.buildObjectFromJS(js, regex);
+    return code.buildObjectFromJS(js, regex);
 }
 
 function getCharacteristics(js) {
     // find all lines looking like: $('sPVBase').innerHTML = (109+39);
     var regex = /\$\('(\w+)'\)\.innerHTML = \((-?\d+)[\+\/](-?\d+)\)/g;
-    return jsAnalyzer.buildObjectFromJS(js, regex);
+    return code.buildObjectFromJS(js, regex);
 }
 
 function getBlocsDroits(doc) {
@@ -42,7 +38,7 @@ function analyze(doc, date, context) {
     var blocsDroits = getBlocsDroits(doc);
     var cibleElement = dom.find('.bloc-perso .cible', doc);
 
-    var perso = context.perso = {
+    context.perso = {
         nom: dom.find('input[name="nvNain"]', doc).attr('value'),
         image: dom.find('.news-titre img', doc).attr('src'),
         rang: dom.find('#sRang', doc).text(),
@@ -50,7 +46,7 @@ function analyze(doc, date, context) {
         barbe: characts.sBarbe[0] / characts.sBarbe[1],
         description: dom.find('input[name="description"]', doc).attr('value'),
         arme: dom.find('input[name="nomArme"]', doc).attr('value'),
-        tag: tagAnalyzer.analyze(dom.find('#s_Tag', doc).html()),
+        tag: analyzeTag(dom.find('#s_Tag', doc).html()),
         vie: characts.sPV[0] + characts.sPV[1],
         vieBase: characts.sPVBase[0],
         vieBonus: characts.sPVBase[1],
@@ -92,7 +88,7 @@ function analyze(doc, date, context) {
     };
 
     if (cibleElement) {
-        perso.cible = {
+        context.perso.cible = {
             nom: cibleElement.firstChild().text(),
             classe: classesLabels[classes['sRangCible']],
             rang: cibleElement.find('#sRangCible').text(),
@@ -100,11 +96,7 @@ function analyze(doc, date, context) {
         };
     }
 
-    return {
-        perso: perso
-    };
+    return context.perso;
 }
 
-module.exports = Page('perso', {
-    analyze: analyze
-});
+module.exports = analyze;
