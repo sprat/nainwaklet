@@ -1,8 +1,9 @@
+var assign = require('core-js/library/fn/object/assign');
 var qs = require('qs');
 var xhr = require('xhr');
 
 function getFullUrl(url, IDS, params) {
-    params = Object.assign({}, params);  // copy
+    params = assign({}, params);  // copy
     params.IDS = IDS;
     return window.location.origin + url + '?' + qs.stringify(params);
 }

@@ -1,4 +1,4 @@
-require('./polyfills');
+var array = require('core-js/library/fn/array');
 var Application = require('./application');
 var Bookmarklet = require('./bookmarklet');
 var Mounter = require('./mounter');
@@ -22,7 +22,7 @@ function run(config) {
 
 function addComponent(createComponent) {
     return function (selector/*, ...args*/) {
-        var args = Array.from(arguments).slice(1);
+        var args = array.from(arguments).slice(1);
         var node = document.querySelector(selector);
         mounter.append(node, createComponent.apply(null, args));
     };

@@ -1,4 +1,7 @@
 /* DOM helpers */
+var array = require('core-js/library/fn/array');
+
+// TODO: implement these functions in Element and extend the module with Element(document) functions
 function find(selector, context) {
     context = context || document;
     var node = context.querySelector(selector);
@@ -10,11 +13,11 @@ function find(selector, context) {
 function findAll(selector, context) {
     context = context || document;
     var nodes = context.querySelectorAll(selector);
-    return Array.from(nodes, Element);
+    return array.from(nodes, Element);
 }
 
 function getInlineJavascript(doc) {
-    var sources = Array.from(doc.scripts, function (script) {
+    var sources = array.from(doc.scripts, function (script) {
         return script.src ? '' : script.innerHTML;
     });
     return sources.join('\n');
@@ -42,7 +45,7 @@ function Element(node) {
     }
 
     function children() {
-        return Array.from(node.childNodes, Element);
+        return array.from(node.childNodes, Element);
     }
 
     function firstChild() {
@@ -121,7 +124,7 @@ function MessageDispatcher(parentWindow) {
     }
 
     function remove(source, callback) {
-        var index = callbacks.findIndex(function (element) {
+        var index = array.findIndex(callbacks, function (element) {
             return (element.source === source) && (element.callback === callback);
         });
 

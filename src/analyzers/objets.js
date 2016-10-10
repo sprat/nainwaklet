@@ -1,3 +1,4 @@
+var assign = require('core-js/library/fn/object/assign');
 var dom = require('../dom');
 var code = require('./code');
 var calcul = require('../calcul');
@@ -56,12 +57,12 @@ function analyze(doc, date, context) {
     });
 
     context.objets = context.objets || {};
-    Object.assign(context.objets, lists);
+    assign(context.objets, lists);
 
     // update the 'perso' bonus data according to the objects in 'inventaire'
     if (context.perso) {
         var bonuses = calcul.bonusObjets(context.objets.inventaire);
-        Object.assign(context.perso, bonuses);
+        assign(context.perso, bonuses);
     }
 
     return lists;

@@ -1,3 +1,4 @@
+var array = require('core-js/library/fn/array');
 var decodeEntities = require('htmldec');
 var zipObject = require('zip-object');
 
@@ -26,7 +27,7 @@ function buildObjectFromJS(js, regex) {
     var result = {};
 
     js.replace(regex, function (match, name) {
-        var values = Array.from(arguments).slice(2, arguments.length - 2);
+        var values = array.from(arguments).slice(2, arguments.length - 2);
         values = values.map(evaluateJS);
         result[name] = (values.length > 1) ? values : values[0];
     });

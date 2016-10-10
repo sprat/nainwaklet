@@ -1,4 +1,5 @@
-require('./polyfills');
+var assign = require('core-js/library/fn/object/assign');
+var array = require('core-js/library/fn/array');
 var addCSS = require('./add-css');
 var Mounter = require('./mounter');
 var analyzeMenu = require('./analyzers/menu');
@@ -29,7 +30,7 @@ var defaultConfiguration = {
 
 /* Application class */
 function Application(configuration) {
-    var config = Object.assign({}, defaultConfiguration, configuration);
+    var config = assign({}, defaultConfiguration, configuration);
     var frames = window.frames;
     var infoFrame = frames.info;
     var menuDocument = frames.menu.document;
@@ -73,7 +74,7 @@ function Application(configuration) {
     var dashboard = Dashboard(config.name, config.loginUrl, mounter.refresh);
 
     // backup the content of the container and clear it before installing our UI
-    var containerChildren = Array.from(container.childNodes);
+    var containerChildren = array.from(container.childNodes);
     container.innerHTML = '';
 
     // install our UI

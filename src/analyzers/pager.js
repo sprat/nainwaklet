@@ -1,3 +1,4 @@
+var assign = require('core-js/library/fn/object/assign');
 var dom = require('../dom');
 var code = require('./code');
 var int = require('./int');
@@ -16,7 +17,7 @@ function analyze(doc, date, context) {
     };
 
     context.perso = context.perso || {};
-    Object.assign(context.perso, pager);
+    assign(context.perso, pager);
 
     return pager;
 }
