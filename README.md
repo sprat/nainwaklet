@@ -8,11 +8,18 @@ Cet outil peut également envoyer des mises à jour des informations du nain
 courant vers le serveur de la guilde.
 
 
-## TODO
+## A faire
 
-- Remplacer zip-object, array-find, xtend et certains builtins par lodash
+- Tester le module dom !
 - Fournir une interface de login (via popup iframe) et un mécanisme d'authentification
 - Retravailler la limitation des requêtes vers le serveur de guilde en utilisant
   les mécanismes disponibles dans le standard HTTP (code HTTP 429 & Retry-After)
 - Ajouter une fonction de recherche textuelle dans la page des formules
 - Ajouter un détecteur de formule dans les pages "detect" et "inventaire"
+
+
+## Pense-bête
+
+- On ne peut pas utiliser de polyfills car il faudrait les charger dans chacune
+  des frames de Nainwak ! Comme ce n'est pas très pratique, il vaut mieux
+  utiliser des ponyfills.
