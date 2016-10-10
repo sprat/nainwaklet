@@ -1,6 +1,6 @@
 var addCSS = require('./add-css');
 var Mounter = require('./mounter');
-var Nain = require('./nain');
+var Joueur = require('./joueur');
 var Spy = require('./spy');
 var Updater = require('./updater');
 //var Channel = require('./channel');
@@ -18,7 +18,7 @@ var defaultConfiguration = {
     loginUrl: undefined,
 
     /* URL of the update page: the Nany application will post updates to this URL
-     * when the user navigate between Nainwak pages */
+     * when the user navigate between joueurwak pages */
     updateUrl: undefined
 
     /* PubNub account's publish & subscribe keys */
@@ -32,9 +32,9 @@ function Application(configuration) {
     var frames = window.frames;
     var infoFrame = frames.info;
     var container = frames.pub.document.body;
-    var nain = Nain.fromDocument(frames.menu.document);
+    var joueur = Joueur.fromMenu(frames.menu.document);
     var updatePages = ['detect', 'invent', 'perso', 'even'];
-    var context = {};  // game information fetched by the current player
+    var context = {};  // game information fetched by the current joueur
 
     // create the spy if the info frame is available
     var spy;
@@ -138,7 +138,7 @@ function Application(configuration) {
         var persoPage = pages.byType('perso');
 
         log('Loading perso page');
-        persoPage.fetch(nain.ids, function (response) {
+        persoPage.fetch(joueur.ids, function (response) {
             if (response.statusCode === 200) {
                 log('OK');
                 processPageDocument(persoPage.url, response.body);

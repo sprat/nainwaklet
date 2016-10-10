@@ -1,7 +1,7 @@
 var qs = require('qs');
 var dom = require('./dom');
 
-function fromDocument(doc) {
+function fromMenu(doc) {
     var search = doc.location && doc.location.search;
     var ids = search ? qs.parse(search.substring(1)).IDS : undefined;
     var tdElements = dom.findAll('.news-titre td', doc);
@@ -16,5 +16,5 @@ function fromDocument(doc) {
 }
 
 module.exports = {
-    fromDocument: fromDocument
+    fromMenu: fromMenu
 };
