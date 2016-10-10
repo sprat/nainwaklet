@@ -11,8 +11,8 @@ function analyze(doc, date, context) {
 }
 
 function enhance(doc, context) {
-    var sol = context.objets.sol;
-    var inventaire = context.objets.inventaire;
+    var sol = context.objets.sol || [];
+    var inventaire = context.objets.inventaire || [];
     var objets = sol.concat(inventaire);
     objetEnhancement.enhance(doc, objets, context);
 }

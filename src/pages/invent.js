@@ -11,8 +11,8 @@ function analyze(doc, date, context) {
 }
 
 function enhance(doc, context) {
-    var bonnet = context.objets.bonnet;
-    var inventaire = context.objets.inventaire;
+    var bonnet = context.objets.bonnet || [];
+    var inventaire = context.objets.inventaire || [];
     var objets = bonnet.concat(inventaire);
     objetEnhancement.enhance(doc, objets, context);
 }
