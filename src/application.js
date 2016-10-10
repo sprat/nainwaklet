@@ -2,7 +2,7 @@ var assign = require('core-js/library/fn/object/assign');
 var array = require('core-js/library/fn/array');
 var addCSS = require('./add-css');
 var Mounter = require('./mounter');
-var analyzeMenu = require('./analyzers/menu');
+var analyzeJoueur = require('./analyzers/joueur');
 var Spy = require('./spy');
 var Updater = require('./updater');
 //var Channel = require('./channel');
@@ -39,7 +39,7 @@ function Application(configuration) {
     var context = {};  // game information fetched by the current joueur
 
     // analyze the menu in order the get the joueur information
-    analyzeMenu(menuDocument, new Date(), context);
+    analyzeJoueur(menuDocument, new Date(), context);
 
     // create the spy if the info frame is available
     var spy;

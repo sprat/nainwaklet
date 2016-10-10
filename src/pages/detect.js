@@ -1,11 +1,12 @@
 /* detect page */
 var Page = require('./page');
-var analyzers = require('../analyzers');
+var analyzeDetection = require('../analyzers/detection');
+var analyzePager = require('../analyzers/pager');
 
 function analyze(doc, date, context) {
     return {
-        detection: analyzers.detection(doc, date, context),
-        pager: analyzers.pager(doc, date, context)
+        detection: analyzeDetection(doc, date, context),
+        pager: analyzePager(doc, date, context)
     };
 }
 

@@ -1,11 +1,12 @@
 var Page = require('./page');
-var analyzers = require('../analyzers');
+var analyzeObjets = require('../analyzers/objets');
+var analyzePager = require('../analyzers/pager');
 var objetEnhancement = require('./objet-enhancement');
 
 function analyze(doc, date, context) {
     return {
-        objets: analyzers.objets(doc, date, context),
-        pager: analyzers.pager(doc, date, context)
+        objets: analyzeObjets(doc, date, context),
+        pager: analyzePager(doc, date, context)
     };
 }
 

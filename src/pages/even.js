@@ -1,10 +1,11 @@
 var Page = require('./page');
-var analyzers = require('../analyzers');
+var analyzeEvenements = require('../analyzers/evenements');
+var analyzePager = require('../analyzers/pager');
 
 function analyze(doc, date, context) {
     return {
-        evenements: analyzers.evenements(doc, date, context),
-        pager: analyzers.pager(doc, date, context)
+        evenements: analyzeEvenements(doc, date, context),
+        pager: analyzePager(doc, date, context)
     };
 }
 

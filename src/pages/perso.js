@@ -1,9 +1,9 @@
 var Page = require('./page');
-var analyzers = require('../analyzers');
+var analyzePerso = require('../analyzers/perso');
 
 function analyze(doc, date, context) {
     return {
-        perso: analyzers.perso(doc, date, context)
+        perso: analyzePerso(doc, date, context)
     };
 }
 
