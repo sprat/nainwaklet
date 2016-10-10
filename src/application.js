@@ -1,6 +1,7 @@
+require('./polyfills');
 var addCSS = require('./add-css');
 var Mounter = require('./mounter');
-var Joueur = require('./joueur');
+var analyzeMenu = require('./analyzers/menu');
 var Spy = require('./spy');
 var Updater = require('./updater');
 //var Channel = require('./channel');
@@ -31,10 +32,13 @@ function Application(configuration) {
     var config = Object.assign({}, defaultConfiguration, configuration);
     var frames = window.frames;
     var infoFrame = frames.info;
+    var menuDocument = frames.menu.document;
     var container = frames.pub.document.body;
-    var joueur = Joueur.fromMenu(frames.menu.document);
     var updatePages = ['detect', 'invent', 'perso', 'even'];
     var context = {};  // game information fetched by the current joueur
+
+    // analyze the menu in order the get the joueur information
+    analyzeMenu(menuDocument, new Date(), context);
 
     // create the spy if the info frame is available
     var spy;
@@ -136,6 +140,7 @@ function Application(configuration) {
 
     function loadPersoPage() {
         var persoPage = pages.byType('perso');
+        var joueur = context.joueur;
 
         log('Loading perso page');
         persoPage.fetch(joueur.ids, function (response) {
