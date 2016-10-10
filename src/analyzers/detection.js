@@ -4,7 +4,7 @@ var analyzeTag = require('./tag');
 var classesLabels = require('./classes-labels');
 var int = require('./int');
 
-function getLocalisation(doc) {
+function analyzeLocalisation(doc) {
     // example:
     // <span class="c1">Position (13,5) sur "Ronain Graou" |b95eb2f716c500db6|</span>
     var text = dom.find('.c1', doc).text();
@@ -19,7 +19,7 @@ function getLocalisation(doc) {
     }
 }
 
-function getNains(js) {
+function analyzeNains(js) {
     var regex = /tabavat\[\d+\]\s=\s\[(.*)\];/ig;
     var keys = 'id,photo,nom,tag,barbe,classe,cote,distance,x,y,description,attaquer,gifler,estCible'.split(',');
     var objects = code.buildObjectsFromJSSequences(js, regex, keys);
@@ -53,7 +53,7 @@ function getNains(js) {
     });
 }
 
-function getObjets(js) {
+function analyzeObjets(js) {
     var regex = /tabobjet\[\d+\]\s=\s\[(.*)\];/ig;
     var keys = 'id,photo,nom,distance,x,y,categorie,poussiere'.split(',');
     var objects = code.buildObjectsFromJSSequences(js, regex, keys);
@@ -72,9 +72,9 @@ function getObjets(js) {
 
 function analyze(doc, date, context) {
     var js = dom.getInlineJavascript(doc);
-    var localisation = getLocalisation(doc);
-    var nains = getNains(js);
-    var objets = getObjets(js);
+    var localisation = analyzeLocalisation(doc);
+    var nains = analyzeNains(js);
+    var objets = analyzeObjets(js);
 
     context.detection = {
         monde: localisation.monde,
