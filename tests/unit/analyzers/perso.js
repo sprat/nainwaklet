@@ -1,12 +1,12 @@
 var test = require('tape-catch');
-var parseHTMLDocument = require('../parse-html-document');
 var analyzePerso = require('src/analyzers/perso');
-var html = require('../fixtures/perso.html');
-var doc = parseHTMLDocument(html);
+var parseHTMLDocument = require('../parse-html-document');
+var persoHTML = require('../fixtures/perso.html');
+var persoDocument = parseHTMLDocument(persoHTML);
 var now = new Date(1457780950000);
 
 test('analyzePerso', function (assert) {
-    var perso = analyzePerso(doc, now);
+    var perso = analyzePerso(persoDocument, now);
 
     assert.deepEqual(perso, {
         nom: 'Palme',

@@ -1,7 +1,5 @@
-var assign = require('core-js/library/fn/object/assign');
 var dom = require('../dom');
 var code = require('./code');
-var calcul = require('../calcul');
 var int = require('./int');
 
 var listNames = {
@@ -12,7 +10,7 @@ var listNames = {
     fee: 'fee'  // quand on fait une recette ?
 };
 
-function analyze(doc, date, context) {
+function analyze(doc/*, date*/) {
     var js = dom.getInlineJavascript(doc);
     var regex = /mip\((.*)\);/ig;
     var keys = 'idtable,nomobjet,photoobjet,descriptionobjet,model,typeobjet,PAutiliser,portee,effet,recharg,PV,PVmax,PAreparer,dispo,PFobj,PPobj,PVobj,PIobj,collant,reparable,poussiere'.split(',');
@@ -55,15 +53,6 @@ function analyze(doc, date, context) {
             poussiere: int(object.poussiere)
         });
     });
-
-    context.objets = context.objets || {};
-    assign(context.objets, lists);
-
-    // update the 'perso' bonus data according to the objects in 'inventaire'
-    if (context.perso) {
-        var bonuses = calcul.bonusObjets(context.objets.inventaire);
-        assign(context.perso, bonuses);
-    }
 
     return lists;
 }

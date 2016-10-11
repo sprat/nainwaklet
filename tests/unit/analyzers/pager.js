@@ -1,12 +1,12 @@
 var test = require('tape-catch');
-var parseHTMLDocument = require('../parse-html-document');
 var analyzePager = require('src/analyzers/pager');
-var html = require('../fixtures/invent.html');
-var doc = parseHTMLDocument(html);
+var parseHTMLDocument = require('../parse-html-document');
+var inventHTML = require('../fixtures/invent.html');
+var inventDocument = parseHTMLDocument(inventHTML);
 var now = new Date(1457780950000);
 
 test('analyzePager', function (assert) {
-    var pager = analyzePager(doc, now);
+    var pager = analyzePager(inventDocument, now);
 
     assert.deepEqual(pager, {
         PA: 2,
