@@ -5,7 +5,7 @@ var html = require('../fixtures/detect.html');
 var doc = parseHTMLDocument(html);
 var now = new Date(1457780950000);
 
-test('detectPage.analyze: localisation', function (assert) {
+test('analyzeDetection: localisation', function (assert) {
     var detection = analyzeDetection(doc, now);
 
     assert.deepEqual(detection.position, [13, 5], 'Position');
@@ -14,7 +14,7 @@ test('detectPage.analyze: localisation', function (assert) {
     assert.end();
 });
 
-test('detectPage.analyze: nains', function (assert) {
+test('analyzeDetection: nains', function (assert) {
     var detection = analyzeDetection(doc, now);
     var nains = detection.nains;
 
@@ -80,7 +80,7 @@ test('detectPage.analyze: nains', function (assert) {
     assert.end();
 });
 
-test('detectPage.analyze: objets', function (assert) {
+test('analyzeDetection: objets', function (assert) {
     var detection = analyzeDetection(doc, now);
     var objets = detection.objets;
 

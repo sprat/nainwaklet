@@ -5,7 +5,7 @@ var html = require('../fixtures/menu.html');
 var doc = parseHTMLDocument(html);
 var now = new Date(1457780950000);
 
-test('analyzeMenu', function (assert) {
+test('analyzeJoueur', function (assert) {
     var joueur = analyzeJoueur(doc, now);
 
     assert.strictEqual(joueur.nom, 'Savate');
