@@ -41,9 +41,3 @@ test('evenPage.analyze: evenements', function (assert) {
 
     assert.end();
 });
-
-test('evenPage.analyze: pager', function (assert) {
-    var info = evenPage.analyze(doc, now, {});
-    assert.notStrictEqual(info.pager, undefined);
-    assert.end();
-});

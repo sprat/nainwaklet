@@ -1,4 +1,3 @@
-require('./detect');
 require('./even');
 require('./perso');
 require('./invent');

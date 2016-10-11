@@ -70,20 +70,18 @@ function analyzeObjets(js) {
     });
 }
 
-function analyze(doc, date, context) {
+function analyze(doc/*, date*/) {
     var js = dom.getInlineJavascript(doc);
     var localisation = analyzeLocalisation(doc);
     var nains = analyzeNains(js);
     var objets = analyzeObjets(js);
 
-    context.detection = {
+    return {
         monde: localisation.monde,
         position: localisation.position,
         nains: nains,
         objets: objets
     };
-
-    return context.detection;
 }
 
 module.exports = analyze;
