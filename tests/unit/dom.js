@@ -56,6 +56,20 @@ test('dom.findAll', function (assert) {
     assert.end();
 });
 
+test('dom.getInlineJavascript', function (assert) {
+    var code = "function myHelloWorld() { console.log('Hello world!'); }";
+    var script = document.createElement('script');
+    script.textContent = code;
+    document.body.appendChild(script);
+
+    var inlineJS = dom.getInlineJavascript();
+    assert.notEqual(inlineJS.indexOf(code), -1, 'inline javascript');
+
+    document.body.removeChild(script);
+
+    assert.end();
+});
+
 test('dom.Element.find', function (assert) {
     var nodes = createDOMNodes();
     var body = dom.Element(document.body);
@@ -171,10 +185,38 @@ test('dom.Element.attr', function (assert) {
     assert.end();
 });
 
-// TODO: add more tests
-/*
-getInlineJavascript?
-dom.MessageDispatcher?
-dom.Element.append
-dom.Element.prepend
-*/
+test('dom.Element.append', function (assert) {
+    var nodes = createDOMNodes();
+    var parent = dom.Element(nodes.parent);
+    var div = document.createElement('div');
+
+    parent.append(div);
+
+    var children = parent.children();
+    assert.strictEqual(children.length, 3, 'children length');
+    assert.strictEqual(children[2].node, div, 'insert at the end');
+
+    // cleanup
+    nodes.remove();
+
+    assert.end();
+});
+
+test('dom.Element.prepend', function (assert) {
+    var nodes = createDOMNodes();
+    var parent = dom.Element(nodes.parent);
+    var div = document.createElement('div');
+
+    parent.prepend(div);
+
+    var children = parent.children();
+    assert.strictEqual(children.length, 3, 'children length');
+    assert.strictEqual(children[0].node, div, 'insert at the beginning');
+
+    // cleanup
+    nodes.remove();
+
+    assert.end();
+});
+
+// TODO: add tests of dom.MessageDispatcher?

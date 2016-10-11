@@ -17,8 +17,9 @@ function findAll(selector, context) {
 }
 
 function getInlineJavascript(doc) {
+    doc = doc || document;
     var sources = array.from(doc.scripts, function (script) {
-        return script.src ? '' : script.innerHTML;
+        return script.src ? '' : script.textContent;
     });
     return sources.join('\n');
 }
