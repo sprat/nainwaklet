@@ -1,5 +1,4 @@
 require('./even');
-require('./perso');
 require('./invent');
 require('./transfert');
 

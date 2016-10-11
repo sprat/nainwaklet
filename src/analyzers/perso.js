@@ -31,14 +31,14 @@ function getBlocsDroits(doc) {
     return data;
 }
 
-function analyze(doc, date, context) {
+function analyze(doc/*, date*/) {
     var js = dom.getInlineJavascript(doc);
     var classes = getClasses(js);
     var characts = getCharacteristics(js);
     var blocsDroits = getBlocsDroits(doc);
     var cibleElement = dom.find('.bloc-perso .cible', doc);
 
-    context.perso = {
+    var perso = {
         nom: dom.find('input[name="nvNain"]', doc).attr('value'),
         image: dom.find('.news-titre img', doc).attr('src'),
         rang: dom.find('#sRang', doc).text(),
@@ -88,7 +88,7 @@ function analyze(doc, date, context) {
     };
 
     if (cibleElement) {
-        context.perso.cible = {
+        perso.cible = {
             nom: cibleElement.firstChild().text(),
             classe: classesLabels[classes['sRangCible']],
             rang: cibleElement.find('#sRangCible').text(),
@@ -96,7 +96,7 @@ function analyze(doc, date, context) {
         };
     }
 
-    return context.perso;
+    return perso;
 }
 
 module.exports = analyze;

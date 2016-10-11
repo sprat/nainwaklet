@@ -1,14 +1,12 @@
 var test = require('tape-catch');
 var parseHTMLDocument = require('../parse-html-document');
-var pages = require('src/pages');
-var persoPage = pages.byType('perso');
+var analyzePerso = require('src/analyzers/perso');
 var html = require('../fixtures/perso.html');
 var doc = parseHTMLDocument(html);
 var now = new Date(1457780950000);
 
-test('persoPage.analyze', function (assert) {
-    var info = persoPage.analyze(doc, now, {});
-    var perso = info.perso;
+test('analyzePerso', function (assert) {
+    var perso = analyzePerso(doc, now);
 
     assert.deepEqual(perso, {
         nom: 'Palme',
@@ -60,7 +58,7 @@ test('persoPage.analyze', function (assert) {
             nombre: 2,
             barbe: 54.80
         }
-    });
+    }, 'perso data');
 
     assert.end();
 });
