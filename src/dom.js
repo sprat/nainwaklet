@@ -1,19 +1,14 @@
 /* DOM helpers */
 var array = require('core-js/library/fn/array');
 
-// TODO: implement these functions in Element and extend the module with Element(document) functions
 function find(selector, context) {
     context = context || document;
-    var node = context.querySelector(selector);
-    if (node) {
-        return Element(node);
-    }
+    return Element(context).find(selector);
 }
 
 function findAll(selector, context) {
     context = context || document;
-    var nodes = context.querySelectorAll(selector);
-    return array.from(nodes, Element);
+    return Element(context).findAll(selector);
 }
 
 function getInlineJavascript(doc) {
@@ -24,21 +19,21 @@ function getInlineJavascript(doc) {
     return sources.join('\n');
 }
 
-// aliases for Element definition
-var _find = find;
-var _findAll = findAll;
-
 function Element(node) {
     if (node.node) {  // unwrap an element
         node = node.node;
     }
 
     function find(selector) {
-        return _find(selector, node);
+        var found = node.querySelector(selector);
+        if (found) {
+            return Element(found);
+        }
     }
 
     function findAll(selector) {
-        return _findAll(selector, node);
+        var nodes = node.querySelectorAll(selector);
+        return array.from(nodes, Element);
     }
 
     function parent() {
