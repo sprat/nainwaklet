@@ -39,7 +39,7 @@ function Application(configuration) {
     var context = {};  // game information fetched by the current joueur
 
     // analyze the menu in order the get the joueur information
-    analyzeJoueur(menuDocument, new Date(), context);
+    context.joueur = analyzeJoueur(menuDocument, new Date());
 
     // create the spy if the info frame is available
     var spy;
