@@ -5,20 +5,17 @@ var html = require('../fixtures/detect.html');
 var doc = parseHTMLDocument(html);
 var now = new Date(1457780950000);
 
-test('analyzeDetection: localisation', function (assert) {
+test('analyzeDetection', function (assert) {
     var detection = analyzeDetection(doc, now);
 
-    assert.deepEqual(detection.position, [13, 5], 'Position');
-    assert.strictEqual(detection.monde, 'Monde des sadiques', 'Monde');
+    // localisation
+    assert.deepEqual(detection.position, [13, 5], 'position');
+    assert.strictEqual(detection.monde, 'Monde des sadiques', 'monde');
 
-    assert.end();
-});
-
-test('analyzeDetection: nains', function (assert) {
-    var detection = analyzeDetection(doc, now);
+    // nains
     var nains = detection.nains;
 
-    assert.strictEqual(nains.length, 3, 'Nombre de nains');
+    assert.strictEqual(nains.length, 3, 'nombre de nains');
 
     // ["33966", "avatar_guilde/41ddb8ad2c2be408e27352accf1cc0b6559466bb.png", "Le PheniX", '[Gnouille] [<span style="color:#91005D;">#!</span>]', "13799", "2", "Diablotin(e)", "0", "13", "5", "&quot;Le PheniX est un oiseau qui symbolise l&#039;immortalité et la résurrection.&quot; A quoi bon me tuer ?!?", "o", "o", "0"];
     assert.deepEqual(nains[0], {
@@ -41,7 +38,7 @@ test('analyzeDetection: nains', function (assert) {
         attaquable: true,
         autreAction: 'gifler',
         estCible: false
-    }, 'Nain 1');
+    }, 'nain 1');
 
     // ["33924", "avatar/perso/dab064da974199a53f0e22527f901d523e8869b3.png", "Nainkomp'", '[Perso]', "10314", "2", "Cancre (nain-culte)", "1", "14", "5", "Description", "o", "", "1"];
     assert.deepEqual(nains[1], {
@@ -59,7 +56,7 @@ test('analyzeDetection: nains', function (assert) {
         attaquable: true,
         autreAction: undefined,
         estCible: true
-    }, 'Nain 2');
+    }, 'nain 2');
 
     // ["71985", "avatar/choix/TOsmuf4.gif", "Bimme65", '', "0", "3", "Rampant Nain-déci", "2", "13", "6", "Bimme65", "", "", "0"];
     assert.deepEqual(nains[2], {
@@ -75,16 +72,12 @@ test('analyzeDetection: nains', function (assert) {
         attaquable: false,
         autreAction: undefined,
         estCible: false
-    }, 'Nain 3');
+    }, 'nain 3');
 
-    assert.end();
-});
-
-test('analyzeDetection: objets', function (assert) {
-    var detection = analyzeDetection(doc, now);
+    // objets
     var objets = detection.objets;
 
-    assert.strictEqual(objets.length, 3, "Nombre d'objets");
+    assert.strictEqual(objets.length, 3, "nombre d'objets");
 
     // [3613899, "objets/jouetkinder2_2.gif", "Surprise de Kine d&#039;Heure", 1, 13, 6, "INUTILE", 1271419];
     assert.deepEqual(objets[0], {
@@ -94,7 +87,7 @@ test('analyzeDetection: objets', function (assert) {
         type: 'inutile',
         position: [13, 6],
         poussiere: 1271419
-    }, 'Objet 1');
+    }, 'objet 1');
 
     //tabobjet[2] = [3613897, "objets/banane_sauteuse.gif", "Banane sauteuse", 1, 13, 6, "VEHICULE", 1271419];
     assert.deepEqual(objets[1], {
@@ -104,7 +97,7 @@ test('analyzeDetection: objets', function (assert) {
         type: 'vehicule',
         position: [13, 6],
         poussiere: 1271419
-    }, 'Objet 2');
+    }, 'objet 2');
 
     //tabobjet[3] = [3613896, "objets/naindiana.gif", "Panoplie de Naindiana Jones", 2, 13, 7, "RUNE", 1271419];
     assert.deepEqual(objets[2], {
@@ -114,7 +107,7 @@ test('analyzeDetection: objets', function (assert) {
         type: 'rune',
         position: [13, 7],
         poussiere: 1271419
-    }, 'Objet 3');
+    }, 'objet 3');
 
     assert.end();
 });

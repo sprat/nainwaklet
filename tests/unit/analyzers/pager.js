@@ -15,7 +15,7 @@ test('analyzePager', function (assert) {
         position: [14, 7],
         messagesNonLus: 0,
         nainxpressNonLu: false
-    });
+    }, 'Pager info');
 
     assert.end();
 });

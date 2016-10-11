@@ -23,12 +23,12 @@ test('calcul.degats', function (assert) {
     assert.deepEqual(calcul.degats(nain, armeSniper), {
         minimum: 72,
         maximum: 80
-    }, 'Dégâts sniper');
+    }, 'dégâts sniper');
 
     assert.deepEqual(calcul.degats(nain, armeBourrin), {
         minimum: 18,
         maximum: 20
-    }, 'Dégâts bourrin');
+    }, 'dégâts bourrin');
 
     assert.end();
 });
@@ -83,21 +83,21 @@ test('calcul.bonusObjets', function (assert) {
         precisionBonus: 0,
         vieBonus: 0,
         intelligenceBonus: 0
-    }, 'empty list');
+    }, 'aucun objet');
 
     assert.deepEqual(calcul.bonusObjets([visee]), {
         forceBonus: -6,
         precisionBonus: 15,
         vieBonus: 0,
         intelligenceBonus: 0
-    }, '1 object');
+    }, '1 objet');
 
     assert.deepEqual(calcul.bonusObjets([visee, guitare]), {
         forceBonus: -6,
         precisionBonus: 24,
         vieBonus: 5,
         intelligenceBonus: -10
-    }, '2 objects');
+    }, '2 objets');
 
     assert.end();
 });
