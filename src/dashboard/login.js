@@ -1,19 +1,16 @@
+var Button = require('../widgets/button');
 var Window = require('../widgets/window');
 
 function Login(loginUrl) {
+    var loginButton = Button('Connexion');
     var loginWindow = Window();
 
-    function onclick() {
+    loginButton.clicked.add(function loginButtonClicked() {
         loginWindow.open(loginUrl);
-        return false;
-    }
-
-    function render(h) {
-        return h('button', { onclick: onclick }, 'Connexion');
-    }
+    });
 
     return {
-        render: render
+        render: loginButton.render
     };
 }
 

@@ -1,4 +1,5 @@
 var maquette = require('maquette');
+var classNames = require('classnames');
 var dom = require('./dom');
 var styles = require('./base.css');
 
@@ -8,8 +9,7 @@ function addBaseStyle(vnode) {
     }
 
     var properties = vnode.properties = vnode.properties || {};
-    var class_ = properties.class || '';
-    properties.class = class_ + ' ' + styles.nany;
+    properties.class = classNames(properties.class, styles.nany);
     return vnode;
 }
 

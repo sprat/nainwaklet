@@ -19,6 +19,7 @@
     "url": "https://github.com/sprat/nany/issues"
   },
   "dependencies": {
+    "classnames": "^2.2.5",
     "core-js": "^2.4.1",
     "htmldec": "^0.0.1",
     "maquette": "^2.3.5",

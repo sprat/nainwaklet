@@ -1,7 +1,10 @@
+var Button = require('./button');
 var styles = require('./tooltip-button.css');
 
 /* TooltipButton */
 function TooltipButton(label, content) {
+    var button = Button(label);
+
     function render(h) {
         var rendered = content.render(h);
 
@@ -10,9 +13,8 @@ function TooltipButton(label, content) {
             return;
         }
 
-        var button = h('button', { class: styles.tooltipButton }, label);
         var contentWrapper = h('div', { class: styles.tooltipContent }, rendered);
-        return h('div', { class: styles.tooltip }, [button, contentWrapper]);
+        return h('div', { class: styles.tooltip }, [button.render(h), contentWrapper]);
     }
 
     return {

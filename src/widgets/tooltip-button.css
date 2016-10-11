@@ -5,23 +5,6 @@
     font-weight: normal;
 }
 
-.tooltipButton {
-    color: #FFF;
-    background: #333;
-    padding: 0.25em 0.5em;
-    border: 1px solid #222;
-    font-weight: bold;
-    line-height: 1;
-    cursor: pointer;
-}
-
-.tooltip:hover .tooltipButton,
-.tooltipButton:focus {
-    background: #606;
-    outline: 0;
-}
-
-.tooltipButton,
 .tooltipContent {
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
@@ -56,6 +39,6 @@
 }
 
 .tooltip:hover .tooltipContent,
-.tooltipButton:focus + .tooltipContent {
+:focus + .tooltipContent {
     display: inherit;
 }
