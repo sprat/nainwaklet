@@ -1,6 +1,6 @@
 var dom = require('../dom');
 var Mounter = require('../mounter');
-var TooltipButton = require('../tooltip-button');
+var TooltipButton = require('../widgets/tooltip-button');
 var calcul = require('../calcul');
 
 function ObjetInfo(objet, perso) {

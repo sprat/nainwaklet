@@ -1,4 +1,4 @@
-var Window = require('../window');
+var Window = require('../widgets/window');
 
 function Login(loginUrl) {
     var loginWindow = Window();

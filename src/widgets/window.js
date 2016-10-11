@@ -1,5 +1,5 @@
 var Signal = require('mini-signals');
-var dom = require('./dom');
+var dom = require('../dom');
 var messageDispatcher = dom.MessageDispatcher();
 
 function Window() {
