@@ -38,7 +38,7 @@
     border-left-color: #333;
 }
 
-.tooltip:hover .tooltipContent,
+.tooltip:hover > .tooltipContent,
 :focus + .tooltipContent {
     display: inherit;
 }

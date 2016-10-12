@@ -1,6 +1,6 @@
 var Signal = require('mini-signals');
 var classNames = require('classnames');
-var styles = require('./button.css');
+var theme = require('./theme.css');
 
 function Button(content, classes) {
     var clicked = new Signal();
@@ -10,7 +10,7 @@ function Button(content, classes) {
         var ctn = content.render ? content.render(h) : content;
         return h('button', {
             key: render,
-            class: classNames(styles.button, classes),
+            class: classNames(theme.button, classes),
             onclick: onclick
         }, ctn);
     }
