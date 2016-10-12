@@ -3,7 +3,7 @@ var Page = require('./page');
 var analyzeObjets = require('../analyzers/objets');
 var analyzePager = require('../analyzers/pager');
 var calcul = require('../calcul');
-var objetEnhancement = require('./objet-enhancement');
+var enhancements = require('./enhancements');
 
 function analyze(doc, date, context) {
     var objets = analyzeObjets(doc, date);
@@ -28,7 +28,7 @@ function enhance(doc, context) {
     var sol = context.objets.sol || [];
     var inventaire = context.objets.inventaire || [];
     var objets = sol.concat(inventaire);
-    objetEnhancement.enhance(doc, objets, context);
+    enhancements.enhanceObjets(doc, objets, context);
 }
 
 module.exports = Page('transfert', {

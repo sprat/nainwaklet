@@ -1,8 +1,7 @@
 var Page = require('./page');
 var dom = require('../dom');
 var Mounter = require('../mounter');
-var TooltipButton = require('../widgets/tooltip-button');
-var objetEnhancement = require('./objet-enhancement');
+var enhancements = require('./enhancements');
 
 function enhance(doc, context) {
     var mounter = Mounter();
@@ -25,14 +24,12 @@ function enhance(doc, context) {
         var match = idRegex.exec(href);
         var objet;
         var objetInfo;
-        var tooltipButton;
 
         if (match) {
             objet = objetsById[match[1]];
             if (objet) {
-                objetInfo = objetEnhancement.ObjetInfo(objet, perso);
-                tooltipButton = TooltipButton('?', objetInfo);
-                mounter.prepend(link.parent(), tooltipButton);
+                objetInfo = enhancements.ObjetInfo(objet, perso);
+                mounter.append(link.parent(), objetInfo);
             }
         }
     });

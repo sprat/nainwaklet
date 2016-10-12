@@ -1,6 +1,5 @@
 var dom = require('../dom');
 var Mounter = require('../mounter');
-var TooltipButton = require('../widgets/tooltip-button');
 var calcul = require('../calcul');
 
 function ObjetInfo(objet, perso) {
@@ -18,20 +17,19 @@ function ObjetInfo(objet, perso) {
     };
 }
 
-function enhance(doc, objets, context) {
+function enhanceObjets(doc, objets, context) {
+    // add an info box inside each objet's table
     var mounter = Mounter();
-    var imageElements = dom.findAll('td.news-text img', doc);
-
-    // add an advisor box on each title
-    imageElements.forEach(function (image, index) {
+    var objetsTables = dom.findAll('table', doc);
+    objetsTables.forEach(function (objetTable, index) {
+        var container = objetTable.findAll('.news-text').pop();  // last .news-text td in table
         var objet = objets[index];
         var objetInfo = ObjetInfo(objet, context.perso);
-        var tooltipButton = TooltipButton('?', objetInfo);
-        mounter.prepend(image.parent(), tooltipButton);
+        mounter.append(container, objetInfo);
     });
 }
 
 module.exports = {
-    enhance: enhance,
+    enhanceObjets: enhanceObjets,
     ObjetInfo: ObjetInfo
 };
