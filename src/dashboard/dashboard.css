@@ -11,5 +11,10 @@
     font-weight: bold;
 }
 
-.dashboardContent {
+.dashboardContent :first-child {
+    margin-top: 0;
+}
+
+.dashboardContent :last-child {
+    margin-bottom: 0;
 }

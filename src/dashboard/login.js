@@ -1,16 +1,24 @@
 var Button = require('../widgets/button');
 var Window = require('../widgets/window');
+var styles = require('./login.css');
 
 function Login(loginUrl) {
     var loginButton = Button('Connexion');
     var loginWindow = Window();
 
-    loginButton.clicked.add(function loginButtonClicked() {
+    loginButton.clicked.add(function () {
         loginWindow.open(loginUrl);
     });
 
+    function render(h) {
+        return h('div', [
+            h('p', { class: styles.loginMessage }, 'Pour activer la mise à jour automatique, vous devez vous connecter.'),
+            h('p', { class: styles.loginButtons }, loginButton.render(h))
+        ]);
+    }
+
     return {
-        render: loginButton.render
+        render: render
     };
 }
 
