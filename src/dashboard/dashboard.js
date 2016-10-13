@@ -7,9 +7,9 @@ function Dashboard(title, loginUrl) {
     var content = Login(loginUrl);
 
     function render(h) {
-        return h('div', { class: styles.dashboard }, [
-            h('div', { class: classNames(contours.VNT, styles.dashboardTitle) }, title),
-            h('div', { class: classNames(contours.TV, styles.dashboardContent) }, content.render(h))
+        return h('div', { class: styles.container }, [
+            h('div', { class: classNames(contours.VNT, styles.title) }, title),
+            h('div', { class: classNames(contours.TV, styles.content) }, content.render(h))
         ]);
     }
 

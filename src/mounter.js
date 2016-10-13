@@ -1,37 +1,40 @@
 var maquette = require('maquette');
 var classNames = require('classnames');
 var dom = require('./dom');
-var styles = require('./base.css');
+var themes = require('./themes.css');
+var h = maquette.h;
 
-function addBaseStyle(vnode) {
-    if (!vnode) {
-        return;
+var empty = h('div', {
+    styles: {
+        display: 'none'
     }
+});
 
+function addThemeStyle(vnode, theme) {
     var properties = vnode.properties = vnode.properties || {};
-    properties.class = classNames(properties.class, styles.nany);
+    properties.class = classNames(properties.class, themes[theme]);
     return vnode;
 }
 
-function Mounter() {
+function Mounter(theme) {
+    theme = theme || 'default';
+
     // create a maquette projector for the rendering
     var projector = maquette.createProjector();
 
     // refresh all the components mounted by this mounter
-    function refresh() {
+    function scheduleRender() {
         projector.scheduleRender();
     }
 
     // method: append / insertBefore / replace / merge
     function mount(method, element, componentOrRender) {
-        var node = element.node;
-        var h = maquette.h;
         var render = componentOrRender.render || componentOrRender;
-        var empty = h('div', { class: styles.hidden });
 
         // render the virtual DOM tree
         function renderTree() {
-            return addBaseStyle(render(h, refresh)) || empty;
+            var rendered = render(h, scheduleRender);
+            return rendered ? addThemeStyle(rendered, theme) : empty;
         }
 
         // unmount the component (does not restore the original node)
@@ -40,7 +43,7 @@ function Mounter() {
         }
 
         // add the component to the projector
-        projector[method](node, renderTree);
+        projector[method](element.node, renderTree);
 
         // return the unmount function
         return unmount;
@@ -65,7 +68,7 @@ function Mounter() {
         append: append,
         prepend: prepend,
         replace: replace,
-        refresh: refresh
+        scheduleRender: scheduleRender
     };
 }
 

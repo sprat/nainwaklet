@@ -1,4 +1,4 @@
-.dashboard {
+.container {
     font-family: Verdana, Arial;
     font-size: 11px;
     color: #444;
@@ -6,15 +6,15 @@
     text-align: left;
 }
 
-.dashboardTitle {
+.title {
     font-size: 1.25em;
     font-weight: bold;
 }
 
-.dashboardContent :first-child {
+.content :first-child {
     margin-top: 0;
 }
 
-.dashboardContent :last-child {
+.content :last-child {
     margin-bottom: 0;
 }
