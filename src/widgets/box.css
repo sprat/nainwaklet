@@ -1,0 +1,12 @@
+.box {
+    position: relative;
+    padding: 10px;
+    border: 1px solid #999;
+    color: #000;
+    background: #CCC;
+    border-radius: 5px;
+    margin: 10px 0;
+}
+
+.boxTitle {
+}

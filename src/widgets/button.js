@@ -1,4 +1,5 @@
 var Signal = require('mini-signals');
+var styles = require('./button.css');
 
 function Button(content) {
     var clicked = new Signal();
@@ -7,6 +8,7 @@ function Button(content) {
     function render(h) {
         return h('button', {
             key: render,
+            class: styles.button,
             onclick: onclick
         }, h.render(content));
     }

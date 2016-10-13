@@ -42,7 +42,7 @@ var applicationConfig = {
             },
             {
                 test: /\.css$/,
-                loader: extractCSS.extract('css-loader?sourceMap&modules&localIdentName=[name]-[local]-[hash:base64:5]')
+                loader: extractCSS.extract('css-loader?sourceMap&modules&localIdentName=[local]--[hash:base64:5]')
             }
         ]
     },

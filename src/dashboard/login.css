@@ -1,7 +1,10 @@
-.message {
+.login {
+}
+
+.loginMessage {
     text-align: justify;
 }
 
-.buttons {
+.loginActions {
     text-align: center;
 }
