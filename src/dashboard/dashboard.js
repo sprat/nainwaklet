@@ -9,7 +9,7 @@ function Dashboard(title, loginUrl) {
     function render(h) {
         return h('div', { class: styles.container }, [
             h('div', { class: classNames(contours.VNT, styles.title) }, title),
-            h('div', { class: classNames(contours.TV, styles.content) }, content.render(h))
+            h('div', { class: classNames(contours.TV, styles.content) }, h.render(content))
         ]);
     }
 

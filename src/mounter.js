@@ -4,6 +4,18 @@ var dom = require('./dom');
 var themes = require('./themes.css');
 var h = maquette.h;
 
+h.render = function (child) {
+    if (child.render) {
+        return child.render(h);
+    }
+
+    if (typeof child === 'function') {
+        return child(h);
+    }
+
+    return child;
+};
+
 var empty = h('div', {
     styles: {
         display: 'none'
@@ -28,12 +40,10 @@ function Mounter(theme) {
     }
 
     // method: append / insertBefore / replace / merge
-    function mount(method, element, componentOrRender) {
-        var render = componentOrRender.render || componentOrRender;
-
+    function mount(method, element, component) {
         // render the virtual DOM tree
         function renderTree() {
-            var rendered = render(h, scheduleRender);
+            var rendered = h.render(component);
             return rendered ? addThemeStyle(rendered, theme) : empty;
         }
 
