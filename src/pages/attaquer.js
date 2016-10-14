@@ -28,7 +28,7 @@ function enhance(doc, context) {
         if (match) {
             objet = objetsById[match[1]];
             if (objet) {
-                mounter.append(element, Box(Objet(objet, context)));
+                mounter.prepend(element, Box(Objet(objet, context)));
             }
         }
     });

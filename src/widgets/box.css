@@ -1,12 +1,12 @@
 .box {
-    position: relative;
-    padding: 10px;
-    border: 1px solid #999;
-    color: #000;
-    background: #CCC;
+    display: block;
+    color: #333;
+    background: rgba(192, 192, 192, 0.5);
+    padding: 5px;
+    border: 1px solid #CCC;
     border-radius: 5px;
-    margin: 10px 0;
-}
 
-.boxTitle {
+    /* TODO: remove the following rules from here */
+    float: right;
+    margin: 5px 0;
 }

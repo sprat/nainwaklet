@@ -1,4 +1,3 @@
-var dom = require('../dom');
 var calcul = require('../calcul');
 
 function Objet(objet, context) {
@@ -8,7 +7,7 @@ function Objet(objet, context) {
 
     function render(h) {
         if (degats) {
-            return h('div', 'Dégâts : entre ' + degats.minimum + ' et ' + degats.maximum);
+            return h('div', h('b', 'Dégâts :'), ' entre ' + degats.minimum + ' et ' + degats.maximum);
         }
     }
 
@@ -16,12 +15,5 @@ function Objet(objet, context) {
         render: render
     };
 }
-
-Objet.findContainers = function(doc) {
-    var objetsTables = dom.findAll('table', doc);
-    return objetsTables.map(function (objetTable) {
-        return objetTable.findAll('.news-text').pop();  // last .news-text td in table
-    });
-};
 
 module.exports = Objet;
