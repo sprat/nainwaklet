@@ -14,7 +14,7 @@ test('channel: signals', function (assert) {
 
     // subscribe to the "connected" signal
     channel.connected.add(function () {
-        assert.comment('1. Connected');
+        assert.comment('1. connected');
 
         // publish to a topic
         channel.publish(topic, dataToSend);
@@ -22,20 +22,20 @@ test('channel: signals', function (assert) {
 
     // subscribe to the "messagePublished" signal
     channel.messagePublished.add(function (topic, data) {
-        assert.comment('2. Message published');
+        assert.comment('2. message published');
 
         // check event data
-        assert.strictEqual(topic, 'chat', 'Topic in messagePublished event');
-        assert.deepEqual(data, dataToSend, 'Data in messagePublished event');
+        assert.strictEqual(topic, 'chat', 'topic in messagePublished event');
+        assert.deepEqual(data, dataToSend, 'data in messagePublished event');
     });
 
     // subscribe to the "messageReceived" signal
     channel.messageReceived.add(function (topic, data) {
-        assert.comment('3. Message received');
+        assert.comment('3. message received');
 
         // check event data
-        assert.strictEqual(topic, 'chat', 'Topic in messageReceived event');
-        assert.deepEqual(data, dataToSend, 'Data in messageReceived event');
+        assert.strictEqual(topic, 'chat', 'topic in messageReceived event');
+        assert.deepEqual(data, dataToSend, 'data in messageReceived event');
 
         // disconnect
         channel.disconnect();
@@ -43,7 +43,7 @@ test('channel: signals', function (assert) {
 
     // subscribe to the "disconnected" signal
     channel.disconnected.add(function () {
-        assert.comment('4. Disconnected');
+        assert.comment('4. disconnected');
 
         // test finished
         assert.end();
