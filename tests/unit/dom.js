@@ -218,5 +218,3 @@ test('dom.Element.prepend', function (assert) {
 
     assert.end();
 });
-
-// TODO: add tests of dom.MessageDispatcher?

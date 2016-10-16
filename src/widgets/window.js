@@ -1,6 +1,6 @@
 var Signal = require('mini-signals');
-var dom = require('../dom');
-var messageDispatcher = dom.MessageDispatcher();
+var MessagesDispatcher = require('./messages-dispatcher');
+var messagesDispatcher = MessagesDispatcher();
 
 function Window() {
     var childWindow;  // child DOM Window
@@ -24,7 +24,7 @@ function Window() {
 
         // add the onMessage callback, so we receive the messages from the child
         // window
-        messageDispatcher.add(childWindow, onMessage);
+        messagesDispatcher.add(childWindow, onMessage);
 
         return true;  // success
     }
@@ -39,7 +39,7 @@ function Window() {
         childWindow = undefined;
 
         // remove the onMessage callback
-        messageDispatcher.remove(childWindow, onMessage);
+        messagesDispatcher.remove(childWindow, onMessage);
 
         return true;  // success
     }
