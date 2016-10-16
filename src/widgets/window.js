@@ -3,11 +3,19 @@ var MessagesDispatcher = require('./messages-dispatcher');
 var messagesDispatcher = MessagesDispatcher();
 var closeDetector = CloseDetector();
 
+function getOrigin(url) {
+    var link = document.createElement('a');
+    link.href = url;
+    link.href = link.href;  // IE 8/9 trick to convert relative to absolute url
+    return link.protocol + '//' + link.host;
+}
+
 function Window() {
     var childWindow;  // child DOM Window
     var messageReceived = new Signal();
     var closed = new Signal();
     var onMessage = messageReceived.dispatch.bind(messageReceived);
+    var openedOrigin;
 
     function isClosed() {
         return childWindow === undefined || childWindow.closed;
@@ -24,22 +32,17 @@ function Window() {
             return false;  // failure
         }
 
-        // register the onMessage and onClose callbacks, so we receive messages
-        // from the child window
+        // register a onClose callback to detect when the window is closed
         closeDetector.add(childWindow, onClose);
+
+        // register a onMessage callback so that we receive messages from the
+        // child window
         messagesDispatcher.add(childWindow, onMessage);
 
+        // remember the opened origin for sendMessage feature
+        openedOrigin = getOrigin(url);
+
         return true;  // success
-    }
-
-    function onClose() {
-        childWindow = undefined;
-
-        // remove the onMessage callback
-        messagesDispatcher.remove(childWindow, onMessage);
-
-        // send the closed signal
-        closed.dispatch();
     }
 
     function close() {
@@ -52,11 +55,26 @@ function Window() {
         return true;  // success
     }
 
+    function sendMessage(message, targetOrigin) {
+        childWindow.postMessage(message, targetOrigin || openedOrigin);
+    }
+
+    function onClose() {
+        childWindow = undefined;
+
+        // remove the onMessage callback
+        messagesDispatcher.remove(childWindow, onMessage);
+
+        // send the closed signal
+        closed.dispatch();
+    }
+
     return {
         // methods
         open: open,
         close: close,
         isClosed: isClosed,
+        sendMessage: sendMessage,
         // signals
         closed: closed,  // called after the window is closed
         messageReceived: messageReceived  // called when a message is received from the child window
