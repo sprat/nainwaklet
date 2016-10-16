@@ -29,7 +29,7 @@ function MessagesDispatcher(parentWindow) {
         });
 
         if (index !== -1) {
-            callbacks.slice(index, 1);
+            callbacks.splice(index, 1);
         }
     }
 
