@@ -48,7 +48,7 @@
     "webpack": "^1.13.2"
   },
   "scripts": {
-    "start": "live-server --no-browser",
+    "start": "live-server --no-browser --ignorePattern=src/.*",
     "lint": "eslint . --cache",
     "prebuild": "npm run lint -s",
     "build": "webpack --bail",
