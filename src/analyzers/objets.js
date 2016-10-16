@@ -1,4 +1,3 @@
-var dom = require('../dom');
 var code = require('./code');
 var int = require('./int');
 
@@ -11,7 +10,7 @@ var listNames = {
 };
 
 function analyze(doc/*, date*/) {
-    var js = dom.getInlineJavascript(doc);
+    var js = code.getInlineJS(doc);
     var regex = /mip\((.*)\);/ig;
     var keys = 'idtable,nomobjet,photoobjet,descriptionobjet,model,typeobjet,PAutiliser,portee,effet,recharg,PV,PVmax,PAreparer,dispo,PFobj,PPobj,PVobj,PIobj,collant,reparable,poussiere'.split(',');
     var objects = code.buildObjectsFromJSSequences(js, regex, keys);

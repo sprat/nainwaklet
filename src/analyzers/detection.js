@@ -71,7 +71,7 @@ function analyzeObjets(js) {
 }
 
 function analyze(doc/*, date*/) {
-    var js = dom.getInlineJavascript(doc);
+    var js = code.getInlineJS(doc);
     var localisation = analyzeLocalisation(doc);
     var nains = analyzeNains(js);
     var objets = analyzeObjets(js);

@@ -1,9 +1,8 @@
-var dom = require('../dom');
 var code = require('./code');
 var int = require('./int');
 
 function analyze(doc/*, date*/) {
-    var js = dom.getInlineJavascript(doc);
+    var js = code.getInlineJS(doc);
     var regex = /miseajourpager\((.*)\);/ig;
     var keys = 'pa,pv,pvbase,classeeven,evnonlu,classechat,mesgnonlu,posx,posy,IDS,newmonochat'.split(',');
     var object = code.buildObjectsFromJSSequences(js, regex, keys)[0];

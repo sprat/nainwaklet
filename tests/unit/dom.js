@@ -56,20 +56,6 @@ test('dom.findAll', function (assert) {
     assert.end();
 });
 
-test('dom.getInlineJavascript', function (assert) {
-    var code = "function myHelloWorld() { console.log('Hello world!'); }";
-    var script = document.createElement('script');
-    script.textContent = code;
-    document.body.appendChild(script);
-
-    var inlineJS = dom.getInlineJavascript();
-    assert.notEqual(inlineJS.indexOf(code), -1, 'inline javascript');
-
-    document.body.removeChild(script);
-
-    assert.end();
-});
-
 test('dom.Element.find', function (assert) {
     var nodes = createDOMNodes();
     var body = dom.Element(document.body);

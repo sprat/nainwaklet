@@ -32,7 +32,7 @@ function getBlocsDroits(doc) {
 }
 
 function analyze(doc/*, date*/) {
-    var js = dom.getInlineJavascript(doc);
+    var js = code.getInlineJS(doc);
     var classes = getClasses(js);
     var characts = getCharacteristics(js);
     var blocsDroits = getBlocsDroits(doc);

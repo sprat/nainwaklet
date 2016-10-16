@@ -11,14 +11,6 @@ function findAll(selector, context) {
     return Element(context).findAll(selector);
 }
 
-function getInlineJavascript(doc) {
-    doc = doc || document;
-    var sources = array.from(doc.scripts, function (script) {
-        return script.src ? '' : script.textContent;
-    });
-    return sources.join('\n');
-}
-
 function Element(node) {
     if (node.node) {  // unwrap an element
         node = node.node;
@@ -99,6 +91,5 @@ function Element(node) {
 module.exports = {
     find: find,
     findAll: findAll,
-    getInlineJavascript: getInlineJavascript,
     Element: Element
 };

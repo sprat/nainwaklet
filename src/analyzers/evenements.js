@@ -1,10 +1,9 @@
-var dom = require('../dom');
 var code = require('./code');
 var int = require('./int');
 var dateRegex = /(\d\d)h(\d\d) \(\w+\. (\d\d)\/(\d\d)\)/;
 
 function analyze(doc, date) {
-    var js = dom.getInlineJavascript(doc);
+    var js = code.getInlineJS(doc);
     var regex = /ev\((.*)\);/ig;
     var keys = 'neweven,time,num,s1,s2,s3,n1,n2,n3,appel'.split(',');
     var objects = code.buildObjectsFromJSSequences(js, regex, keys);
