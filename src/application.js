@@ -3,6 +3,7 @@ var array = require('core-js/library/fn/array');
 var addCSS = require('./add-css');
 var Mounter = require('./mounter');
 var analyzeJoueur = require('./analyzers/joueur');
+var Store = require('./store');
 var Spy = require('./spy');
 var Updater = require('./updater');
 //var Channel = require('./channel');
@@ -41,6 +42,9 @@ function Application(configuration) {
     // analyze the menu in order the get the joueur information
     jeu.joueur = analyzeJoueur(menuDocument, new Date());
 
+    // create a store to save the settings of the current player
+    var store = Store(jeu.joueur.nom);
+
     // create the spy if the info frame is available
     var spy;
     if (infoFrame) {
@@ -64,14 +68,14 @@ function Application(configuration) {
     channel.connect();
     */
 
-    // add the Nany CSS into the container document...
+    // add the nany CSS into the container document...
     var removeCSS = addCSS(container.ownerDocument);
 
-    // create a Mounter to render our components into the DOM
+    // create a mounter to render our components into the DOM
     var mounter = Mounter();
 
     // create the dashboard object
-    var dashboard = Dashboard(config.name, config.loginUrl, mounter.refresh);
+    var dashboard = Dashboard(config, store, mounter.scheduleRender);
 
     // backup the content of the container and clear it before installing our UI
     var containerChildren = array.from(container.childNodes);
