@@ -1,7 +1,7 @@
 var calcul = require('../calcul');
 
-function Objet(objet, context) {
-    var perso = context.perso;
+function Objet(objet, jeu) {
+    var perso = jeu.perso;
     var isArme = objet.type === 'arme';
     var degats = (isArme && perso) ? calcul.degats(perso, objet) : undefined;
 

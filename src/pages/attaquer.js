@@ -4,9 +4,9 @@ var Objet = require('../enhancements/objet');
 var Box = require('../widgets/box');
 var Mounter = require('../mounter');
 
-function enhance(doc, context) {
+function enhance(doc, jeu) {
     var mounter = Mounter();
-    var inventaire = context.objets && context.objets.inventaire;
+    var inventaire = jeu.objets && jeu.objets.inventaire;
     var idRegex = /javascript:choisir\('(\d+)'\)/i;
     var linkElements = dom.findAll('a', doc);
     var objetsById = {};
@@ -28,7 +28,7 @@ function enhance(doc, context) {
         if (match) {
             objet = objetsById[match[1]];
             if (objet) {
-                mounter.prepend(element, Box(Objet(objet, context)));
+                mounter.prepend(element, Box(Objet(objet, jeu)));
             }
         }
     });

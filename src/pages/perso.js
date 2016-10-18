@@ -1,10 +1,10 @@
 var Page = require('./page');
 var analyzePerso = require('../analyzers/perso');
 
-function analyze(doc, date, context) {
+function analyze(doc, date, jeu) {
     var perso = analyzePerso(doc, date);
 
-    context.perso = perso;
+    jeu.perso = perso;
 
     return {
         perso: perso

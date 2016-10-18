@@ -36,10 +36,10 @@ function Application(configuration) {
     var menuDocument = frames.menu.document;
     var container = frames.pub.document.body;
     var updatePages = ['detect', 'invent', 'perso', 'even'];
-    var context = {};  // game information fetched by the current joueur
+    var jeu = {};  // game information fetched by the current joueur
 
     // analyze the menu in order the get the joueur information
-    context.joueur = analyzeJoueur(menuDocument, new Date());
+    jeu.joueur = analyzeJoueur(menuDocument, new Date());
 
     // create the spy if the info frame is available
     var spy;
@@ -120,7 +120,7 @@ function Application(configuration) {
 
         // analyze the page
         if (page.analyze) {
-            analysis = page.analyze(doc, date, context);
+            analysis = page.analyze(doc, date, jeu);
             log(analysis);
         }
 
@@ -135,13 +135,13 @@ function Application(configuration) {
             addCSS(doc);
 
             // enhance
-            page.enhance(doc, context);
+            page.enhance(doc, jeu);
         }
     }
 
     function loadPersoPage() {
         var persoPage = pages.byType('perso');
-        var joueur = context.joueur;
+        var joueur = jeu.joueur;
 
         log('Loading perso page');
         persoPage.fetch(joueur.ids, function (response) {
