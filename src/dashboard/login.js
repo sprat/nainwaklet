@@ -1,6 +1,7 @@
 var Signal = require('mini-signals');
 var Button = require('../widgets/button');
 var Window = require('../widgets/window');
+var log = require('../log');
 var styles = require('./login.css');
 
 function Login(loginUrl) {
@@ -8,11 +9,15 @@ function Login(loginUrl) {
     var button = Button('Connexion');
     var window = Window();
 
-    //window.closed
-    window.messageReceived.add(function (message/*, origin*/) {
-        // TODO: check origin
+    window.messageReceived.add(function (message, origin) {
         window.close();
-        loggedIn.dispatch(message);
+
+        // check origin
+        if (origin !== window.initialOrigin) {
+            log('Invalid origin in authorization message, should be the same as the loginUrl one');
+        } else {
+            loggedIn.dispatch(message);
+        }
     });
 
     button.clicked.add(function () {

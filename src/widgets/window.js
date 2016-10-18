@@ -12,10 +12,10 @@ function getOrigin(url) {
 
 function Window() {
     var childWindow;  // child DOM Window
+    var initialOrigin;
     var messageReceived = new Signal();
     var closed = new Signal();
     var onMessage = messageReceived.dispatch.bind(messageReceived);
-    var openedOrigin;
 
     function isClosed() {
         return childWindow === undefined || childWindow.closed;
@@ -40,7 +40,7 @@ function Window() {
         messagesDispatcher.add(childWindow, onMessage);
 
         // remember the opened origin for sendMessage feature
-        openedOrigin = getOrigin(url);
+        initialOrigin = getOrigin(url);
 
         return true;  // success
     }
@@ -56,11 +56,12 @@ function Window() {
     }
 
     function sendMessage(message, targetOrigin) {
-        childWindow.postMessage(message, targetOrigin || openedOrigin);
+        childWindow.postMessage(message, targetOrigin || initialOrigin);
     }
 
     function onClose() {
         childWindow = undefined;
+        initialOrigin = undefined;
 
         // remove the onMessage callback
         messagesDispatcher.remove(childWindow, onMessage);
@@ -75,6 +76,9 @@ function Window() {
         close: close,
         isClosed: isClosed,
         sendMessage: sendMessage,
+        get initialOrigin() {
+            return initialOrigin;
+        },
         // signals
         // called after the window is closed
         closed: closed,

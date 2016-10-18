@@ -20,6 +20,7 @@ test('Window', function (assert) {
             childWindow.closed.add(function () {
                 assert.strictEqual(childWindow.isClosed(), true, 'closed');
                 assert.strictEqual(childWindow.close(), false, 'cannot be closed');
+                assert.strictEqual(childWindow.initialOrigin, undefined, 'initial origin not set anymore');
                 assert.end();
             });
 
@@ -32,12 +33,14 @@ test('Window', function (assert) {
 
     assert.strictEqual(childWindow.isClosed(), true, 'starts closed');
     assert.strictEqual(childWindow.close(), false, 'cannot be closed');
+    assert.strictEqual(childWindow.initialOrigin, undefined, 'initial origin not set yet');
 
     // In order for our window not to be blocked by the popup blockers, we must
     // create a link and simulate a click... what a hack!
     var link = document.createElement('a');
     link.addEventListener('click', function () {
         assert.strictEqual(childWindow.open(url), true, 'opening (popup blocker need to be disabled)');
+        assert.strictEqual(childWindow.initialOrigin, 'https://rawgit.com', 'initial origin set');
     });
     document.body.appendChild(link);
     link.click();
