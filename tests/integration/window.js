@@ -37,7 +37,7 @@ test('Window', function (assert) {
     // create a link and simulate a click... what a hack!
     var link = document.createElement('a');
     link.addEventListener('click', function () {
-        assert.strictEqual(childWindow.open(url), true, 'opening');
+        assert.strictEqual(childWindow.open(url), true, 'opening (popup blocker need to be disabled)');
     });
     document.body.appendChild(link);
     link.click();
