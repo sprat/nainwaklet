@@ -25,7 +25,7 @@ function Login(loginUrl) {
     });
 
     function render(h) {
-        return h('div', { class: styles.login }, [
+        return h('div', { key: render, class: styles.login }, [
             h('p', { class: styles.loginMessage }, 'Pour activer la mise à jour automatique, vous devez vous connecter.'),
             h('p', { class: styles.loginActions }, button.render(h))
         ]);

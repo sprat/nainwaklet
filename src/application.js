@@ -3,7 +3,7 @@ var array = require('core-js/library/fn/array');
 var addCSS = require('./add-css');
 var Mounter = require('./mounter');
 var analyzeJoueur = require('./analyzers/joueur');
-var Store = require('./store');
+var Storage = require('./storage');
 var Spy = require('./spy');
 var Updater = require('./updater');
 //var Channel = require('./channel');
@@ -42,8 +42,8 @@ function Application(configuration) {
     // analyze the menu in order the get the joueur information
     jeu.joueur = analyzeJoueur(menuDocument, new Date());
 
-    // create a store to save the settings of the current player
-    var store = Store(jeu.joueur.nom);
+    // create a storage to save the settings of the current player
+    var storage = Storage('Nany/' + configuration.name + '/' + jeu.joueur.nom);
 
     // create the spy if the info frame is available
     var spy;
@@ -59,7 +59,7 @@ function Application(configuration) {
     // create the updater if an update URL is available
     var updater;
     if (config.updateUrl) {
-        updater = Updater(config.updateUrl);
+        updater = Updater(config.updateUrl, storage);
     }
 
     /*
@@ -75,7 +75,7 @@ function Application(configuration) {
     var mounter = Mounter();
 
     // create the dashboard object
-    var dashboard = Dashboard(config, store, mounter.scheduleRender);
+    var dashboard = Dashboard(config, storage, mounter.scheduleRender);
 
     // backup the content of the container and clear it before installing our UI
     var containerChildren = array.from(container.childNodes);

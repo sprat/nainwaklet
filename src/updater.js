@@ -3,23 +3,26 @@ var serializeHTML = require('print-html');
 var log = require('./log');
 
 /* Updater class */
-function Updater(url, throttleDelay) {
-    if (!url) {
-        throw new Error('url is mandatory');
-    }
-
+function Updater(url, storage, throttleDelay) {
     throttleDelay = throttleDelay || 60;
 
+    var needAuthorization = false;
     var lastUpdates = {};
 
     function send(page, doc, date, analysis) {
         var pageId = page.url;
-        var isAuthenticated = true;  // TODO: authenticate
         var lastUpdate = lastUpdates[pageId] || 0;
         var elapsed = (date - lastUpdate) / 1000;
+        var authorization = storage.get('authorization');
 
-        if (!isAuthenticated || elapsed < throttleDelay) {
-            return;  // don't do anything
+        if (elapsed < throttleDelay) {
+            log('No update: not enough delay');
+            return;  // try later
+        }
+
+        if (needAuthorization && !authorization) {
+            log('No update: authorization missing');
+            return;  // credentials needed
         }
 
         var data = {
@@ -33,8 +36,15 @@ function Updater(url, throttleDelay) {
         var options = {
             url: url,
             method: 'POST',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            },
             json: data
         };
+
+        if (authorization) {
+            options.headers['Authorization'] = authorization;
+        }
 
         log('Sending an update to ' + url);
 
@@ -44,7 +54,13 @@ function Updater(url, throttleDelay) {
             var label = isOk ? 'OK' : 'FAIL';
             log(label + ' (' + status + ')');
 
-            // TODO: check response status: auth errors, rate-limit, etc.
+            if (status === 401) {  // TODO: what about 403?
+                needAuthorization = true;
+                storage.set('authorization', undefined);
+                return;
+            }
+
+            // TODO: check response status: rate-limit, etc.
             lastUpdates[pageId] = date;
         });
     }

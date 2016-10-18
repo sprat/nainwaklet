@@ -1,35 +1,35 @@
 var Login = require('./login');
+var Logout = require('./logout');
 var styles = require('./dashboard.css');
 var contours = require('./contours.css');
 
-function Content() {
-    function render(h) {
-        return h('p', 'MAJ automatique activée');
-    }
-
-    return {
-        render: render
-    };
-}
-
-function Dashboard(config, store, refreshUI) {
+function Dashboard(config, storage, refreshUI) {
     var title = config.name;
     var login = Login(config.loginUrl);
-    var content = Content();
+    var logout = Logout();
 
     login.loggedIn.add(function (authorization) {
-        store.authorization = authorization;
-        store.save();
-        refreshUI();
+        storage.set('authorization', authorization);
+    });
+
+    logout.loggedOut.add(function () {
+        storage.set('authorization', undefined);
+    });
+
+    // refresh the UI when the authorization is changed in storage
+    storage.changed.add(function (key) {
+        if (key === 'authorization') {
+            refreshUI();
+        }
     });
 
     function render(h) {
-        var authorization = store.authorization;
-        var innerContent = authorization ? content : login;
+        var authorization = storage.get('authorization');
+        var content = authorization ? logout : login;
 
         return h('div', { class: styles.dashboard }, [
             h('div', { class: [contours.VNT, styles.dashboardTitle] }, title),
-            h('div', { class: [contours.TV, styles.dashboardContent] }, h.render(innerContent))
+            h('div', { class: [contours.TV, styles.dashboardContent] }, content.render(h))
         ]);
     }
 
