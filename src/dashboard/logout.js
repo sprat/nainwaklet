@@ -4,7 +4,7 @@ var styles = require('./logout.css');
 
 function Logout() {
     var loggedOut = new Signal();
-    var button = Button('Déconnexion');
+    var button = Button('Désactiver');
 
     button.clicked.add(function () {
         loggedOut.dispatch();

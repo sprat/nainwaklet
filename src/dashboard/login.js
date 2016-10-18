@@ -6,7 +6,7 @@ var styles = require('./login.css');
 
 function Login(loginUrl) {
     var loggedIn = new Signal();
-    var button = Button('Connexion');
+    var button = Button('Activer');
     var window = Window();
 
     window.messageReceived.add(function (message, origin) {
@@ -26,7 +26,7 @@ function Login(loginUrl) {
 
     function render(h) {
         return h('div', { key: render, class: styles.login }, [
-            h('p', { class: styles.loginMessage }, 'Pour activer la mise à jour automatique, vous devez vous connecter.'),
+            h('p', { class: styles.loginMessage }, 'MAJ automatique désactivée'),
             h('p', { class: styles.loginActions }, button.render(h))
         ]);
     }
