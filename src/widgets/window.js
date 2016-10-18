@@ -76,8 +76,11 @@ function Window() {
         isClosed: isClosed,
         sendMessage: sendMessage,
         // signals
-        closed: closed,  // called after the window is closed
-        messageReceived: messageReceived  // called when a message is received from the child window
+        // called after the window is closed
+        closed: closed,
+        // called when a message is received from the child window, with message
+        // and origin arguments
+        messageReceived: messageReceived
     };
 }
 
