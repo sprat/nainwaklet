@@ -2,7 +2,22 @@ var maquette = require('maquette');
 var classNames = require('classnames');
 var dom = require('./dom');
 var styles = require('./mounter.css');
-var h = maquette.h;
+
+function h(/*arguments*/) {
+    var properties = arguments[1];
+
+    if (properties && !properties.hasOwnProperty('vnodeSelector') && !Array.isArray(properties) && typeof properties === 'object') {
+        var class_ = classNames(properties.class);  // make sure we render the classes to a valid class string
+        if (class_) {
+            properties.class = class_;
+        }
+        else {
+            delete properties.class;
+        }
+    }
+
+    return maquette.h.apply(maquette, arguments);
+}
 
 h.render = function (child) {
     if (child.render) {
