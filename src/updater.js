@@ -6,23 +6,35 @@ var log = require('./log');
 function Updater(url, storage, throttleDelay) {
     throttleDelay = throttleDelay || 60;
 
+    // we don't know if authorization is needed yet, so we assume it's not needed
+    // until we receive an authorization error
     var needAuthorization = false;
+
+    // store the last update dates for each page
     var lastUpdates = {};
+
+    function getAuthorization() {
+        return storage.get('authorization');
+    }
+
+    function isAllowed(authorization) {
+        return !needAuthorization || authorization;
+    }
 
     function send(page, doc, date, analysis) {
         var pageId = page.url;
         var lastUpdate = lastUpdates[pageId] || 0;
         var elapsed = (date - lastUpdate) / 1000;
-        var authorization = storage.get('authorization');
+        var authorization = getAuthorization();
 
         if (elapsed < throttleDelay) {
-            log('No update: not enough delay');
-            return;  // try later
+            log('No update: rate limited');
+            return;
         }
 
-        if (needAuthorization && !authorization) {
-            log('No update: authorization missing');
-            return;  // credentials needed
+        if (!isAllowed(authorization)) {
+            log('No update: authorization needed');
+            return;
         }
 
         var data = {
@@ -37,6 +49,10 @@ function Updater(url, storage, throttleDelay) {
             url: url,
             method: 'POST',
             headers: {
+                // This header is set to tell the server that we are calling it
+                // from a XHR request. In that case, it must not send a
+                // "WWW-Authenticate: Basic" header back to us since we can't
+                // handle it properly cross-browser.
                 'X-Requested-With': 'XMLHttpRequest'
             },
             json: data
@@ -65,8 +81,15 @@ function Updater(url, storage, throttleDelay) {
         });
     }
 
+    function render(h) {
+        var authorization = getAuthorization();
+        var enabledWord = isAllowed(authorization) ? 'activée' : 'désactivée';
+        return h('p', 'Mise à jour ' + enabledWord);
+    }
+
     return {
-        send: send
+        send: send,
+        render: render
     };
 }
 

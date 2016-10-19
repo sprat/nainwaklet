@@ -75,7 +75,7 @@ function Application(configuration) {
     var mounter = Mounter();
 
     // create the dashboard object
-    var dashboard = Dashboard(config, storage, mounter.scheduleRender);
+    var dashboard = Dashboard(config, updater, storage, mounter.scheduleRender);
 
     // backup the content of the container and clear it before installing our UI
     var containerChildren = array.from(container.childNodes);

@@ -1,20 +1,10 @@
-var Login = require('./login');
-var Logout = require('./logout');
+var Connect = require('./connect');
 var styles = require('./dashboard.css');
 var contours = require('./contours.css');
 
-function Dashboard(config, storage, refreshUI) {
+function Dashboard(config, updater, storage, refreshUI) {
     var title = config.name;
-    var login = Login(config.loginUrl);
-    var logout = Logout();
-
-    login.loggedIn.add(function (authorization) {
-        storage.set('authorization', authorization);
-    });
-
-    logout.loggedOut.add(function () {
-        storage.set('authorization', undefined);
-    });
+    var connect = config.loginUrl ? Connect(config.loginUrl, storage) : undefined;
 
     // refresh the UI when the authorization is changed in storage
     storage.changed.add(function (key) {
@@ -24,12 +14,12 @@ function Dashboard(config, storage, refreshUI) {
     });
 
     function render(h) {
-        var authorization = storage.get('authorization');
-        var content = authorization ? logout : login;
-
         return h('div', { class: styles.dashboard }, [
             h('div', { class: [contours.VNT, styles.dashboardTitle] }, title),
-            h('div', { class: [contours.TV, styles.dashboardContent] }, content.render(h))
+            h('div', { class: [contours.TV, styles.dashboardContent] }, [
+                updater ? updater.render(h) : '',
+                connect ? connect.render(h) : ''
+            ])
         ]);
     }
 
