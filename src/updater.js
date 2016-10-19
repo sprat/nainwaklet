@@ -1,17 +1,16 @@
 var xhr = require('xhr');
 var serializeHTML = require('print-html');
+var httpHeaders = require('./http-headers');
 var log = require('./log');
 
 /* Updater class */
-function Updater(url, storage, throttleDelay) {
-    throttleDelay = throttleDelay || 60;
-
+function Updater(url, storage) {
     // we don't know if authorization is needed yet, so we assume it's not needed
     // until we receive an authorization error
     var needAuthorization = false;
 
-    // store the last update dates for each page
-    var lastUpdates = {};
+    // store the retry after dates for each page type
+    var retryAfterDates = {};
 
     function getAuthorization() {
         return storage.get('authorization');
@@ -22,12 +21,10 @@ function Updater(url, storage, throttleDelay) {
     }
 
     function send(page, doc, date, analysis) {
-        var pageId = page.url;
-        var lastUpdate = lastUpdates[pageId] || 0;
-        var elapsed = (date - lastUpdate) / 1000;
+        var retryAfterDate = retryAfterDates[page.url];
         var authorization = getAuthorization();
 
-        if (elapsed < throttleDelay) {
+        if (retryAfterDate && date < retryAfterDate) {
             log('No update: rate limited');
             return;
         }
@@ -76,8 +73,9 @@ function Updater(url, storage, throttleDelay) {
                 return;
             }
 
-            // TODO: check response status: rate-limit, etc.
-            lastUpdates[pageId] = date;
+            // handle rate-limiting header
+            var retryAfterDate = httpHeaders.getRetryAfter(response.headers);
+            retryAfterDates[page.url] = retryAfterDate;
         });
     }
 
