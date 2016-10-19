@@ -11,6 +11,14 @@
     font-weight: bold;
 }
 
+.dashboardContent {
+    text-align: center;
+}
+
+.dashboardContent p {
+    text-align: justify;
+}
+
 .dashboardContent :first-child {
     margin-top: 0;
 }
