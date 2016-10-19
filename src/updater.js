@@ -25,7 +25,7 @@ function Updater(url, storage) {
         var authorization = getAuthorization();
 
         if (retryAfterDate && date < retryAfterDate) {
-            log('No update: rate limited');
+            log('No update: rate-limiting');
             return;
         }
 
