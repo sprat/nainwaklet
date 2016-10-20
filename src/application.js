@@ -40,7 +40,8 @@ function Application(configuration) {
     var jeu = {};  // game information fetched by the current joueur
 
     // analyze the menu in order the get the joueur information
-    jeu.joueur = analyzeJoueur(menuDocument, new Date());
+    var joueur = analyzeJoueur(menuDocument, new Date());
+    jeu.joueur = joueur;
 
     // create a storage to save the settings of the current player
     var storage = Storage('Nany/' + configuration.name + '/' + jeu.joueur.nom);
@@ -130,7 +131,7 @@ function Application(configuration) {
 
         // send an update to the server
         if (updater && shouldSendUpdateForPage(page)) {
-            updater.send(page, doc, date, analysis);
+            updater.send(page, doc, date, analysis, joueur);
         }
 
         // enhance the page

@@ -20,7 +20,7 @@ function Updater(url, storage) {
         return !needAuthorization || authorization;
     }
 
-    function send(page, doc, date, analysis) {
+    function send(page, doc, date, analysis, joueur) {
         var retryAfterDate = retryAfterDates[page.url];
         var authorization = getAuthorization();
 
@@ -38,8 +38,9 @@ function Updater(url, storage) {
             url: page.url,
             type: page.type,
             raw: serializeHTML(doc),
-            content: analysis,
-            date: date
+            contenu: analysis,
+            date: date,
+            joueur: joueur.nom
         };
 
         var options = {
