@@ -32,6 +32,7 @@
   },
   "devDependencies": {
     "css-loader": "^0.25.0",
+    "electron": "^1.6.11",
     "eslint": "^3.5.0",
     "extract-text-webpack-plugin": "^1.0.1",
     "faucet": "^0.0.1",
@@ -41,10 +42,9 @@
     "nodemon": "^1.10.2",
     "npm-run-all": "^3.1.0",
     "rimraf": "^2.5.4",
-    "tap-closer": "^1.0.0",
-    "tape": "^4.6.0",
+    "tape": "^4.7.0",
     "tape-catch": "^1.0.6",
-    "tape-run": "^2.1.4",
+    "tape-run-electron": "^1.0.18",
     "webpack": "^1.13.2"
   },
   "scripts": {
@@ -52,8 +52,8 @@
     "lint": "eslint . --cache",
     "prebuild": "npm run lint -s",
     "build": "webpack --bail",
-    "test": "tap-closer < dist/nany.tests.js | tape-run | faucet",
-    "unittest": "tap-closer < dist/nany.unittests.js | tape-run | faucet",
+    "test": "tape-run-electron < dist/nany.tests.js | faucet",
+    "unittest": "tape-run-electron < dist/nany.unittests.js | faucet",
     "watch": "nodemon -e js,json,css --ignore dist --exec \"npm run build -s && npm run unittest -s\"",
     "dev": "npm-run-all --parallel start watch"
   }
