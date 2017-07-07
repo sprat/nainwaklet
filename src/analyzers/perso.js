@@ -11,7 +11,7 @@ function getClasses(js) {
 
 function getCharacteristics(js) {
     // find all lines looking like: $('sPVBase').innerHTML = (109+39);
-    var regex = /\$\('(\w+)'\)\.innerHTML = \((-?\d+)[\+\/](-?\d+)\)/g;
+    var regex = /\$\('(\w+)'\)\.innerHTML = \((-?\d+)[+/](-?\d+)\)/g;
     return code.buildObjectFromJS(js, regex);
 }
 

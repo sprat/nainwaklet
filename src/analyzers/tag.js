@@ -1,6 +1,6 @@
 function analyze(tagHtml) {
     var noBracketsTag = tagHtml.replace(/\] \[|\[|\]/g, '');
-    var guildeRegex = /<span\s+style=\"color:(#[0-9A-F]{6});\">([^<]*)<\/span>/i;
+    var guildeRegex = /<span\s+style="color:(#[0-9A-F]{6});">([^<]*)<\/span>/i;
     var guilde = '';
     var result = {};
 
