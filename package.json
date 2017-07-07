@@ -31,7 +31,7 @@
     "zip-object": "^0.1.0"
   },
   "devDependencies": {
-    "css-loader": "^0.25.0",
+    "css-loader": "^0.28.4",
     "electron": "^1.6.11",
     "eslint": "^4.1.1",
     "extract-text-webpack-plugin": "^1.0.1",
