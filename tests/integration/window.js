@@ -16,6 +16,7 @@ test('Window', function (assert) {
         childWindow.messageReceived.add(function (message, origin) {
             assert.strictEqual(message, 'How are you?', 'second message');
             assert.strictEqual(origin, 'https://rawgit.com', 'second message origin');
+            assert.strictEqual(childWindow.isClosed(), false, 'not closed either');
 
             childWindow.closed.add(function () {
                 assert.strictEqual(childWindow.isClosed(), true, 'closed');
@@ -25,7 +26,6 @@ test('Window', function (assert) {
             });
 
             assert.strictEqual(childWindow.close(), true, 'closing');
-            assert.strictEqual(childWindow.isClosed(), true, 'closed immediately');
         });
 
         childWindow.sendMessage('Hello');
