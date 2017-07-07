@@ -8,7 +8,6 @@ var testsDir = path.join(root, 'tests');
 var distDir = path.join(root, 'dist');
 
 var extractCSS = new ExtractTextPlugin('[name].css');
-var dedupe = new webpack.optimize.DedupePlugin();
 var uglify = new webpack.optimize.UglifyJsPlugin({
     //sourceMap: true,
     //mangle: true,
@@ -48,7 +47,6 @@ var applicationConfig = {
     },
     plugins: [
         extractCSS,
-        dedupe,
         uglify
     ]
 };
