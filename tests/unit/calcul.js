@@ -20,6 +20,24 @@ test('calcul.degats', function (assert) {
         portee: 0,
         dommages: 0
     };
+    var mainCollante = {
+        nom: 'Main collante de gosse',
+        type: 'special',
+        portee: 0,
+        dommages: 0
+    };
+    var tarte = {
+        nom: 'Tarte à la crème',
+        type: 'arme',
+        portee: 4,
+        dommages: 0
+    };
+    var batteSpeciale = {
+        nom: 'Batte de base-ball spéciale',
+        type: 'arme',
+        portee: 0,
+        dommages: 0
+    };
     var nain = {
         nom: 'NainNain',
         vie: 100,
@@ -39,6 +57,9 @@ test('calcul.degats', function (assert) {
     }, 'dégâts arme bourrin');
 
     assert.deepEqual(calcul.degats(nain, rune), undefined, 'dégâts rune');
+    assert.deepEqual(calcul.degats(nain, mainCollante), undefined, 'dégâts main collante');
+    assert.deepEqual(calcul.degats(nain, tarte), undefined, 'dégâts tarte');
+    assert.deepEqual(calcul.degats(nain, batteSpeciale), undefined, 'dégâts batte spéciale');
 
     assert.end();
 });
