@@ -1,5 +1,6 @@
 function int(v) {
-    return parseInt(v, 10);
+    var result = parseInt(v, 10);
+    return (result == v) ? result : undefined;
 }
 
 module.exports = int;

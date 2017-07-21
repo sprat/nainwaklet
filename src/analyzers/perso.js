@@ -24,7 +24,9 @@ function getBlocsDroits(doc) {
         var valueElement = row.find('td b');
 
         if (nameElement && valueElement) {  // not all rows have both elements
-            data[nameElement.text()] = int(valueElement.text());
+            // keep only the first integer in the value
+            var value = int(valueElement.text().replace(/(\d+).*/, '$1'));
+            data[nameElement.text()] = value;
         }
     });
 
