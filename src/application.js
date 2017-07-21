@@ -21,7 +21,7 @@ var defaultConfiguration = {
     loginUrl: undefined,
 
     /* URL of the update page: the Nany application will post updates to this URL
-     * when the user navigate between joueurwak pages */
+     * when the user navigate between nainwak pages */
     updateUrl: undefined
 
     /* PubNub account's publish & subscribe keys */
