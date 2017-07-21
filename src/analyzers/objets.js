@@ -37,7 +37,7 @@ function analyze(doc/*, date*/) {
             type: object.typeobjet.toLowerCase(),
             PAutiliser: int(object.PAutiliser),
             portee: int(object.portee),
-            dommages: int(object.effet),
+            dommages: int(object.effet) || 0,
             rechargement: int(object.recharg),
             PV: int(object.PV),
             PVmax: int(object.PVmax),

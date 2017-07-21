@@ -31,7 +31,30 @@ test('analyzeObjets: invent.html', function (assert) {
         collant: false,
         reparable: true,
         poussiere: 2412535
-    }, 'inventaire 1');
+    }, 'inventaire 1 : arquebuse naine');
+
+    assert.deepEqual(objets.inventaire[3], {
+        id: 25183956,
+        nom: 'Batte de base-ball spéciale',
+        image: '/images/objets/batte.gif',
+        description: "T'es Ok !  T'es In !  T'es Batte ...",
+        type: 'arme',
+        PAutiliser: 8,
+        portee: 0,
+        dommages: 0,
+        rechargement: 0,
+        PV: 70,
+        PVmax: 100,
+        PAreparer: 19,
+        dispo: -259682,
+        forceBonus: 0,
+        precisionBonus: 0,
+        vieBonus: 0,
+        intelligenceBonus: 0,
+        collant: false,
+        reparable: true,
+        poussiere: 2159518
+    }, 'inventaire 4 : batte de base-ball spéciale');
 
     assert.deepEqual(objets.inventaire[8], {
         id: 25183959,
@@ -54,7 +77,7 @@ test('analyzeObjets: invent.html', function (assert) {
         collant: false,
         reparable: false,
         poussiere: 2229326
-    }, 'inventaire 9');
+    }, 'inventaire 9 : visée à poisson');
 
     assert.deepEqual(objets.inventaire[10], {
         id: 25183960,
@@ -77,7 +100,7 @@ test('analyzeObjets: invent.html', function (assert) {
         collant: false,
         reparable: false,
         poussiere: 2229334
-    }, 'inventaire 11');
+    }, 'inventaire 11 : pigeon voyageur');
 
     assert.deepEqual(objets.inventaire[18], {
         id: 25134600,
@@ -100,7 +123,7 @@ test('analyzeObjets: invent.html', function (assert) {
         collant: true,
         reparable: false,
         poussiere: -1
-    }, 'inventaire 19');
+    }, 'inventaire 19 : fée cabossée');
 
     assert.deepEqual(objets.inventaire[19], {
         id: 25159237,
@@ -123,7 +146,53 @@ test('analyzeObjets: invent.html', function (assert) {
         collant: false,
         reparable: false,
         poussiere: 951613
-    }, 'inventaire 20');
+    }, 'inventaire 20 : kine d\'heure');
+
+    assert.deepEqual(objets.inventaire[25], {
+        id: 25170640,
+        nom: 'Main collante de gosse',
+        image: '/images/objets/main_collante.gif',
+        description: "Les Gosses c'est Bien mais qu'est ce que c'est collant ...",
+        type: 'special',
+        PAutiliser: 2,
+        portee: 0,
+        dommages: 0,
+        rechargement: 0,
+        PV: 1,
+        PVmax: 3,
+        PAreparer: 0,
+        dispo: -200591,
+        forceBonus: 0,
+        precisionBonus: 0,
+        vieBonus: 0,
+        intelligenceBonus: 0,
+        collant: false,
+        reparable: false,
+        poussiere: 2330050
+    }, 'inventaire 26 : main collante');
+
+    assert.deepEqual(objets.inventaire[26], {
+        id: 25170639,
+        nom: 'Tarte à la crème',
+        image: '/images/objets/tarte_creme.gif',
+        description: 'les chaines de télé culturelles sont importantes lorsque la religion part en fumée..<br /><br />',
+        type: 'arme',
+        PAutiliser: 4,
+        portee: 4,
+        dommages: 5,
+        rechargement: 1,
+        PV: 100,
+        PVmax: 100,
+        PAreparer: 2,
+        dispo: -407945,
+        forceBonus: 0,
+        precisionBonus: 0,
+        vieBonus: 0,
+        intelligenceBonus: 0,
+        collant: false,
+        reparable: true,
+        poussiere: 2011255
+    }, 'inventaire 27 : tarte à la crème');
 
     assert.end();
 });
