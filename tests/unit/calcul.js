@@ -4,13 +4,21 @@ var calcul = require('src/calcul');
 test('calcul.degats', function (assert) {
     var armeBourrin = {
         nom: 'Excalibur',
+        type: 'arme',
         portee: 0,
         dommages: 12
     };
     var armeSniper = {
         nom: 'Arquebuse naine',
+        type: 'arme',
         portee: 2,
         dommages: 20
+    };
+    var rune = {
+        nom: 'Visée à poisson',
+        type: 'rune',
+        portee: 0,
+        dommages: 0
     };
     var nain = {
         nom: 'NainNain',
@@ -23,12 +31,14 @@ test('calcul.degats', function (assert) {
     assert.deepEqual(calcul.degats(nain, armeSniper), {
         minimum: 72,
         maximum: 80
-    }, 'dégâts sniper');
+    }, 'dégâts arme sniper');
 
     assert.deepEqual(calcul.degats(nain, armeBourrin), {
         minimum: 18,
         maximum: 20
-    }, 'dégâts bourrin');
+    }, 'dégâts arme bourrin');
+
+    assert.deepEqual(calcul.degats(nain, rune), undefined, 'dégâts rune');
 
     assert.end();
 });

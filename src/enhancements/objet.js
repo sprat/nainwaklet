@@ -2,8 +2,7 @@ var calcul = require('../calcul');
 
 function Objet(objet, jeu) {
     var perso = jeu.perso;
-    var isArme = objet.type === 'arme';
-    var degats = (isArme && perso) ? calcul.degats(perso, objet) : undefined;
+    var degats = perso ? calcul.degats(perso, objet) : undefined;
 
     function render(h) {
         if (degats) {

@@ -1,9 +1,13 @@
 /*
  * Calcule les dégâts d'une arme en fonction des caractéristiques du nain
  */
-function degats(perso, arme) {
-    var competence = (arme.portee > 0) ? perso.precision : perso.force;
-    var dommages = arme.dommages;
+function degats(perso, objet) {
+    if (objet.type !== 'arme') {
+        return;
+    }
+
+    var competence = (objet.portee > 0) ? perso.precision : perso.force;
+    var dommages = objet.dommages;
     var baseDegats = (competence + 80) * dommages / 100;
 
     return {
