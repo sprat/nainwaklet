@@ -7,7 +7,7 @@ var transfertHTML = require('../fixtures/transfert.html');
 var transfertDocument = parseHTMLDocument(transfertHTML);
 var now = new Date(1457780950000);
 
-test('analyzeObjets: invent.html', function (assert) {
+test('analyzeObjets: invent', function (assert) {
     var objets = analyzeObjets(inventDocument, now);
 
     assert.deepEqual(objets.inventaire[0], {
@@ -31,7 +31,7 @@ test('analyzeObjets: invent.html', function (assert) {
         collant: false,
         reparable: true,
         poussiere: 2412535
-    }, 'inventaire 1 : arquebuse naine');
+    }, 'inventaire[0] : arquebuse naine');
 
     assert.deepEqual(objets.inventaire[3], {
         id: 25183956,
@@ -54,7 +54,7 @@ test('analyzeObjets: invent.html', function (assert) {
         collant: false,
         reparable: true,
         poussiere: 2159518
-    }, 'inventaire 4 : batte de base-ball spéciale');
+    }, 'inventaire[3] : batte de base-ball spéciale');
 
     assert.deepEqual(objets.inventaire[8], {
         id: 25183959,
@@ -77,7 +77,7 @@ test('analyzeObjets: invent.html', function (assert) {
         collant: false,
         reparable: false,
         poussiere: 2229326
-    }, 'inventaire 9 : visée à poisson');
+    }, 'inventaire[8] : visée à poisson');
 
     assert.deepEqual(objets.inventaire[10], {
         id: 25183960,
@@ -100,7 +100,7 @@ test('analyzeObjets: invent.html', function (assert) {
         collant: false,
         reparable: false,
         poussiere: 2229334
-    }, 'inventaire 11 : pigeon voyageur');
+    }, 'inventaire[10] : pigeon voyageur');
 
     assert.deepEqual(objets.inventaire[18], {
         id: 25134600,
@@ -123,7 +123,7 @@ test('analyzeObjets: invent.html', function (assert) {
         collant: true,
         reparable: false,
         poussiere: -1
-    }, 'inventaire 19 : fée cabossée');
+    }, 'inventaire[18] : fée cabossée');
 
     assert.deepEqual(objets.inventaire[19], {
         id: 25159237,
@@ -146,7 +146,7 @@ test('analyzeObjets: invent.html', function (assert) {
         collant: false,
         reparable: false,
         poussiere: 951613
-    }, 'inventaire 20 : kine d\'heure');
+    }, 'inventaire[19] : kine d\'heure');
 
     assert.deepEqual(objets.inventaire[25], {
         id: 25170640,
@@ -169,7 +169,7 @@ test('analyzeObjets: invent.html', function (assert) {
         collant: false,
         reparable: false,
         poussiere: 2330050
-    }, 'inventaire 26 : main collante');
+    }, 'inventaire[25] : main collante');
 
     assert.deepEqual(objets.inventaire[26], {
         id: 25170639,
@@ -192,12 +192,12 @@ test('analyzeObjets: invent.html', function (assert) {
         collant: false,
         reparable: true,
         poussiere: 2011255
-    }, 'inventaire 27 : tarte à la crème');
+    }, 'inventaire[26] : tarte à la crème');
 
     assert.end();
 });
 
-test('analyzeObjets: transfert.html', function (assert) {
+test('analyzeObjets: transfert', function (assert) {
     var objets = analyzeObjets(transfertDocument, now);
 
     assert.deepEqual(objets.sol[0], {
@@ -221,7 +221,7 @@ test('analyzeObjets: transfert.html', function (assert) {
         collant: false,
         reparable: true,
         poussiere: 1295996
-    }, 'sol 1 : bouteille vide');
+    }, 'sol[0] : bouteille vide');
 
     assert.deepEqual(objets.inventaire[0], {
         id: 25186146,
@@ -244,7 +244,7 @@ test('analyzeObjets: transfert.html', function (assert) {
         collant: false,
         reparable: true,
         poussiere: 2404936
-    }, 'inventaire 1 : arquebuse naine');
+    }, 'inventaire[0] : arquebuse naine');
 
     assert.end();
 });
