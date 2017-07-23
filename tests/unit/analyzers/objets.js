@@ -179,7 +179,7 @@ test('analyzeObjets: invent.html', function (assert) {
         type: 'arme',
         PAutiliser: 4,
         portee: 4,
-        dommages: 5,
+        dommages: 0,
         rechargement: 1,
         PV: 100,
         PVmax: 100,
@@ -200,7 +200,6 @@ test('analyzeObjets: invent.html', function (assert) {
 test('analyzeObjets: transfert.html', function (assert) {
     var objets = analyzeObjets(transfertDocument, now);
 
-    // mip(3819679, "Bouteille vide", "objets/vinvide.gif", '' , "ramasser", "INUTILE", 0, 0, "0", 0, 100, 100, 0, 0, 0, 0, 0, 0, "N", "O", "1295996");
     assert.deepEqual(objets.sol[0], {
         id: 3819679,
         nom: 'Bouteille vide',
@@ -222,9 +221,8 @@ test('analyzeObjets: transfert.html', function (assert) {
         collant: false,
         reparable: true,
         poussiere: 1295996
-    }, 'sol 1');
+    }, 'sol 1 : bouteille vide');
 
-    // mip(25186146, "Arquebuse naine", "objets/arquebuse.gif", '' , "poser", "ARME", 10, 2, "20", 1, 100, 100, 7, -14264, 0, 0, 0, 0, "N", "O", "2404936");
     assert.deepEqual(objets.inventaire[0], {
         id: 25186146,
         nom: 'Arquebuse naine',
@@ -246,7 +244,7 @@ test('analyzeObjets: transfert.html', function (assert) {
         collant: false,
         reparable: true,
         poussiere: 2404936
-    }, 'inventaire 1');
+    }, 'inventaire 1 : arquebuse naine');
 
     assert.end();
 });

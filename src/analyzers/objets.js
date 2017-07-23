@@ -9,6 +9,8 @@ var listNames = {
     fee: 'fee'  // quand on fait une recette ?
 };
 
+// valeurs pour type: 'arme', 'rune', 'detecteur', 'vehicule', 'manger', 'special', 'inutile'
+
 function analyze(doc/*, date*/) {
     var js = code.getInlineJS(doc);
     var regex = /mip\((.*)\);/ig;
@@ -16,8 +18,8 @@ function analyze(doc/*, date*/) {
     var objects = code.buildObjectsFromJSSequences(js, regex, keys);
     var lists = {};
 
-    function getList(object) {
-        var listName = listNames[object.model];
+    function getList(model) {
+        var listName = listNames[model];
         var list = lists[listName];
 
         if (list === undefined) {
@@ -28,7 +30,17 @@ function analyze(doc/*, date*/) {
     }
 
     objects.forEach(function (object) {
-        var list = getList(object);
+        var list = getList(object.model);
+
+        // des objets "speciaux" de type "arme" ont "???" comme valeur: ils ne
+        // font pas de dommages donc on initialize la valeur à 0
+        var dommages = object.effet === '???' ? 0 : int(object.effet);
+
+        // cas spécial pour "Tarte à la crème" qui ne suit pas la règle précédente
+        if (object.nomobjet === 'Tarte à la crème') {
+            dommages = 0;
+        }
+
         list.push({
             id: object.idtable,
             nom: object.nomobjet,
@@ -37,7 +49,7 @@ function analyze(doc/*, date*/) {
             type: object.typeobjet.toLowerCase(),
             PAutiliser: int(object.PAutiliser),
             portee: int(object.portee),
-            dommages: int(object.effet) || 0,
+            dommages: dommages,
             rechargement: int(object.recharg),
             PV: int(object.PV),
             PVmax: int(object.PVmax),
