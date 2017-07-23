@@ -56,7 +56,7 @@ test('analyzeObjets: invent', function (assert) {
         poussiere: 2159518
     }, 'inventaire[3] : batte de base-ball spéciale');
 
-    assert.deepEqual(objets.inventaire[8], {
+    assert.deepEqual(objets.inventaire[5], {
         id: 25183959,
         nom: 'Visée à poisson',
         image: '/images/objets/faux_thon.gif',
@@ -77,9 +77,9 @@ test('analyzeObjets: invent', function (assert) {
         collant: false,
         reparable: false,
         poussiere: 2229326
-    }, 'inventaire[8] : visée à poisson');
+    }, 'inventaire[5] : visée à poisson');
 
-    assert.deepEqual(objets.inventaire[10], {
+    assert.deepEqual(objets.inventaire[7], {
         id: 25183960,
         nom: 'Pigeon voyageur',
         image: '/images/objets/pigeon.gif',
@@ -100,9 +100,9 @@ test('analyzeObjets: invent', function (assert) {
         collant: false,
         reparable: false,
         poussiere: 2229334
-    }, 'inventaire[10] : pigeon voyageur');
+    }, 'inventaire[7] : pigeon voyageur');
 
-    assert.deepEqual(objets.inventaire[18], {
+    assert.deepEqual(objets.inventaire[9], {
         id: 25134600,
         nom: 'Fée Cabossée',
         image: '/images/objets/fee.png',
@@ -123,9 +123,9 @@ test('analyzeObjets: invent', function (assert) {
         collant: true,
         reparable: false,
         poussiere: -1
-    }, 'inventaire[18] : fée cabossée');
+    }, 'inventaire[9] : fée cabossée');
 
-    assert.deepEqual(objets.inventaire[19], {
+    assert.deepEqual(objets.inventaire[10], {
         id: 25159237,
         nom: "Kine d'Heure",
         image: '/images/objets/kinder.gif',
@@ -146,9 +146,9 @@ test('analyzeObjets: invent', function (assert) {
         collant: false,
         reparable: false,
         poussiere: 951613
-    }, 'inventaire[19] : kine d\'heure');
+    }, 'inventaire[10] : kine d\'heure');
 
-    assert.deepEqual(objets.inventaire[25], {
+    assert.deepEqual(objets.inventaire[12], {
         id: 25170640,
         nom: 'Main collante de gosse',
         image: '/images/objets/main_collante.gif',
@@ -169,9 +169,9 @@ test('analyzeObjets: invent', function (assert) {
         collant: false,
         reparable: false,
         poussiere: 2330050
-    }, 'inventaire[25] : main collante');
+    }, 'inventaire[12] : main collante');
 
-    assert.deepEqual(objets.inventaire[26], {
+    assert.deepEqual(objets.inventaire[13], {
         id: 25170639,
         nom: 'Tarte à la crème',
         image: '/images/objets/tarte_creme.gif',
@@ -192,7 +192,7 @@ test('analyzeObjets: invent', function (assert) {
         collant: false,
         reparable: true,
         poussiere: 2011255
-    }, 'inventaire[26] : tarte à la crème');
+    }, 'inventaire[13] : tarte à la crème');
 
     assert.end();
 });
@@ -202,10 +202,10 @@ test('analyzeObjets: transfert', function (assert) {
 
     assert.deepEqual(objets.sol[0], {
         id: 3819679,
-        nom: 'Bouteille vide',
-        image: '/images/objets/vinvide.gif',
+        nom: 'Visée à poisson',
+        image: '/images/objets/faux_thon.gif',
         description: '',
-        type: 'inutile',
+        type: 'rune',
         PAutiliser: 0,
         portee: 0,
         dommages: 0,
@@ -214,14 +214,14 @@ test('analyzeObjets: transfert', function (assert) {
         PVmax: 100,
         PAreparer: 0,
         dispo: 0,
-        forceBonus: 0,
-        precisionBonus: 0,
+        forceBonus: -6,
+        precisionBonus: 15,
         vieBonus: 0,
         intelligenceBonus: 0,
         collant: false,
-        reparable: true,
-        poussiere: 1295996
-    }, 'sol[0] : bouteille vide');
+        reparable: false,
+        poussiere: 2418204
+    }, 'sol[0] : visée à poisson');
 
     assert.deepEqual(objets.inventaire[0], {
         id: 25186146,
