@@ -5,7 +5,7 @@ var Mounter = require('./mounter');
 var analyzeJoueur = require('./analyzers/joueur');
 var Storage = require('./storage');
 var Spy = require('./spy');
-var Updater = require('./updater');
+var Ring = require('./ring');
 //var Channel = require('./channel');
 var Dashboard = require('./dashboard');
 var pages = require('./pages');
@@ -57,10 +57,10 @@ function Application(configuration) {
         });
     }
 
-    // create the updater if an update URL is available
-    var updater;
+    // create the ring if an update URL is available
+    var ring;
     if (config.updateUrl) {
-        updater = Updater(config.updateUrl, storage);
+        ring = Ring(config.updateUrl, storage);
     }
 
     /*
@@ -76,7 +76,7 @@ function Application(configuration) {
     var mounter = Mounter();
 
     // create the dashboard object
-    var dashboard = Dashboard(config, updater, storage, mounter.scheduleRender);
+    var dashboard = Dashboard(config, ring, storage, mounter.scheduleRender);
 
     // backup the content of the container and clear it before installing our UI
     var containerChildren = array.from(container.childNodes);
@@ -130,8 +130,8 @@ function Application(configuration) {
         }
 
         // send an update to the server
-        if (updater && shouldSendUpdateForPage(page)) {
-            updater.send(page, doc, date, analysis, joueur);
+        if (ring && shouldSendUpdateForPage(page)) {
+            ring.send(page, doc, date, analysis, joueur);
         }
 
         // enhance the page

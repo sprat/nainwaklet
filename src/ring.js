@@ -3,8 +3,8 @@ var serializeHTML = require('print-html');
 var httpHeaders = require('./http-headers');
 var log = require('./log');
 
-/* Updater class */
-function Updater(url, storage) {
+/* Ring class */
+function Ring(url, storage) {
     // we don't know if authorization is needed yet, so we assume it's not needed
     // until we receive an authorization error
     var needAuthorization = false;
@@ -92,4 +92,4 @@ function Updater(url, storage) {
     };
 }
 
-module.exports = Updater;
+module.exports = Ring;

@@ -2,7 +2,7 @@ var Connect = require('./connect');
 var styles = require('./dashboard.css');
 var contours = require('./contours.css');
 
-function Dashboard(config, updater, storage, refreshUI) {
+function Dashboard(config, ring, storage, refreshUI) {
     var title = config.name;
     var connect = config.loginUrl ? Connect(config.loginUrl, storage) : undefined;
 
@@ -17,7 +17,7 @@ function Dashboard(config, updater, storage, refreshUI) {
         return h('div', { class: styles.dashboard }, [
             h('div', { class: [contours.VNT, styles.dashboardTitle] }, title),
             h('div', { class: [contours.TV, styles.dashboardContent] }, [
-                updater ? updater.render(h) : '',
+                ring ? ring.render(h) : '',
                 connect ? connect.render(h) : ''
             ])
         ]);
