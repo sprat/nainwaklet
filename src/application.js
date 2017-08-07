@@ -43,6 +43,16 @@ function Application(configuration) {
     var joueur = analyzeJoueur(menuDocument, new Date());
     jeu.joueur = joueur;
 
+    // add the nany CSS into the container document...
+    var removeCSS = addCSS(container.ownerDocument);
+
+    // create a mounter to render our components into the DOM
+    var mounter = Mounter();
+
+    function refreshUI() {
+        mounter.scheduleRender();
+    }
+
     // create a storage to save the settings of the current player
     var storage = Storage('Nany/' + configuration.name + '/' + jeu.joueur.nom);
 
@@ -69,21 +79,13 @@ function Application(configuration) {
     channel.connect();
     */
 
-    // add the nany CSS into the container document...
-    var removeCSS = addCSS(container.ownerDocument);
-
-    // create a mounter to render our components into the DOM
-    var mounter = Mounter();
-
     // create the dashboard object
-    var dashboard = Dashboard(config, ring, storage, mounter.scheduleRender);
-
-    // backup the content of the container and clear it before installing our UI
-    var containerChildren = array.from(container.childNodes);
-    container.innerHTML = '';
+    var dashboard = Dashboard(config, ring, storage, refreshUI);
 
     // install our UI
-    var unmountDashboard = mounter.append(container, dashboard);
+    var containerChildren = array.from(container.childNodes);
+    container.innerHTML = '';
+    var unmount = mounter.append(container, dashboard);
 
     // finally, load the perso page
     loadPersoPage();
@@ -98,7 +100,7 @@ function Application(configuration) {
         removeCSS();
 
         // restore the container's initial content
-        unmountDashboard();
+        unmount();
         container.innerHTML = '';
         containerChildren.forEach(function (child) {
             container.appendChild(child);
