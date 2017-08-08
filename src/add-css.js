@@ -1,5 +1,4 @@
-var currentScript = require('./current-script');
-var cssUrl = currentScript.src.replace(/\bjs\b/g, 'css');
+var urls = require('./urls');
 
 function addCSS(doc) {
     var linkId = 'nanyCSS';
@@ -11,7 +10,7 @@ function addCSS(doc) {
         link = doc.createElement('link');
         link.setAttribute('rel', 'stylesheet');
         link.setAttribute('type', 'text/css');
-        link.setAttribute('href', cssUrl);
+        link.setAttribute('href', urls.applicationCssUrl);
         link.setAttribute('id', linkId);
         head.appendChild(link);
     }

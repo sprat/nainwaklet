@@ -1,5 +1,4 @@
-var currentScript = require('../current-script');
-var urls = require('../urls');
+var urls = require('./urls');
 var styles = require('./bookmarklet.css');
 
 function getHref(config) {
@@ -28,7 +27,7 @@ function getHref(config) {
 
 function Bookmarklet(config) {
     var label = 'Nany ' + config.name;
-    config.scriptUrl = config.scriptUrl || currentScript.src;
+    config.scriptUrl = config.scriptUrl || urls.applicationScriptUrl;
 
     function render(h) {
         return h('a', {
