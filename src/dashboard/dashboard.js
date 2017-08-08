@@ -1,12 +1,12 @@
-var Connect = require('./connect');
 var styles = require('./dashboard.css');
 var contours = require('./contours.css');
 
+// TODO: remove the dashboard, should be the app's render function
 function Dashboard(config, ring, storage, refreshUI) {
     var title = config.name;
-    var connect = config.loginUrl ? Connect(config.loginUrl, storage) : undefined;
 
     // refresh the UI when the authorization is changed in storage
+    // TODO: move this into the Ring class as it is related to that
     storage.changed.add(function (key) {
         if (key === 'authorization') {
             refreshUI();
@@ -17,8 +17,7 @@ function Dashboard(config, ring, storage, refreshUI) {
         return h('div', { class: styles.dashboard }, [
             h('div', { class: [contours.VNT, styles.dashboardTitle] }, title),
             h('div', { class: [contours.TV, styles.dashboardContent] }, [
-                ring ? ring.render(h) : '',
-                connect ? connect.render(h) : ''
+                ring ? ring.render(h) : ''
             ])
         ]);
     }

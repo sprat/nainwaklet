@@ -36,6 +36,7 @@ function Application(configuration) {
     var infoFrame = frames.info;
     var menuDocument = frames.menu.document;
     var container = frames.pub.document.body;
+    // TODO: move this into the Ring configuration
     var updatePages = ['detect', 'invent', 'perso', 'even'];
     var jeu = {};  // game information fetched by the current joueur
 
@@ -70,7 +71,8 @@ function Application(configuration) {
     // create the ring if an update URL is available
     var ring;
     if (config.updateUrl) {
-        ring = Ring(config.updateUrl, storage);
+        // TODO: create a specific ring section into the main config
+        ring = Ring(config, storage);
     }
 
     /*
