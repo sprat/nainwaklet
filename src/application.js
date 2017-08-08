@@ -1,4 +1,3 @@
-var assign = require('core-js/library/fn/object/assign');
 var array = require('core-js/library/fn/array');
 var addCSS = require('./add-css');
 var Mounter = require('./mounter');
@@ -11,27 +10,13 @@ var Dashboard = require('./dashboard');
 var pages = require('./pages');
 var log = require('./log');
 
-var defaultConfiguration = {
-    /* Guild/group name shown in the dashboard */
-    name: '<inconnu>',
-
-    /* URL of the login page: a window will open with this URL when we
-     * need authentication credentials; once logged, the page should return an
-     * access token via postMessage */
-    loginUrl: undefined,
-
-    /* URL of the update page: the Nany application will post updates to this URL
-     * when the user navigate between nainwak pages */
-    updateUrl: undefined
-
-    /* PubNub account's publish & subscribe keys */
-    //publishKey: 'pub-c-8be41a11-cbc5-4427-a5ad-e18cf5a466e4',
-    //subscribeKey: 'sub-c-38ae8020-6d33-11e5-bf4b-0619f8945a4f',
-};
-
 /* Application class */
-function Application(configuration) {
-    var config = assign({}, defaultConfiguration, configuration);
+function Application(config) {
+    var applicationName = config.name;
+    if (!applicationName) {
+        throw 'Application name is mandatory, please provide one in the configuration';
+    }
+
     var frames = window.frames;
     var infoFrame = frames.info;
     var menuDocument = frames.menu.document;
@@ -55,7 +40,7 @@ function Application(configuration) {
     }
 
     // create a storage to save the settings of the current player
-    var storage = Storage('Nany/' + configuration.name + '/' + jeu.joueur.nom);
+    var storage = Storage('Nany/' + applicationName + '/' + jeu.joueur.nom);
 
     // create the spy if the info frame is available
     var spy;
@@ -82,7 +67,7 @@ function Application(configuration) {
     */
 
     // create the dashboard object
-    var dashboard = Dashboard(config, ring, storage, refreshUI);
+    var dashboard = Dashboard(applicationName, ring, storage, refreshUI);
 
     // install our UI
     var containerChildren = array.from(container.childNodes);
