@@ -72,7 +72,7 @@ function Application(configuration) {
     var ring;
     if (config.updateUrl) {
         // TODO: create a specific ring section into the main config
-        ring = Ring(config, storage);
+        ring = Ring(config, storage, refreshUI);
     }
 
     /*

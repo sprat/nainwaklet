@@ -3,65 +3,87 @@ var serializeHTML = require('print-html');
 var httpHeaders = require('./http-headers');
 var Button = require('./widgets/button');
 var Window = require('./widgets/window');
+var styles = require('./ring.css');
 var log = require('./log');
 
-
 /* Ring class */
-function Ring(config, storage) {
+function Ring(config, storage, refreshUI) {
     var updateUrl = config.updateUrl;
-
-    // login
     var loginUrl = config.loginUrl;
-    var loginButton = Button('Connexion');
-    var logoutButton = Button('Déconnexion');
+
+    // authorization key in storage
+    var authKey = 'ring:authorization';
+
+    // update enabled?
+    var enabled = !loginUrl || !!getAuthorization();
+
+    // store the retry after dates for each page type
+    var retryAfterDates = {};
+
+    function login(authorization) {
+        // add authorization
+        storage.set(authKey, authorization);
+
+        // update our state
+        enabled = true;
+
+        // update the UI
+        refreshUI();
+    }
+
+    function logout() {
+        // remove authorization
+        storage.set(authKey, undefined);
+
+        // update out state
+        enabled = false;
+
+        // update the UI
+        refreshUI();
+    }
+
+    // login window
     var loginWindow = Window();
-
-    // we don't know if authorization is needed yet, so we assume it's not needed
-    // until we receive an authorization error
-    var needAuthorization = false;
-
-    loginButton.clicked.add(function () {
-        loginWindow.open(loginUrl);
-    });
-
-    logoutButton.clicked.add(function () {
-        storage.set('authorization', undefined);
-    });
-
-    loginWindow.messageReceived.add(function (message, origin) {
+    loginWindow.messageReceived.add(function (authorization, origin) {
+        // close the login window
         loginWindow.close();
 
         // check origin
         if (origin !== loginWindow.initialOrigin) {
             log('Invalid origin in authorization message, should match the loginUrl one');
-        } else {
-            storage.set('authorization', message);
-            //loggedIn.dispatch(message);
-        }
-    });
-
-    // store the retry after dates for each page type
-    var retryAfterDates = {};
-
-    function getAuthorization() {
-        return storage.get('authorization');
-    }
-
-    function isAllowed(authorization) {
-        return !needAuthorization || authorization;
-    }
-
-    function send(page, doc, date, analysis, joueur) {
-        var retryAfterDate = retryAfterDates[page.url];
-        var authorization = getAuthorization();
-
-        if (retryAfterDate && date < retryAfterDate) {
-            log('No update: rate-limiting');
             return;
         }
 
-        if (!isAllowed(authorization)) {
-            log('No update: authorization needed');
+        log('Authorization: ' + authorization);
+        login(authorization);
+    });
+
+    // login button
+    var loginButton = Button('Connexion');
+    loginButton.clicked.add(function () {
+        // open the login window
+        loginWindow.open(loginUrl);
+    });
+
+    // logout button
+    var logoutButton = Button('Déconnexion');
+    logoutButton.clicked.add(function () {
+        logout();
+    });
+
+    function getAuthorization() {
+        return storage.get(authKey);
+    }
+
+    function send(page, doc, date, analysis, joueur) {
+        if (!enabled) {
+            log('No update sent: disabled');
+            return;
+        }
+
+        var retryAfterDate = retryAfterDates[page.url];
+        if (retryAfterDate && date < retryAfterDate) {
+            log('No update sent: rate-limit reached');
             return;
         }
 
@@ -87,6 +109,7 @@ function Ring(config, storage) {
             json: data
         };
 
+        var authorization = getAuthorization();
         if (authorization) {
             options.headers['Authorization'] = authorization;
         }
@@ -100,8 +123,7 @@ function Ring(config, storage) {
             log(label + ' (' + status + ')');
 
             if (status === 401) {  // TODO: what about 403?
-                needAuthorization = true;
-                storage.set('authorization', undefined);
+                logout();  // remove invalid authorization
                 return;
             }
 
@@ -112,13 +134,15 @@ function Ring(config, storage) {
     }
 
     function render(h) {
-        var authorization = getAuthorization();
-        var enabledWord = isAllowed(authorization) ? 'activée' : 'désactivée';
-        var authButton = authorization ? logoutButton : loginButton;
+        var enabledWord = enabled ? 'activée' : 'désactivée';
+        var button;
+        if (loginUrl) {
+            button = enabled ? logoutButton : loginButton;
+        }
 
-        return h('div', { class: 'ring' }, [  // TODO: styles.ring
-            h('p', 'Mise à jour ' + enabledWord),
-            loginUrl ? authButton.render(h) : ''
+        return h('div', { class: styles.ring }, [
+            h('p', 'Ring: mise à jour ' + enabledWord),
+            button ? button.render(h) : ''
         ]);
     }
 
