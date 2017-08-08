@@ -1,7 +1,7 @@
 var styles = require('./dashboard.css');
 var contours = require('./contours.css');
 
-// TODO: remove the dashboard, should be the app's render function
+// FIXME: Should the dashboard be the application's render function?
 function Dashboard(applicationName, ring) {
     function render(h) {
         return h('div', { class: styles.dashboard }, [
