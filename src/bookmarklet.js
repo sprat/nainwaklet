@@ -2,7 +2,6 @@ var urls = require('./urls');
 var styles = require('./bookmarklet.css');
 
 function getHref(config) {
-    // TODO: maybe we can use a template and the text plugin here?
     var lines = [
         'javascript:(function(config) {',
         'var w=window, l=w.location, d=w.document, b=d.body, s;',
