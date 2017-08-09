@@ -1,9 +1,9 @@
 var test = require('tape-catch');
 var analyzeObjets = require('src/analyzers/objets');
-var parseHTMLDocument = require('../parse-html-document');
-var inventHTML = require('../fixtures/invent.html');
+var parseHTMLDocument = require('test/utils/parse-html-document');
+var inventHTML = require('test/fixtures/invent.html');
 var inventDocument = parseHTMLDocument(inventHTML);
-var transfertHTML = require('../fixtures/transfert.html');
+var transfertHTML = require('test/fixtures/transfert.html');
 var transfertDocument = parseHTMLDocument(transfertHTML);
 var now = new Date(1457780950000);
 

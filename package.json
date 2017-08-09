@@ -52,8 +52,8 @@
     "lint": "eslint . --cache",
     "prebuild": "npm run lint -s",
     "build": "webpack --bail",
-    "test": "tape-run-electron < dist/nany.tests.js | faucet",
-    "unittest": "tape-run-electron < dist/nany.unittests.js | faucet",
+    "test": "tape-run-electron < dist/nany.test.js | faucet",
+    "unittest": "tape-run-electron < dist/nany.unittest.js | faucet",
     "watch": "nodemon -e js,json,css --ignore dist --exec \"npm run build -s && npm run unittest -s\"",
     "dev": "npm-run-all --parallel start watch"
   }

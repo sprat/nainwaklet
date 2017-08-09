@@ -4,7 +4,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 var root = __dirname;
 var srcDir = path.join(root, 'src');
-var testsDir = path.join(root, 'tests');
+var testDir = path.join(root, 'test');
 var distDir = path.join(root, 'dist');
 
 var extractCSS = new ExtractTextPlugin('[name].css');
@@ -52,16 +52,17 @@ var applicationConfig = {
 };
 
 /* Build configuration for the tests */
-var testsConfig = {
-    context: testsDir,
+var testConfig = {
+    context: testDir,
     resolve: {
         alias: {
-            'src': srcDir
+            'src': srcDir,
+            'test': testDir
         }
     },
     entry: {
-        'nany.tests': ['./index.js'],
-        'nany.unittests': ['./unit/index.js']
+        'nany.test': ['./index.js'],
+        'nany.unittest': ['./unit/index.js']
     },
     devtool: 'source-map',
     output: {
@@ -90,4 +91,4 @@ var testsConfig = {
     }
 };
 
-module.exports = [applicationConfig, testsConfig];
+module.exports = [applicationConfig, testConfig];

@@ -1,7 +1,7 @@
 var test = require('tape-catch');
 var analyzePerso = require('src/analyzers/perso');
-var parseHTMLDocument = require('../parse-html-document');
-var persoHTML = require('../fixtures/perso.html');
+var parseHTMLDocument = require('test/utils/parse-html-document');
+var persoHTML = require('test/fixtures/perso.html');
 var persoDocument = parseHTMLDocument(persoHTML);
 var now = new Date(1457780950000);
 

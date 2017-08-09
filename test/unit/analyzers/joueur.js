@@ -1,7 +1,7 @@
 var test = require('tape-catch');
 var analyzeJoueur = require('src/analyzers/joueur');
-var parseHTMLDocument = require('../parse-html-document');
-var menuHTML = require('../fixtures/menu.html');
+var parseHTMLDocument = require('test/utils/parse-html-document');
+var menuHTML = require('test/fixtures/menu.html');
 var menuDocument = parseHTMLDocument(menuHTML);
 var now = new Date(1457780950000);
 

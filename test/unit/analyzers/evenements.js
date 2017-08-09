@@ -1,7 +1,7 @@
 var test = require('tape-catch');
 var analyzeEvenements = require('src/analyzers/evenements');
-var parseHTMLDocument = require('../parse-html-document');
-var evenHTML = require('../fixtures/even.html');
+var parseHTMLDocument = require('test/utils/parse-html-document');
+var evenHTML = require('test/fixtures/even.html');
 var evenDocument = parseHTMLDocument(evenHTML);
 var now = new Date(1457780950000);
 
