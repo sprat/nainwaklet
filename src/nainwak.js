@@ -1,3 +1,7 @@
+/* Nainwak URLs */
+var url = 'http://www.nainwak.com';
+var gameUrlRegex = /^https?:\/\/(www\.)?nainwak\.com\/jeu\/index\.php/;
+
 /*
  * Calcule les dégâts d'une arme en fonction des caractéristiques du nain
  */
@@ -54,6 +58,8 @@ function bonusObjets(objects) {
 }
 
 module.exports = {
+    url: url,
+    gameUrlRegex: gameUrlRegex,
     degats: degats,
     portee: portee,
     deplacement: deplacement,

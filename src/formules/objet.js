@@ -1,4 +1,4 @@
-var urls = require('../urls');
+var nainwak = require('../nainwak');
 var styles = require('./objet.css');
 
 function Objet(nom, image, quantite, id, note) {
@@ -15,7 +15,7 @@ function Objet(nom, image, quantite, id, note) {
 
         var img = h('img', {
             class: styles.image,
-            src: urls.nainwakUrl + image,
+            src: nainwak.url + image,
             title: title
         });
 

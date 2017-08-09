@@ -1,8 +1,8 @@
-var calcul = require('../calcul');
+var nainwak = require('../nainwak');
 
 function Objet(objet, jeu) {
     var perso = jeu.perso;
-    var degats = perso ? calcul.degats(perso, objet) : undefined;
+    var degats = perso ? nainwak.degats(perso, objet) : undefined;
 
     function render(h) {
         if (degats) {

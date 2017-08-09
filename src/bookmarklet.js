@@ -1,13 +1,14 @@
-var urls = require('./urls');
+var applicationUrls = require('./application-urls');
+var nainwak = require('./nainwak');
 var styles = require('./bookmarklet.css');
 
 function getHref(config) {
     var lines = [
         'javascript:(function(config) {',
         'var w=window, l=w.location, d=w.document, b=d.body, s;',
-        'if (!' + urls.gameUrlRegex + '.test(l.href)) {',
+        'if (!' + nainwak.gameUrlRegex + '.test(l.href)) {',
         '  alert("Connectez-vous sur Nainwak puis cliquez sur « Jouer ! » avant d\'utiliser le Nany");',
-        '  l.assign("' + urls.nainwakUrl + '");',
+        '  l.assign("' + nainwak.url + '");',
         '  return;',
         '}',
         's=d.createElement("script");',
@@ -26,7 +27,7 @@ function getHref(config) {
 
 function Bookmarklet(config) {
     var label = 'Nany ' + config.name;
-    config.scriptUrl = config.scriptUrl || urls.applicationScriptUrl;
+    config.scriptUrl = config.scriptUrl || applicationUrls.scriptUrl;
 
     function render(h) {
         return h('a', {

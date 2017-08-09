@@ -1,6 +1,6 @@
 var assign = require('core-js/library/fn/object/assign');
 var Page = require('./page');
-var calcul = require('../calcul');
+var nainwak = require('../nainwak');
 var dom = require('../dom');
 var analyzeObjets = require('../analyzers/objets');
 var analyzePager = require('../analyzers/pager');
@@ -17,7 +17,7 @@ function analyze(doc, date, jeu) {
 
     // update the 'perso' bonus data according to the objects in 'inventaire'
     if (jeu.perso) {
-        var bonuses = calcul.bonusObjets(jeu.objets.inventaire);
+        var bonuses = nainwak.bonusObjets(jeu.objets.inventaire);
         assign(jeu.perso, bonuses);
     }
 

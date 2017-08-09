@@ -1,5 +1,5 @@
 require('./analyzers');
-require('./calcul');
+require('./nainwak');
 require('./dom');
 require('./http-headers');
 require('./pages');

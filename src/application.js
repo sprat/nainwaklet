@@ -1,5 +1,5 @@
 var array = require('core-js/library/fn/array');
-var urls = require('./urls');
+var applicationUrls = require('./application-urls');
 var Mounter = require('./mounter');
 var analyzeJoueur = require('./analyzers/joueur');
 var Storage = require('./storage');
@@ -151,7 +151,7 @@ function Application(config) {
             link = doc.createElement('link');
             link.setAttribute('rel', 'stylesheet');
             link.setAttribute('type', 'text/css');
-            link.setAttribute('href', urls.applicationCssUrl);
+            link.setAttribute('href', applicationUrls.cssUrl);
             link.setAttribute('id', linkId);
             head.appendChild(link);
         }
