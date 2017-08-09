@@ -1,7 +1,7 @@
 var Page = require('./page');
 var dom = require('../dom');
 var Objet = require('../enhancers/objet');
-var Box = require('../widgets/box');
+var Box = require('../enhancers/box');
 var Mounter = require('../mounter');
 
 function enhance(doc, jeu) {

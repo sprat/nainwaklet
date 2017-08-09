@@ -5,7 +5,7 @@ var dom = require('../dom');
 var analyzeObjets = require('../analyzers/objets');
 var analyzePager = require('../analyzers/pager');
 var Objet = require('../enhancers/objet');
-var Box = require('../widgets/box');
+var Box = require('../enhancers/box');
 var Mounter = require('../mounter');
 
 function analyze(doc, date, jeu) {
