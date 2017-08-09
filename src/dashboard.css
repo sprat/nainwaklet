@@ -1,9 +1,16 @@
 .dashboard {
+    box-sizing: border-box;
     font-family: Verdana, Arial;
     font-size: 11px;
     color: #444;
     background: transparent;
     text-align: left;
+}
+
+.dashboard *,
+.dashboard *:before,
+.dashboard *:after {
+    box-sizing: inherit;
 }
 
 .dashboardTitle {

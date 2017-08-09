@@ -1,9 +1,0 @@
-.mount {
-    box-sizing: border-box;
-}
-
-.mount *,
-.mount *:before,
-.mount *:after {
-    box-sizing: inherit;
-}

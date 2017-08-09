@@ -1,7 +1,6 @@
 var maquette = require('maquette');
 var classNames = require('classnames');
 var dom = require('./dom');
-var styles = require('./mounter.css');
 
 function h(/*arguments*/) {
     var properties = arguments[1];
@@ -37,12 +36,6 @@ var empty = h('div', {
     }
 });
 
-function addStyle(vnode) {
-    var properties = vnode.properties = vnode.properties || {};
-    properties.class = classNames(properties.class, styles.mount);
-    return vnode;
-}
-
 function Mounter() {
     // create a maquette projector for the rendering
     var projector = maquette.createProjector();
@@ -57,7 +50,7 @@ function Mounter() {
         // render the virtual DOM tree
         function renderTree() {
             var rendered = h.render(component);
-            return rendered ? addStyle(rendered) : empty;
+            return rendered ? rendered : empty;
         }
 
         // unmount the component (does not restore the original node)
