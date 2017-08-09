@@ -135,7 +135,7 @@ function Ring(config, storage, refreshUI) {
             var label = isOk ? 'OK' : 'FAIL';
             log(label + ' (' + status + ')');
 
-            if (status === 401) {  // TODO: what about 403?
+            if ((status === 401) || (status === 403)) {
                 logout();  // remove invalid authorization
                 return;
             }
