@@ -4,7 +4,7 @@ var calcul = require('../calcul');
 var dom = require('../dom');
 var analyzeObjets = require('../analyzers/objets');
 var analyzePager = require('../analyzers/pager');
-var Objet = require('../enhancements/objet');
+var Objet = require('../enhancers/objet');
 var Box = require('../widgets/box');
 var Mounter = require('../mounter');
 

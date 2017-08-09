@@ -1,6 +1,6 @@
 var Page = require('./page');
 var dom = require('../dom');
-var Objet = require('../enhancements/objet');
+var Objet = require('../enhancers/objet');
 var Box = require('../widgets/box');
 var Mounter = require('../mounter');
 
