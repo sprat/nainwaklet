@@ -10,12 +10,14 @@ courant vers le serveur de la guilde.
 
 ## A faire
 
-- Tester le module dom !
-- Fournir une interface de login (via popup iframe) et un mécanisme d'authentification
-- Retravailler la limitation des requêtes vers le serveur de guilde en utilisant
-  les mécanismes disponibles dans le standard HTTP (code HTTP 429 & Retry-After)
+- Tester inventaire/transfert avec bonnet
+- Tester enhancement objets avec bonnet
+- refreshUI/scheduleRender dans h ?
+- Page encyclo (sans analyse pour le moment)
+- Analyse page encyclo ?
 - Ajouter une fonction de recherche textuelle dans la page des formules
 - Ajouter un détecteur de formule dans les pages "detect" et "inventaire"
+- Mettre en place une intégration continue ? (Travis ?)
 
 
 ## Pense-bête
