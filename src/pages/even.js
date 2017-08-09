@@ -1,7 +1,7 @@
 var assign = require('core-js/library/fn/object/assign');
 var Page = require('./page');
-var analyzeEvenements = require('../analyzers/evenements');
-var analyzePager = require('../analyzers/pager');
+var analyzeEvenements = require('src/analyzers/evenements');
+var analyzePager = require('src/analyzers/pager');
 
 function analyze(doc, date, jeu) {
     var evenements = analyzeEvenements(doc, date);

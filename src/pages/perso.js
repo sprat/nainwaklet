@@ -1,5 +1,5 @@
 var Page = require('./page');
-var analyzePerso = require('../analyzers/perso');
+var analyzePerso = require('src/analyzers/perso');
 
 function analyze(doc, date, jeu) {
     var perso = analyzePerso(doc, date);

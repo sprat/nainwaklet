@@ -1,4 +1,4 @@
-var nainwak = require('../nainwak');
+var nainwak = require('src/nainwak');
 var styles = require('./objet.css');
 
 function Objet(nom, image, quantite, id, note) {

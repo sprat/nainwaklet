@@ -1,12 +1,12 @@
 var assign = require('core-js/library/fn/object/assign');
 var Page = require('./page');
-var nainwak = require('../nainwak');
-var dom = require('../dom');
-var analyzeObjets = require('../analyzers/objets');
-var analyzePager = require('../analyzers/pager');
-var Objet = require('../enhancers/objet');
-var Box = require('../enhancers/box');
-var Mounter = require('../mounter');
+var nainwak = require('src/nainwak');
+var dom = require('src/dom');
+var analyzeObjets = require('src/analyzers/objets');
+var analyzePager = require('src/analyzers/pager');
+var Objet = require('src/enhancers/objet');
+var Box = require('src/enhancers/box');
+var Mounter = require('src/mounter');
 
 function analyze(doc, date, jeu) {
     var objets = analyzeObjets(doc, date);

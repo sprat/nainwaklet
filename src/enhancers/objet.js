@@ -1,4 +1,4 @@
-var nainwak = require('../nainwak');
+var nainwak = require('src/nainwak');
 
 function Objet(objet, jeu) {
     var perso = jeu.perso;

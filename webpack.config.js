@@ -22,6 +22,11 @@ var uglify = new webpack.optimize.UglifyJsPlugin({
 /* Build configuration for the application */
 var applicationConfig = {
     context: srcDir,
+    resolve: {
+        alias: {
+            'src': srcDir
+        }
+    },
     entry: {
         'nany': './index.js'
     },
