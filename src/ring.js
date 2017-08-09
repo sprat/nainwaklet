@@ -8,12 +8,13 @@ var log = require('./log');
 
 /* Ring class */
 function Ring(config, storage, refreshUI) {
+    // read config
     var updateUrl = config.updateUrl;
     if (!updateUrl) {
         throw 'The ring configuration should specify an updateUrl';
     }
-
     var loginUrl = config.loginUrl;
+    var monitoredPages = config.pages || ['detect', 'invent', 'perso', 'even'];
 
     // authorization key in storage
     var authKey = 'ring:authorization';
@@ -79,9 +80,17 @@ function Ring(config, storage, refreshUI) {
         return storage.get(authKey);
     }
 
-    function send(page, doc, date, analysis, joueur) {
+    function isPageMonitored(page) {
+        return monitoredPages.indexOf(page.type) > -1;
+    }
+
+    function processPage(page, doc, date, analysis, joueur) {
+        if (!isPageMonitored(page)) {
+            return;
+        }
+
         if (!enabled) {
-            log('No update sent: disabled');
+            log('No update sent: updates disabled');
             return;
         }
 
@@ -151,7 +160,7 @@ function Ring(config, storage, refreshUI) {
     }
 
     return {
-        send: send,
+        processPage: processPage,
         render: render
     };
 }

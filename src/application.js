@@ -21,8 +21,6 @@ function Application(config) {
     var infoFrame = frames.info;
     var menuDocument = frames.menu.document;
     var container = frames.pub.document.body;
-    // TODO: move this into the Ring configuration
-    var updatePages = ['detect', 'invent', 'perso', 'even'];
     var jeu = {};  // game information fetched by the current joueur
 
     // analyze the menu in order the get the joueur information
@@ -98,10 +96,6 @@ function Application(config) {
         }
     }
 
-    function shouldSendUpdateForPage(page) {
-        return updatePages.indexOf(page.type) > -1;
-    }
-
     function processPageDocument(url, doc) {
         var date = new Date();
         var page = pages.byUrl(url);
@@ -117,9 +111,9 @@ function Application(config) {
             log(analysis);
         }
 
-        // send an update to the server
-        if (ring && shouldSendUpdateForPage(page)) {
-            ring.send(page, doc, date, analysis, joueur);
+        // send an update to the server if needed
+        if (ring) {
+            ring.processPage(page, doc, date, analysis, joueur);
         }
 
         // enhance the page
