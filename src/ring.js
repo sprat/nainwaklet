@@ -9,6 +9,10 @@ var log = require('./log');
 /* Ring class */
 function Ring(config, storage, refreshUI) {
     var updateUrl = config.updateUrl;
+    if (!updateUrl) {
+        throw 'The ring configuration should specify an updateUrl';
+    }
+
     var loginUrl = config.loginUrl;
 
     // authorization key in storage

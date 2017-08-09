@@ -37,14 +37,18 @@
     <script type="text/javascript">
     Nany.addBookmarklet('.buttons', {
         name: '#B',
-        loginUrl: 'http://b.swinformatique.fr/nany/login.php',
-        updateUrl: 'http://b.swinformatique.fr/nany/update.php'
+        ring: {
+            updateUrl: 'http://b.swinformatique.fr/nany/update.php',
+            loginUrl: 'http://b.swinformatique.fr/nany/login.php'
+        }
     });
 
     Nany.addBookmarklet('.buttons', {
         name: '#B [préprod]',
-        loginUrl: 'http://preb.swinformatique.fr/nany/login.php',
-        updateUrl: 'http://preb.swinformatique.fr/nany/update.php'
+        ring: {
+            updateUrl: 'http://preb.swinformatique.fr/nany/update.php',
+            loginUrl: 'http://preb.swinformatique.fr/nany/login.php'
+        }
     });
     </script>
 </body>

@@ -55,9 +55,8 @@ function Application(config) {
 
     // create the ring if an update URL is available
     var ring;
-    if (config.updateUrl) {
-        // TODO: create a specific ring section into the main config
-        ring = Ring(config, storage, refreshUI);
+    if (config.ring) {
+        ring = Ring(config.ring, storage, refreshUI);
     }
 
     /*
