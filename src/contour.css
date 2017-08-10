@@ -1,0 +1,10 @@
+.contourFrame {
+    width: 100%;
+    border: 0;
+    border-spacing: 0;
+    border-collapse: separate;
+}
+
+.contourFrame > tr > td {
+    padding: 0;
+}

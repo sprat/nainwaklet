@@ -1,15 +1,17 @@
+var Contour = require('src/contour');
 var styles = require('./dashboard.css');
-var contours = require('./contours.css');
 
 // FIXME: Should the dashboard be the application's render function?
 function Dashboard(applicationName, ring) {
     function render(h) {
-        return h('div', { class: styles.dashboard }, [
-            h('div', { class: [contours.VNT, styles.dashboardTitle] }, applicationName),
-            h('div', { class: [contours.TV, styles.dashboardContent] }, [
-                ring ? ring.render(h) : ''
-            ])
-        ]);
+        var contour = Contour(h, Contour.Mutant);
+        return contour.frame([
+            contour.darkTop(),
+            contour.darkBlock(applicationName),
+            contour.darkToLight(),
+            contour.lightBlock(ring ? ring.render(h) : ''),
+            contour.lightBottom()
+        ], styles.dashboard);
     }
 
     return {
