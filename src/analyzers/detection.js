@@ -1,4 +1,4 @@
-var dom = require('src/dom');
+var dom = require('src/utilities/dom');
 var code = require('./code');
 var analyzeTag = require('./tag');
 var classesLabels = require('./classes-labels');

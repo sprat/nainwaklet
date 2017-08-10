@@ -1,5 +1,5 @@
-var applicationUrls = require('./application-urls');
-var nainwak = require('./nainwak');
+var applicationUrls = require('src/application-urls');
+var nainwak = require('src/nainwak');
 var styles = require('./bookmarklet.css');
 
 function getHref(config) {

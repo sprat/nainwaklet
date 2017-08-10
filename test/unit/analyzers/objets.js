@@ -1,6 +1,6 @@
 var test = require('tape-catch');
 var analyzeObjets = require('src/analyzers/objets');
-var parseHTMLDocument = require('test/utils/parse-html-document');
+var parseHTMLDocument = require('test/fixtures/parse-html-document');
 var inventHTML = require('test/fixtures/invent.html');
 var inventDocument = parseHTMLDocument(inventHTML);
 var transfertHTML = require('test/fixtures/transfert.html');

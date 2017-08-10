@@ -1,5 +1,5 @@
 var qs = require('qs');
-var dom = require('src/dom');
+var dom = require('src/utilities/dom');
 
 function getIDS(location) {
     var search = location && location.search;

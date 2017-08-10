@@ -1,7 +1,7 @@
 var array = require('core-js/library/fn/array');
 var decodeEntities = require('htmldec');
 var zipObject = require('zip-object');
-var dom = require('src/dom');
+var dom = require('src/utilities/dom');
 
 function decodeEnt(value) {
     if (typeof value === 'string') {

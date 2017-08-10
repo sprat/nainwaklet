@@ -1,5 +1,5 @@
 var test = require('tape-catch');
-var dom = require('src/dom');
+var dom = require('src/utilities/dom');
 
 function createDOMNodes() {
     var parent = document.createElement('div');

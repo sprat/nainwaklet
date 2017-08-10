@@ -1,10 +1,10 @@
 var xhr = require('xhr');
 var serializeHTML = require('print-html');
-var httpHeaders = require('./http-headers');
-var Button = require('./widgets/button');
-var Window = require('./widgets/window');
+var Button = require('src/widgets/button');
+var Window = require('src/widgets/window');
+var httpHeaders = require('src/utilities/http-headers');
+var log = require('src/utilities/log');
 var styles = require('./ring.css');
-var log = require('./log');
 
 /* Ring class */
 function Ring(config, storage, refreshUI) {

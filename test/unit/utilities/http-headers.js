@@ -1,5 +1,5 @@
 var test = require('tape-catch');
-var httpHeaders = require('src/http-headers');
+var httpHeaders = require('src/utilities/http-headers');
 
 test('httpHeaders.getDate', function (assert) {
     assert.strictEqual(

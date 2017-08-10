@@ -1,14 +1,14 @@
 var array = require('core-js/library/fn/array');
-var applicationUrls = require('./application-urls');
-var Mounter = require('./mounter');
+var applicationUrls = require('src/application-urls');
+var Mounter = require('src/utilities/mounter');
 var analyzeJoueur = require('./analyzers/joueur');
-var Storage = require('./storage');
-var Spy = require('./spy');
-var Ring = require('./ring');
-//var Channel = require('./channel');
-var Dashboard = require('./dashboard');
-var pages = require('./pages');
-var log = require('./log');
+var Storage = require('src/storage');
+var Spy = require('src/spy');
+var Ring = require('src/ring');
+//var Channel = require('src/channel');
+var Dashboard = require('src/dashboard');
+var pages = require('src/pages');
+var log = require('src/utilities/log');
 
 /* Application class */
 function Application(config) {

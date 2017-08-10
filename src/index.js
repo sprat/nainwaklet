@@ -1,8 +1,8 @@
 var array = require('core-js/library/fn/array');
-var Application = require('./application');
-var Bookmarklet = require('./bookmarklet');
-var Mounter = require('./mounter');
-var formules = require('./formules');
+var Application = require('src/application');
+var Bookmarklet = require('src/bookmarklet');
+var Mounter = require('src/utilities/mounter');
+var formules = require('src/formules');
 var mounter = Mounter();
 
 // start/stop the Application on the Nainwak game page

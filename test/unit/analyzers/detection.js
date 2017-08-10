@@ -1,6 +1,6 @@
 var test = require('tape-catch');
 var analyzeDetection = require('src/analyzers/detection');
-var parseHTMLDocument = require('test/utils/parse-html-document');
+var parseHTMLDocument = require('test/fixtures/parse-html-document');
 var detectHTML = require('test/fixtures/detect.html');
 var detectDocument = parseHTMLDocument(detectHTML);
 var now = new Date(1457780950000);

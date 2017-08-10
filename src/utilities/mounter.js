@@ -1,6 +1,6 @@
 var maquette = require('maquette');
 var classNames = require('classnames');
-var dom = require('./dom');
+var dom = require('src/utilities/dom');
 
 function h(/*arguments*/) {
     var properties = arguments[1];
