@@ -91,15 +91,15 @@ function Contour(h, color) {
     };
 }
 
-// Contour colors
-Contour.Accueil = Contour.Yellow = 0;
-Contour.Brave = Contour.Blue = 1;
-Contour.Sadique = Contour.Red = 2;
-Contour.Rampant = Contour.Green = 3;
-Contour.Halloween = Contour.Orange = 4;
-Contour.Pacific = Contour.Pink = 5;
-Contour.SaintPatrick = Contour.DarkGreen = 6;
-Contour.Mutant = Contour.Purple = 7;
-Contour.Noir = 8;
+// Colors
+Contour.Brown = 0;  // Nain-déci
+Contour.Blue = 1;  // Brave
+Contour.Red = 2;  // Sadique
+Contour.Green = 3;  // Rampant
+Contour.Orange = 4;
+Contour.Pink = 5;
+Contour.DarkGreen = 6;
+Contour.Purple = 7;  // Mutant
+Contour.Black = 8;
 
 module.exports = Contour;
