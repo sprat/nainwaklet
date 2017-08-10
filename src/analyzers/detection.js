@@ -1,7 +1,6 @@
 var dom = require('src/utilities/dom');
 var code = require('./code');
 var analyzeTag = require('./tag');
-var classesLabels = require('./classes-labels');
 var int = require('./int');
 
 function analyzeLocalisation(doc) {
@@ -36,7 +35,7 @@ function analyzeNains(js) {
             image: '/images/' + object.photo,
             description: object.description,
             position: [int(object.x), int(object.y)],
-            classe: classesLabels[int(object.classe)],
+            classe: int(object.classe),
             rang: object.cote,
             barbe: int(object.barbe) / 100,
             attaquable: object.attaquer === 'o',

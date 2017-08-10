@@ -1,7 +1,6 @@
 var dom = require('src/utilities/dom');
 var code = require('./code');
 var analyzeTag = require('./tag');
-var classesLabels = require('./classes-labels');
 var int = require('./int');
 
 function getClasses(js) {
@@ -44,7 +43,7 @@ function analyze(doc/*, date*/) {
         nom: dom.find('input[name="nvNain"]', doc).attr('value'),
         image: dom.find('.news-titre img', doc).attr('src'),
         rang: dom.find('#sRang', doc).text(),
-        classe: classesLabels[classes['sRang']],
+        classe: classes['sRang'],
         barbe: characts.sBarbe[0] / characts.sBarbe[1],
         description: dom.find('input[name="description"]', doc).attr('value'),
         arme: dom.find('input[name="nomArme"]', doc).attr('value'),
@@ -92,7 +91,7 @@ function analyze(doc/*, date*/) {
     if (cibleElement) {
         perso.cible = {
             nom: cibleElement.firstChild().text(),
-            classe: classesLabels[classes['sRangCible']],
+            classe: classes['sRangCible'],
             rang: cibleElement.find('#sRangCible').text(),
             barbe: characts.sBarbeCible[0] / characts.sBarbeCible[1]
         };

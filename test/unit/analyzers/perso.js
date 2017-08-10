@@ -12,7 +12,7 @@ test('analyzePerso', function (assert) {
         nom: 'Palme',
         image: '/images/avatar_guilde/fade976ec961a21e13af618e54476d1a5c285d7a.png',
         rang: 'Ami(e) des nains-béciles (des bêtes)',
-        classe: 'brave',
+        classe: 1,
         barbe: 68.06,
         description: "Quitte à taper un petit level, tapez Rêveur ! Gagnant de la palme d'or du meilleur nom de nain.",
         arme: 'Tuba',
@@ -50,7 +50,7 @@ test('analyzePerso', function (assert) {
         giflesRecues: 0,
         cible: {
             nom: 'Nelson',
-            classe: 'sadique',
+            classe: 2,
             rang: 'Cancre (nain-culte)',
             barbe: 61.68
         },

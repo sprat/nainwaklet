@@ -2,6 +2,22 @@
 var url = 'http://www.nainwak.com';
 var gameUrlRegex = /^https?:\/\/(www\.)?nainwak\.com\/jeu\/index\.php/;
 
+// bonus attributes
+var bonusAttributes = ['forceBonus', 'precisionBonus', 'intelligenceBonus', 'vieBonus'];
+
+/*
+ * Retourne le nom de classe d'un nain (i.e. "Brave", "Sadique", "Rampant", etc.)
+ */
+function nomClasse(classe) {
+    return {
+        0: 'Nain-déci',
+        1: 'Brave',
+        2: 'Sadique',
+        3: 'Rampant',
+        7: 'Mutant'
+    }[classe];
+}
+
 /*
  * Calcule les dégâts d'une arme en fonction des caractéristiques du nain
  */
@@ -21,6 +37,9 @@ function degats(perso, objet) {
     };
 }
 
+/*
+ * Fonction utilitaire renvoyant l'offset/delta entre 2 points
+ */
 function offset(point1, point2) {
     var x = Math.abs(point1[0] - point2[0]);
     var y = Math.abs(point1[1] - point2[1]);
@@ -45,13 +64,12 @@ function deplacement(point1, point2) {
     return Math.max(dep[0], dep[1]);
 }
 
-var bonusProperties = ['forceBonus', 'precisionBonus', 'intelligenceBonus', 'vieBonus'];
 /*
  * Calcule le total des bonus apportés par une liste d'objets
  */
 function bonusObjets(objects) {
     var totals = {};
-    bonusProperties.forEach(function (bonus) {
+    bonusAttributes.forEach(function (bonus) {
         totals[bonus] = objects.reduce(function (total, object) { return object[bonus] + total; }, 0);
     });
     return totals;
@@ -60,6 +78,7 @@ function bonusObjets(objects) {
 module.exports = {
     url: url,
     gameUrlRegex: gameUrlRegex,
+    nomClasse: nomClasse,
     degats: degats,
     portee: portee,
     deplacement: deplacement,
