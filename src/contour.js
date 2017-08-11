@@ -2,7 +2,11 @@ var styles = require('./contour.css');
 
 function Contour(h, color) {
     function frame(content, style) {
-        return h('table', { class: ['coul_' + color, styles.contourFrame, style] }, content);
+        var classes = {};
+        for (var c=0; c<9; ++c) {
+            classes['coul_' + c] = (c === color);
+        }
+        return h('table', { class: [styles.contourFrame, style], classes: classes }, content);
     }
 
     function lightBlock(content, style) {
