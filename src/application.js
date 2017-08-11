@@ -64,7 +64,7 @@ function Application(config) {
     */
 
     // create the dashboard object
-    var dashboard = Dashboard(applicationName, ring, storage, refreshUI);
+    var dashboard = Dashboard(applicationName, ring);
 
     // install our UI
     var containerChildren = array.from(container.childNodes);
