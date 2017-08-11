@@ -9,7 +9,7 @@ var distDir = path.join(root, 'dist');
 
 var extractCSS = new ExtractTextPlugin('[name].css');
 var uglify = new webpack.optimize.UglifyJsPlugin({
-    //sourceMap: true,
+    sourceMap: true,
     //mangle: true,
     output: {
         comments: false
