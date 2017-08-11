@@ -1,7 +1,6 @@
 var xhr = require('xhr');
 var serializeHTML = require('print-html');
-var Button = require('src/widgets/button');
-var Window = require('src/widgets/window');
+var Window = require('src/window');
 var httpHeaders = require('src/utilities/http-headers');
 var log = require('src/utilities/log');
 var styles = require('./ring.css');
@@ -63,18 +62,9 @@ function Ring(config, storage, refreshUI) {
         login(authorization);
     });
 
-    // login button
-    var loginButton = Button('Connexion');
-    loginButton.clicked.add(function () {
-        // open the login window
+    function openLoginWindow() {
         loginWindow.open(loginUrl);
-    });
-
-    // logout button
-    var logoutButton = Button('Déconnexion');
-    logoutButton.clicked.add(function () {
-        logout();
-    });
+    }
 
     function getAuthorization() {
         return storage.get(authKey);
@@ -148,14 +138,19 @@ function Ring(config, storage, refreshUI) {
 
     function render(h) {
         var enabledWord = enabled ? 'activée' : 'désactivée';
-        var button;
+
+        var button = '';
         if (loginUrl) {
-            button = enabled ? logoutButton : loginButton;
+            if (enabled) {
+                button = h('button', { key: logout, onclick: logout }, 'Déconnexion');
+            } else {
+                button = h('button', { key: openLoginWindow, onclick: openLoginWindow }, 'Connexion');
+            }
         }
 
         return h('div', { class: styles.ring }, [
             h('p', 'Ring: mise à jour ' + enabledWord),
-            button ? button.render(h) : ''
+            button
         ]);
     }
 

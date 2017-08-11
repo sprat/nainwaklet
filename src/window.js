@@ -130,7 +130,7 @@ function MessagesDispatcher(parentWindow) {
 // Due to cross-origin access restrictions, we can't always attach a unload handler
 // on the child windows. So we must poll the closed status of the windows instead.
 function CloseDetector(pollingDelay) {
-    pollingDelay = pollingDelay || 500;
+    pollingDelay = pollingDelay || 200;
     var mainWindow = window;
     var checks = [];
     var intervalId;

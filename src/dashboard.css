@@ -7,3 +7,29 @@
 .dashboard *:after {
     box-sizing: inherit;
 }
+
+/*
+.dashboard button {
+    padding: 0.25em 0.5em;
+    border: 1px solid #000;
+    border-radius: 5px;
+    color: #FFF;
+    background: #424242;
+    font-weight: bold;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.dashboard button:hover {
+    background: #680068;
+}
+
+.dashboard button:focus {
+    outline: 0;
+}
+
+.dashboard button::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+}
+*/
