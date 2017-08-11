@@ -30,11 +30,7 @@ h.render = function (child) {
     return child;
 };
 
-var empty = h('div', {
-    styles: {
-        display: 'none'
-    }
-});
+var empty = h('span');
 
 function Mounter() {
     // create a maquette projector for the rendering
