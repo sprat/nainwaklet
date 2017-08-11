@@ -1,3 +1,7 @@
 .ring {
     text-align: center;
 }
+
+.ring :first-child {
+    margin-top: 0;
+}
