@@ -1,14 +1,7 @@
+var array = require('core-js/library/fn/array');
 var Signal = require('mini-signals');
-var MessagesDispatcher = require('./messages-dispatcher');
 var messagesDispatcher = MessagesDispatcher();
 var closeDetector = CloseDetector();
-
-function getOrigin(url) {
-    var link = document.createElement('a');
-    link.href = url;
-    link.href = link.href;  // IE 8/9 trick to convert relative to absolute url
-    return link.protocol + '//' + link.host;
-}
 
 function Window() {
     var childWindow;  // child DOM Window
@@ -16,6 +9,13 @@ function Window() {
     var messageReceived = new Signal();
     var closed = new Signal();
     var onMessage = messageReceived.dispatch.bind(messageReceived);
+
+    function getOrigin(url) {
+        var link = document.createElement('a');
+        link.href = url;
+        link.href = link.href;  // IE 8/9 trick to convert relative to absolute url
+        return link.protocol + '//' + link.host;
+    }
 
     function isClosed() {
         return childWindow === undefined || childWindow.closed;
@@ -85,6 +85,45 @@ function Window() {
         // called when a message is received from the child window, with message
         // and origin arguments
         messageReceived: messageReceived
+    };
+}
+
+function MessagesDispatcher(parentWindow) {
+    parentWindow = parentWindow || window;
+
+    // we cannot use window objects or functions as object keys, so we store them
+    // in a array
+    var callbacks = [];
+
+    // register a global handler to receive child windows/frames messages
+    parentWindow.addEventListener('message', function onMessage(event) {
+        callbacks.forEach(function (element) {
+            if (event.source === element.source) {
+                element.callback(event.data, event.origin);
+            }
+        });
+    });
+
+    function add(source, callback) {
+        callbacks.push({
+            source: source,
+            callback: callback
+        });
+    }
+
+    function remove(source, callback) {
+        var index = array.findIndex(callbacks, function (element) {
+            return (element.source === source) && (element.callback === callback);
+        });
+
+        if (index !== -1) {
+            callbacks.splice(index, 1);
+        }
+    }
+
+    return {
+        add: add,
+        remove: remove
     };
 }
 
