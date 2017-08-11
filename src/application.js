@@ -33,7 +33,7 @@ function Application(config) {
     // create a mounter to render our components into the DOM
     var mounter = Mounter();
 
-    function refreshUI() {
+    function scheduleRender() {
         mounter.scheduleRender();
     }
 
@@ -54,7 +54,7 @@ function Application(config) {
     // create the ring if an update URL is available
     var ring;
     if (config.ring) {
-        ring = Ring(config.ring, storage, refreshUI);
+        ring = Ring(config.ring, storage, scheduleRender);
     }
 
     /*

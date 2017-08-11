@@ -6,7 +6,7 @@ var log = require('src/utilities/log');
 var styles = require('./ring.css');
 
 /* Ring class */
-function Ring(config, storage, refreshUI) {
+function Ring(config, storage, scheduleRender) {
     // read config
     var updateUrl = config.updateUrl;
     if (!updateUrl) {
@@ -32,7 +32,7 @@ function Ring(config, storage, refreshUI) {
         enabled = true;
 
         // update the UI
-        refreshUI();
+        scheduleRender();
     }
 
     function logout() {
@@ -43,7 +43,7 @@ function Ring(config, storage, refreshUI) {
         enabled = false;
 
         // update the UI
-        refreshUI();
+        scheduleRender();
     }
 
     // login window
