@@ -6,7 +6,7 @@ var formules = require('src/formules');
 var mounter = Mounter();
 
 // start/stop the Application on the Nainwak game page
-function run(config) {
+function runInGame(config) {
     var app = window.nanyApplication;
 
     // if the application is already launched, stop it
@@ -29,7 +29,7 @@ function addComponent(createComponent) {
 }
 
 module.exports = Object.freeze({
-    run: run,
+    runInGame: runInGame,
     addBookmarklet: addComponent(Bookmarklet),
     addFormules: addComponent(function() { return formules; })
 });

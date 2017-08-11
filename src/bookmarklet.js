@@ -16,7 +16,7 @@ function getHref(config) {
         's.src=config.scriptUrl;',
         's.charset="utf-8";',
         's.onload=function() {',
-        '  Nany.run(config);',
+        '  Nany.runInGame(config);',
         '  b.removeChild(s);',
         '};',
         'b.appendChild(s);',
