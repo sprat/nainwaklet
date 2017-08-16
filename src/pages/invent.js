@@ -19,9 +19,7 @@ function analyze(doc, date, jeu) {
         // update the 'perso' bonus data according to the objects in 'inventaire'
         var bonuses = nainwak.bonusObjets(jeu.objets.inventaire);
         assign(jeu.perso, bonuses);
-
-        // update the 'perso' vie
-        jeu.perso.vie = pager.vie;
+        assign(jeu.perso, pager);
     }
 
     return {

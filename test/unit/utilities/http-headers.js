@@ -26,7 +26,7 @@ test('httpHeaders.getRetryAfter', function (assert) {
         'no retry-after'
     );
 
-    assert.equal(
+    assert.strictEqual(
         httpHeaders.getRetryAfter({
             'retry-after': 'Thu, 06 Oct 2016 09:01:00 GMT'
         }).toISOString(),
@@ -34,7 +34,7 @@ test('httpHeaders.getRetryAfter', function (assert) {
         'date retry-after'
     );
 
-    assert.equal(
+    assert.strictEqual(
         httpHeaders.getRetryAfter({
             'date': 'Thu, 06 Oct 2016 09:00:00 GMT',
             'retry-after': '60'
