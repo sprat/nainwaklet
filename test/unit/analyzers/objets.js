@@ -10,6 +10,33 @@ var now = new Date(1457780950000);
 test('analyzeObjets: invent', function (assert) {
     var objets = analyzeObjets(inventDocument, now);
 
+    assert.equal(objets.bonnet.length, 1, 'number of objets in bonnet') ;
+    assert.equal(objets.inventaire.length, 14, 'number of objets in inventaire') ;
+
+    assert.deepEqual(objets.bonnet[0], {
+        id: 23779038,
+        nom: 'Potion de respécialisation',
+        image: '/images/objets/potion_reset.png',
+        description: 'Le pôle emploi te propose de changer de métier en revalorisant ton XP. ',
+        type: 'special',
+        PAutiliser: 24,
+        portee: 0,
+        dommages: 0,
+        rechargement: 0,
+        PV: 100,
+        PVmax: 100,
+        PAreparer: 0,
+        dispo: 0,
+        forceBonus: 0,
+        precisionBonus: 0,
+        vieBonus: 0,
+        intelligenceBonus: 0,
+        collant: false,
+        reparable: false,
+        poussiere: -1
+    }, 'bonnet[0] : potion de respécialisation');
+
+
     assert.deepEqual(objets.inventaire[0], {
         id: 25186146,
         nom: 'Arquebuse naine',
@@ -199,6 +226,9 @@ test('analyzeObjets: invent', function (assert) {
 
 test('analyzeObjets: transfert', function (assert) {
     var objets = analyzeObjets(transfertDocument, now);
+
+    assert.equal(objets.sol.length, 1, 'number of objets in sol') ;
+    assert.equal(objets.inventaire.length, 13, 'number of objets in inventaire') ;
 
     assert.deepEqual(objets.sol[0], {
         id: 3819679,

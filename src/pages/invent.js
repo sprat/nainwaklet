@@ -15,10 +15,13 @@ function analyze(doc, date, jeu) {
     jeu.objets = jeu.objets || {};
     assign(jeu.objets, objets);
 
-    // update the 'perso' bonus data according to the objects in 'inventaire'
     if (jeu.perso) {
+        // update the 'perso' bonus data according to the objects in 'inventaire'
         var bonuses = nainwak.bonusObjets(jeu.objets.inventaire);
         assign(jeu.perso, bonuses);
+
+        // update the 'perso' vie
+        jeu.perso.vie = pager.vie;
     }
 
     return {

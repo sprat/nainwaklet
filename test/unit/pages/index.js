@@ -1,5 +1,8 @@
+require('./invent');
+
 var test = require('tape-catch');
 var pages = require('src/pages');
+
 
 test('pages.list', function (assert) {
     assert.ok(pages.list.length > 0, 'liste non vide');
