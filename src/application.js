@@ -21,11 +21,11 @@ function Application(config) {
     var infoFrame = frames.info;
     var menuDocument = frames.menu.document;
     var container = frames.pub.document.body;
-    var jeu = {};  // game information fetched by the current joueur
+    var context = {};  // game information fetched by the current joueur
 
     // analyze the menu in order the get the joueur information
     var joueur = analyzeJoueur(menuDocument, new Date());
-    jeu.joueur = joueur;
+    context.joueur = joueur;
 
     // add the nany CSS into the container document...
     var removeCSS = addCSS(container.ownerDocument);
@@ -38,7 +38,7 @@ function Application(config) {
     }
 
     // create a storage to save the settings of the current player
-    var storage = Storage('Nany/' + applicationName + '/' + jeu.joueur.nom);
+    var storage = Storage('Nany/' + applicationName + '/' + context.joueur.nom);
 
     // create the spy if the info frame is available
     var spy;
@@ -107,7 +107,7 @@ function Application(config) {
 
         // analyze the page
         if (page.analyze) {
-            analysis = page.analyze(doc, date, jeu);
+            analysis = page.analyze(doc, date, context);
             log(analysis);
         }
 
@@ -122,13 +122,13 @@ function Application(config) {
             addCSS(doc);
 
             // enhance
-            page.enhance(doc, jeu);
+            page.enhance(doc, context);
         }
     }
 
     function loadPersoPage() {
         var persoPage = pages.byType('perso');
-        var joueur = jeu.joueur;
+        var joueur = context.joueur;
 
         log('Loading perso page');
         persoPage.fetch(joueur.ids, function (response) {

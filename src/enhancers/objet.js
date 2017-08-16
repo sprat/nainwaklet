@@ -1,7 +1,7 @@
 var nainwak = require('src/nainwak');
 
-function Objet(objet, jeu) {
-    var perso = jeu.perso;
+function Objet(objet, context) {
+    var perso = context.perso;
     var degats = perso ? nainwak.degats(perso, objet) : undefined;
 
     function render(h) {

@@ -8,18 +8,18 @@ var Objet = require('src/enhancers/objet');
 var Box = require('src/enhancers/box');
 var Mounter = require('src/utilities/mounter');
 
-function analyze(doc, date, jeu) {
+function analyze(doc, date, context) {
     var objets = analyzeObjets(doc, date);
     var pager = analyzePager(doc, date);
 
-    jeu.objets = jeu.objets || {};
-    assign(jeu.objets, objets);
+    context.objets = context.objets || {};
+    assign(context.objets, objets);
 
-    if (jeu.perso) {
+    if (context.perso) {
         // update the 'perso' bonus data according to the objects in 'inventaire'
-        var bonuses = nainwak.bonusObjets(jeu.objets.inventaire);
-        assign(jeu.perso, bonuses);
-        assign(jeu.perso, pager);
+        var bonuses = nainwak.bonusObjets(context.objets.inventaire);
+        assign(context.perso, bonuses);
+        assign(context.perso, pager);
     }
 
     return {
@@ -35,15 +35,15 @@ function findObjetsContainers(doc) {
     });
 }
 
-function enhance(doc, jeu) {
+function enhance(doc, context) {
     var mounter = Mounter();
-    var bonnet = jeu.objets.bonnet || [];
-    var inventaire = jeu.objets.inventaire || [];
+    var bonnet = context.objets.bonnet || [];
+    var inventaire = context.objets.inventaire || [];
     var objets = bonnet.concat(inventaire);
     var containers = findObjetsContainers(doc);
 
     containers.forEach(function (container, index) {
-        mounter.prepend(container, Box(Objet(objets[index], jeu)));
+        mounter.prepend(container, Box(Objet(objets[index], context)));
     });
 }
 

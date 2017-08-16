@@ -6,7 +6,7 @@ var inventHTML = require('test/fixtures/invent-enhancement.html');
 var inventDocument = parseHTMLDocument(inventHTML);
 
 test('inventPage.analyze', function (assert) {
-    var jeu = {
+    var context = {
         perso: createPerso(),
         objets: {
             sol: [{
@@ -56,7 +56,7 @@ test('inventPage.analyze', function (assert) {
         }
     };
 
-    var analysis = inventPage.analyze(inventDocument, new Date(), jeu);
+    var analysis = inventPage.analyze(inventDocument, new Date(), context);
 
     var objets = analysis.objets;
     assert.strictEqual(objets.sol, undefined, 'analysis: objets in sol');
@@ -71,15 +71,15 @@ test('inventPage.analyze', function (assert) {
         nainxpressNonLu: false
     }, 'analysis: pager');
 
-    assert.strictEqual(jeu.objets.sol.length, 1, 'jeu: objets in sol');
-    assert.strictEqual(jeu.objets.bonnet.length, 1, 'jeu: objets in bonnet');
-    assert.strictEqual(jeu.objets.inventaire.length, 14, 'jeu: objets in inventaire');
+    assert.strictEqual(context.objets.sol.length, 1, 'context: objets in sol');
+    assert.strictEqual(context.objets.bonnet.length, 1, 'context: objets in bonnet');
+    assert.strictEqual(context.objets.inventaire.length, 14, 'context: objets in inventaire');
 
-    assert.strictEqual(jeu.perso.vieTotal, 134, 'jeu: perso.vieTotal');
-    assert.strictEqual(jeu.perso.force, 25, 'jeu: perso.force');
-    assert.strictEqual(jeu.perso.precision, 325, 'jeu: perso.precision');
-    assert.strictEqual(jeu.perso.intelligence, 90, 'jeu: perso.intelligence');
-    assert.strictEqual(jeu.perso.vie, 149, 'jeu: perso.vie');
+    assert.strictEqual(context.perso.vieTotal, 134, 'context: perso.vieTotal');
+    assert.strictEqual(context.perso.force, 25, 'context: perso.force');
+    assert.strictEqual(context.perso.precision, 325, 'context: perso.precision');
+    assert.strictEqual(context.perso.intelligence, 90, 'context: perso.intelligence');
+    assert.strictEqual(context.perso.vie, 149, 'context: perso.vie');
 
     assert.end();
 });
