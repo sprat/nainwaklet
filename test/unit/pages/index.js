@@ -1,4 +1,5 @@
 require('./invent');
+require('./transfert');
 
 var test = require('tape-catch');
 var pages = require('src/pages');
