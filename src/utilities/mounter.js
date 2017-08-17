@@ -30,9 +30,7 @@ h.render = function (child) {
     return child;
 };
 
-var empty = h('span');
-
-function Mounter() {
+function Mounter(name) {
     // create a maquette projector for the rendering
     var projector = maquette.createProjector();
 
@@ -45,8 +43,10 @@ function Mounter() {
     function mount(method, element, component) {
         // render the virtual DOM tree
         function renderTree() {
-            var rendered = h.render(component);
-            return rendered ? rendered : empty;
+            var root = h.render(component) || h('span');
+            root.properties = root.properties || {};
+            root.properties['data-mounter'] = name || '';
+            return root;
         }
 
         // unmount the component (does not restore the original node)

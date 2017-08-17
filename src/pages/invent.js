@@ -6,7 +6,6 @@ var analyzeObjets = require('src/analyzers/objets');
 var analyzePager = require('src/analyzers/pager');
 var Objet = require('src/enhancers/objet');
 var Box = require('src/enhancers/box');
-var Mounter = require('src/utilities/mounter');
 
 function analyze(doc, date, context) {
     var objets = analyzeObjets(doc, date);
@@ -35,8 +34,7 @@ function findObjetsContainers(doc) {
     });
 }
 
-function enhance(doc, context) {
-    var mounter = Mounter();
+function enhance(doc, mounter, context) {
     var bonnet = context.objets.bonnet || [];
     var inventaire = context.objets.inventaire || [];
     var objets = bonnet.concat(inventaire);

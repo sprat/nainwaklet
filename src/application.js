@@ -31,7 +31,7 @@ function Application(config) {
     var removeCSS = addCSS(container.ownerDocument);
 
     // create a mounter to render our components into the DOM
-    var mounter = Mounter();
+    var mounter = Mounter('nany:dashboard');
 
     function scheduleRender() {
         mounter.scheduleRender();
@@ -99,6 +99,7 @@ function Application(config) {
     function processPageDocument(url, doc) {
         var date = new Date();
         var page = pages.byUrl(url);
+        var mounter = Mounter('nany:enhancement');
         var analysis;
 
         if (!page) {
@@ -122,7 +123,7 @@ function Application(config) {
             addCSS(doc);
 
             // enhance
-            page.enhance(doc, context);
+            page.enhance(doc, mounter, context);
         }
     }
 
