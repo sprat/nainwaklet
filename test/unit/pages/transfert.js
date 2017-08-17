@@ -3,16 +3,17 @@ var transfert = require('src/pages/transfert');
 var createPerso = require('test/fixtures/create-perso');
 var parseHTMLDocument = require('test/fixtures/parse-html-document');
 var transfertHTML = require('test/fixtures/transfert.html');
-var transfertDocument = parseHTMLDocument(transfertHTML);
 var now = new Date(1457780950000);
 
 test('pages/transfert.analyze', function (assert) {
     var context = createContext();
-    var analysis = transfert.analyze(transfertDocument, now, context);
+    var doc = parseHTMLDocument(transfertHTML);
+    var analysis = transfert.analyze(doc, now, context);
     var objets = analysis.objets;
 
-    assert.strictEqual(objets.sol.length, 1, 'number of objets in sol') ;
-    assert.strictEqual(objets.inventaire.length, 13, 'number of objets in inventaire') ;
+    assert.strictEqual(objets.bonnet, undefined, 'analysis: number of objets in bonnet') ;
+    assert.strictEqual(objets.sol.length, 1, 'analysis: number of objets in sol') ;
+    assert.strictEqual(objets.inventaire.length, 13, 'analysis: number of objets in inventaire') ;
 
     assert.deepEqual(objets.sol[0], {
         id: 3819679,
@@ -60,11 +61,76 @@ test('pages/transfert.analyze', function (assert) {
         poussiere: 2404936
     }, 'inventaire[0] : arquebuse naine');
 
+    assert.deepEqual(analysis.pager, {
+        PA: 5,
+        vie: 149,
+        position: [15, 4],
+        messagesNonLus: 0,
+        nainxpressNonLu: false
+    }, 'analysis: pager');
+
+    // check context
+    assert.strictEqual(context.objets.sol.length, 1, 'context: objets in sol');
+    assert.strictEqual(context.objets.bonnet.length, 1, 'context: objets in bonnet');
+    assert.strictEqual(context.objets.inventaire.length, 13, 'context: objets in inventaire');
+
+    assert.strictEqual(context.perso.vieTotal, 134, 'context: perso.vieTotal');
+    assert.strictEqual(context.perso.force, 31, 'context: perso.force');
+    assert.strictEqual(context.perso.precision, 310, 'context: perso.precision');
+    assert.strictEqual(context.perso.intelligence, 90, 'context: perso.intelligence');
+    assert.strictEqual(context.perso.vie, 149, 'context: perso.vie');
+
     assert.end();
 });
 
 function createContext() {
     return {
-        perso: createPerso()
+        perso: createPerso(),
+        objets: {
+            bonnet: [{
+                id: 23779038,
+                nom: 'Potion de respécialisation',
+                image: '/images/objets/potion_reset.png',
+                description: 'Le pôle emploi te propose de changer de métier en revalorisant ton XP. ',
+                type: 'special',
+                PAutiliser: 24,
+                portee: 0,
+                dommages: 0,
+                rechargement: 0,
+                PV: 100,
+                PVmax: 100,
+                PAreparer: 0,
+                dispo: 0,
+                forceBonus: 0,
+                precisionBonus: 0,
+                vieBonus: 0,
+                intelligenceBonus: 0,
+                collant: false,
+                reparable: false,
+                poussiere: -1
+            }],
+            inventaire: [{
+                id: 25186146,
+                nom: 'Arquebuse naine',
+                image: '/images/objets/arquebuse.gif',
+                description: '',
+                type: 'arme',
+                PAutiliser: 10,
+                portee: 2,
+                dommages: 20,
+                rechargement: 1,
+                PV: 100,
+                PVmax: 100,
+                PAreparer: 7,
+                dispo: -14264,
+                forceBonus: 0,
+                precisionBonus: 0,
+                vieBonus: 0,
+                intelligenceBonus: 0,
+                collant: false,
+                reparable: true,
+                poussiere: 2404936
+            }]
+        }
     };
 }
