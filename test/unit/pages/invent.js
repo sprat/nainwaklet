@@ -1,14 +1,16 @@
 var test = require('tape-catch');
 var invent = require('src/pages/invent');
+var dom = require('src/utilities/dom');
+var Mounter = require('src/utilities/mounter');
 var createPerso = require('test/fixtures/create-perso');
 var parseHTMLDocument = require('test/fixtures/parse-html-document');
 var inventHTML = require('test/fixtures/invent.html');
-var inventDocument = parseHTMLDocument(inventHTML);
 var now = new Date(1457780950000);
 
 test('pages/invent.analyze', function (assert) {
     var context = createContext();
-    var analysis = invent.analyze(inventDocument, now, context);
+    var doc = parseHTMLDocument(inventHTML);
+    var analysis = invent.analyze(doc, now, context);
     var objets = analysis.objets;
 
     assert.strictEqual(objets.sol, undefined, 'analysis: number of objets in sol');
@@ -245,7 +247,26 @@ test('pages/invent.analyze', function (assert) {
     assert.end();
 });
 
-// TODO: check enhancement
+test('pages/invent.enhance', function (assert) {
+    var context = createContext();
+    var mounter = Mounter('test');
+    var doc = parseHTMLDocument(inventHTML);
+    invent.analyze(doc, now, context);
+    invent.enhance(doc, mounter, context);
+
+    var boxes = dom.findAll('div[data-mounter="test"]', doc);
+    assert.strictEqual(3, boxes.length);
+
+    // Perso: precision=325 -> dommages * 4.05
+    // Arquebuse naine: dommages=20
+    assert.strictEqual(boxes[0].text(), 'Dégâts : entre 77 et 85');
+    // Boomrang feu: dommages=30
+    assert.strictEqual(boxes[1].text(), 'Dégâts : entre 115 et 128');
+    // Revolver 6 coups: dommages=15
+    assert.strictEqual(boxes[2].text(), 'Dégâts : entre 58 et 64');
+
+    assert.end();
+});
 
 function createContext() {
     return {
