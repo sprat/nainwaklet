@@ -2,13 +2,13 @@ var assign = require('core-js/library/fn/object/assign');
 var Page = require('./page');
 var nainwak = require('src/nainwak');
 var dom = require('src/utilities/dom');
-var analyzeObjets = require('src/analyzers/objets');
+var objetsAnalyzer = require('src/analyzers/objets');
 var analyzePager = require('src/analyzers/pager');
 var Objet = require('src/enhancers/objet');
 var Box = require('src/enhancers/box');
 
 function analyze(doc, date, context) {
-    var objets = analyzeObjets(doc, date);
+    var objets = objetsAnalyzer.analyzeDocument(doc, date);
     var pager = analyzePager(doc, date);
 
     context.objets = context.objets || {};

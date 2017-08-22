@@ -2,13 +2,13 @@ var assign = require('core-js/library/fn/object/assign');
 var Page = require('./page');
 var nainwak = require('src/nainwak');
 var dom = require('src/utilities/dom');
-var analyzeObjets = require('src/analyzers/objets');
+var objetsAnalyzer = require('src/analyzers/objets');
 var analyzePager = require('src/analyzers/pager');
 var Objet = require('src/enhancers/objet');
 var Box = require('src/enhancers/box');
 
 function analyze(doc, date, context) {
-    var objets = analyzeObjets(doc, date);
+    var objets = objetsAnalyzer.analyzeDocument(doc, date);
     var pager = analyzePager(doc, date);
 
     context.objets = context.objets || {};
@@ -27,21 +27,15 @@ function analyze(doc, date, context) {
     };
 }
 
-function findObjetsContainers(doc) {
-    var objetsTables = dom.findAll('table', doc);
-    return objetsTables.map(function (objetTable) {
-        return objetTable.find('.news-text');  // first .news-text td in table
-    });
-}
-
 function enhance(doc, mounter, context) {
-    var bonnet = context.objets.bonnet || [];
-    var inventaire = context.objets.inventaire || [];
-    var objets = bonnet.concat(inventaire);
-    var containers = findObjetsContainers(doc);
+    var actionLinks = dom.findAll('a[href*="action"]', doc);
 
-    containers.forEach(function (container, index) {
-        mounter.prepend(container, Box(Objet(objets[index], context)));
+    actionLinks.forEach(function (actionLink) {
+        var container = actionLink.parent().node;
+        var objet = objetsAnalyzer.analyzeActionLink(actionLink, context);
+        if (objet) {
+            mounter.prepend(container, Box(Objet(objet, context)));
+        }
     });
 }
 

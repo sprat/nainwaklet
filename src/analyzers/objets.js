@@ -1,3 +1,5 @@
+var array = require('core-js/library/fn/array');
+var qs = require('qs');
 var code = require('./code');
 var int = require('./int');
 
@@ -9,9 +11,33 @@ var listNames = {
     fee: 'fee'  // quand on fait une recette ?
 };
 
+var idParams = {  // nom du paramètre donnant l'id de l'objet dans certaines actions
+    bonnet: 'idbonnet',
+    poser: 'idinv',
+    ramasser: 'idsol'
+};
+
 // valeurs pour type: 'arme', 'rune', 'detecteur', 'vehicule', 'manger', 'special', 'inutile'
 
-function analyze(doc/*, date*/) {
+function analyzeActionLink(actionLink, context) {
+    // extract the query string of the action link
+    var query = actionLink.node.search.substring(1);
+    var params = qs.parse(query);
+
+    // read the action parameter and determine the target list and objet id
+    var action = params['action'];
+    var listName = listNames[action];
+    var list = context.objets[listName];
+    var idParam = idParams[action];
+    var id = int(params[idParam]);
+
+    // try to find the objet in the target list
+    return array.find(list, function (objet) {
+        return objet.id === id;
+    });
+}
+
+function analyzeDocument(doc/*, date*/) {
     var js = code.getInlineJS(doc);
     var regex = /mip\((.*)\);/ig;
     var keys = 'idtable,nomobjet,photoobjet,descriptionobjet,model,typeobjet,PAutiliser,portee,effet,recharg,PV,PVmax,PAreparer,dispo,PFobj,PPobj,PVobj,PIobj,collant,reparable,poussiere'.split(',');
@@ -68,4 +94,7 @@ function analyze(doc/*, date*/) {
     return lists;
 }
 
-module.exports = analyze;
+module.exports = {
+    analyzeDocument: analyzeDocument,
+    analyzeActionLink: analyzeActionLink
+};
