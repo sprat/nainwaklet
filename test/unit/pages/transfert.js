@@ -1,5 +1,7 @@
 var test = require('tape-catch');
 var transfert = require('src/pages/transfert');
+var dom = require('src/utilities/dom');
+var Mounter = require('src/utilities/mounter');
 var createPerso = require('test/fixtures/create-perso');
 var parseHTMLDocument = require('test/fixtures/parse-html-document');
 var transfertHTML = require('test/fixtures/transfert.html');
@@ -79,6 +81,27 @@ test('pages/transfert.analyze', function (assert) {
     assert.strictEqual(context.perso.precision, 310, 'context: perso.precision');
     assert.strictEqual(context.perso.intelligence, 90, 'context: perso.intelligence');
     assert.strictEqual(context.perso.vie, 149, 'context: perso.vie');
+
+    assert.end();
+});
+
+test('pages/transfert.enhance', function (assert) {
+    var context = createContext();
+    var mounter = Mounter('test');
+    var doc = parseHTMLDocument(transfertHTML);
+    transfert.analyze(doc, now, context);
+    transfert.enhance(doc, mounter, context);
+
+    var boxes = dom.findAll('div[data-mounter="test"]', doc);
+    assert.strictEqual(3, boxes.length);
+
+    // Perso: precision=310 -> dommages * 3.9
+    // Arquebuse naine: dommages=20
+    assert.strictEqual(boxes[0].text(), 'Dégâts : entre 74 et 82');
+    // Boomrang feu: dommages=30
+    assert.strictEqual(boxes[1].text(), 'Dégâts : entre 111 et 123');
+    // Revolver 6 coups: dommages=15
+    assert.strictEqual(boxes[2].text(), 'Dégâts : entre 56 et 61');
 
     assert.end();
 });

@@ -27,21 +27,15 @@ function analyze(doc, date, context) {
     };
 }
 
-function findObjetsContainers(doc) {
-    var objetsTables = dom.findAll('table', doc);
-    return objetsTables.map(function (objetTable) {
-        return objetTable.find('.news-text');  // first .news-text td in table
-    });
-}
-
 function enhance(doc, mounter, context) {
-    var sol = context.objets.sol || [];
-    var inventaire = context.objets.inventaire || [];
-    var objets = sol.concat(inventaire);
-    var containers = findObjetsContainers(doc);
+    var actionLinks = dom.findAll('a[href*="action"]', doc);
 
-    containers.forEach(function (container, index) {
-        mounter.prepend(container, Box(Objet(objets[index], context)));
+    actionLinks.forEach(function (actionLink) {
+        var container = actionLink.parent().node;
+        var objet = objetsAnalyzer.analyzeActionLink(actionLink, context);
+        if (objet) {
+            mounter.prepend(container, Box(Objet(objet, context)));
+        }
     });
 }
 
