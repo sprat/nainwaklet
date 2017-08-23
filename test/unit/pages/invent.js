@@ -7,7 +7,7 @@ var parseHTMLDocument = require('test/fixtures/parse-html-document');
 var inventHTML = require('test/fixtures/invent.html');
 var now = new Date(1457780950000);
 
-test('pages/invent.analyze', function (assert) {
+test('pages/invent: analyze', function (assert) {
     var context = createContext();
     var doc = parseHTMLDocument(inventHTML);
     var analysis = invent.analyze(doc, now, context);
@@ -247,7 +247,7 @@ test('pages/invent.analyze', function (assert) {
     assert.end();
 });
 
-test('pages/invent.enhance', function (assert) {
+test('pages/invent: enhance', function (assert) {
     var context = createContext();
     var mounter = Mounter('test');
     var doc = parseHTMLDocument(inventHTML);

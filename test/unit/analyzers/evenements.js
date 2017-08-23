@@ -5,7 +5,7 @@ var evenHTML = require('test/fixtures/even.html');
 var evenDocument = parseHTMLDocument(evenHTML);
 var now = new Date(1457780950000);
 
-test('analyzeEvenements', function (assert) {
+test('analyzers/evenements: analyze', function (assert) {
     var evenements = analyzeEvenements(evenDocument, now);
 
     //12h09 (sam. 12/03) xØu a pris un(e) Hache sur le sol.

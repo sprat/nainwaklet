@@ -7,7 +7,7 @@ var parseHTMLDocument = require('test/fixtures/parse-html-document');
 var transfertHTML = require('test/fixtures/transfert.html');
 var now = new Date(1457780950000);
 
-test('pages/transfert.analyze', function (assert) {
+test('pages/transfert: analyze', function (assert) {
     var context = createContext();
     var doc = parseHTMLDocument(transfertHTML);
     var analysis = transfert.analyze(doc, now, context);
@@ -85,7 +85,7 @@ test('pages/transfert.analyze', function (assert) {
     assert.end();
 });
 
-test('pages/transfert.enhance', function (assert) {
+test('pages/transfert: enhance', function (assert) {
     var context = createContext();
     var mounter = Mounter('test');
     var doc = parseHTMLDocument(transfertHTML);

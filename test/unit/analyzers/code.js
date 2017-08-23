@@ -1,7 +1,7 @@
 var test = require('tape-catch');
 var code = require('src/analyzers/code');
 
-test('code.getInlineJS', function (assert) {
+test('analyzers/code: getInlineJS', function (assert) {
     var source = "function myHelloWorld() { console.log('Hello world!'); }";
     var script = document.createElement('script');
     script.textContent = source;

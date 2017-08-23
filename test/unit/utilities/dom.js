@@ -30,7 +30,7 @@ function createDOMNodes() {
     };
 }
 
-test('dom.find', function (assert) {
+test('utilities/dom: find', function (assert) {
     var nodes = createDOMNodes();
 
     assert.strictEqual(dom.find('.parent').node, nodes.parent, 'find child');
@@ -42,7 +42,7 @@ test('dom.find', function (assert) {
     assert.end();
 });
 
-test('dom.findAll', function (assert) {
+test('utilities/dom: findAll', function (assert) {
     var nodes = createDOMNodes();
     var children = dom.findAll('.child');
 
@@ -56,7 +56,7 @@ test('dom.findAll', function (assert) {
     assert.end();
 });
 
-test('dom.Element.find', function (assert) {
+test('utilities/dom: Element.find', function (assert) {
     var nodes = createDOMNodes();
     var body = dom.Element(document.body);
 
@@ -69,7 +69,7 @@ test('dom.Element.find', function (assert) {
     assert.end();
 });
 
-test('dom.Element.findAll', function (assert) {
+test('utilities/dom: Element.findAll', function (assert) {
     var nodes = createDOMNodes();
     var body = dom.Element(document.body);
     var children = body.findAll('.child');
@@ -84,7 +84,7 @@ test('dom.Element.findAll', function (assert) {
     assert.end();
 });
 
-test('dom.Element.parent', function (assert) {
+test('utilities/dom: Element.parent', function (assert) {
     var nodes = createDOMNodes();
     var child1 = dom.Element(nodes.child1);
 
@@ -96,7 +96,7 @@ test('dom.Element.parent', function (assert) {
     assert.end();
 });
 
-test('dom.Element.children', function (assert) {
+test('utilities/dom: Element.children', function (assert) {
     var nodes = createDOMNodes();
     var parent = dom.Element(nodes.parent);
     var children = parent.children();
@@ -111,7 +111,7 @@ test('dom.Element.children', function (assert) {
     assert.end();
 });
 
-test('dom.Element.firstChild', function (assert) {
+test('utilities/dom: Element.firstChild', function (assert) {
     var nodes = createDOMNodes();
     var parent = dom.Element(nodes.parent);
 
@@ -123,7 +123,7 @@ test('dom.Element.firstChild', function (assert) {
     assert.end();
 });
 
-test('dom.Element.lastChild', function (assert) {
+test('utilities/dom: Element.lastChild', function (assert) {
     var nodes = createDOMNodes();
     var parent = dom.Element(nodes.parent);
 
@@ -135,7 +135,7 @@ test('dom.Element.lastChild', function (assert) {
     assert.end();
 });
 
-test('dom.Element.text', function (assert) {
+test('utilities/dom: Element.text', function (assert) {
     var nodes = createDOMNodes();
     var child1 = dom.Element(nodes.child1);
 
@@ -147,7 +147,7 @@ test('dom.Element.text', function (assert) {
     assert.end();
 });
 
-test('dom.Element.html', function (assert) {
+test('utilities/dom: Element.html', function (assert) {
     var nodes = createDOMNodes();
     var child1 = dom.Element(nodes.child1);
 
@@ -159,7 +159,7 @@ test('dom.Element.html', function (assert) {
     assert.end();
 });
 
-test('dom.Element.attr', function (assert) {
+test('utilities/dom: Element.attr', function (assert) {
     var nodes = createDOMNodes();
     var child1 = dom.Element(nodes.child1);
 
@@ -171,7 +171,7 @@ test('dom.Element.attr', function (assert) {
     assert.end();
 });
 
-test('dom.Element.append', function (assert) {
+test('utilities/dom: Element.append', function (assert) {
     var nodes = createDOMNodes();
     var parent = dom.Element(nodes.parent);
     var div = document.createElement('div');
@@ -188,7 +188,7 @@ test('dom.Element.append', function (assert) {
     assert.end();
 });
 
-test('dom.Element.prepend', function (assert) {
+test('utilities/dom: Element.prepend', function (assert) {
     var nodes = createDOMNodes();
     var parent = dom.Element(nodes.parent);
     var div = document.createElement('div');

@@ -5,7 +5,7 @@ var detectHTML = require('test/fixtures/detect.html');
 var detectDocument = parseHTMLDocument(detectHTML);
 var now = new Date(1457780950000);
 
-test('analyzeDetection', function (assert) {
+test('analyzers/detection: analyze', function (assert) {
     var detection = analyzeDetection(detectDocument, now);
 
     // localisation

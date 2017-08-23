@@ -1,7 +1,7 @@
 var test = require('tape-catch');
 var httpHeaders = require('src/utilities/http-headers');
 
-test('httpHeaders.getDate', function (assert) {
+test('utilities/http-headers: getDate', function (assert) {
     assert.strictEqual(
         httpHeaders.getDate({}),
         undefined,
@@ -19,7 +19,7 @@ test('httpHeaders.getDate', function (assert) {
     assert.end();
 });
 
-test('httpHeaders.getRetryAfter', function (assert) {
+test('utilities/http-headers: getRetryAfter', function (assert) {
     assert.strictEqual(
         httpHeaders.getRetryAfter({}),
         undefined,

@@ -5,7 +5,7 @@ var inventHTML = require('test/fixtures/invent.html');
 var inventDocument = parseHTMLDocument(inventHTML);
 var now = new Date(1457780950000);
 
-test('analyzePager', function (assert) {
+test('analyzers/pager: analyze', function (assert) {
     var pager = analyzePager(inventDocument, now);
 
     assert.deepEqual(pager, {

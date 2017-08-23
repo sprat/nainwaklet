@@ -1,7 +1,7 @@
 var test = require('tape-catch');
 var nainwak = require('src/nainwak');
 
-test('nainwak.degats', function (assert) {
+test('nainwak: degats', function (assert) {
     var armeBourrin = {
         nom: 'Excalibur',
         type: 'arme',
@@ -64,7 +64,7 @@ test('nainwak.degats', function (assert) {
     assert.end();
 });
 
-test('nainwak.portee', function (assert) {
+test('nainwak: portee', function (assert) {
     assert.deepEqual(nainwak.portee([12, 4], [12, 4]), 0, '0 case');
     assert.deepEqual(nainwak.portee([12, 4], [12, 3]), 1, '1 case au-dessus');
     assert.deepEqual(nainwak.portee([12, 4], [12, 5]), 1, '1 case au-dessous');
@@ -78,7 +78,7 @@ test('nainwak.portee', function (assert) {
     assert.end();
 });
 
-test('nainwak.deplacement', function (assert) {
+test('nainwak: deplacement', function (assert) {
     assert.deepEqual(nainwak.deplacement([12, 4], [12, 4]), 0, '0 case');
     assert.deepEqual(nainwak.deplacement([12, 4], [12, 3]), 1, '1 case au-dessus');
     assert.deepEqual(nainwak.deplacement([12, 4], [12, 5]), 1, '1 case au-dessous');
@@ -92,7 +92,7 @@ test('nainwak.deplacement', function (assert) {
     assert.end();
 });
 
-test('nainwak.bonusObjets', function (assert) {
+test('nainwak: bonusObjets', function (assert) {
     var visee = {
         nom: 'Visée à poisson',
         forceBonus: -6,
