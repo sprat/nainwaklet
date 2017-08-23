@@ -64,7 +64,7 @@ function Application(config) {
     */
 
     // create the dashboard object
-    var dashboard = Dashboard(applicationName, ring);
+    var dashboard = Dashboard(applicationName, ring, context);
 
     // install our UI
     var containerChildren = array.from(container.childNodes);
@@ -125,6 +125,9 @@ function Application(config) {
             // enhance
             page.enhance(doc, mounter, context);
         }
+
+        // since the context has been updated, re-render the dashboard just in case
+        scheduleRender();
     }
 
     function loadPersoPage() {

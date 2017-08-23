@@ -2,10 +2,10 @@ var contour = require('src/contour');
 var styles = require('./dashboard.css');
 
 // FIXME: Should the dashboard be the application's render function?
-function Dashboard(applicationName, ring) {
+function Dashboard(applicationName, ring, context) {
     function render(h) {
-        // TODO: use perso.classe for color?
-        return contour.frame(h, contour.Purple, [
+        var color = (context.perso) ? context.perso.classe : contour.Purple;
+        return contour.frame(h, color, [
             contour.darkTop(h),
             contour.darkBlock(h, applicationName),
             contour.darkToLight(h),
