@@ -48,13 +48,14 @@
     "webpack": "^3.1.0"
   },
   "scripts": {
-    "start": "live-server --no-browser --ignorePattern=\"(src|node_modules)/.*\"",
+    "start": "live-server --no-browser www",
+    "server": "live-server",
     "lint": "eslint . --cache",
     "prebuild": "npm run lint -s",
     "build": "webpack --bail",
-    "test": "tape-run-electron < dist/nany.test.js | faucet",
-    "unittest": "tape-run-electron < dist/nany.unittest.js | faucet",
-    "watch": "nodemon -e js,json,css --ignore dist --exec \"npm run build -s && npm run unittest -s\"",
+    "test": "tape-run-electron < www/dist/nany.test.js | faucet",
+    "unittest": "tape-run-electron < www/dist/nany.unittest.js | faucet",
+    "watch": "nodemon -e js,json,css --ignore www/dist --exec \"npm run build -s && npm run unittest -s\"",
     "dev": "npm-run-all --parallel start watch"
   }
 }
