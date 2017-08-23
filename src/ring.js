@@ -13,7 +13,7 @@ function Ring(config, storage, scheduleRender) {
         throw 'The ring configuration should specify an updateUrl';
     }
     var loginUrl = config.loginUrl;
-    var monitoredPages = config.pages || ['detect', 'invent', 'perso', 'even'];
+    var monitoredPages = config.pages || ['detect', 'invent', 'perso', 'even', 'encyclo'];
 
     // authorization key in storage
     var authKey = 'ring:authorization';
@@ -76,6 +76,7 @@ function Ring(config, storage, scheduleRender) {
 
     function processPage(page, doc, date, analysis, joueur) {
         if (!isPageMonitored(page)) {
+            log('No update sent: page not monitored');
             return;
         }
 

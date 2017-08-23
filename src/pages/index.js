@@ -2,6 +2,7 @@ var array = require('core-js/library/fn/array');
 var detect = require('./detect');
 var even = require('./even');
 var perso = require('./perso');
+var encyclo = require('./encyclo');
 var invent = require('./invent');
 var transfert = require('./transfert');
 var attaquer = require('./attaquer');
@@ -30,6 +31,7 @@ var pages = Pages([
     detect,
     even,
     perso,
+    encyclo,
     invent,
     transfert,
     attaquer
