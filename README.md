@@ -10,8 +10,6 @@ courant vers le serveur de la guilde.
 
 ## A faire
 
-- Mettre en place une commande deploy sur Github Pages : permettrait
-  probablement d'éviter de mettre les fichiers générés dans git
 - refreshUI/scheduleRender dans h ?
 - Page encyclo (sans analyse pour le moment)
 - Analyse page encyclo ?
