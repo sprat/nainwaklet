@@ -1,12 +1,6 @@
 var dom = require('src/utilities/dom');
 var int = require('./int');
 
-function analyze(doc/*, date*/) {
-    var listFrame = dom.find('#encycl_liste', doc);
-    var listDocument = listFrame.node.contentWindow.document;
-    return analyzeList(listDocument);
-}
-
 var typesNames = {
     A: 'arme',
     R: 'rune',
@@ -17,7 +11,7 @@ var typesNames = {
     J: 'jouet'
 };
 
-function analyzeList(doc) {
+function analyzeListFrameDocument(doc) {
     var newsTexts = dom.findAll('.news-text', doc);
 
     return newsTexts.map(function (newsText) {
@@ -37,4 +31,12 @@ function analyzeList(doc) {
     });
 }
 
-module.exports = analyze;
+function getListFrameDocument(doc) {
+    var frame = dom.find('#encycl_liste', doc);
+    return frame.node.contentWindow.document;
+}
+
+module.exports = {
+    analyzeListFrameDocument: analyzeListFrameDocument,
+    getListFrameDocument: getListFrameDocument
+};

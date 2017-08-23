@@ -1,8 +1,9 @@
 var Page = require('./page');
-var analyzeEncyclo = require('src/analyzers/encyclo');
+var encycloAnalyzer = require('src/analyzers/encyclo');
 
 function analyze(doc, date, context) {
-    var encyclo = analyzeEncyclo(doc, date);
+    var listDocument = encycloAnalyzer.getListFrameDocument(doc);
+    var encyclo = encycloAnalyzer.analyzeListFrameDocument(listDocument);
 
     context.encyclo = encyclo;
 
