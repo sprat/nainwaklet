@@ -11,7 +11,6 @@ courant vers le serveur de la guilde.
 ## A faire
 
 - Encyclo : envoyer le bon contenu dans raw (objvus plutôt que encyclo)
-- Encyclo : tester analyse dans tests unitaires
 - Homogénéiser les types d'objets entre inventaire et encyclo
 - Analyser les actions dans les paramètres d'url lors du chargement des pages
 - Ajouter une fonction de recherche textuelle dans la page des formules

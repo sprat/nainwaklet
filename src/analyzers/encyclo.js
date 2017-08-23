@@ -11,7 +11,7 @@ var typesNames = {
     J: 'jouet'
 };
 
-function analyzeListFrameDocument(doc) {
+function analyzeListDocument(doc) {
     var newsTexts = dom.findAll('.news-text', doc);
 
     return newsTexts.map(function (newsText) {
@@ -31,12 +31,12 @@ function analyzeListFrameDocument(doc) {
     });
 }
 
-function getListFrameDocument(doc) {
+function getListDocument(doc) {
     var frame = dom.find('#encycl_liste', doc);
     return frame.node.contentWindow.document;
 }
 
 module.exports = {
-    analyzeListFrameDocument: analyzeListFrameDocument,
-    getListFrameDocument: getListFrameDocument
+    analyzeListDocument: analyzeListDocument,
+    getListDocument: getListDocument
 };
