@@ -11,8 +11,8 @@ courant vers le serveur de la guilde.
 ## A faire
 
 - refreshUI/scheduleRender dans h ?
-- Page encyclo (sans analyse pour le moment)
-- Analyse page encyclo ?
+- Encyclo : envoyer le bon contenu dans raw (objvus plutôt que encyclo)
+- Encyclo : tester analyse dans tests unitaires
 - Ajouter une fonction de recherche textuelle dans la page des formules
 - Ajouter un détecteur de formule dans les pages "detect" et "inventaire"
 - Mettre en place une intégration continue ? (Travis ?)
