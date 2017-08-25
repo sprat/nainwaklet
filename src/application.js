@@ -109,12 +109,15 @@ function Application(config) {
         // analyze the page
         if (page.analyze) {
             analysis = page.analyze(doc, date, context);
-            log(analysis);
+            if (analysis) {
+                analysis.date = date;
+                log(analysis);
+            }
         }
 
         // send an update to the server if needed
         if (ring) {
-            ring.processPage(page, doc, date, analysis, joueur);
+            ring.processPage(page, analysis, joueur);
         }
 
         // enhance the page

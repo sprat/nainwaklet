@@ -1,4 +1,5 @@
 var assign = require('core-js/library/fn/object/assign');
+var printHTML = require('print-html');
 var Page = require('./page');
 var analyzeDetection = require('src/analyzers/detection');
 var analyzePager = require('src/analyzers/pager');
@@ -14,7 +15,8 @@ function analyze(doc, date, context) {
 
     return {
         detection: detection,
-        pager: pager
+        pager: pager,
+        raw: printHTML(doc)
     };
 }
 

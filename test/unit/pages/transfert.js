@@ -4,14 +4,16 @@ var dom = require('src/utilities/dom');
 var Mounter = require('src/utilities/mounter');
 var createPerso = require('test/fixtures/create-perso');
 var parseHTMLDocument = require('test/fixtures/parse-html-document');
-var transfertHTML = require('test/fixtures/transfert.html');
+var html = require('test/fixtures/transfert.html');
 var now = new Date(1457780950000);
 
 test('pages/transfert: analyze', function (assert) {
     var context = createContext();
-    var doc = parseHTMLDocument(transfertHTML);
+    var doc = parseHTMLDocument(html);
     var analysis = transfert.analyze(doc, now, context);
     var objets = analysis.objets;
+
+    assert.ok(analysis.raw, 'analysis: raw data is present');
 
     assert.strictEqual(objets.bonnet, undefined, 'analysis: number of objets in bonnet') ;
     assert.strictEqual(objets.sol.length, 1, 'analysis: number of objets in sol') ;
@@ -88,7 +90,7 @@ test('pages/transfert: analyze', function (assert) {
 test('pages/transfert: enhance', function (assert) {
     var context = createContext();
     var mounter = Mounter('test');
-    var doc = parseHTMLDocument(transfertHTML);
+    var doc = parseHTMLDocument(html);
     transfert.analyze(doc, now, context);
     transfert.enhance(doc, mounter, context);
 

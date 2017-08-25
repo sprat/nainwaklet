@@ -1,4 +1,5 @@
 var assign = require('core-js/library/fn/object/assign');
+var printHTML = require('print-html');
 var Page = require('./page');
 var nainwak = require('src/nainwak');
 var dom = require('src/utilities/dom');
@@ -23,7 +24,8 @@ function analyze(doc, date, context) {
 
     return {
         objets: objets,
-        pager: pager
+        pager: pager,
+        raw: printHTML(doc)
     };
 }
 

@@ -1,5 +1,5 @@
+var assign = require('core-js/library/fn/object/assign');
 var xhr = require('xhr');
-var serializeHTML = require('print-html');
 var Window = require('src/window');
 var httpHeaders = require('src/utilities/http-headers');
 var log = require('src/utilities/log');
@@ -74,7 +74,7 @@ function Ring(config, storage, scheduleRender) {
         return monitoredPages.indexOf(page.type) > -1;
     }
 
-    function processPage(page, doc, date, analysis, joueur) {
+    function processPage(page, analysis, joueur) {
         if (!isPageMonitored(page)) {
             log('No update sent: page not monitored');
             return;
@@ -86,7 +86,7 @@ function Ring(config, storage, scheduleRender) {
         }
 
         var retryAfterDate = retryAfterDates[page.url];
-        if (retryAfterDate && date < retryAfterDate) {
+        if (retryAfterDate && analysis.date < retryAfterDate) {
             log('No update sent: rate-limit reached');
             return;
         }
@@ -94,11 +94,10 @@ function Ring(config, storage, scheduleRender) {
         var data = {
             url: page.url,
             type: page.type,
-            raw: serializeHTML(doc),
-            contenu: analysis,
-            date: date,
             joueur: joueur.nom
         };
+
+        assign(data, analysis);
 
         var options = {
             url: updateUrl,

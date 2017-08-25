@@ -1,12 +1,12 @@
 var test = require('tape-catch');
 var analyzeEvenements = require('src/analyzers/evenements');
 var parseHTMLDocument = require('test/fixtures/parse-html-document');
-var evenHTML = require('test/fixtures/even.html');
-var evenDocument = parseHTMLDocument(evenHTML);
+var html = require('test/fixtures/even.html');
 var now = new Date(1457780950000);
 
 test('analyzers/evenements: analyze', function (assert) {
-    var evenements = analyzeEvenements(evenDocument, now);
+    var doc = parseHTMLDocument(html);
+    var evenements = analyzeEvenements(doc, now);
 
     //12h09 (sam. 12/03) xØu a pris un(e) Hache sur le sol.
     assert.deepEqual(evenements[0], {

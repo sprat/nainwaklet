@@ -1,11 +1,11 @@
 var test = require('tape-catch');
 var encycloAnalyzer = require('src/analyzers/encyclo');
 var parseHTMLDocument = require('test/fixtures/parse-html-document');
-var objvusHTML = require('test/fixtures/objvus.html');
-var objvusDocument = parseHTMLDocument(objvusHTML);
+var html = require('test/fixtures/objvus.html');
 
 test('analyzers/encyclo: analyzeListDocument', function (assert) {
-    var encyclo = encycloAnalyzer.analyzeListDocument(objvusDocument);
+    var doc = parseHTMLDocument(html);
+    var encyclo = encycloAnalyzer.analyzeListDocument(doc);
 
     assert.strictEqual(encyclo.length, 250, 'number of elements in encyclo');
 

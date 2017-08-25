@@ -1,3 +1,4 @@
+var printHTML = require('print-html');
 var Page = require('./page');
 var analyzePerso = require('src/analyzers/perso');
 
@@ -8,7 +9,8 @@ function analyze(doc, date, context) {
     context.perso = perso;
 
     return {
-        perso: perso
+        perso: perso,
+        raw: printHTML(doc)
     };
 }
 

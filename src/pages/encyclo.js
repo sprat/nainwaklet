@@ -1,3 +1,4 @@
+var printHTML = require('print-html');
 var Page = require('./page');
 var encycloAnalyzer = require('src/analyzers/encyclo');
 
@@ -8,7 +9,8 @@ function analyze(doc, date, context) {
     context.encyclo = encyclo;
 
     return {
-        encyclo: encyclo
+        encyclo: encyclo,
+        raw: printHTML(listDocument)
     };
 }
 

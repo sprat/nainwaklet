@@ -1,12 +1,12 @@
 var test = require('tape-catch');
 var analyzeDetection = require('src/analyzers/detection');
 var parseHTMLDocument = require('test/fixtures/parse-html-document');
-var detectHTML = require('test/fixtures/detect.html');
-var detectDocument = parseHTMLDocument(detectHTML);
+var html = require('test/fixtures/detect.html');
 var now = new Date(1457780950000);
 
 test('analyzers/detection: analyze', function (assert) {
-    var detection = analyzeDetection(detectDocument, now);
+    var doc = parseHTMLDocument(html);
+    var detection = analyzeDetection(doc, now);
 
     // localisation
     assert.deepEqual(detection.position, [13, 5], 'position');
