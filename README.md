@@ -18,6 +18,36 @@ courant vers le serveur de la guilde.
 - Mettre en place une intégration continue ? (Travis ?)
 
 
+## Développement :
+
+En pré-requis, il est nécessaire d'installer NodeJS et Npm.
+
+Pour installer les dépendances Javascript du projet, lancer la commande
+suivante :
+
+```shell
+npm install
+```
+
+Puis, pour développer de nouvelles fonctionnalités, il faut lancer la commande
+"dev" :
+```shell
+npm run dev
+```
+
+Cette commande lance un outil qui surveille les sources du projet afin de
+détecter d'éventuels changements. En cas de changement, il vérifie les sources
+(lint) puis lance la construction des bundles Javascript si tout est ok et
+lance les tests unitaires. Cette commande lance aussi un serveur de dev sur
+http://localhost:8080/ permettant d'observer/vérifier le résultat.
+
+Enfin, une fois le développement validé, pour déployer l'application sur le
+site http://sprat.github.io/nany/, entrer la commande suivante :
+```shell
+npm deploy
+```
+
+
 ## Pense-bête
 
 - On ne peut pas utiliser de polyfills car il faudrait les charger dans chacune
