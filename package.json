@@ -50,7 +50,6 @@
   },
   "scripts": {
     "start": "live-server --no-browser www",
-    "server": "live-server",
     "lint": "eslint . --cache",
     "prebuild": "npm run lint -s",
     "build": "webpack --bail",
