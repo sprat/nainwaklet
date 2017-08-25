@@ -18,7 +18,7 @@ courant vers le serveur de la guilde.
 - Mettre en place une intégration continue ? (Travis ?)
 
 
-## Développement :
+## Développement
 
 En pré-requis, il est nécessaire d'installer NodeJS et Npm.
 
@@ -44,7 +44,7 @@ http://localhost:8080/ permettant d'observer/vérifier le résultat.
 Enfin, une fois le développement validé, pour déployer l'application sur le
 site http://sprat.github.io/nany/, entrer la commande suivante :
 ```shell
-npm deploy
+npm run deploy
 ```
 
 
