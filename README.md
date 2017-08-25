@@ -13,7 +13,8 @@ courant vers le serveur de la guilde.
 - Calcul de dégâts : poing perso manquant
 - Analyser les actions dans les paramètres d'url lors du chargement des pages
 - Ajouter une fonction de recherche textuelle dans la page des formules
-- Ajouter un détecteur de formule dans les pages "detect" et "inventaire"
+- Implémenter un détecteur de formule dans les pages "detect" et "inventaire"
+- Communication temps-réel pour outils externes (IRC bot, etc.)
 - Mettre en place une intégration continue ? (Travis ?)
 
 
