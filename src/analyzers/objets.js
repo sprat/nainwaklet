@@ -17,7 +17,15 @@ var idParams = {  // nom du paramètre donnant l'id de l'objet dans certaines ac
     ramasser: 'idsol'
 };
 
-// valeurs pour type: 'arme', 'rune', 'detecteur', 'vehicule', 'manger', 'special', 'inutile'
+var typesNames = {
+    ARME: 'arme',
+    RUNE: 'rune',
+    VEHICULE: 'véhicule',
+    DETECTEUR: 'détecteur',
+    INUTILE: 'inutile',
+    MANGER: 'bouffe',
+    SPECIAL: 'jouet'
+};
 
 function analyzeActionLink(actionLink, context) {
     // extract the query string of the action link
@@ -72,7 +80,7 @@ function analyzeDocument(doc/*, date*/) {
             nom: object.nomobjet,
             image: '/images/' + object.photoobjet,
             description: object.descriptionobjet,
-            type: object.typeobjet.toLowerCase(),
+            type: typesNames[object.typeobjet],
             PAutiliser: int(object.PAutiliser),
             portee: int(object.portee),
             dommages: dommages,

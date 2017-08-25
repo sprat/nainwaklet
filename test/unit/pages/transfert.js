@@ -121,7 +121,7 @@ function createContext() {
                 nom: 'Potion de respécialisation',
                 image: '/images/objets/potion_reset.png',
                 description: 'Le pôle emploi te propose de changer de métier en revalorisant ton XP. ',
-                type: 'special',
+                type: 'jouet',
                 PAutiliser: 24,
                 portee: 0,
                 dommages: 0,
