@@ -10,6 +10,7 @@ courant vers le serveur de la guilde.
 
 ## A faire
 
+- Calcul de dégâts : poing perso manquant
 - Analyser les actions dans les paramètres d'url lors du chargement des pages
 - Ajouter une fonction de recherche textuelle dans la page des formules
 - Ajouter un détecteur de formule dans les pages "detect" et "inventaire"
