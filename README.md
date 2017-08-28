@@ -11,11 +11,25 @@ courant vers le serveur de la guilde.
 ## A faire
 
 - Calcul de dégâts : poing perso manquant
-- Analyser les actions dans les paramètres d'url lors du chargement des pages
+- Analyser les actions lors des changements des pages (cf. ci-dessous)
 - Ajouter une fonction de recherche textuelle dans la page des formules
 - Implémenter un détecteur de formule dans les pages "detect" et "inventaire"
 - Communication temps-réel pour outils externes (IRC bot, etc.)
 - Mettre en place une intégration continue ? (Travis ?)
+
+
+## Actions
+
+- Poser : transfert.php en GET avec IDS, action=poser, idinv
+- Ramasser : transfert.php et GET avec IDS, action=ramasser, idsol
+- Réparer : reparer.php en GET avec IDS, idinv
+- Manger : utiliser.php en GET avec IDS, idinv
+- Gifler : gifler.php en GET avec IDS, id
+- Utiliser une arme : utiliser.php en POST avec IDS, idennemi et idinv
+- Se déplacer : deplac.php en POST avec IDS, type=1, destx et desty
+- Glisser : deplac.php en POST avec IDS, type=2, destimonde (cf. deplac.php pour les id de mondes)
+- Occuper son nain : deplac.php en POST avec IDS, type=3
+- Localiser sa cible : deplac.php en POST avec IDS, type=7
 
 
 ## Développement
