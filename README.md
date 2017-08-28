@@ -11,6 +11,8 @@ courant vers le serveur de la guilde.
 ## A faire
 
 - Calcul de dégâts : poing perso manquant
+- Spy : extraire l'url et les paramètres GET et POST (evt submit ?) en plus du
+  document 
 - Analyser les actions lors des changements des pages (cf. ci-dessous)
 - Ajouter une fonction de recherche textuelle dans la page des formules
 - Implémenter un détecteur de formule dans les pages "detect" et "inventaire"
