@@ -136,10 +136,10 @@ function Application(config) {
         var joueur = context.joueur;
 
         log('Loading perso page');
-        persoPage.fetch(joueur.ids, function (response) {
+        persoPage.fetch(joueur.ids, function (response, path, params) {
             if (response.statusCode === 200) {
                 log('OK');
-                processPageDocument(response.body, persoPage.path, {});
+                processPageDocument(response.body, path, params);
             } else {
                 log('FAIL (' + response.statusCode + ')');
             }

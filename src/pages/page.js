@@ -2,25 +2,24 @@ var assign = require('core-js/library/fn/object/assign');
 var qs = require('qs');
 var xhr = require('xhr');
 
-function getFullUrl(url, IDS, params) {
-    params = assign({}, params);  // copy
-    params.IDS = IDS;
-    return window.location.origin + url + '?' + qs.stringify(params);
-}
-
 /* Page class */
 function Page(type, options) {
     var path = '/jeu/' + type + '.php';
     var fetchParameters = options.fetchParameters || {};
 
     function fetch(IDS, processResponse) {
-        var fullUrl = getFullUrl(path, IDS, fetchParameters);
+        var params = {
+            IDS: IDS
+        };
+        assign(params, fetchParameters);
+
+        var fullUrl = window.location.origin + path + '?' + qs.stringify(params);
         var options = {
             responseType: 'document'
         };
 
         xhr.get(fullUrl, options, function (error, response) {
-            processResponse(response);
+            processResponse(response, path, params);
         });
     }
 
