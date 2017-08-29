@@ -7,7 +7,9 @@ function Spy(frameWindow) {
 
     function onLoad() {
         var doc = frameWindow.document;
-        documentChanged.dispatch(doc);
+        var path = doc.location.pathname;
+        var params = {};
+        documentChanged.dispatch(doc, path, params);
     }
 
     function destroy() {

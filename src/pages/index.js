@@ -8,9 +8,9 @@ var transfert = require('./transfert');
 var attaquer = require('./attaquer');
 
 function Pages(pages) {
-    function byUrl(url) {
+    function byPath(path) {
         return array.find(pages, function (page) {
-            return page.url === url;
+            return page.path === path;
         });
     }
 
@@ -23,7 +23,7 @@ function Pages(pages) {
     return Object.freeze({
         list: pages,
         byType: byType,
-        byUrl: byUrl
+        byPath: byPath
     });
 }
 

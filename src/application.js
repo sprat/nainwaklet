@@ -44,11 +44,7 @@ function Application(config) {
     var spy;
     if (infoFrame) {
         spy = Spy(infoFrame);
-        spy.documentChanged.add(function (doc) {
-            var url = doc.location.pathname;
-            log('Navigation to ' + url);
-            processPageDocument(url, doc);
-        });
+        spy.documentChanged.add(processPageDocument);
     }
 
     // create the ring if an update URL is available
@@ -96,9 +92,11 @@ function Application(config) {
         }
     }
 
-    function processPageDocument(url, doc) {
+    function processPageDocument(doc, path/*, params*/) {
+        log('Navigation to ' + path);
+
         var date = new Date();
-        var page = pages.byUrl(url);
+        var page = pages.byPath(path);
         var mounter = Mounter('nany:enhancement');
         var analysis;
 
@@ -141,7 +139,7 @@ function Application(config) {
         persoPage.fetch(joueur.ids, function (response) {
             if (response.statusCode === 200) {
                 log('OK');
-                processPageDocument(persoPage.url, response.body);
+                processPageDocument(response.body, persoPage.path, {});
             } else {
                 log('FAIL (' + response.statusCode + ')');
             }

@@ -10,11 +10,11 @@ function getFullUrl(url, IDS, params) {
 
 /* Page class */
 function Page(type, options) {
-    var url = '/jeu/' + type + '.php';
+    var path = '/jeu/' + type + '.php';
     var fetchParameters = options.fetchParameters || {};
 
     function fetch(IDS, processResponse) {
-        var fullUrl = getFullUrl(url, IDS, fetchParameters);
+        var fullUrl = getFullUrl(path, IDS, fetchParameters);
         var options = {
             responseType: 'document'
         };
@@ -26,7 +26,7 @@ function Page(type, options) {
 
     return Object.freeze({
         type: type,
-        url: url,  // e.g. /jeu/invent.php, without query parameters
+        path: path,  // e.g. /jeu/invent.php, without query parameters
         analyze: options.analyze,
         enhance: options.enhance,
         fetch: fetch

@@ -17,11 +17,11 @@ test('pages: byType', function (assert) {
     assert.end();
 });
 
-test('pages: byUrl', function (assert) {
-    var detectPage = pages.byUrl('/jeu/detect.php');
+test('pages: byPath', function (assert) {
+    var detectPage = pages.byPath('/jeu/detect.php');
     assert.strictEqual(detectPage, pages.byType('detect'), 'page détection');
 
-    var invalidPage = pages.byUrl('/jeu/invalid.php');
+    var invalidPage = pages.byPath('/jeu/invalid.php');
     assert.strictEqual(invalidPage, undefined, 'url invalide');
 
     assert.end();
