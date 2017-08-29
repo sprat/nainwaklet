@@ -1,3 +1,5 @@
+var assign = require('core-js/library/fn/object/assign');
+var qs = require('qs');
 var Signal = require('mini-signals');
 
 /* Spy class */
@@ -8,7 +10,13 @@ function Spy(frameWindow) {
     function onLoad() {
         var doc = frameWindow.document;
         var path = doc.location.pathname;
+
         var params = {};
+        var search = doc.location.search;
+        if (search) {
+            assign(params,  qs.parse(search.substring(1)));
+        }
+
         documentChanged.dispatch(doc, path, params);
     }
 
