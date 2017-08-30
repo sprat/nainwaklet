@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head><title>PostMessage Test</title></head>
+<body>
+  <script>
+  var caller = window.opener || window.parent;
+
+  window.addEventListener('message', function (event) {
+    if (event.data === 'Hello') {
+      console.log('Hello reply received, sending the How are you message');
+      caller.postMessage('How are you?', '*');
+    }
+  });
+
+  console.log('Sending the Hello message');
+  caller.postMessage('Hello', '*');
+  </script>
+</body>
+</html>

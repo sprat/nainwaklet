@@ -3,19 +3,20 @@ var Window = require('src/window');
 
 test('Window', function (assert) {
     var childWindow = Window();
-    var url = 'https://rawgit.com/sprat/11a24923ca0b5e9a406f3fb8a54c48fa/raw/8e26382e470bc55b4fdb6f6ceef50ab8ce4a4c8d/postmessage.html';
+    var currentOrigin = window.location.origin;
+    var url = window.nanyTestsFixturesBaseUrl + 'postmessage.html';
 
     // add a message received signal handler
     var binding = childWindow.messageReceived.add(function (message, origin) {
         assert.strictEqual(message, 'Hello', 'first message');
-        assert.strictEqual(origin, 'https://rawgit.com', 'first message origin');
+        assert.strictEqual(origin, currentOrigin, 'first message origin');
         assert.strictEqual(childWindow.isClosed(), false, 'opened');
         assert.strictEqual(childWindow.open(url), false, 'cannot be opened again');
         binding.detach();
 
         childWindow.messageReceived.add(function (message, origin) {
             assert.strictEqual(message, 'How are you?', 'second message');
-            assert.strictEqual(origin, 'https://rawgit.com', 'second message origin');
+            assert.strictEqual(origin, currentOrigin, 'second message origin');
             assert.strictEqual(childWindow.isClosed(), false, 'not closed either');
 
             childWindow.closed.add(function () {
@@ -40,7 +41,7 @@ test('Window', function (assert) {
     var link = document.createElement('a');
     link.addEventListener('click', function () {
         assert.strictEqual(childWindow.open(url), true, 'opening (popup blocker need to be disabled)');
-        assert.strictEqual(childWindow.initialOrigin, 'https://rawgit.com', 'initial origin set');
+        assert.strictEqual(childWindow.initialOrigin, currentOrigin, 'initial origin set');
     });
     document.body.appendChild(link);
     link.click();

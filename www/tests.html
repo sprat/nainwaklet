@@ -9,6 +9,10 @@
     <h1>Tests</h1>
     <pre id="output"></pre>
     <script>
+    // set the tests fixtures base URL to run the nany integration tests
+    window.nanyTestsFixturesBaseUrl = window.location.pathname.replace('/tests.html', '/tests_fixtures/');
+
+    // dump the tests output into the current page
     var log = console.log;
     var output = document.getElementById('output');
     window.console.log = function(message) {
