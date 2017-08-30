@@ -10,7 +10,7 @@ var now = new Date(1457780950000);
 test('pages/invent: analyze', function (assert) {
     var context = createContext();
     var doc = parseHTMLDocument(html);
-    var analysis = invent.analyze(doc, now, context);
+    var analysis = invent.analyze(doc, {}, now, context);
     var objets = analysis.objets;
 
     assert.ok(analysis.raw, 'analysis: raw data is present');
@@ -253,7 +253,7 @@ test('pages/invent: enhance', function (assert) {
     var context = createContext();
     var mounter = Mounter('test');
     var doc = parseHTMLDocument(html);
-    invent.analyze(doc, now, context);
+    invent.analyze(doc, {}, now, context);
     invent.enhance(doc, mounter, context);
 
     var boxes = dom.findAll('div[data-mounter="test"]', doc);

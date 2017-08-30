@@ -8,7 +8,7 @@ var analyzePager = require('src/analyzers/pager');
 var Objet = require('src/enhancers/objet');
 var Box = require('src/enhancers/box');
 
-function analyze(doc, date, context) {
+function analyze(doc, params, date, context) {
     var objets = objetsAnalyzer.analyzeDocument(doc, date);
     var pager = analyzePager(doc, date);
 

@@ -2,7 +2,7 @@ var printHTML = require('print-html');
 var Page = require('./page');
 var analyzePerso = require('src/analyzers/perso');
 
-function analyze(doc, date, context) {
+function analyze(doc, params, date, context) {
     var perso = analyzePerso(doc, date);
 
     // TODO: assign?

@@ -2,7 +2,7 @@ var printHTML = require('print-html');
 var Page = require('./page');
 var encycloAnalyzer = require('src/analyzers/encyclo');
 
-function analyze(doc, date, context) {
+function analyze(doc, params, date, context) {
     var listDocument = encycloAnalyzer.getListDocument(doc);
     var encyclo = encycloAnalyzer.analyzeListDocument(listDocument);
 

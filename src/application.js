@@ -92,7 +92,7 @@ function Application(config) {
         }
     }
 
-    function processPageDocument(doc, path/*, params*/) {
+    function processPageDocument(doc, path, params) {
         log('Navigation to ' + path);
 
         var date = new Date();
@@ -106,7 +106,7 @@ function Application(config) {
 
         // analyze the page
         if (page.analyze) {
-            analysis = page.analyze(doc, date, context);
+            analysis = page.analyze(doc, params, date, context);
             if (analysis) {
                 analysis.date = date;
                 log(analysis);

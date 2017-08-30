@@ -10,7 +10,7 @@ var now = new Date(1457780950000);
 test('pages/transfert: analyze', function (assert) {
     var context = createContext();
     var doc = parseHTMLDocument(html);
-    var analysis = transfert.analyze(doc, now, context);
+    var analysis = transfert.analyze(doc, {}, now, context);
     var objets = analysis.objets;
 
     assert.ok(analysis.raw, 'analysis: raw data is present');
@@ -91,7 +91,7 @@ test('pages/transfert: enhance', function (assert) {
     var context = createContext();
     var mounter = Mounter('test');
     var doc = parseHTMLDocument(html);
-    transfert.analyze(doc, now, context);
+    transfert.analyze(doc, {}, now, context);
     transfert.enhance(doc, mounter, context);
 
     var boxes = dom.findAll('div[data-mounter="test"]', doc);

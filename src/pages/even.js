@@ -4,7 +4,7 @@ var Page = require('./page');
 var analyzeEvenements = require('src/analyzers/evenements');
 var analyzePager = require('src/analyzers/pager');
 
-function analyze(doc, date, context) {
+function analyze(doc, params, date, context) {
     var evenements = analyzeEvenements(doc, date);
     var pager = analyzePager(doc, date);
 
