@@ -2,3 +2,4 @@ node_modules
 npm-debug.log*
 .eslintcache
 www/dist
+www/COMMIT_ID
