@@ -58,6 +58,6 @@
     "watch": "nodemon -e js,json,css --ignore www/dist --exec \"npm run build -s && npm run unittest -s\"",
     "dev": "npm-run-all --parallel start watch",
     "predeploy": "git diff-index --quiet HEAD && git rev-parse --quiet HEAD >www/COMMIT_ID",
-    "deploy": "gh-pages -d www -m Deployment"
+    "deploy": "gh-pages -d www -m Deploy"
   }
 }
