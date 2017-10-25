@@ -23,7 +23,8 @@
             <li>Cliquez sur le bouton du Nany !</li>
         </ol>
 
-        <p class="buttons"></p>
+        <p class="prod-button"></p>
+        <p class="preprod-button"></p>
 
         <p>Liens utiles :</p>
         <ul>
@@ -34,7 +35,7 @@
 
     <script src="dist/nany.js"></script>
     <script type="text/javascript">
-    Nany.addBookmarklet('.buttons', {
+    Nany.addBookmarklet('.prod-button', {
         name: '#B',
         ring: {
             updateUrl: 'http://b.swinformatique.fr/nany/update.php',
@@ -42,7 +43,7 @@
         }
     });
 
-    Nany.addBookmarklet('.buttons', {
+    Nany.addBookmarklet('.preprod-button', {
         name: '#B [préprod]',
         ring: {
             updateUrl: 'http://preb.swinformatique.fr/nany/update.php',

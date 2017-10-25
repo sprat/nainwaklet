@@ -36,10 +36,6 @@ a:hover {
     color: #33C;
 }
 
-.buttons {
-    margin: 2em 0;
-}
-
-.buttons a {
-    margin-right: 5px;
+.preprod-button {
+    display: none;
 }
