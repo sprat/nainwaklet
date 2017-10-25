@@ -11,6 +11,7 @@ courant vers le serveur de la guilde.
 ## A faire
 
 - Calcul de dégâts : poing perso manquant
+- Afficher nombre d'utilisations restantes pour les mains collantes
 - Spy : extraire l'url et les paramètres GET et POST (evt submit ?) en plus du
   document 
 - Analyser les actions lors des changements des pages (cf. ci-dessous)
