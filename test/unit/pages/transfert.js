@@ -95,15 +95,15 @@ test('pages/transfert: enhance', function (assert) {
     transfert.enhance(doc, mounter, context);
 
     var boxes = dom.findAll('div[data-mounter="test"]', doc);
-    assert.strictEqual(3, boxes.length);
+    assert.strictEqual(boxes.length, 3);
 
     // Perso: precision=310 -> dommages * 3.9
     assert.strictEqual(nomObjetBox(boxes[0]), 'Arquebuse naine');
-    assert.strictEqual(boxes[0].text(), 'Dégâts : entre 74 et 82');  // dommages: 20
+    assert.strictEqual(boxes[0].text(), 'Dégâts : 74 à 82');  // dommages: 20
     assert.strictEqual(nomObjetBox(boxes[1]), 'Boomrang feu');
-    assert.strictEqual(boxes[1].text(), 'Dégâts : entre 111 et 123');  // dommages: 30
+    assert.strictEqual(boxes[1].text(), 'Dégâts : 111 à 123');  // dommages: 30
     assert.strictEqual(nomObjetBox(boxes[2]), 'Revolver 6 coups');
-    assert.strictEqual(boxes[2].text(), 'Dégâts : entre 56 et 61');  // dommages: 15
+    assert.strictEqual(boxes[2].text(), 'Dégâts : 56 à 61');  // dommages: 15
 
     assert.end();
 });

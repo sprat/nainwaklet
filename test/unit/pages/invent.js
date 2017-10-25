@@ -257,15 +257,15 @@ test('pages/invent: enhance', function (assert) {
     invent.enhance(doc, mounter, context);
 
     var boxes = dom.findAll('div[data-mounter="test"]', doc);
-    assert.strictEqual(3, boxes.length);
+    assert.strictEqual(boxes.length, 3);
 
     // Perso: precision=325 -> dommages * 4.05
     assert.strictEqual(nomObjetBox(boxes[0]), 'Arquebuse naine');
-    assert.strictEqual(boxes[0].text(), 'Dégâts : entre 77 et 85');  // dommages: 20
+    assert.strictEqual(boxes[0].text(), 'Dégâts : 77 à 85');  // dommages: 20
     assert.strictEqual(nomObjetBox(boxes[1]), 'Boomrang feu');
-    assert.strictEqual(boxes[1].text(), 'Dégâts : entre 115 et 128');  // dommages: 30
+    assert.strictEqual(boxes[1].text(), 'Dégâts : 115 à 128');  // dommages: 30
     assert.strictEqual(nomObjetBox(boxes[2]), 'Revolver 6 coups');
-    assert.strictEqual(boxes[2].text(), 'Dégâts : entre 58 et 64');  // dommages: 15
+    assert.strictEqual(boxes[2].text(), 'Dégâts : 58 à 64');  // dommages: 15
 
     assert.end();
 });

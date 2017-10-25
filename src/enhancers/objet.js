@@ -5,9 +5,18 @@ function Objet(objet, context) {
     var degats = perso ? nainwak.degats(perso, objet) : undefined;
 
     function render(h) {
+        var lines = [];
+
         if (degats) {
-            return h('div', h('b', 'Dégâts :'), ' entre ' + degats.minimum + ' et ' + degats.maximum);
+            lines.push(h('div', [
+                h('b', 'Dégâts : '),
+                degats.minimum,
+                ' à ',
+                degats.maximum
+            ]));
         }
+
+        return lines;
     }
 
     return {
