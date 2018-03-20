@@ -7,6 +7,8 @@ sous la forme d'un bookmarklet faisant apparaître l'interface de guilde directe
 Cet outil peut également envoyer des mises à jour des informations du nain
 courant vers le serveur de la guilde.
 
+[![Build Status](https://travis-ci.org/sprat/nany.svg?branch=master)](https://travis-ci.org/sprat/nany)
+
 
 ## A faire
 
