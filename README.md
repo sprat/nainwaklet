@@ -59,11 +59,8 @@ détecter d'éventuels changements. En cas de changement, il vérifie les source
 lance les tests unitaires. Cette commande lance aussi un serveur de dev sur
 http://localhost:8080/ permettant d'observer/vérifier le résultat.
 
-Enfin, une fois le développement validé, pour déployer l'application sur le
-site http://sprat.github.io/nany/, entrer la commande suivante :
-```shell
-npm run deploy
-```
+Pour déployer l'application sur le site http://sprat.github.io/nany/, il faut
+fusionner les changements de la branche `master` sur la branche `release`.
 
 
 ## Pense-bête
