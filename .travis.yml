@@ -3,3 +3,10 @@ node_js:
   - "lts/*"
 script:
   - xvfb-run npm test
+deploy:
+  provider: pages
+  skip-cleanup: true
+  local-dir: www
+  github-token: $GITHUB_TOKEN
+  on:
+    branch: release
