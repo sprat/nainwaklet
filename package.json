@@ -53,9 +53,9 @@
     "lint": "eslint . --cache",
     "prebuild": "npm run lint -s",
     "build": "webpack --bail",
-    "test": "tape-run-electron < www/dist/nany.test.js | faucet",
-    "unittest": "tape-run-electron < www/dist/nany.unittest.js | faucet",
-    "watch": "nodemon -e js,json,css --ignore www/dist --exec \"npm run build -s && npm run unittest -s\"",
+    "pretest": "npm run build -s",
+    "test": "tape-run-electron < www/dist/nany.unit_tests.js | faucet",
+    "watch": "nodemon -e js,json,css --ignore www/dist --exec \"npm test -s\"",
     "dev": "npm-run-all --parallel start watch",
     "predeploy": "git diff-index --quiet HEAD && git rev-parse --quiet HEAD >www/COMMIT_ID",
     "deploy": "gh-pages -d www -m Deploy"

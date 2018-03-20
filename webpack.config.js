@@ -57,7 +57,7 @@ var applicationConfig = {
 };
 
 /* Build configuration for the tests */
-var testConfig = {
+var testsConfig = {
     context: testDir,
     resolve: {
         alias: {
@@ -66,8 +66,8 @@ var testConfig = {
         }
     },
     entry: {
-        'nany.test': ['./index.js'],
-        'nany.unittest': ['./unit/index.js']
+        'nany.integration_tests': ['./integration/index.js'],
+        'nany.unit_tests': ['./unit/index.js']
     },
     devtool: 'source-map',
     output: {
@@ -96,4 +96,4 @@ var testConfig = {
     }
 };
 
-module.exports = [applicationConfig, testConfig];
+module.exports = [applicationConfig, testsConfig];

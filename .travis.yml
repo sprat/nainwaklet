@@ -1,7 +1,5 @@
 language: node_js
 node_js:
   - "lts/*"
-before_script:
-  - npm run build
 script:
-  - xvfb-run npm run unittest
+  - xvfb-run npm test
