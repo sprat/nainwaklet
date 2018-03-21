@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <title>Nany</title>
+    <link rel="stylesheet" href="dist/nany.css">
+    <link rel="stylesheet" href="site.css">
+</head>
+<body>
+    <h1>Nany</h1>
+
+    <section role="main">
+        <p>Le <a href="https://github.com/sprat/nany">Nany</a> est un outil de
+        guilde qui se greffe directement dans le jeu Nainwak à la place de
+        la publicité.</p>
+
+        <p>Pour utiliser le Nany :</p>
+        <ol>
+            <li>Glissez l'un des boutons ci-dessous dans vos marques-pages
+            Internet (uniquement la première fois)</li>
+            <li>Connectez-vous sur <a href="http://www.nainwak.com/">Nainwak</a>
+            puis cliquez sur « Jouer ! »</li>
+            <li>Cliquez sur le bouton du Nany !</li>
+        </ol>
+
+        <p class="prod-button"></p>
+        <p class="preprod-button"></p>
+
+        <p>Liens utiles :</p>
+        <ul>
+            <li><a href="formules.html">Formules de la fée</a></li>
+            <li><a href="tests.html">Tests de l'application</a></li>
+        </ul>
+    </section>
+
+    <script src="dist/nany.js"></script>
+    <script type="text/javascript">
+    Nany.addBookmarklet('.prod-button', {
+        name: '#B',
+        ring: {
+            updateUrl: 'http://b.swinformatique.fr/nany/update.php',
+            loginUrl: 'http://b.swinformatique.fr/nany/login.php'
+        }
+    });
+
+    Nany.addBookmarklet('.preprod-button', {
+        name: '#B [préprod]',
+        ring: {
+            updateUrl: 'http://preb.swinformatique.fr/nany/update.php',
+            loginUrl: 'http://preb.swinformatique.fr/nany/login.php'
+        }
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+body {
+    font-family: sans-serif;
+    font-size: 16px;
+    line-height: 1.4em;
+    padding: 0 20px;
+    margin: 0;
+}
+
+.formules-page h1 {
+    text-align: center;
+}
+
+h2 {
+    margin: 2em 0 1em;
+}
+
+p {
+    margin: 1em 0;
+}
+
+ol, ul {
+    margin: -1em 0 1em;
+}
+
+ol {
+    list-style: decimal outside;
+    padding-left: 1.2em;
+}
+
+a {
+    color: #666;
+    text-decoration: underline;
+}
+
+a:hover {
+    color: #33C;
+}
+
+.preprod-button {
+    display: none;
+}
