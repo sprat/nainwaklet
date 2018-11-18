@@ -2,10 +2,9 @@ var path = require('path');
 var webpack = require('webpack');
 var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
-var root = __dirname;
-var srcDir = path.join(root, 'src');
-var testDir = path.join(root, 'test');
-var distDir = path.join(root, 'www', 'dist');
+var srcDir = path.resolve(__dirname, 'src');
+var testDir = path.resolve(__dirname, 'test');
+var distDir = path.resolve(__dirname, 'www', 'dist');
 
 var extractCSS = new ExtractTextPlugin('[name].css');
 var uglify = new webpack.optimize.UglifyJsPlugin({
